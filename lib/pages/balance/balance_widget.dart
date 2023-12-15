@@ -1,0 +1,938 @@
+import '/backend/api_requests/api_calls.dart';
+import '/backend/supabase/supabase.dart';
+import '/component/nav_bar/nav_bar_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'balance_model.dart';
+export 'balance_model.dart';
+
+class BalanceWidget extends StatefulWidget {
+  const BalanceWidget({Key? key}) : super(key: key);
+
+  @override
+  _BalanceWidgetState createState() => _BalanceWidgetState();
+}
+
+class _BalanceWidgetState extends State<BalanceWidget>
+    with TickerProviderStateMixin {
+  late BalanceModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => BalanceModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      while (true) {
+        await Future.delayed(const Duration(milliseconds: 1000));
+        FFAppState().clearUserTransactionCache();
+        setState(() {
+          FFAppState()
+              .clearUserTransactionCacheKey(_model.apiRequestLastUniqueKey);
+          _model.apiRequestCompleted = false;
+        });
+        await _model.waitForApiRequestCompleted();
+      }
+    });
+
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 2,
+      initialIndex: 0,
+    )..addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Balance',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 0.0,
+        ),
+        body: SafeArea(
+          top: true,
+          child: Stack(
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                      border: Border.all(
+                        color: FlutterFlowTheme.of(context).primary,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          20.0, 10.0, 20.0, 10.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xFFCDF57E),
+                                  FlutterFlowTheme.of(context).secondary
+                                ],
+                                stops: [0.0, 1.0],
+                                begin: AlignmentDirectional(0.0, 1.0),
+                                end: AlignmentDirectional(0, -1.0),
+                              ),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 70.0,
+                                  height: 70.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    child: Text(
+                                      'Account\nsummary',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            fontSize: 10.0,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Total in USD',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        fontSize: 14.0,
+                                      ),
+                                ),
+                                Divider(
+                                  thickness: 1.0,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                ),
+                                FutureBuilder<List<UsersRow>>(
+                                  future: UsersTable().querySingleRow(
+                                    queryFn: (q) => q.eq(
+                                      'PhoneNumber',
+                                      FFAppState().UserInfo.phoneNumber,
+                                    ),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<UsersRow> textUsersRowList =
+                                        snapshot.data!;
+                                    final textUsersRow =
+                                        textUsersRowList.isNotEmpty
+                                            ? textUsersRowList.first
+                                            : null;
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await actions.printAction(
+                                          'Money: ${textUsersRow?.balance?.toString()}',
+                                        );
+                                      },
+                                      child: Text(
+                                        '\$ ${formatNumber(
+                                          textUsersRow?.balance,
+                                          formatType: FormatType.custom,
+                                          format: '###,###.##',
+                                          locale: '',
+                                        )}',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w800,
+                                            ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 0.0),
+                            child: Wrap(
+                              spacing: 10.0,
+                              runSpacing: 10.0,
+                              alignment: WrapAlignment.start,
+                              crossAxisAlignment: WrapCrossAlignment.start,
+                              direction: Axis.horizontal,
+                              runAlignment: WrapAlignment.start,
+                              verticalDirection: VerticalDirection.down,
+                              clipBehavior: Clip.none,
+                              children: [
+                                Material(
+                                  color: Colors.transparent,
+                                  elevation: 4.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.3,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'Deposit',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/icons8-deposit-48.png',
+                                              width: 50.0,
+                                              height: 50.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Deposit',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 12.0,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Material(
+                                  color: Colors.transparent,
+                                  elevation: 4.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.3,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'Transfer',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/icons8-exchange-48.png',
+                                              width: 50.0,
+                                              height: 50.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Transfer',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 12.0,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Material(
+                                  color: Colors.transparent,
+                                  elevation: 4.0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.3,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'Withdrawal',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                            ),
+                                          },
+                                        );
+                                      },
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/icons8-atm-48.png',
+                                              width: 50.0,
+                                              height: 50.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Withdrawal',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  fontSize: 12.0,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: FutureBuilder<ApiCallResponse>(
+                              future: FFAppState()
+                                  .userTransaction(
+                                uniqueQueryKey:
+                                    FFAppState().UserInfo.userID.toString(),
+                                requestFn: () => TransactionsGroup
+                                    .userListTransactionsNoDateCall
+                                    .call(
+                                  userPhoneNumber:
+                                      FFAppState().UserInfo.phoneNumber,
+                                ),
+                              )
+                                  .then((result) {
+                                try {
+                                  _model.apiRequestCompleted = true;
+                                  _model.apiRequestLastUniqueKey =
+                                      FFAppState().UserInfo.userID.toString();
+                                } finally {}
+                                return result;
+                              }),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                          FlutterFlowTheme.of(context).primary,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                final tabBarUserListTransactionsNoDateResponse =
+                                    snapshot.data!;
+                                return Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment(0.0, 0),
+                                      child: TabBar(
+                                        labelColor: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        unselectedLabelColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 14.0,
+                                            ),
+                                        unselectedLabelStyle: TextStyle(),
+                                        indicatorColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                        padding: EdgeInsets.all(4.0),
+                                        tabs: [
+                                          Tab(
+                                            text: 'Transaction',
+                                          ),
+                                          Tab(
+                                            text: 'Pending',
+                                          ),
+                                        ],
+                                        controller: _model.tabBarController,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: TabBarView(
+                                        controller: _model.tabBarController,
+                                        children: [
+                                          KeepAliveWidgetWrapper(
+                                            builder: (context) => Builder(
+                                              builder: (context) {
+                                                final transations =
+                                                    TransactionsGroup
+                                                            .userListTransactionsNoDateCall
+                                                            .all(
+                                                              tabBarUserListTransactionsNoDateResponse
+                                                                  .jsonBody,
+                                                            )
+                                                            ?.where((e) =>
+                                                                true ==
+                                                                getJsonField(
+                                                                  e,
+                                                                  r'''$.isapprove''',
+                                                                ))
+                                                            .toList()
+                                                            ?.toList() ??
+                                                        [];
+                                                return ListView.separated(
+                                                  padding: EdgeInsets.zero,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemCount: transations.length,
+                                                  separatorBuilder: (_, __) =>
+                                                      SizedBox(height: 10.0),
+                                                  itemBuilder: (context,
+                                                      transationsIndex) {
+                                                    final transationsItem =
+                                                        transations[
+                                                            transationsIndex];
+                                                    return Material(
+                                                      color: Colors.transparent,
+                                                      elevation: 1.0,
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 100.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      10.0,
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      getJsonField(
+                                                                        transationsItem,
+                                                                        r'''$.type''',
+                                                                      )
+                                                                          .toString()
+                                                                          .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                50,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyLarge
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            fontSize:
+                                                                                12.0,
+                                                                          ),
+                                                                    ),
+                                                                    Text(
+                                                                      getJsonField(
+                                                                        transationsItem,
+                                                                        r'''$.detail''',
+                                                                      ).toString(),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .labelSmall,
+                                                                    ),
+                                                                  ].divide(SizedBox(
+                                                                      height:
+                                                                          10.0)),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceEvenly,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Date: ${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                                transationsItem,
+                                                                                r'''$.createddate''',
+                                                                              ).toString()))}'
+                                                                          .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            50,
+                                                                        replacement:
+                                                                            '…',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .labelSmall,
+                                                                    ),
+                                                                    Builder(
+                                                                      builder:
+                                                                          (context) {
+                                                                        if ((_model.giveMoney ==
+                                                                                getJsonField(
+                                                                                  transationsItem,
+                                                                                  r'''$.type''',
+                                                                                )) ||
+                                                                            (_model.tranfer ==
+                                                                                getJsonField(
+                                                                                  transationsItem,
+                                                                                  r'''$.type''',
+                                                                                )) ||
+                                                                            (_model.buy ==
+                                                                                getJsonField(
+                                                                                  transationsItem,
+                                                                                  r'''$.type''',
+                                                                                ))) {
+                                                                          return Text(
+                                                                            '-\$${getJsonField(
+                                                                              transationsItem,
+                                                                              r'''$.amount''',
+                                                                            ).toString()}',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Readex Pro',
+                                                                                  color: FlutterFlowTheme.of(context).error,
+                                                                                ),
+                                                                          );
+                                                                        } else {
+                                                                          return Text(
+                                                                            '+\$${getJsonField(
+                                                                              transationsItem,
+                                                                              r'''$.amount''',
+                                                                            ).toString()}',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Readex Pro',
+                                                                                  color: FlutterFlowTheme.of(context).success,
+                                                                                ),
+                                                                          );
+                                                                        }
+                                                                      },
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          KeepAliveWidgetWrapper(
+                                            builder: (context) => Builder(
+                                              builder: (context) {
+                                                final pandings = TransactionsGroup
+                                                        .userListTransactionsNoDateCall
+                                                        .all(
+                                                          tabBarUserListTransactionsNoDateResponse
+                                                              .jsonBody,
+                                                        )
+                                                        ?.where((e) =>
+                                                            false ==
+                                                            getJsonField(
+                                                              e,
+                                                              r'''$.isapprove''',
+                                                            ))
+                                                        .toList()
+                                                        ?.toList() ??
+                                                    [];
+                                                return ListView.separated(
+                                                  padding: EdgeInsets.zero,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemCount: pandings.length,
+                                                  separatorBuilder: (_, __) =>
+                                                      SizedBox(height: 10.0),
+                                                  itemBuilder:
+                                                      (context, pandingsIndex) {
+                                                    final pandingsItem =
+                                                        pandings[pandingsIndex];
+                                                    return Material(
+                                                      color: Colors.transparent,
+                                                      elevation: 1.0,
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 100.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      10.0,
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    getJsonField(
+                                                                      pandingsItem,
+                                                                      r'''$.type''',
+                                                                    )
+                                                                        .toString()
+                                                                        .maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              50,
+                                                                          replacement:
+                                                                              '…',
+                                                                        ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyLarge
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          fontSize:
+                                                                              12.0,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    'Date: ${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                              pandingsItem,
+                                                                              r'''$.createddate''',
+                                                                            ).toString()))}'
+                                                                        .maybeHandleOverflow(
+                                                                      maxChars:
+                                                                          50,
+                                                                      replacement:
+                                                                          '…',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelSmall,
+                                                                  ),
+                                                                ].divide(SizedBox(
+                                                                    height:
+                                                                        10.0)),
+                                                              ),
+                                                              Builder(
+                                                                builder:
+                                                                    (context) {
+                                                                  if (_model
+                                                                          .inputMoney ==
+                                                                      getJsonField(
+                                                                        pandingsItem,
+                                                                        r'''$.type''',
+                                                                      )) {
+                                                                    return Text(
+                                                                      '+\$${getJsonField(
+                                                                        pandingsItem,
+                                                                        r'''$.amount''',
+                                                                      ).toString()}',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).success,
+                                                                          ),
+                                                                    );
+                                                                  } else {
+                                                                    return Text(
+                                                                      '-\$${getJsonField(
+                                                                        pandingsItem,
+                                                                        r'''$.amount''',
+                                                                      ).toString()}',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).error,
+                                                                          ),
+                                                                    );
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                        ].divide(SizedBox(height: 10.0)),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 100.0,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                    ),
+                  ),
+                ].divide(SizedBox(height: 10.0)),
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.0, 1.0),
+                child: wrapWithModel(
+                  model: _model.navBarModel,
+                  updateCallback: () => setState(() {}),
+                  child: NavBarWidget(
+                    selectPageIndex: 3,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
