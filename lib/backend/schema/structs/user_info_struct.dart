@@ -21,6 +21,8 @@ class UserInfoStruct extends FFFirebaseStruct {
     String? userReferral,
     String? hashedPassword,
     bool? isMember,
+    bool? isTestAccount,
+    String? invite,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _userID = userID,
         _fullName = fullName,
@@ -32,6 +34,8 @@ class UserInfoStruct extends FFFirebaseStruct {
         _userReferral = userReferral,
         _hashedPassword = hashedPassword,
         _isMember = isMember,
+        _isTestAccount = isTestAccount,
+        _invite = invite,
         super(firestoreUtilData);
 
   // "UserID" field.
@@ -96,6 +100,18 @@ class UserInfoStruct extends FFFirebaseStruct {
   set isMember(bool? val) => _isMember = val;
   bool hasIsMember() => _isMember != null;
 
+  // "IsTestAccount" field.
+  bool? _isTestAccount;
+  bool get isTestAccount => _isTestAccount ?? false;
+  set isTestAccount(bool? val) => _isTestAccount = val;
+  bool hasIsTestAccount() => _isTestAccount != null;
+
+  // "Invite" field.
+  String? _invite;
+  String get invite => _invite ?? '';
+  set invite(String? val) => _invite = val;
+  bool hasInvite() => _invite != null;
+
   static UserInfoStruct fromMap(Map<String, dynamic> data) => UserInfoStruct(
         userID: castToType<int>(data['UserID']),
         fullName: data['FullName'] as String?,
@@ -107,6 +123,8 @@ class UserInfoStruct extends FFFirebaseStruct {
         userReferral: data['UserReferral'] as String?,
         hashedPassword: data['HashedPassword'] as String?,
         isMember: data['IsMember'] as bool?,
+        isTestAccount: data['IsTestAccount'] as bool?,
+        invite: data['Invite'] as String?,
       );
 
   static UserInfoStruct? maybeFromMap(dynamic data) =>
@@ -123,6 +141,8 @@ class UserInfoStruct extends FFFirebaseStruct {
         'UserReferral': _userReferral,
         'HashedPassword': _hashedPassword,
         'IsMember': _isMember,
+        'IsTestAccount': _isTestAccount,
+        'Invite': _invite,
       }.withoutNulls;
 
   @override
@@ -166,6 +186,14 @@ class UserInfoStruct extends FFFirebaseStruct {
         'IsMember': serializeParam(
           _isMember,
           ParamType.bool,
+        ),
+        'IsTestAccount': serializeParam(
+          _isTestAccount,
+          ParamType.bool,
+        ),
+        'Invite': serializeParam(
+          _invite,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -221,6 +249,16 @@ class UserInfoStruct extends FFFirebaseStruct {
           ParamType.bool,
           false,
         ),
+        isTestAccount: deserializeParam(
+          data['IsTestAccount'],
+          ParamType.bool,
+          false,
+        ),
+        invite: deserializeParam(
+          data['Invite'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -238,7 +276,9 @@ class UserInfoStruct extends FFFirebaseStruct {
         profile == other.profile &&
         userReferral == other.userReferral &&
         hashedPassword == other.hashedPassword &&
-        isMember == other.isMember;
+        isMember == other.isMember &&
+        isTestAccount == other.isTestAccount &&
+        invite == other.invite;
   }
 
   @override
@@ -252,7 +292,9 @@ class UserInfoStruct extends FFFirebaseStruct {
         profile,
         userReferral,
         hashedPassword,
-        isMember
+        isMember,
+        isTestAccount,
+        invite
       ]);
 }
 
@@ -267,6 +309,8 @@ UserInfoStruct createUserInfoStruct({
   String? userReferral,
   String? hashedPassword,
   bool? isMember,
+  bool? isTestAccount,
+  String? invite,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -283,6 +327,8 @@ UserInfoStruct createUserInfoStruct({
       userReferral: userReferral,
       hashedPassword: hashedPassword,
       isMember: isMember,
+      isTestAccount: isTestAccount,
+      invite: invite,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

@@ -66,15 +66,11 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
         text: FFAppState().CreateCompanyHolder.telegramLink);
     _model.telegramLinkFocusNode ??= FocusNode();
 
-    _model.inviteIDController ??=
-        TextEditingController(text: FFAppState().CreateCompanyHolder.invite);
-    _model.inviteIDFocusNode ??= FocusNode();
-
     _model.discountController ??= TextEditingController(
         text: FFAppState().CreateCompanyHolder.discount.toString());
     _model.discountFocusNode ??= FocusNode();
 
-    _model.textController6 ??=
+    _model.textController5 ??=
         TextEditingController(text: FFAppState().CreateCompanyHolder.details);
     _model.textFieldFocusNode ??= FocusNode();
   }
@@ -372,48 +368,6 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                     validator: _model.telegramLinkControllerValidator
                         .asValidator(context),
                   ),
-                  TextFormField(
-                    controller: _model.inviteIDController,
-                    focusNode: _model.inviteIDFocusNode,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      isDense: true,
-                      labelText: 'Invite ID',
-                      labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).primary,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).error,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyMedium,
-                    validator:
-                        _model.inviteIDControllerValidator.asValidator(context),
-                  ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -533,7 +487,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                       ),
                     ),
                     child: TextFormField(
-                      controller: _model.textController6,
+                      controller: _model.textController5,
                       focusNode: _model.textFieldFocusNode,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -572,7 +526,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       maxLines: 5,
                       validator:
-                          _model.textController6Validator.asValidator(context),
+                          _model.textController5Validator.asValidator(context),
                     ),
                   ),
                   FFButtonWidget(
@@ -945,15 +899,14 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                               ..phoneNumber = _model.phoneNumberController.text
                               ..telegramLink =
                                   _model.telegramLinkController.text
-                              ..details = _model.textController6.text
+                              ..details = _model.textController5.text
                               ..discount =
                                   int.tryParse(_model.discountController.text)
                               ..location = currentUserLocationValue
                               ..profile = valueOrDefault<String>(
                                 _model.uploadedFileUrl1,
                                 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                              )
-                              ..invite = _model.inviteIDController.text,
+                              ),
                           );
                         });
 
@@ -977,14 +930,13 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                               ..phoneNumber = _model.phoneNumberController.text
                               ..telegramLink =
                                   _model.telegramLinkController.text
-                              ..details = _model.textController6.text
+                              ..details = _model.textController5.text
                               ..discount =
                                   int.tryParse(_model.discountController.text)
                               ..profile = valueOrDefault<String>(
                                 _model.uploadedFileUrl1,
                                 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                              )
-                              ..invite = _model.inviteIDController.text,
+                              ),
                           );
                         });
 

@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
@@ -6,6 +7,9 @@ import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
+import '/actions/actions.dart' as action_blocks;
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import 'dart:async';
@@ -39,7 +43,47 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await requestPermission(locationPermission);
+      unawaited(
+        () async {
+          await requestPermission(locationPermission);
+        }(),
+      );
+      _model.check = await CheckUnderMaintenanceCall.call();
+      await actions.printAction(
+        'isTest: ${FFAppState().UserInfo.isTestAccount.toString()}, Check Maintenance: ${CheckUnderMaintenanceCall.value(
+          (_model.check?.jsonBody ?? ''),
+        ).toString().toString()}',
+      );
+      if ((_model.check?.succeeded ?? true)) {
+        if (FFAppState().UserInfo.isTestAccount) {
+          return;
+        }
+
+        if (CheckUnderMaintenanceCall.value(
+          (_model.check?.jsonBody ?? ''),
+        )) {
+          if (Navigator.of(context).canPop()) {
+            context.pop();
+          }
+          context.pushNamed(
+            'UnderMaintenance',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
+            },
+          );
+
+          return;
+        } else {
+          return;
+        }
+      } else {
+        await action_blocks.noInternet(context);
+        return;
+      }
     });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
@@ -110,7 +154,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).primary,
             body: Center(
               child: SizedBox(
                 width: 50.0,
@@ -131,7 +175,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
               : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).primary,
             body: SafeArea(
               top: true,
               child: Stack(
@@ -165,12 +209,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Icon(
-                                    Icons.notifications_sharp,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    size: 30.0,
-                                  ),
+                                  if (FFAppState().UserInfo.isMember)
+                                    Icon(
+                                      Icons.notifications_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      size: 30.0,
+                                    ),
                                   InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -342,7 +387,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
                                                                 context
                                                                     .pushNamed(
-                                                                  'MapPage',
+                                                                  'Locator',
                                                                   queryParameters:
                                                                       {
                                                                     'moveLocation':
@@ -582,7 +627,18 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     Builder(
                                       builder: (context) {
                                         final byList = homePageCompaniesRowList
-                                            .sortedList((e) => e.companyName)
+                                            .sortedList((e) =>
+                                                functions.areSimilarLocation(
+                                                    e.latitude,
+                                                    functions
+                                                        .splitLatLng(
+                                                            currentUserLocationValue)
+                                                        ?.first,
+                                                    e.longitude,
+                                                    functions
+                                                        .splitLatLng(
+                                                            currentUserLocationValue)
+                                                        ?.last)!)
                                             .toList();
                                         return RefreshIndicator(
                                           onRefresh: () async {
@@ -617,7 +673,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       Colors.transparent,
                                                   onTap: () async {
                                                     context.pushNamed(
-                                                      'MapPage',
+                                                      'Locator',
                                                       queryParameters: {
                                                         'moveLocation':
                                                             serializeParam(

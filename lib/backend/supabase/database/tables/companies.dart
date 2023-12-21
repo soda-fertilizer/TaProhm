@@ -65,7 +65,4 @@ class CompaniesRow extends SupabaseDataRow {
 
   double get amount => getField<double>('Amount')!;
   set amount(double value) => setField<double>('Amount', value);
-
-  String? get invite => getField<String>('Invite');
-  set invite(String? value) => setField<String>('Invite', value);
 }

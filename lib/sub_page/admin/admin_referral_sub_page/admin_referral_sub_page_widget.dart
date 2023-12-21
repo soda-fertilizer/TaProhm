@@ -182,6 +182,9 @@ class _AdminReferralSubPageWidgetState extends State<AdminReferralSubPageWidget>
                                     valueOrDefault<String>(
                                       widget.user?.fullName,
                                       'null',
+                                    ).maybeHandleOverflow(
+                                      maxChars: 30,
+                                      replacement: '…',
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
@@ -360,7 +363,13 @@ class _AdminReferralSubPageWidgetState extends State<AdminReferralSubPageWidget>
                                                                           4.0),
                                                                   child: Text(
                                                                     adminReferralSubPageVarItem
-                                                                        .fullName,
+                                                                        .fullName
+                                                                        .maybeHandleOverflow(
+                                                                      maxChars:
+                                                                          40,
+                                                                      replacement:
+                                                                          '…',
+                                                                    ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyLarge

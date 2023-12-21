@@ -670,7 +670,6 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                         double.tryParse(_model.amountController.text),
                         0.0,
                       ),
-                      'Invite': FFAppState().CreateCompanyHolder.invite,
                     });
                     setState(() {
                       FFAppState().deleteCreateCompanyHolder();

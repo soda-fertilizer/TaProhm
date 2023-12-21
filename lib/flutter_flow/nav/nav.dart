@@ -96,9 +96,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
-          name: 'MapPage',
-          path: '/mapPage',
-          builder: (context, params) => MapPageWidget(
+          name: 'Locator',
+          path: '/locator',
+          builder: (context, params) => LocatorWidget(
             moveLocation: params.getParam('moveLocation', ParamType.LatLng),
             clickCompany: params.getParam('clickCompany', ParamType.bool),
           ),
@@ -335,6 +335,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Notification',
           path: '/notification',
           builder: (context, params) => NotificationWidget(),
+        ),
+        FFRoute(
+          name: 'UnderMaintenance',
+          path: '/underMaintenance',
+          builder: (context, params) => UnderMaintenanceWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

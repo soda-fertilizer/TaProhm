@@ -20,9 +20,6 @@ class TransactionsRow extends SupabaseDataRow {
   int get typeID => getField<int>('TypeID')!;
   set typeID(int value) => setField<int>('TypeID', value);
 
-  int? get productID => getField<int>('ProductID');
-  set productID(int? value) => setField<int>('ProductID', value);
-
   double get amount => getField<double>('Amount')!;
   set amount(double value) => setField<double>('Amount', value);
 

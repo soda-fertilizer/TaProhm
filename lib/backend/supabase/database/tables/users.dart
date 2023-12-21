@@ -61,4 +61,10 @@ class UsersRow extends SupabaseDataRow {
 
   bool get isMember => getField<bool>('IsMember')!;
   set isMember(bool value) => setField<bool>('IsMember', value);
+
+  bool get isTestAccount => getField<bool>('IsTestAccount')!;
+  set isTestAccount(bool value) => setField<bool>('IsTestAccount', value);
+
+  String? get invite => getField<String>('Invite');
+  set invite(String? value) => setField<String>('Invite', value);
 }

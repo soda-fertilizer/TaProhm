@@ -286,7 +286,12 @@ class _AdminUserReferralWidgetState extends State<AdminUserReferralWidget>
                                                                         4.0),
                                                             child: Text(
                                                               adminUserReferralVarItem
-                                                                  .fullName,
+                                                                  .fullName
+                                                                  .maybeHandleOverflow(
+                                                                maxChars: 40,
+                                                                replacement:
+                                                                    '…',
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyLarge

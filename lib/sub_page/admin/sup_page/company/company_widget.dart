@@ -720,8 +720,6 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                               containerUsersRow?.phoneNumber,
                                           money: double.tryParse(
                                               _model.amountController.text),
-                                          invitePhoneNumber:
-                                              companyCompaniesRow?.invite,
                                         );
                                       }(),
                                     );

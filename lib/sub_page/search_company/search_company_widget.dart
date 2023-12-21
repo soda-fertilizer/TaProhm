@@ -196,7 +196,7 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   context.pushNamed(
-                                    'MapPage',
+                                    'Locator',
                                     queryParameters: {
                                       'moveLocation': serializeParam(
                                         functions.returnLatLng(

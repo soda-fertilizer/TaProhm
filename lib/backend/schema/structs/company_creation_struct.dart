@@ -21,7 +21,6 @@ class CompanyCreationStruct extends FFFirebaseStruct {
     bool? isVertify,
     int? discount,
     String? pymentImage,
-    String? invite,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _profile = profile,
         _name = name,
@@ -33,7 +32,6 @@ class CompanyCreationStruct extends FFFirebaseStruct {
         _isVertify = isVertify,
         _discount = discount,
         _pymentImage = pymentImage,
-        _invite = invite,
         super(firestoreUtilData);
 
   // "Profile" field.
@@ -99,12 +97,6 @@ class CompanyCreationStruct extends FFFirebaseStruct {
   set pymentImage(String? val) => _pymentImage = val;
   bool hasPymentImage() => _pymentImage != null;
 
-  // "Invite" field.
-  String? _invite;
-  String get invite => _invite ?? '';
-  set invite(String? val) => _invite = val;
-  bool hasInvite() => _invite != null;
-
   static CompanyCreationStruct fromMap(Map<String, dynamic> data) =>
       CompanyCreationStruct(
         profile: data['Profile'] as String?,
@@ -117,7 +109,6 @@ class CompanyCreationStruct extends FFFirebaseStruct {
         isVertify: data['IsVertify'] as bool?,
         discount: castToType<int>(data['Discount']),
         pymentImage: data['PymentImage'] as String?,
-        invite: data['Invite'] as String?,
       );
 
   static CompanyCreationStruct? maybeFromMap(dynamic data) =>
@@ -134,7 +125,6 @@ class CompanyCreationStruct extends FFFirebaseStruct {
         'IsVertify': _isVertify,
         'Discount': _discount,
         'PymentImage': _pymentImage,
-        'Invite': _invite,
       }.withoutNulls;
 
   @override
@@ -178,10 +168,6 @@ class CompanyCreationStruct extends FFFirebaseStruct {
         ),
         'PymentImage': serializeParam(
           _pymentImage,
-          ParamType.String,
-        ),
-        'Invite': serializeParam(
-          _invite,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -238,11 +224,6 @@ class CompanyCreationStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        invite: deserializeParam(
-          data['Invite'],
-          ParamType.String,
-          false,
-        ),
       );
 
   @override
@@ -261,8 +242,7 @@ class CompanyCreationStruct extends FFFirebaseStruct {
         listEquality.equals(imageDetails, other.imageDetails) &&
         isVertify == other.isVertify &&
         discount == other.discount &&
-        pymentImage == other.pymentImage &&
-        invite == other.invite;
+        pymentImage == other.pymentImage;
   }
 
   @override
@@ -276,8 +256,7 @@ class CompanyCreationStruct extends FFFirebaseStruct {
         imageDetails,
         isVertify,
         discount,
-        pymentImage,
-        invite
+        pymentImage
       ]);
 }
 
@@ -291,7 +270,6 @@ CompanyCreationStruct createCompanyCreationStruct({
   bool? isVertify,
   int? discount,
   String? pymentImage,
-  String? invite,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -307,7 +285,6 @@ CompanyCreationStruct createCompanyCreationStruct({
       isVertify: isVertify,
       discount: discount,
       pymentImage: pymentImage,
-      invite: invite,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

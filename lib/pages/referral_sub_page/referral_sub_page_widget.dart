@@ -72,7 +72,8 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
             .eq(
               'IsApprove',
               true,
-            ),
+            )
+            .order('PhoneNumber', ascending: true),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -177,6 +178,9 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                     valueOrDefault<String>(
                                       widget.user?.fullName,
                                       'Null',
+                                    ).maybeHandleOverflow(
+                                      maxChars: 30,
+                                      replacement: '…',
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
@@ -344,7 +348,12 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                                           4.0),
                                                               child: Text(
                                                                 referralSubPageVarItem
-                                                                    .fullName,
+                                                                    .fullName
+                                                                    .maybeHandleOverflow(
+                                                                  maxChars: 40,
+                                                                  replacement:
+                                                                      '…',
+                                                                ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyLarge

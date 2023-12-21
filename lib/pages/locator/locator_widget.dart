@@ -1,6 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
-import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/login_component/login_component_widget.dart';
 import '/component/login_only/login_only_widget.dart';
@@ -10,7 +7,6 @@ import '/component/show_shop/show_shop_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/actions/actions.dart' as action_blocks;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +14,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'map_page_model.dart';
-export 'map_page_model.dart';
+import 'locator_model.dart';
+export 'locator_model.dart';
 
-class MapPageWidget extends StatefulWidget {
-  const MapPageWidget({
+class LocatorWidget extends StatefulWidget {
+  const LocatorWidget({
     Key? key,
     this.moveLocation,
     bool? clickCompany,
@@ -33,11 +29,11 @@ class MapPageWidget extends StatefulWidget {
   final bool clickCompany;
 
   @override
-  _MapPageWidgetState createState() => _MapPageWidgetState();
+  _LocatorWidgetState createState() => _LocatorWidgetState();
 }
 
-class _MapPageWidgetState extends State<MapPageWidget> {
-  late MapPageModel _model;
+class _LocatorWidgetState extends State<LocatorWidget> {
+  late LocatorModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng? currentUserLocationValue;
@@ -45,7 +41,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MapPageModel());
+    _model = createModel(context, () => LocatorModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -74,6 +70,8 @@ class _MapPageWidgetState extends State<MapPageWidget> {
               );
             },
           ).then((value) => safeSetState(() {}));
+
+          return;
         } else {
           showModalBottomSheet(
             isScrollControlled: true,
@@ -95,33 +93,10 @@ class _MapPageWidgetState extends State<MapPageWidget> {
               );
             },
           ).then((value) => safeSetState(() {}));
-        }
-      }
-      _model.apiResult8il = await CompanyGroup.companyLocationCall.call();
-      if ((_model.apiResult8il?.succeeded ?? true)) {
-        while (_model.locationLoop <
-            CompanyGroup.companyLocationCall
-                .companyID(
-                  (_model.apiResult8il?.jsonBody ?? ''),
-                )!
-                .length) {
-          setState(() {
-            _model.addToLocationList(CustomMapLocationStruct(
-              id: CompanyGroup.companyLocationCall.companyID(
-                (_model.apiResult8il?.jsonBody ?? ''),
-              )?[_model.locationLoop],
-              latitude: CompanyGroup.companyLocationCall.latitude(
-                (_model.apiResult8il?.jsonBody ?? ''),
-              )?[_model.locationLoop],
-              longitude: CompanyGroup.companyLocationCall.longitude(
-                (_model.apiResult8il?.jsonBody ?? ''),
-              )?[_model.locationLoop],
-            ));
-            _model.locationLoop = _model.locationLoop + 1;
-          });
+
+          return;
         }
       } else {
-        await action_blocks.noInternet(context);
         return;
       }
     });
@@ -199,7 +174,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
             ),
           );
         }
-        List<CompaniesRow> mapPageCompaniesRowList = snapshot.data!;
+        List<CompaniesRow> locatorCompaniesRowList = snapshot.data!;
         return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -241,7 +216,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                               center: widget.moveLocation == null
                                   ? currentUserLocationValue
                                   : widget.moveLocation,
-                              cuLocation: mapPageCompaniesRowList,
+                              cuLocation: locatorCompaniesRowList,
                               userCurrentLocation: currentUserLocationValue!,
                               showShop: () async {
                                 if (FFAppState().IsLogged) {

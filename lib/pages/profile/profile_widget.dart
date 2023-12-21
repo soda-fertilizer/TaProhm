@@ -122,7 +122,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    FFAppState().UserInfo.fullName,
+                                    FFAppState()
+                                        .UserInfo
+                                        .fullName
+                                        .maybeHandleOverflow(
+                                          maxChars: 30,
+                                          replacement: '…',
+                                        ),
                                     style: FlutterFlowTheme.of(context)
                                         .headlineSmall
                                         .override(
@@ -853,7 +859,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
                                   setState(() {
                                     FFAppState().deleteUserInfo();
-                                    FFAppState().UserInfo = UserInfoStruct();
+                                    FFAppState().UserInfo = UserInfoStruct
+                                        .fromSerializableMap(jsonDecode(
+                                            '{\"IsTestAccount\":\"false\"}'));
 
                                     FFAppState().IsLogged = false;
                                   });

@@ -71,7 +71,8 @@ class _ReferralWidgetState extends State<ReferralWidget>
             .neq(
               'UserID',
               FFAppState().UserInfo.userID,
-            ),
+            )
+            .order('PhoneNumber', ascending: true),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -155,10 +156,25 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    FFAppState().UserInfo.fullName,
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  Flexible(
+                                    child: Container(
+                                      decoration: BoxDecoration(),
+                                      child: Text(
+                                        FFAppState()
+                                            .UserInfo
+                                            .fullName
+                                            .maybeHandleOverflow(
+                                              maxChars: 30,
+                                              replacement: '…',
+                                            ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 14.0,
+                                            ),
+                                      ),
+                                    ),
                                   ),
                                   Text(
                                     'ID: ${FFAppState().UserInfo.phoneNumber}',
@@ -363,7 +379,13 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                                                         child:
                                                                             Text(
                                                                           referralVarItem
-                                                                              .fullName,
+                                                                              .fullName
+                                                                              .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                40,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyLarge
                                                                               .override(

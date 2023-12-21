@@ -412,10 +412,20 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ],
                                       ),
                                     ),
-                                    if (UsersGroup.loginCall.errorMessage(
-                                          (_model.login?.jsonBody ?? ''),
-                                        ) !=
-                                        null)
+                                    if (UsersGroup.loginCall
+                                                .errorMessage(
+                                                  (_model.login?.jsonBody ??
+                                                      ''),
+                                                )
+                                                .toString() !=
+                                            null &&
+                                        UsersGroup.loginCall
+                                                .errorMessage(
+                                                  (_model.login?.jsonBody ??
+                                                      ''),
+                                                )
+                                                .toString() !=
+                                            '')
                                       Align(
                                         alignment:
                                             AlignmentDirectional(0.0, 0.0),

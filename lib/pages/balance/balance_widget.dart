@@ -212,11 +212,11 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                         ),
                                       );
                                     }
-                                    List<UsersRow> textUsersRowList =
+                                    List<UsersRow> moneyUsersRowList =
                                         snapshot.data!;
-                                    final textUsersRow =
-                                        textUsersRowList.isNotEmpty
-                                            ? textUsersRowList.first
+                                    final moneyUsersRow =
+                                        moneyUsersRowList.isNotEmpty
+                                            ? moneyUsersRowList.first
                                             : null;
                                     return InkWell(
                                       splashColor: Colors.transparent,
@@ -225,12 +225,12 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
                                         await actions.printAction(
-                                          'Money: ${textUsersRow?.balance?.toString()}',
+                                          'Money: ${moneyUsersRow?.balance?.toString()}',
                                         );
                                       },
                                       child: Text(
                                         '\$ ${formatNumber(
-                                          textUsersRow?.balance,
+                                          moneyUsersRow?.balance,
                                           formatType: FormatType.custom,
                                           format: '###,###.##',
                                           locale: '',

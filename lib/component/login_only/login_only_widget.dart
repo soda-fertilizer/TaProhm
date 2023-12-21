@@ -304,10 +304,12 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                             ],
                           ),
                         ),
-                        if (UsersGroup.loginCall.errorMessage(
-                              (_model.login?.jsonBody ?? ''),
-                            ) !=
-                            null)
+                        if (UsersGroup.loginCall
+                                .errorMessage(
+                                  (_model.login?.jsonBody ?? ''),
+                                )
+                                .toString() !=
+                            'null')
                           Align(
                             alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
@@ -399,6 +401,15 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                       isMember: UsersGroup.loginCall.isMember(
                                         (_model.login?.jsonBody ?? ''),
                                       ),
+                                      isTestAccount:
+                                          UsersGroup.loginCall.isTestAccount(
+                                        (_model.login?.jsonBody ?? ''),
+                                      ),
+                                      invite: UsersGroup.loginCall
+                                          .invite(
+                                            (_model.login?.jsonBody ?? ''),
+                                          )
+                                          .toString(),
                                     );
                                   });
                                   if (Navigator.of(context).canPop()) {

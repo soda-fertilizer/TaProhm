@@ -362,7 +362,8 @@ class FFAppState extends ChangeNotifier {
     updateFn(_shopHolder);
   }
 
-  UserInfoStruct _UserInfo = UserInfoStruct();
+  UserInfoStruct _UserInfo = UserInfoStruct.fromSerializableMap(
+      jsonDecode('{\"IsTestAccount\":\"false\"}'));
   UserInfoStruct get UserInfo => _UserInfo;
   set UserInfo(UserInfoStruct _value) {
     _UserInfo = _value;

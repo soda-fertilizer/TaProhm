@@ -43,10 +43,6 @@ class CreateCompanyModel extends FlutterFlowModel<CreateCompanyWidget> {
   FocusNode? telegramLinkFocusNode;
   TextEditingController? telegramLinkController;
   String? Function(BuildContext, String?)? telegramLinkControllerValidator;
-  // State field(s) for InviteID widget.
-  FocusNode? inviteIDFocusNode;
-  TextEditingController? inviteIDController;
-  String? Function(BuildContext, String?)? inviteIDControllerValidator;
   // State field(s) for Discount widget.
   FocusNode? discountFocusNode;
   TextEditingController? discountController;
@@ -55,8 +51,8 @@ class CreateCompanyModel extends FlutterFlowModel<CreateCompanyWidget> {
   bool? checkboxValue;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
-  TextEditingController? textController6;
-  String? Function(BuildContext, String?)? textController6Validator;
+  TextEditingController? textController5;
+  String? Function(BuildContext, String?)? textController5Validator;
   bool isDataUploading2 = false;
   List<FFUploadedFile> uploadedLocalFiles2 = [];
   List<String> uploadedFileUrls2 = [];
@@ -81,14 +77,11 @@ class CreateCompanyModel extends FlutterFlowModel<CreateCompanyWidget> {
     telegramLinkFocusNode?.dispose();
     telegramLinkController?.dispose();
 
-    inviteIDFocusNode?.dispose();
-    inviteIDController?.dispose();
-
     discountFocusNode?.dispose();
     discountController?.dispose();
 
     textFieldFocusNode?.dispose();
-    textController6?.dispose();
+    textController5?.dispose();
   }
 
   /// Action blocks are added here.

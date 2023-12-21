@@ -113,7 +113,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
               highlightColor: Colors.transparent,
               onTap: () async {
                 context.pushNamed(
-                  'MapPage',
+                  'Locator',
                   extra: <String, dynamic>{
                     kTransitionInfoKey: TransitionInfo(
                       hasTransition: true,
@@ -199,7 +199,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       size: 24.0,
                     ),
                     Text(
-                      'Notification',
+                      'Alert',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             color: widget.selectPageIndex == 3

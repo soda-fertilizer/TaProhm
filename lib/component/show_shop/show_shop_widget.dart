@@ -29,8 +29,6 @@ class ShowShopWidget extends StatefulWidget {
 class _ShowShopWidgetState extends State<ShowShopWidget> {
   late ShowShopModel _model;
 
-  LatLng? currentUserLocationValue;
-
   @override
   void setState(VoidCallback callback) {
     super.setState(callback);
@@ -255,25 +253,23 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
               alignment: AlignmentDirectional(1.0, -1.0),
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                child: Container(
-                  width: 50.0,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      currentUserLocationValue = await getCurrentUserLocation(
-                          defaultLocation: LatLng(0.0, 0.0));
-                      await actions.openUrl(
-                        'google.navigation:q=${showShopCompaniesRow?.latitude?.toString()},${showShopCompaniesRow?.longitude?.toString()}&mode=d',
-                      );
-                    },
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    await actions.openUrl(
+                      'google.navigation:q=${showShopCompaniesRow?.latitude?.toString()},${showShopCompaniesRow?.longitude?.toString()}&mode=d',
+                    );
+                  },
+                  child: Container(
+                    width: 50.0,
+                    height: 50.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                      shape: BoxShape.circle,
+                    ),
                     child: Icon(
                       Icons.directions_rounded,
                       color: FlutterFlowTheme.of(context).primaryBackground,
