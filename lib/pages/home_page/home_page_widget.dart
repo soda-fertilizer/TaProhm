@@ -7,9 +7,7 @@ import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/permissions_util.dart';
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -44,11 +42,6 @@ class _HomePageWidgetState extends State<HomePageWidget>
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
-      unawaited(
-        () async {
-          await requestPermission(locationPermission);
-        }(),
-      );
       _model.check = await CheckUnderMaintenanceCall.call();
       if (FFAppState().UserInfo.isTestAccount) {
         return;
