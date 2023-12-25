@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -6,9 +7,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
-import '/custom_code/actions/index.dart' as actions;
+import '/actions/actions.dart' as action_blocks;
 import 'admin_create_user_widget.dart' show AdminCreateUserWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,9 +30,13 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
 
   String? selectReferral = '';
 
+  bool isLodaingCompleted = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (Get max phone number)] action in AdminCreateUser widget.
+  ApiCallResponse? maxPhoneNumber;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -41,10 +47,23 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl1 = '';
 
-  // State field(s) for TeamFullName widget.
-  FocusNode? teamFullNameFocusNode;
-  TextEditingController? teamFullNameController;
-  String? Function(BuildContext, String?)? teamFullNameControllerValidator;
+  // State field(s) for NormalFullName widget.
+  FocusNode? normalFullNameFocusNode;
+  TextEditingController? normalFullNameController;
+  String? Function(BuildContext, String?)? normalFullNameControllerValidator;
+  // State field(s) for NormalPassword widget.
+  FocusNode? normalPasswordFocusNode;
+  TextEditingController? normalPasswordController;
+  late bool normalPasswordVisibility;
+  String? Function(BuildContext, String?)? normalPasswordControllerValidator;
+  // State field(s) for NormalInvite widget.
+  FocusNode? normalInviteFocusNode;
+  TextEditingController? normalInviteController;
+  String? Function(BuildContext, String?)? normalInviteControllerValidator;
+  // State field(s) for NormalPhoneNumber widget.
+  FocusNode? normalPhoneNumberFocusNode;
+  TextEditingController? normalPhoneNumberController;
+  String? Function(BuildContext, String?)? normalPhoneNumberControllerValidator;
   // State field(s) for Sector widget.
   String? sectorValue;
   FormFieldController<String>? sectorValueController;
@@ -57,20 +76,6 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   // State field(s) for commune widget.
   String? communeValue;
   FormFieldController<String>? communeValueController;
-  // State field(s) for MemberInvite widget.
-  FocusNode? memberInviteFocusNode1;
-  TextEditingController? memberInviteController1;
-  String? Function(BuildContext, String?)? memberInviteController1Validator;
-  // State field(s) for MemberTelegramNumber widget.
-  FocusNode? memberTelegramNumberFocusNode1;
-  TextEditingController? memberTelegramNumberController1;
-  String? Function(BuildContext, String?)?
-      memberTelegramNumberController1Validator;
-  // State field(s) for MemberPassword widget.
-  FocusNode? memberPasswordFocusNode1;
-  TextEditingController? memberPasswordController1;
-  late bool memberPasswordVisibility1;
-  String? Function(BuildContext, String?)? memberPasswordController1Validator;
   bool isDataUploading2 = false;
   FFUploadedFile uploadedLocalFile2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -85,46 +90,39 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   TextEditingController? memberReferrController;
   String? Function(BuildContext, String?)? memberReferrControllerValidator;
   // State field(s) for MemberInvite widget.
-  FocusNode? memberInviteFocusNode2;
-  TextEditingController? memberInviteController2;
-  String? Function(BuildContext, String?)? memberInviteController2Validator;
-  // State field(s) for MemberTelegramNumber widget.
-  FocusNode? memberTelegramNumberFocusNode2;
-  TextEditingController? memberTelegramNumberController2;
-  String? Function(BuildContext, String?)?
-      memberTelegramNumberController2Validator;
+  FocusNode? memberInviteFocusNode;
+  TextEditingController? memberInviteController;
+  String? Function(BuildContext, String?)? memberInviteControllerValidator;
   // State field(s) for MemberPassword widget.
-  FocusNode? memberPasswordFocusNode2;
-  TextEditingController? memberPasswordController2;
-  late bool memberPasswordVisibility2;
-  String? Function(BuildContext, String?)? memberPasswordController2Validator;
+  FocusNode? memberPasswordFocusNode;
+  TextEditingController? memberPasswordController;
+  late bool memberPasswordVisibility;
+  String? Function(BuildContext, String?)? memberPasswordControllerValidator;
   // State field(s) for MemberSector widget.
   String? memberSectorValue;
   FormFieldController<String>? memberSectorValueController;
-  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
-  UsersRow? createdUser;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    memberPasswordVisibility1 = false;
-    memberPasswordVisibility2 = false;
+    normalPasswordVisibility = false;
+    memberPasswordVisibility = false;
   }
 
   void dispose() {
     unfocusNode.dispose();
     tabBarController?.dispose();
-    teamFullNameFocusNode?.dispose();
-    teamFullNameController?.dispose();
+    normalFullNameFocusNode?.dispose();
+    normalFullNameController?.dispose();
 
-    memberInviteFocusNode1?.dispose();
-    memberInviteController1?.dispose();
+    normalPasswordFocusNode?.dispose();
+    normalPasswordController?.dispose();
 
-    memberTelegramNumberFocusNode1?.dispose();
-    memberTelegramNumberController1?.dispose();
+    normalInviteFocusNode?.dispose();
+    normalInviteController?.dispose();
 
-    memberPasswordFocusNode1?.dispose();
-    memberPasswordController1?.dispose();
+    normalPhoneNumberFocusNode?.dispose();
+    normalPhoneNumberController?.dispose();
 
     memberFullNameFocusNode?.dispose();
     memberFullNameController?.dispose();
@@ -132,14 +130,11 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
     memberReferrFocusNode?.dispose();
     memberReferrController?.dispose();
 
-    memberInviteFocusNode2?.dispose();
-    memberInviteController2?.dispose();
+    memberInviteFocusNode?.dispose();
+    memberInviteController?.dispose();
 
-    memberTelegramNumberFocusNode2?.dispose();
-    memberTelegramNumberController2?.dispose();
-
-    memberPasswordFocusNode2?.dispose();
-    memberPasswordController2?.dispose();
+    memberPasswordFocusNode?.dispose();
+    memberPasswordController?.dispose();
   }
 
   /// Action blocks are added here.

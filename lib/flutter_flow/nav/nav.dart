@@ -340,6 +340,62 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'UnderMaintenance',
           path: '/underMaintenance',
           builder: (context, params) => UnderMaintenanceWidget(),
+        ),
+        FFRoute(
+          name: 'MemberPayment',
+          path: '/memberPayment',
+          builder: (context, params) => MemberPaymentWidget(
+            name: params.getParam('name', ParamType.String),
+            referral: params.getParam('referral', ParamType.String),
+            password: params.getParam('password', ParamType.String),
+            sectorID: params.getParam('sectorID', ParamType.int),
+            isNewMember: params.getParam('isNewMember', ParamType.bool),
+            profile: params.getParam('profile', ParamType.String),
+            phoneNumber: params.getParam('phoneNumber', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'TeamPayment',
+          path: '/teamPayment',
+          builder: (context, params) => TeamPaymentWidget(
+            name: params.getParam('name', ParamType.String),
+            referral: params.getParam('referral', ParamType.String),
+            invite: params.getParam('invite', ParamType.String),
+            password: params.getParam('password', ParamType.String),
+            sectorID: params.getParam('sectorID', ParamType.int),
+            profile: params.getParam('profile', ParamType.String),
+            phoneNumber: params.getParam('phoneNumber', ParamType.String),
+            isNew: params.getParam('isNew', ParamType.bool),
+          ),
+        ),
+        FFRoute(
+          name: 'SubAdminMain',
+          path: '/subAdminMain',
+          builder: (context, params) => SubAdminMainWidget(),
+        ),
+        FFRoute(
+          name: 'SubAdminAccount',
+          path: '/subAdminAccount',
+          builder: (context, params) => SubAdminAccountWidget(),
+        ),
+        FFRoute(
+          name: 'SubAdminBusinesses',
+          path: '/subAdminBusinesses',
+          builder: (context, params) => SubAdminBusinessesWidget(),
+        ),
+        FFRoute(
+          name: 'AdminAccountPayment',
+          path: '/adminAccountPayment',
+          builder: (context, params) => AdminAccountPaymentWidget(
+            name: params.getParam('name', ParamType.String),
+            referral: params.getParam('referral', ParamType.String),
+            password: params.getParam('password', ParamType.String),
+            sectorID: params.getParam('sectorID', ParamType.int),
+            isMember: params.getParam('isMember', ParamType.bool),
+            profile: params.getParam('profile', ParamType.String),
+            phoneNumber: params.getParam('phoneNumber', ParamType.String),
+            inviteID: params.getParam('inviteID', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

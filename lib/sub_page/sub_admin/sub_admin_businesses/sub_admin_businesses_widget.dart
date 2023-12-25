@@ -9,25 +9,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'admin_businesses_model.dart';
-export 'admin_businesses_model.dart';
+import 'sub_admin_businesses_model.dart';
+export 'sub_admin_businesses_model.dart';
 
-class AdminBusinessesWidget extends StatefulWidget {
-  const AdminBusinessesWidget({Key? key}) : super(key: key);
+class SubAdminBusinessesWidget extends StatefulWidget {
+  const SubAdminBusinessesWidget({Key? key}) : super(key: key);
 
   @override
-  _AdminBusinessesWidgetState createState() => _AdminBusinessesWidgetState();
+  _SubAdminBusinessesWidgetState createState() =>
+      _SubAdminBusinessesWidgetState();
 }
 
-class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
-  late AdminBusinessesModel _model;
+class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
+  late SubAdminBusinessesModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AdminBusinessesModel());
+    _model = createModel(context, () => SubAdminBusinessesModel());
   }
 
   @override

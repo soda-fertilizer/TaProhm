@@ -439,7 +439,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   (_model.login?.jsonBody ??
                                                       ''),
                                                 )
-                                                .toString(),
+                                                .toString()!,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -485,7 +485,8 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       (_model.login?.jsonBody ??
                                                           ''),
                                                     )
-                                                    .toString(),
+                                                    .toString()
+                                                    ?.toString(),
                                               );
                                               await actions.onesignalLogin(
                                                 UsersGroup.loginCall
@@ -493,7 +494,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       (_model.login?.jsonBody ??
                                                           ''),
                                                     )
-                                                    .toString(),
+                                                    .toString()!,
                                               );
                                               setState(() {
                                                 FFAppState().IsLogged = true;

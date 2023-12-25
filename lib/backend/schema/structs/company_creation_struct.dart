@@ -111,8 +111,9 @@ class CompanyCreationStruct extends FFFirebaseStruct {
         pymentImage: data['PymentImage'] as String?,
       );
 
-  static CompanyCreationStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? CompanyCreationStruct.fromMap(data) : null;
+  static CompanyCreationStruct? maybeFromMap(dynamic data) => data is Map
+      ? CompanyCreationStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'Profile': _profile,

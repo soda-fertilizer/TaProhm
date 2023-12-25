@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -54,59 +55,59 @@ class LoginCall {
     );
   }
 
-  dynamic userID(dynamic response) => getJsonField(
+  int? userID(dynamic response) => castToType<int>(getJsonField(
         response,
         r'''$[:].userid''',
-      );
-  dynamic phoneNumber(dynamic response) => getJsonField(
+      ));
+  String? phoneNumber(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:].phonenumber''',
-      );
-  dynamic token(dynamic response) => getJsonField(
+      ));
+  String? token(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:].token''',
-      );
-  dynamic sectorID(dynamic response) => getJsonField(
+      ));
+  int? sectorID(dynamic response) => castToType<int>(getJsonField(
         response,
         r'''$[:].sectorid''',
-      );
-  dynamic sectorName(dynamic response) => getJsonField(
+      ));
+  String? sectorName(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:].sectorname''',
-      );
-  dynamic profile(dynamic response) => getJsonField(
+      ));
+  String? profile(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:].profile''',
-      );
-  dynamic userReferral(dynamic response) => getJsonField(
+      ));
+  String? userReferral(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:].userreferral''',
-      );
-  dynamic isAdmin(dynamic response) => getJsonField(
+      ));
+  bool? isAdmin(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$[:].isadmin''',
-      );
-  dynamic fullName(dynamic response) => getJsonField(
+      ));
+  String? fullName(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:].fullname''',
-      );
-  dynamic hashedPassword(dynamic response) => getJsonField(
+      ));
+  String? hashedPassword(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:].hashedpassword''',
-      );
-  dynamic isMember(dynamic response) => getJsonField(
+      ));
+  bool? isMember(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$[:].ismember''',
-      );
-  dynamic errorMessage(dynamic response) => getJsonField(
+      ));
+  String? errorMessage(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.message''',
-      );
-  dynamic isTestAccount(dynamic response) => getJsonField(
+      ));
+  bool? isTestAccount(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$[:].istestaccount''',
-      );
-  dynamic invite(dynamic response) => getJsonField(
+      ));
+  dynamic? invite(dynamic response) => getJsonField(
         response,
         r'''$[:].invite''',
       );
@@ -197,10 +198,10 @@ class OneUserNameCall {
     );
   }
 
-  dynamic name(dynamic response) => getJsonField(
+  String? name(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$[:]''',
-      );
+      ));
 }
 
 /// End Users Group Code
@@ -419,35 +420,45 @@ class ListTransactionsCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<String>? userName(dynamic response) => (getJsonField(
         response,
         r'''$[:].username''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? userProfile(dynamic response) => (getJsonField(
         response,
         r'''$[:].userprofile''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<int>? amount(dynamic response) => (getJsonField(
         response,
         r'''$[:].amount''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<String>? type(dynamic response) => (getJsonField(
         response,
         r'''$[:].type''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List? all(dynamic response) => getJsonField(
         response,
         r'''$[:]''',
@@ -494,35 +505,45 @@ class ListHistoryTransactionsCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<String>? userName(dynamic response) => (getJsonField(
         response,
         r'''$[:].username''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? userProfile(dynamic response) => (getJsonField(
         response,
         r'''$[:].userprofile''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<int>? amount(dynamic response) => (getJsonField(
         response,
         r'''$[:].amount''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<String>? type(dynamic response) => (getJsonField(
         response,
         r'''$[:].type''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List? all(dynamic response) => getJsonField(
         response,
         r'''$[:]''',
@@ -534,14 +555,18 @@ class ListHistoryTransactionsCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<String>? detail(dynamic response) => (getJsonField(
         response,
         r'''$[:].detail''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List? createdDate(dynamic response) => getJsonField(
         response,
         r'''$[:].createddate''',
@@ -585,28 +610,36 @@ class UserListTransactionsCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<String>? type(dynamic response) => (getJsonField(
         response,
         r'''$[:].type''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? createdDate(dynamic response) => (getJsonField(
         response,
         r'''$[:].createddate''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<int>? amount(dynamic response) => (getJsonField(
         response,
         r'''$[:].amount''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List? all(dynamic response) => getJsonField(
         response,
         r'''$[:]''',
@@ -651,28 +684,36 @@ class UserListTransactionsNoDateCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List<String>? type(dynamic response) => (getJsonField(
         response,
         r'''$[:].type''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<String>? createdDate(dynamic response) => (getJsonField(
         response,
         r'''$[:].createddate''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<String>();
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List<int>? amount(dynamic response) => (getJsonField(
         response,
         r'''$[:].amount''',
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<int>();
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
   List? all(dynamic response) => getJsonField(
         response,
         r'''$[:]''',
@@ -684,7 +725,9 @@ class UserListTransactionsNoDateCall {
         true,
       ) as List?)
           ?.withoutNulls
-          .cast<bool>();
+          .map((x) => castToType<bool>(x))
+          .withoutNulls
+          .toList();
 }
 
 /// End Transactions Group Code
@@ -906,10 +949,10 @@ class CheckUnderMaintenanceCall {
     );
   }
 
-  static dynamic value(dynamic response) => getJsonField(
+  static bool? value(dynamic response) => castToType<bool>(getJsonField(
         response,
         r'''$''',
-      );
+      ));
 }
 
 class GetMaxPhoneNumberCall {
@@ -935,10 +978,10 @@ class GetMaxPhoneNumberCall {
     );
   }
 
-  static dynamic value(dynamic response) => getJsonField(
+  static String? value(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$''',
-      );
+      ));
 }
 
 class ApiPagingParams {

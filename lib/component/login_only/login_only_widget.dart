@@ -320,7 +320,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                     .errorMessage(
                                       (_model.login?.jsonBody ?? ''),
                                     )
-                                    .toString(),
+                                    .toString()!,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -356,7 +356,8 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                         .userID(
                                           (_model.login?.jsonBody ?? ''),
                                         )
-                                        .toString(),
+                                        .toString()
+                                        ?.toString(),
                                   );
                                   setState(() {
                                     FFAppState().IsLogged = true;

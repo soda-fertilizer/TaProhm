@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
@@ -8,10 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
-import '/actions/actions.dart' as action_blocks;
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/permissions_util.dart';
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -44,46 +40,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       unawaited(
-        () async {
-          await requestPermission(locationPermission);
-        }(),
+        () async {}(),
       );
-      _model.check = await CheckUnderMaintenanceCall.call();
-      await actions.printAction(
-        'isTest: ${FFAppState().UserInfo.isTestAccount.toString()}, Check Maintenance: ${CheckUnderMaintenanceCall.value(
-          (_model.check?.jsonBody ?? ''),
-        ).toString().toString()}',
-      );
-      if ((_model.check?.succeeded ?? true)) {
-        if (FFAppState().UserInfo.isTestAccount) {
-          return;
-        }
-
-        if (CheckUnderMaintenanceCall.value(
-          (_model.check?.jsonBody ?? ''),
-        )) {
-          if (Navigator.of(context).canPop()) {
-            context.pop();
-          }
-          context.pushNamed(
-            'UnderMaintenance',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.fade,
-                duration: Duration(milliseconds: 0),
-              ),
-            },
-          );
-
-          return;
-        } else {
-          return;
-        }
-      } else {
-        await action_blocks.noInternet(context);
-        return;
-      }
     });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
@@ -131,129 +89,125 @@ class _HomePageWidgetState extends State<HomePageWidget>
       );
     }
 
-    return FutureBuilder<List<CompaniesRow>>(
-      future: FFAppState()
-          .company(
-        requestFn: () => CompaniesTable().queryRows(
-          queryFn: (q) => q
-              .eq(
-                'IsApprove',
-                true,
-              )
-              .eq(
-                'IsActive',
-                true,
-              ),
-        ),
-      )
-          .then((result) {
-        _model.requestCompleted = true;
-        return result;
-      }),
-      builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
-          return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
-            body: Center(
-              child: SizedBox(
-                width: 50.0,
-                height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
-                ),
-              ),
-            ),
-          );
-        }
-        List<CompaniesRow> homePageCompaniesRowList = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primary,
-            body: SafeArea(
-              top: true,
-              child: Stack(
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
+        body: SafeArea(
+          top: true,
+          child: Stack(
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primary,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 10.0),
-                          child: Row(
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).primary,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(
+                          20.0, 20.0, 20.0, 10.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Ta Prohm',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  fontSize: 22.0,
+                                ),
+                          ),
+                          Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Ta Prohm',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      fontSize: 22.0,
-                                    ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  if (FFAppState().UserInfo.isMember)
-                                    Icon(
-                                      Icons.notifications_sharp,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      size: 30.0,
-                                    ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
-                                        'SearchCompany',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration: Duration(milliseconds: 0),
-                                          ),
-                                        },
-                                      );
+                              if (FFAppState().UserInfo.isMember)
+                                Icon(
+                                  Icons.notifications_sharp,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  size: 30.0,
+                                ),
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'SearchCompany',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
                                     },
-                                    child: Icon(
-                                      Icons.travel_explore,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      size: 28.0,
-                                    ),
-                                  ),
-                                ].divide(SizedBox(width: 10.0)),
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.travel_explore,
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  size: 28.0,
+                                ),
                               ),
                             ].divide(SizedBox(width: 10.0)),
                           ),
-                        ),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).primaryBackground,
+                      ),
+                      child: FutureBuilder<List<CompaniesRow>>(
+                        future: FFAppState()
+                            .company(
+                          requestFn: () => CompaniesTable().queryRows(
+                            queryFn: (q) => q
+                                .eq(
+                                  'IsApprove',
+                                  true,
+                                )
+                                .eq(
+                                  'IsActive',
+                                  true,
+                                ),
                           ),
-                          child: Column(
+                        )
+                            .then((result) {
+                          _model.requestCompleted = true;
+                          return result;
+                        }),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          List<CompaniesRow> tabBarCompaniesRowList =
+                              snapshot.data!;
+                          return Column(
                             children: [
                               Align(
                                 alignment: Alignment(0.0, 0),
@@ -295,7 +249,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       ),
                                       child: Builder(
                                         builder: (context) {
-                                          final homePageVar = homePageCompaniesRowList
+                                          final homePageVar = tabBarCompaniesRowList
                                               .sortedList((e) =>
                                                   functions.areSimilarLocation(
                                                       e.latitude,
@@ -626,7 +580,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     ),
                                     Builder(
                                       builder: (context) {
-                                        final byList = homePageCompaniesRowList
+                                        final byList = tabBarCompaniesRowList
                                             .sortedList((e) =>
                                                 functions.areSimilarLocation(
                                                     e.latitude,
@@ -818,32 +772,32 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 ),
                               ),
                             ],
-                          ),
-                        ),
-                      ),
-                      wrapWithModel(
-                        model: _model.navPaddingModel,
-                        updateCallback: () => setState(() {}),
-                        child: NavPaddingWidget(),
-                      ),
-                    ],
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
-                    child: wrapWithModel(
-                      model: _model.navBarModel,
-                      updateCallback: () => setState(() {}),
-                      child: NavBarWidget(
-                        selectPageIndex: 1,
+                          );
+                        },
                       ),
                     ),
                   ),
+                  wrapWithModel(
+                    model: _model.navPaddingModel,
+                    updateCallback: () => setState(() {}),
+                    child: NavPaddingWidget(),
+                  ),
                 ],
               ),
-            ),
+              Align(
+                alignment: AlignmentDirectional(0.0, 1.0),
+                child: wrapWithModel(
+                  model: _model.navBarModel,
+                  updateCallback: () => setState(() {}),
+                  child: NavBarWidget(
+                    selectPageIndex: 1,
+                  ),
+                ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

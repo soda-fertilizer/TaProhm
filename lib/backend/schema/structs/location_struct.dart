@@ -37,7 +37,7 @@ class LocationStruct extends FFFirebaseStruct {
       );
 
   static LocationStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? LocationStruct.fromMap(data) : null;
+      data is Map ? LocationStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
         'UserID': _userID,

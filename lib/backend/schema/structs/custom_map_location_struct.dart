@@ -48,10 +48,9 @@ class CustomMapLocationStruct extends FFFirebaseStruct {
         longitude: castToType<double>(data['longitude']),
       );
 
-  static CustomMapLocationStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic>
-          ? CustomMapLocationStruct.fromMap(data)
-          : null;
+  static CustomMapLocationStruct? maybeFromMap(dynamic data) => data is Map
+      ? CustomMapLocationStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,

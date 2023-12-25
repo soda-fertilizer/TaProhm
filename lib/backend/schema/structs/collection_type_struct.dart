@@ -27,8 +27,9 @@ class CollectionTypeStruct extends FFFirebaseStruct {
         value: data['value'] as DocumentReference?,
       );
 
-  static CollectionTypeStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? CollectionTypeStruct.fromMap(data) : null;
+  static CollectionTypeStruct? maybeFromMap(dynamic data) => data is Map
+      ? CollectionTypeStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'value': _value,

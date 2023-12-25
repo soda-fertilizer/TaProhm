@@ -1,35 +1,53 @@
-import '/backend/schema/structs/index.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/show_k_h_q_r/show_k_h_q_r_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:async';
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'acount_payment_model.dart';
-export 'acount_payment_model.dart';
+import 'member_payment_model.dart';
+export 'member_payment_model.dart';
 
-class AcountPaymentWidget extends StatefulWidget {
-  const AcountPaymentWidget({Key? key}) : super(key: key);
+class MemberPaymentWidget extends StatefulWidget {
+  const MemberPaymentWidget({
+    Key? key,
+    required this.name,
+    required this.referral,
+    required this.password,
+    required this.sectorID,
+    required this.isNewMember,
+    required this.profile,
+    required this.phoneNumber,
+  }) : super(key: key);
+
+  final String? name;
+  final String? referral;
+  final String? password;
+  final int? sectorID;
+  final bool? isNewMember;
+  final String? profile;
+  final String? phoneNumber;
 
   @override
-  _AcountPaymentWidgetState createState() => _AcountPaymentWidgetState();
+  _MemberPaymentWidgetState createState() => _MemberPaymentWidgetState();
 }
 
-class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
-  late AcountPaymentModel _model;
+class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
+  late MemberPaymentModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AcountPaymentModel());
+    _model = createModel(context, () => MemberPaymentModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -123,8 +141,9 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
               ),
             ),
             Text(
-              '\$ 1',
-              style: FlutterFlowTheme.of(context).displayLarge,
+              widget.isNewMember! ? '\$ 100' : '\$ 1',
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).displayMedium,
             ),
             Container(
               width: double.infinity,
@@ -489,11 +508,13 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            final selectedMedia = await selectMedia(
+                            final selectedMedia =
+                                await selectMediaWithSourceBottomSheet(
+                              context: context,
                               storageFolderPath: 'Users',
                               maxWidth: 1080.00,
                               maxHeight: 1080.00,
-                              multiImage: false,
+                              allowPhoto: true,
                             );
                             if (selectedMedia != null &&
                                 selectedMedia.every((m) => validateFileFormat(
@@ -564,76 +585,69 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  valueOrDefault<String>(
-                    _model.uploadedImage,
-                    'https://placehold.co/300x200/c4cdd3/f0f0f0',
+            if (_model.uploadedImage != null && _model.uploadedImage != '')
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    valueOrDefault<String>(
+                      _model.uploadedImage,
+                      'https://placehold.co/300x200/c4cdd3/f0f0f0',
+                    ),
+                    width: double.infinity,
+                    height: 200.0,
+                    fit: BoxFit.contain,
                   ),
-                  width: double.infinity,
-                  height: 200.0,
-                  fit: BoxFit.contain,
                 ),
               ),
-            ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  setState(() {
-                    FFAppState().updateCreatAccountHolderStruct(
-                      (e) => e..pymentImage = _model.uploadedImage,
-                    );
-                  });
-                  await UsersTable().insert({
-                    'PhoneNumber': FFAppState().CreatAccountHolder.phoneNumber,
-                    'Password': FFAppState().CreatAccountHolder.password,
-                    'PaymentImage': FFAppState().CreatAccountHolder.pymentImage,
-                    'SectorID': FFAppState().CreatAccountHolder.sectorID,
-                    'UserReferral':
-                        FFAppState().CreatAccountHolder.invidePhonenumber,
-                    'FullName': FFAppState().CreatAccountHolder.fullName,
-                    'Profile': FFAppState().CreatAccountHolder.profile,
+                  _model.createUser = await UsersTable().insert({
+                    'PhoneNumber': widget.phoneNumber,
+                    'Password': widget.password,
+                    'PaymentImage': _model.uploadedImage,
                     'Balance': 0.0,
+                    'SectorID': widget.sectorID,
+                    'Profile': widget.profile,
+                    'FullName': widget.name,
+                    'UserReferral': widget.referral,
+                    'IsMember': true,
                   });
-                  setState(() {
-                    FFAppState().deleteCreatAccountHolder();
-                    FFAppState().CreatAccountHolder =
-                        UserCreationStruct.fromSerializableMap(jsonDecode(
-                            '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\"}'));
-                  });
-                  await showDialog(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('Complete!'),
-                        content:
-                            Text('Please our team will contact you shortly.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('Ok'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                  if (Navigator.of(context).canPop()) {
-                    context.pop();
+                  if (widget.isNewMember!) {
+                    unawaited(
+                      () async {
+                        _model.apiResult1an =
+                            await EdgeFunctionGroup.referralCall.call(
+                          phoneNumber: widget.phoneNumber,
+                          money: 50.0,
+                        );
+                      }(),
+                    );
+                  } else {
+                    _model.apiResulta5x =
+                        await EdgeFunctionGroup.updateBalanceCall.call(
+                      phoneNumber: widget.phoneNumber,
+                      money: 1.0,
+                      action: 'plus',
+                    );
+                    await TransactionsTable().insert({
+                      'TypeID': 5,
+                      'Amount': 1.0,
+                      'UserPhoneNumber': 'admin',
+                      'Detail':
+                          'Income: ${widget.name} (ID: ${widget.phoneNumber} )',
+                    });
                   }
-                  context.pushNamed(
-                    'HomePage',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 0),
-                      ),
-                    },
-                  );
+
+                  await AllowToReferralsTable().insert({
+                    'UserPhoneNumber': _model.createUser?.phoneNumber,
+                  });
+                  context.safePop();
+
+                  setState(() {});
                 },
                 text: 'Active',
                 options: FFButtonOptions(

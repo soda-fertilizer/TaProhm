@@ -8,26 +8,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'admin_account_model.dart';
-export 'admin_account_model.dart';
+import 'sub_admin_account_model.dart';
+export 'sub_admin_account_model.dart';
 
-class AdminAccountWidget extends StatefulWidget {
-  const AdminAccountWidget({Key? key}) : super(key: key);
+class SubAdminAccountWidget extends StatefulWidget {
+  const SubAdminAccountWidget({Key? key}) : super(key: key);
 
   @override
-  _AdminAccountWidgetState createState() => _AdminAccountWidgetState();
+  _SubAdminAccountWidgetState createState() => _SubAdminAccountWidgetState();
 }
 
-class _AdminAccountWidgetState extends State<AdminAccountWidget>
+class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
     with TickerProviderStateMixin {
-  late AdminAccountModel _model;
+  late SubAdminAccountModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AdminAccountModel());
+    _model = createModel(context, () => SubAdminAccountModel());
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -124,7 +124,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
                       child: FutureBuilder<List<UsersRow>>(
-                        future: (_model.requestCompleter2 ??=
+                        future: (_model.requestCompleter1 ??=
                                 Completer<List<UsersRow>>()
                                   ..complete(UsersTable().queryRows(
                                     queryFn: (q) => q
@@ -161,8 +161,8 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                           return RefreshIndicator(
                             onRefresh: () async {
                               FFAppState().clearAdminRequestAccountCache();
-                              setState(() => _model.requestCompleter2 = null);
-                              await _model.waitForRequestCompleted2();
+                              setState(() => _model.requestCompleter1 = null);
+                              await _model.waitForRequestCompleted1();
                             },
                             child: ListView.builder(
                               padding: EdgeInsets.zero,
@@ -291,7 +291,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
                       child: FutureBuilder<List<UsersRow>>(
-                        future: (_model.requestCompleter1 ??=
+                        future: (_model.requestCompleter2 ??=
                                 Completer<List<UsersRow>>()
                                   ..complete(UsersTable().queryRows(
                                     queryFn: (q) => q
@@ -333,8 +333,8 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                           return RefreshIndicator(
                             onRefresh: () async {
                               FFAppState().clearAdminRequestAccountCache();
-                              setState(() => _model.requestCompleter1 = null);
-                              await _model.waitForRequestCompleted1();
+                              setState(() => _model.requestCompleter2 = null);
+                              await _model.waitForRequestCompleted2();
                             },
                             child: ListView.builder(
                               padding: EdgeInsets.zero,

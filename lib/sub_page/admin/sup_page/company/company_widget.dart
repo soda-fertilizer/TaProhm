@@ -718,8 +718,14 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             .call(
                                           phoneNumber:
                                               containerUsersRow?.phoneNumber,
-                                          money: double.tryParse(
-                                              _model.amountController.text),
+                                          money: 50.0,
+                                          invitePhoneNumber: containerUsersRow
+                                                          ?.invite ==
+                                                      null ||
+                                                  containerUsersRow?.invite ==
+                                                      ''
+                                              ? null
+                                              : containerUsersRow?.invite,
                                         );
                                       }(),
                                     );

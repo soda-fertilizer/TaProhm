@@ -91,8 +91,9 @@ class UserCreationStruct extends FFFirebaseStruct {
         invidePhonenumber: data['InvidePhonenumber'] as String?,
       );
 
-  static UserCreationStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? UserCreationStruct.fromMap(data) : null;
+  static UserCreationStruct? maybeFromMap(dynamic data) => data is Map
+      ? UserCreationStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'FullName': _fullName,
