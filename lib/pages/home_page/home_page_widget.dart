@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
@@ -8,6 +9,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/permissions_util.dart';
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +41,40 @@ class _HomePageWidgetState extends State<HomePageWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (RootPageContext.isInactiveRootPage(context)) {
+        return;
+      }
       unawaited(
-        () async {}(),
+        () async {
+          await requestPermission(locationPermission);
+        }(),
       );
+      _model.check = await CheckUnderMaintenanceCall.call();
+      if (FFAppState().UserInfo.isTestAccount) {
+        return;
+      }
+
+      if (CheckUnderMaintenanceCall.value(
+        (_model.check?.jsonBody ?? ''),
+      )!) {
+        if (Navigator.of(context).canPop()) {
+          context.pop();
+        }
+        context.pushNamed(
+          'UnderMaintenance',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: Duration(milliseconds: 0),
+            ),
+          },
+        );
+
+        return;
+      } else {
+        return;
+      }
     });
 
     getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
