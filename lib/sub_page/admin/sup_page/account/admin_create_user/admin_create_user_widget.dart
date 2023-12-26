@@ -71,9 +71,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
     _model.memberReferrController ??= TextEditingController();
     _model.memberReferrFocusNode ??= FocusNode();
 
-    _model.memberInviteController ??= TextEditingController();
-    _model.memberInviteFocusNode ??= FocusNode();
-
     _model.memberPasswordController ??= TextEditingController();
     _model.memberPasswordFocusNode ??= FocusNode();
   }
@@ -547,6 +544,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         'UserReferral',
                                         '000001',
                                       )
+                                      .eq(
+                                        'IsMember',
+                                        true,
+                                      )
                                       .order('UserID', ascending: true),
                                 ),
                                 builder: (context, snapshot) {
@@ -637,6 +638,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           'UserReferral',
                                           _model.selectSectorPhoneNumber,
                                         )
+                                        .eq(
+                                          'IsMember',
+                                          true,
+                                        )
                                         .order('UserID', ascending: true),
                                   ),
                                   builder: (context, snapshot) {
@@ -718,6 +723,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         .eq(
                                           'UserReferral',
                                           _model.selectCityPhoneNumber,
+                                        )
+                                        .eq(
+                                          'IsMember',
+                                          true,
                                         )
                                         .order('UserID', ascending: true),
                                   ),
@@ -802,6 +811,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         .eq(
                                           'UserReferral',
                                           _model.selectDistrictPhoneNumber,
+                                        )
+                                        .eq(
+                                          'IsMember',
+                                          true,
                                         )
                                         .order('UserID', ascending: true),
                                   ),
@@ -1241,68 +1254,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 0.8,
                                 child: TextFormField(
-                                  controller: _model.memberInviteController,
-                                  focusNode: _model.memberInviteFocusNode,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    labelText: 'Invite ID',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                  ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                  keyboardType: TextInputType.number,
-                                  validator: _model
-                                      .memberInviteControllerValidator
-                                      .asValidator(context),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('^[^\\s]*\$'))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 0.0, 8.0, 0.0),
-                              child: Container(
-                                width: MediaQuery.sizeOf(context).width * 0.8,
-                                child: TextFormField(
                                   controller: _model.memberPasswordController,
                                   focusNode: _model.memberPasswordFocusNode,
                                   textCapitalization: TextCapitalization.none,
@@ -1484,63 +1435,29 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             _model.memberPasswordController
                                                     .text !=
                                                 '')) {
-                                      context.pushNamed(
-                                        'AdminAccountPayment',
-                                        queryParameters: {
-                                          'name': serializeParam(
-                                            _model
-                                                .memberFullNameController.text,
-                                            ParamType.String,
-                                          ),
-                                          'referral': serializeParam(
+                                      await UsersTable().insert({
+                                        'PhoneNumber': getJsonField(
+                                          (_model.maxPhoneNumber?.jsonBody ??
+                                              ''),
+                                          r'''$''',
+                                        ).toString(),
+                                        'Password': _model
+                                            .memberPasswordController.text,
+                                        'IsApprove': true,
+                                        'Balance': 0.0,
+                                        'SectorID': _model.selectSectorID,
+                                        'Profile': _model.uploadedFileUrl2 ==
+                                                    null ||
+                                                _model.uploadedFileUrl2 == ''
+                                            ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
+                                            : _model.uploadedFileUrl2,
+                                        'FullName': _model
+                                            .memberFullNameController.text,
+                                        'UserReferral':
                                             _model.memberReferrController.text,
-                                            ParamType.String,
-                                          ),
-                                          'password': serializeParam(
-                                            _model
-                                                .memberPasswordController.text,
-                                            ParamType.String,
-                                          ),
-                                          'sectorID': serializeParam(
-                                            _model.selectSectorID,
-                                            ParamType.int,
-                                          ),
-                                          'isMember': serializeParam(
-                                            true,
-                                            ParamType.bool,
-                                          ),
-                                          'profile': serializeParam(
-                                            _model.uploadedFileUrl2 == null ||
-                                                    _model.uploadedFileUrl2 ==
-                                                        ''
-                                                ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
-                                                : _model.uploadedFileUrl2,
-                                            ParamType.String,
-                                          ),
-                                          'phoneNumber': serializeParam(
-                                            getJsonField(
-                                              (_model.maxPhoneNumber
-                                                      ?.jsonBody ??
-                                                  ''),
-                                              r'''$''',
-                                            ).toString(),
-                                            ParamType.String,
-                                          ),
-                                          'inviteID': serializeParam(
-                                            _model.memberInviteController.text,
-                                            ParamType.String,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration: Duration(milliseconds: 0),
-                                          ),
-                                        },
-                                      );
-
+                                        'IsMember': true,
+                                      });
+                                      context.safePop();
                                       return;
                                     } else {
                                       await showDialog(
@@ -1563,7 +1480,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       return;
                                     }
                                   },
-                                  text: 'Next',
+                                  text: 'Create',
                                   options: FFButtonOptions(
                                     width: 230.0,
                                     height: 52.0,

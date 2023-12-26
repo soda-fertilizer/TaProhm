@@ -272,58 +272,59 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       validator:
                           _model.textController1Validator.asValidator(context),
                     ),
-                    if (false)
-                      TextFormField(
-                        controller: _model.textController2 ??=
-                            TextEditingController(
-                          text: editAccountUsersRow?.phoneNumber,
-                        ),
-                        focusNode: _model.textFieldFocusNode2,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          isDense: true,
-                          labelText: 'Phone number',
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).primary,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                        validator: _model.textController2Validator
-                            .asValidator(context),
-                      ),
                     TextFormField(
-                      controller: _model.textController3 ??=
+                      controller: _model.textController2 ??=
                           TextEditingController(
                         text: editAccountUsersRow?.userReferral,
                       ),
+                      focusNode: _model.textFieldFocusNode2,
+                      readOnly: true,
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        labelText: 'Referral',
+                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).primary,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      validator:
+                          _model.textController2Validator.asValidator(context),
+                    ),
+                    TextFormField(
+                      controller: _model.textController3 ??=
+                          TextEditingController(
+                        text: editAccountUsersRow?.invite,
+                      ),
                       focusNode: _model.textFieldFocusNode3,
+                      readOnly: true,
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
@@ -590,7 +591,6 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                           onPressed: () async {
                             _model.updatedUser = await UsersTable().update(
                               data: {
-                                'PhoneNumber': _model.textController2.text,
                                 'SectorID': _model.sectorID == null
                                     ? editAccountUsersRow?.sectorID
                                     : _model.sectorID,
@@ -611,7 +611,6 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                 FFAppState().updateUserInfoStruct(
                                   (e) => e
                                     ..fullName = _model.textController1.text
-                                    ..phoneNumber = _model.textController2.text
                                     ..sectorID = _model.sectorID
                                     ..profile =
                                         _model.uploadedFileUrl == null ||

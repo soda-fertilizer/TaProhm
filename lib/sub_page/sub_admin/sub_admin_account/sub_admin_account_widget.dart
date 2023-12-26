@@ -139,6 +139,10 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                                         .eq(
                                           'IsActive',
                                           true,
+                                        )
+                                        .eq(
+                                          'SectorID',
+                                          FFAppState().UserInfo.sectorID,
                                         ),
                                   )))
                             .future,
@@ -310,6 +314,10 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                                         .eq(
                                           'IsAdmin',
                                           false,
+                                        )
+                                        .eq(
+                                          'SectorID',
+                                          FFAppState().UserInfo.sectorID,
                                         )
                                         .order('PhoneNumber', ascending: true),
                                   )))

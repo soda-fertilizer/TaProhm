@@ -765,145 +765,163 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceEvenly,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                              child:
+                                                                  SingleChildScrollView(
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceEvenly,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    if (false)
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             0.0,
                                                                             4.0),
-                                                                    child: Text(
-                                                                      '${getJsonField(
-                                                                        historyItem,
-                                                                        r'''$.username''',
-                                                                      ).toString()} - ${getJsonField(
-                                                                        historyItem,
-                                                                        r'''$.type''',
-                                                                      ).toString()}',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyLarge
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Readex Pro',
-                                                                            fontSize:
-                                                                                12.0,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                                        child:
+                                                                            Text(
+                                                                          '${getJsonField(
+                                                                            historyItem,
+                                                                            r'''$.username''',
+                                                                          ).toString()} - ${getJsonField(
+                                                                            historyItem,
+                                                                            r'''$.type''',
+                                                                          ).toString()}',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyLarge
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                fontSize: 12.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    if (false)
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             0.0,
                                                                             4.0),
-                                                                    child: Text(
-                                                                      getJsonField(
-                                                                        historyItem,
-                                                                        r'''$.detail''',
-                                                                      ).toString(),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .labelSmall,
+                                                                        child:
+                                                                            Text(
+                                                                          '${getJsonField(
+                                                                            historyItem,
+                                                                            r'''$.username''',
+                                                                          ).toString()} - ${getJsonField(
+                                                                            historyItem,
+                                                                            r'''$.type''',
+                                                                          ).toString()}',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyLarge
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                fontSize: 12.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          historyItem,
+                                                                          r'''$.detail''',
+                                                                        ).toString(),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .labelSmall,
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceEvenly,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                dateTimeFormat(
-                                                                    'dd/MM/yyyy hh:mm a',
-                                                                    functions
-                                                                        .dataTimeConverter(
+                                                          SingleChildScrollView(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                Text(
+                                                                  dateTimeFormat(
+                                                                      'jm',
+                                                                      functions
+                                                                          .dataTimeConverter(
+                                                                              getJsonField(
+                                                                        historyItem,
+                                                                        r'''$.createddate''',
+                                                                      ).toString())),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelSmall,
+                                                                ),
+                                                                Builder(
+                                                                  builder:
+                                                                      (context) {
+                                                                    if ((_model.transfer ==
                                                                             getJsonField(
-                                                                      historyItem,
-                                                                      r'''$.createddate''',
-                                                                    ).toString())),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelSmall,
-                                                              ),
-                                                              Builder(
-                                                                builder:
-                                                                    (context) {
-                                                                  if ((_model.transfer ==
-                                                                          getJsonField(
-                                                                            historyItem,
-                                                                            r'''$.type''',
-                                                                          )) ||
-                                                                      (_model.transfer ==
-                                                                          getJsonField(
-                                                                            historyItem,
-                                                                            r'''$.type''',
-                                                                          )) ||
-                                                                      (_model.buy ==
-                                                                          getJsonField(
-                                                                            historyItem,
-                                                                            r'''$.type''',
-                                                                          ))) {
-                                                                    return Text(
-                                                                      '-\$${getJsonField(
-                                                                        historyItem,
-                                                                        r'''$.amount''',
-                                                                      ).toString()}',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Readex Pro',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).error,
-                                                                            fontSize:
-                                                                                12.0,
-                                                                          ),
-                                                                    );
-                                                                  } else {
-                                                                    return Text(
-                                                                      '+\$${getJsonField(
-                                                                        historyItem,
-                                                                        r'''$.amount''',
-                                                                      ).toString()}',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Readex Pro',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).success,
-                                                                            fontSize:
-                                                                                12.0,
-                                                                          ),
-                                                                    );
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ],
+                                                                              historyItem,
+                                                                              r'''$.type''',
+                                                                            )) ||
+                                                                        (_model.transfer ==
+                                                                            getJsonField(
+                                                                              historyItem,
+                                                                              r'''$.type''',
+                                                                            )) ||
+                                                                        (_model.buy ==
+                                                                            getJsonField(
+                                                                              historyItem,
+                                                                              r'''$.type''',
+                                                                            ))) {
+                                                                      return Text(
+                                                                        '-\$${getJsonField(
+                                                                          historyItem,
+                                                                          r'''$.amount''',
+                                                                        ).toString()}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Readex Pro',
+                                                                              color: FlutterFlowTheme.of(context).error,
+                                                                              fontSize: 12.0,
+                                                                            ),
+                                                                      );
+                                                                    } else {
+                                                                      return Text(
+                                                                        '+\$${getJsonField(
+                                                                          historyItem,
+                                                                          r'''$.amount''',
+                                                                        ).toString()}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Readex Pro',
+                                                                              color: FlutterFlowTheme.of(context).success,
+                                                                              fontSize: 12.0,
+                                                                            ),
+                                                                      );
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ],
                                                       ),

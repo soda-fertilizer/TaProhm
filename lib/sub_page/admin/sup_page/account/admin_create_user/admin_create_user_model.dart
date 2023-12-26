@@ -89,10 +89,6 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   FocusNode? memberReferrFocusNode;
   TextEditingController? memberReferrController;
   String? Function(BuildContext, String?)? memberReferrControllerValidator;
-  // State field(s) for MemberInvite widget.
-  FocusNode? memberInviteFocusNode;
-  TextEditingController? memberInviteController;
-  String? Function(BuildContext, String?)? memberInviteControllerValidator;
   // State field(s) for MemberPassword widget.
   FocusNode? memberPasswordFocusNode;
   TextEditingController? memberPasswordController;
@@ -129,9 +125,6 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
 
     memberReferrFocusNode?.dispose();
     memberReferrController?.dispose();
-
-    memberInviteFocusNode?.dispose();
-    memberInviteController?.dispose();
 
     memberPasswordFocusNode?.dispose();
     memberPasswordController?.dispose();

@@ -7,6 +7,7 @@ import '/component/show_shop/show_shop_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,11 @@ class _LocatorWidgetState extends State<LocatorWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await requestPermission(locationPermission);
+      unawaited(
+        () async {
+          await requestPermission(locationPermission);
+        }(),
+      );
       if (widget.clickCompany) {
         if (FFAppState().IsLogged) {
           showModalBottomSheet(

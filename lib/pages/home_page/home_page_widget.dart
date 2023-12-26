@@ -7,7 +7,9 @@ import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/permissions_util.dart';
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +44,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
+      unawaited(
+        () async {
+          await requestPermission(locationPermission);
+        }(),
+      );
       _model.check = await CheckUnderMaintenanceCall.call();
       if (FFAppState().UserInfo.isTestAccount) {
         return;
@@ -252,8 +259,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   unselectedLabelStyle: TextStyle(),
                                   indicatorColor:
                                       FlutterFlowTheme.of(context).primary,
+                                  indicatorWeight: 1.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      4.0, 0.0, 4.0, 0.0),
+                                      4.0, 0.0, 4.0, 4.0),
                                   tabs: [
                                     Tab(
                                       text: 'By Grid',
@@ -335,143 +343,141 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         children: [
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    10.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                setState(() {
-                                                                  FFAppState()
-                                                                      .updateShopHolderStruct(
-                                                                    (e) => e
-                                                                      ..id = homePageVarItem
-                                                                          .companyID
-                                                                      ..latitude =
-                                                                          homePageVarItem
-                                                                              .latitude
-                                                                      ..longitude =
-                                                                          homePageVarItem
-                                                                              .longitude,
-                                                                  );
-                                                                });
+                                                          Container(
+                                                            height: 72.0,
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(
+                                                                          10.0),
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  setState(() {
+                                                                    FFAppState()
+                                                                        .updateShopHolderStruct(
+                                                                      (e) => e
+                                                                        ..id = homePageVarItem
+                                                                            .companyID
+                                                                        ..latitude =
+                                                                            homePageVarItem.latitude
+                                                                        ..longitude =
+                                                                            homePageVarItem.longitude,
+                                                                    );
+                                                                  });
 
-                                                                context
-                                                                    .pushNamed(
-                                                                  'Locator',
-                                                                  queryParameters:
-                                                                      {
-                                                                    'moveLocation':
-                                                                        serializeParam(
-                                                                      functions.returnLatLng(
+                                                                  context
+                                                                      .pushNamed(
+                                                                    'Locator',
+                                                                    queryParameters:
+                                                                        {
+                                                                      'moveLocation':
+                                                                          serializeParam(
+                                                                        functions.returnLatLng(
+                                                                            homePageVarItem.latitude,
+                                                                            homePageVarItem.longitude),
+                                                                        ParamType
+                                                                            .LatLng,
+                                                                      ),
+                                                                      'clickCompany':
+                                                                          serializeParam(
+                                                                        true,
+                                                                        ParamType
+                                                                            .bool,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                    extra: <String,
+                                                                        dynamic>{
+                                                                      kTransitionInfoKey:
+                                                                          TransitionInfo(
+                                                                        hasTransition:
+                                                                            true,
+                                                                        transitionType:
+                                                                            PageTransitionType.fade,
+                                                                        duration:
+                                                                            Duration(milliseconds: 0),
+                                                                      ),
+                                                                    },
+                                                                  );
+                                                                },
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              100.0),
+                                                                      child:
+                                                                          CachedNetworkImage(
+                                                                        fadeInDuration:
+                                                                            Duration(milliseconds: 500),
+                                                                        fadeOutDuration:
+                                                                            Duration(milliseconds: 500),
+                                                                        imageUrl:
+                                                                            valueOrDefault<String>(
                                                                           homePageVarItem
-                                                                              .latitude,
-                                                                          homePageVarItem
-                                                                              .longitude),
-                                                                      ParamType
-                                                                          .LatLng,
+                                                                              .companyProfile,
+                                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/s-m-e-locator-vgu6pa/assets/u2axwx4lw1p4/1.png',
+                                                                        ),
+                                                                        width:
+                                                                            40.0,
+                                                                        height:
+                                                                            40.0,
+                                                                        fit: BoxFit
+                                                                            .contain,
+                                                                      ),
                                                                     ),
-                                                                    'clickCompany':
-                                                                        serializeParam(
-                                                                      true,
-                                                                      ParamType
-                                                                          .bool,
-                                                                    ),
-                                                                  }.withoutNulls,
-                                                                  extra: <String,
-                                                                      dynamic>{
-                                                                    kTransitionInfoKey:
-                                                                        TransitionInfo(
-                                                                      hasTransition:
-                                                                          true,
-                                                                      transitionType:
-                                                                          PageTransitionType
-                                                                              .fade,
-                                                                      duration: Duration(
-                                                                          milliseconds:
-                                                                              0),
-                                                                    ),
-                                                                  },
-                                                                );
-                                                              },
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                children: [
-                                                                  Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: [
-                                                                      ClipRRect(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(100.0),
+                                                                    Expanded(
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            12.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
                                                                         child:
-                                                                            CachedNetworkImage(
-                                                                          fadeInDuration:
-                                                                              Duration(milliseconds: 500),
-                                                                          fadeOutDuration:
-                                                                              Duration(milliseconds: 500),
-                                                                          imageUrl:
-                                                                              valueOrDefault<String>(
-                                                                            homePageVarItem.companyProfile,
-                                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/s-m-e-locator-vgu6pa/assets/u2axwx4lw1p4/1.png',
+                                                                            Container(
+                                                                          decoration:
+                                                                              BoxDecoration(),
+                                                                          child:
+                                                                              SingleChildScrollView(
+                                                                            child:
+                                                                                Column(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                Text(
+                                                                                  homePageVarItem.companyName,
+                                                                                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                        fontFamily: 'Outfit',
+                                                                                        fontSize: 14.0,
+                                                                                      ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
                                                                           ),
-                                                                          width:
-                                                                              40.0,
-                                                                          height:
-                                                                              40.0,
-                                                                          fit: BoxFit
-                                                                              .contain,
                                                                         ),
                                                                       ),
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children:
-                                                                            [
-                                                                          Text(
-                                                                            homePageVarItem.companyName.maybeHandleOverflow(
-                                                                              maxChars: 30,
-                                                                              replacement: '…',
-                                                                            ),
-                                                                            style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                  fontFamily: 'Outfit',
-                                                                                  fontSize: 14.0,
-                                                                                ),
-                                                                          ),
-                                                                          if (false)
-                                                                            ClipRRect(
-                                                                              borderRadius: BorderRadius.circular(0.0),
-                                                                              child: Image.asset(
-                                                                                'assets/images/verify.png',
-                                                                                width: 50.0,
-                                                                                height: 10.0,
-                                                                                fit: BoxFit.contain,
-                                                                              ),
-                                                                            ),
-                                                                        ].divide(SizedBox(height: 5.0)),
-                                                                      ),
-                                                                    ].divide(SizedBox(
-                                                                        width:
-                                                                            10.0)),
-                                                                  ),
-                                                                ],
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -739,47 +745,51 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             ),
                                                           ),
                                                           Expanded(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .start,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
                                                                         .fromSTEB(
+                                                                            12.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                child:
+                                                                    SingleChildScrollView(
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             0.0,
                                                                             4.0),
-                                                                    child: Text(
-                                                                      byListItem
-                                                                          .companyName,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyLarge
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Readex Pro',
-                                                                            fontSize:
-                                                                                14.0,
-                                                                          ),
-                                                                    ),
+                                                                        child:
+                                                                            Text(
+                                                                          byListItem
+                                                                              .companyName,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyLarge
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                fontSize: 14.0,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
-                                                                ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
