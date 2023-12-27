@@ -399,6 +399,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             phoneNumber: params.getParam('phoneNumber', ParamType.String),
             inviteID: params.getParam('inviteID', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'InvideMember',
+          path: '/invideMember',
+          builder: (context, params) => InvideMemberWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

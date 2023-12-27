@@ -719,13 +719,8 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                           phoneNumber:
                                               containerUsersRow?.phoneNumber,
                                           money: 50.0,
-                                          invitePhoneNumber: containerUsersRow
-                                                          ?.invite ==
-                                                      null ||
-                                                  containerUsersRow?.invite ==
-                                                      ''
-                                              ? null
-                                              : containerUsersRow?.invite,
+                                          invitePhoneNumber:
+                                              containerUsersRow?.invite,
                                         );
                                       }(),
                                     );

@@ -23,6 +23,7 @@ class UserInfoStruct extends FFFirebaseStruct {
     bool? isMember,
     bool? isTestAccount,
     String? invite,
+    bool? isSubAdmin,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _userID = userID,
         _fullName = fullName,
@@ -36,6 +37,7 @@ class UserInfoStruct extends FFFirebaseStruct {
         _isMember = isMember,
         _isTestAccount = isTestAccount,
         _invite = invite,
+        _isSubAdmin = isSubAdmin,
         super(firestoreUtilData);
 
   // "UserID" field.
@@ -112,6 +114,12 @@ class UserInfoStruct extends FFFirebaseStruct {
   set invite(String? val) => _invite = val;
   bool hasInvite() => _invite != null;
 
+  // "IsSubAdmin" field.
+  bool? _isSubAdmin;
+  bool get isSubAdmin => _isSubAdmin ?? false;
+  set isSubAdmin(bool? val) => _isSubAdmin = val;
+  bool hasIsSubAdmin() => _isSubAdmin != null;
+
   static UserInfoStruct fromMap(Map<String, dynamic> data) => UserInfoStruct(
         userID: castToType<int>(data['UserID']),
         fullName: data['FullName'] as String?,
@@ -125,6 +133,7 @@ class UserInfoStruct extends FFFirebaseStruct {
         isMember: data['IsMember'] as bool?,
         isTestAccount: data['IsTestAccount'] as bool?,
         invite: data['Invite'] as String?,
+        isSubAdmin: data['IsSubAdmin'] as bool?,
       );
 
   static UserInfoStruct? maybeFromMap(dynamic data) =>
@@ -143,6 +152,7 @@ class UserInfoStruct extends FFFirebaseStruct {
         'IsMember': _isMember,
         'IsTestAccount': _isTestAccount,
         'Invite': _invite,
+        'IsSubAdmin': _isSubAdmin,
       }.withoutNulls;
 
   @override
@@ -194,6 +204,10 @@ class UserInfoStruct extends FFFirebaseStruct {
         'Invite': serializeParam(
           _invite,
           ParamType.String,
+        ),
+        'IsSubAdmin': serializeParam(
+          _isSubAdmin,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -259,6 +273,11 @@ class UserInfoStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        isSubAdmin: deserializeParam(
+          data['IsSubAdmin'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -278,7 +297,8 @@ class UserInfoStruct extends FFFirebaseStruct {
         hashedPassword == other.hashedPassword &&
         isMember == other.isMember &&
         isTestAccount == other.isTestAccount &&
-        invite == other.invite;
+        invite == other.invite &&
+        isSubAdmin == other.isSubAdmin;
   }
 
   @override
@@ -294,7 +314,8 @@ class UserInfoStruct extends FFFirebaseStruct {
         hashedPassword,
         isMember,
         isTestAccount,
-        invite
+        invite,
+        isSubAdmin
       ]);
 }
 
@@ -311,6 +332,7 @@ UserInfoStruct createUserInfoStruct({
   bool? isMember,
   bool? isTestAccount,
   String? invite,
+  bool? isSubAdmin,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -329,6 +351,7 @@ UserInfoStruct createUserInfoStruct({
       isMember: isMember,
       isTestAccount: isTestAccount,
       invite: invite,
+      isSubAdmin: isSubAdmin,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

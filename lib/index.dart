@@ -76,3 +76,5 @@ export '/sub_page/sub_admin/sub_admin_businesses/sub_admin_businesses_widget.dar
     show SubAdminBusinessesWidget;
 export '/sub_page/admin/sup_page/account/admin_account_payment/admin_account_payment_widget.dart'
     show AdminAccountPaymentWidget;
+export '/sub_page/invide_member/invide_member_widget.dart'
+    show InvideMemberWidget;

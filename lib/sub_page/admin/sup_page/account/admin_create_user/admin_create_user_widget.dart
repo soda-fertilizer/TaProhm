@@ -59,11 +59,14 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
     _model.normalPasswordController ??= TextEditingController();
     _model.normalPasswordFocusNode ??= FocusNode();
 
-    _model.normalInviteController ??= TextEditingController();
-    _model.normalInviteFocusNode ??= FocusNode();
-
     _model.normalPhoneNumberController ??= TextEditingController();
     _model.normalPhoneNumberFocusNode ??= FocusNode();
+
+    _model.normalReferralController ??= TextEditingController();
+    _model.normalReferralFocusNode ??= FocusNode();
+
+    _model.normalInviteController ??= TextEditingController();
+    _model.normalInviteFocusNode ??= FocusNode();
 
     _model.memberFullNameController ??= TextEditingController();
     _model.memberFullNameFocusNode ??= FocusNode();
@@ -150,10 +153,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                   padding: EdgeInsets.all(4.0),
                   tabs: [
                     Tab(
-                      text: 'Normal',
+                      text: 'Member',
                     ),
                     Tab(
-                      text: 'Member',
+                      text: 'Officer',
                     ),
                   ],
                   controller: _model.tabBarController,
@@ -409,6 +412,140 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 child: Container(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: TextFormField(
+                                    controller:
+                                        _model.normalPhoneNumberController,
+                                    focusNode:
+                                        _model.normalPhoneNumberFocusNode,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      labelText: 'Phone',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium,
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    keyboardType: TextInputType.number,
+                                    validator: _model
+                                        .normalPhoneNumberControllerValidator
+                                        .asValidator(context),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('^[^\\s]*\$'))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 8.0, 0.0),
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 0.8,
+                                  child: TextFormField(
+                                    controller: _model.normalReferralController,
+                                    focusNode: _model.normalReferralFocusNode,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      labelText: 'Referral',
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium,
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .error,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                    ),
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    keyboardType: TextInputType.number,
+                                    validator: _model
+                                        .normalReferralControllerValidator
+                                        .asValidator(context),
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp('^[^\\s]*\$'))
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 8.0, 0.0),
+                                child: Container(
+                                  width: MediaQuery.sizeOf(context).width * 0.8,
+                                  child: TextFormField(
                                     controller: _model.normalInviteController,
                                     focusNode: _model.normalInviteFocusNode,
                                     obscureText: false,
@@ -469,86 +606,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 0.0, 8.0, 0.0),
-                                child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 0.8,
-                                  child: TextFormField(
-                                    controller:
-                                        _model.normalPhoneNumberController,
-                                    focusNode:
-                                        _model.normalPhoneNumberFocusNode,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      isDense: true,
-                                      labelText: 'Phone Number',
-                                      labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          width: 1.0,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                    ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                    keyboardType: TextInputType.number,
-                                    validator: _model
-                                        .normalPhoneNumberControllerValidator
-                                        .asValidator(context),
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp('^[^\\s]*\$'))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              FutureBuilder<List<UsersRow>>(
-                                future: UsersTable().queryRows(
-                                  queryFn: (q) => q
-                                      .eq(
-                                        'UserReferral',
-                                        '000001',
-                                      )
-                                      .eq(
-                                        'IsMember',
-                                        true,
-                                      )
-                                      .order('UserID', ascending: true),
+                              FutureBuilder<List<SectorsRow>>(
+                                future: SectorsTable().queryRows(
+                                  queryFn: (q) => q,
                                 ),
                                 builder: (context, snapshot) {
                                   // Customize what your widget looks like when it's loading.
@@ -567,35 +627,39 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       ),
                                     );
                                   }
-                                  List<UsersRow> sectorUsersRowList =
+                                  List<SectorsRow> normalSectorSectorsRowList =
                                       snapshot.data!;
                                   return FlutterFlowDropDown<String>(
-                                    controller: _model.sectorValueController ??=
-                                        FormFieldController<String>(null),
-                                    options: sectorUsersRowList
-                                        .map((e) => e.fullName)
+                                    controller:
+                                        _model.normalSectorValueController ??=
+                                            FormFieldController<String>(
+                                      _model.normalSectorValue ??=
+                                          normalSectorSectorsRowList
+                                              .where((e) =>
+                                                  e.sectorID ==
+                                                  _model.selectSectorID)
+                                              .toList()
+                                              .first
+                                              .sectorName,
+                                    ),
+                                    options: normalSectorSectorsRowList
+                                        .map((e) => valueOrDefault<String>(
+                                              e.sectorName,
+                                              'null',
+                                            ))
                                         .toList(),
                                     onChanged: (val) async {
-                                      setState(() => _model.sectorValue = val);
+                                      setState(
+                                          () => _model.normalSectorValue = val);
                                       setState(() {
-                                        _model.selectSectorPhoneNumber =
-                                            sectorUsersRowList
-                                                .where((e) =>
-                                                    _model.sectorValue ==
-                                                    e.fullName)
-                                                .toList()
-                                                .first
-                                                .phoneNumber;
                                         _model.selectSectorID =
-                                            sectorUsersRowList
+                                            normalSectorSectorsRowList
                                                 .where((e) =>
-                                                    _model.sectorValue ==
-                                                    e.fullName)
+                                                    e.sectorName ==
+                                                    _model.normalSectorValue)
                                                 .toList()
                                                 .first
-                                                .sectorID!;
-                                        _model.selectReferral =
-                                            _model.selectSectorPhoneNumber;
+                                                .sectorID;
                                       });
                                     },
                                     width:
@@ -629,268 +693,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   );
                                 },
                               ),
-                              if (_model.selectSectorPhoneNumber != null &&
-                                  _model.selectSectorPhoneNumber != '')
-                                FutureBuilder<List<UsersRow>>(
-                                  future: UsersTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'UserReferral',
-                                          _model.selectSectorPhoneNumber,
-                                        )
-                                        .eq(
-                                          'IsMember',
-                                          true,
-                                        )
-                                        .order('UserID', ascending: true),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<UsersRow> cityUsersRowList =
-                                        snapshot.data!;
-                                    return FlutterFlowDropDown<String>(
-                                      controller: _model.cityValueController ??=
-                                          FormFieldController<String>(null),
-                                      options: cityUsersRowList
-                                          .map((e) => e.fullName)
-                                          .toList(),
-                                      onChanged: (val) async {
-                                        setState(() => _model.cityValue = val);
-                                        setState(() {
-                                          _model.selectCityPhoneNumber =
-                                              cityUsersRowList
-                                                  .where((e) =>
-                                                      _model.cityValue ==
-                                                      e.fullName)
-                                                  .toList()
-                                                  .first
-                                                  .phoneNumber;
-                                          _model.selectReferral =
-                                              _model.selectCityPhoneNumber;
-                                        });
-                                      },
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.8,
-                                      height: 40.0,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 14.0,
-                                          ),
-                                      hintText: 'Please select city',
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      elevation: 0.0,
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      borderWidth: 1.0,
-                                      borderRadius: 30.0,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 4.0, 16.0, 4.0),
-                                      hidesUnderline: true,
-                                      isSearchable: false,
-                                      isMultiSelect: false,
-                                    );
-                                  },
-                                ),
-                              if (_model.selectCityPhoneNumber != null &&
-                                  _model.selectCityPhoneNumber != '')
-                                FutureBuilder<List<UsersRow>>(
-                                  future: UsersTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'UserReferral',
-                                          _model.selectCityPhoneNumber,
-                                        )
-                                        .eq(
-                                          'IsMember',
-                                          true,
-                                        )
-                                        .order('UserID', ascending: true),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<UsersRow> districtUsersRowList =
-                                        snapshot.data!;
-                                    return FlutterFlowDropDown<String>(
-                                      controller:
-                                          _model.districtValueController ??=
-                                              FormFieldController<String>(null),
-                                      options: districtUsersRowList
-                                          .map((e) => e.fullName)
-                                          .toList(),
-                                      onChanged: (val) async {
-                                        setState(
-                                            () => _model.districtValue = val);
-                                        setState(() {
-                                          _model.selectDistrictPhoneNumber =
-                                              districtUsersRowList
-                                                  .where((e) =>
-                                                      _model.districtValue ==
-                                                      e.fullName)
-                                                  .toList()
-                                                  .first
-                                                  .phoneNumber;
-                                          _model.selectReferral =
-                                              _model.selectDistrictPhoneNumber;
-                                        });
-                                      },
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.8,
-                                      height: 40.0,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 14.0,
-                                          ),
-                                      hintText: 'Please select district',
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      elevation: 0.0,
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      borderWidth: 1.0,
-                                      borderRadius: 30.0,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 4.0, 16.0, 4.0),
-                                      hidesUnderline: true,
-                                      isSearchable: false,
-                                      isMultiSelect: false,
-                                    );
-                                  },
-                                ),
-                              if (_model.selectDistrictPhoneNumber != null &&
-                                  _model.selectDistrictPhoneNumber != '')
-                                FutureBuilder<List<UsersRow>>(
-                                  future: UsersTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'UserReferral',
-                                          _model.selectDistrictPhoneNumber,
-                                        )
-                                        .eq(
-                                          'IsMember',
-                                          true,
-                                        )
-                                        .order('UserID', ascending: true),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50.0,
-                                          height: 50.0,
-                                          child: CircularProgressIndicator(
-                                            valueColor:
-                                                AlwaysStoppedAnimation<Color>(
-                                              FlutterFlowTheme.of(context)
-                                                  .primary,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<UsersRow> communeUsersRowList =
-                                        snapshot.data!;
-                                    return FlutterFlowDropDown<String>(
-                                      controller:
-                                          _model.communeValueController ??=
-                                              FormFieldController<String>(null),
-                                      options: communeUsersRowList
-                                          .map((e) => e.fullName)
-                                          .toList(),
-                                      onChanged: (val) async {
-                                        setState(
-                                            () => _model.communeValue = val);
-                                        setState(() {
-                                          _model.selectCommunePhoneNumber =
-                                              communeUsersRowList
-                                                  .where((e) =>
-                                                      _model.communeValue ==
-                                                      e.fullName)
-                                                  .toList()
-                                                  .first
-                                                  .phoneNumber;
-                                          _model.selectReferral =
-                                              _model.selectCommunePhoneNumber;
-                                        });
-                                      },
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.8,
-                                      height: 40.0,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            fontSize: 14.0,
-                                          ),
-                                      hintText: 'Please select commune',
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
-                                      ),
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      elevation: 0.0,
-                                      borderColor: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      borderWidth: 1.0,
-                                      borderRadius: 30.0,
-                                      margin: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 4.0, 16.0, 4.0),
-                                      hidesUnderline: true,
-                                      isSearchable: false,
-                                      isMultiSelect: false,
-                                    );
-                                  },
-                                ),
                               Container(
                                 width: MediaQuery.sizeOf(context).width * 0.8,
                                 decoration: BoxDecoration(),
@@ -935,7 +737,8 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               ParamType.String,
                                             ),
                                             'referral': serializeParam(
-                                              _model.selectReferral,
+                                              _model.normalReferralController
+                                                  .text,
                                               ParamType.String,
                                             ),
                                             'password': serializeParam(

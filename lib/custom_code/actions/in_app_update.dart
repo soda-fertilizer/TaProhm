@@ -20,7 +20,7 @@ Future inAppUpdate() async {
   await InAppUpdate.checkForUpdate().then((updateInfo) {
     if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
       // Update is available, prompt user to update
-      InAppUpdate.startFlexibleUpdate().catchError((e) => print(e));
+      InAppUpdate.completeFlexibleUpdate().catchError((e) => print(e));
     }
   }).catchError((e) => print(e));
 }

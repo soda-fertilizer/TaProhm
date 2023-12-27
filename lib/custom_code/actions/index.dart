@@ -9,6 +9,5 @@ export 'onesignal_initialise.dart' show onesignalInitialise;
 export 'onesignal_login.dart' show onesignalLogin;
 export 'onesignal_logout.dart' show onesignalLogout;
 export 'get_app_vertsion.dart' show getAppVertsion;
-export 'init_app_info.dart' show initAppInfo;
 export 'in_app_update.dart' show inAppUpdate;
 export 'supa_realtime.dart' show supaRealtime;

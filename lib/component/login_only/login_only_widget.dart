@@ -411,6 +411,10 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                             (_model.login?.jsonBody ?? ''),
                                           )
                                           .toString(),
+                                      isSubAdmin:
+                                          UsersGroup.loginCall.isSubAdmin(
+                                        (_model.login?.jsonBody ?? ''),
+                                      ),
                                     );
                                   });
                                   if (Navigator.of(context).canPop()) {

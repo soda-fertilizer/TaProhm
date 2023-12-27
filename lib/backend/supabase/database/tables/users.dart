@@ -67,4 +67,7 @@ class UsersRow extends SupabaseDataRow {
 
   String? get invite => getField<String>('Invite');
   set invite(String? value) => setField<String>('Invite', value);
+
+  bool get isSubAdmin => getField<bool>('IsSubAdmin')!;
+  set isSubAdmin(bool value) => setField<bool>('IsSubAdmin', value);
 }

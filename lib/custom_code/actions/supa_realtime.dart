@@ -26,7 +26,6 @@ Future<void> supaRealtime(
     ChannelFilter(event: '*', schema: 'public', table: table),
     (payload, [ref]) {
       reloadAction();
-      print('Reloaded.');
     },
   ).subscribe();
 }

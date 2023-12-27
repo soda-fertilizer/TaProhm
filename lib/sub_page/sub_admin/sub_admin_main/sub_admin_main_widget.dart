@@ -74,7 +74,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
           title: Align(
             alignment: AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Admin Page',
+              'SubAdmin Page',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,

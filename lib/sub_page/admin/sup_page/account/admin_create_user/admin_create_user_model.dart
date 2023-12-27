@@ -56,26 +56,21 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   TextEditingController? normalPasswordController;
   late bool normalPasswordVisibility;
   String? Function(BuildContext, String?)? normalPasswordControllerValidator;
-  // State field(s) for NormalInvite widget.
-  FocusNode? normalInviteFocusNode;
-  TextEditingController? normalInviteController;
-  String? Function(BuildContext, String?)? normalInviteControllerValidator;
   // State field(s) for NormalPhoneNumber widget.
   FocusNode? normalPhoneNumberFocusNode;
   TextEditingController? normalPhoneNumberController;
   String? Function(BuildContext, String?)? normalPhoneNumberControllerValidator;
-  // State field(s) for Sector widget.
-  String? sectorValue;
-  FormFieldController<String>? sectorValueController;
-  // State field(s) for city widget.
-  String? cityValue;
-  FormFieldController<String>? cityValueController;
-  // State field(s) for district widget.
-  String? districtValue;
-  FormFieldController<String>? districtValueController;
-  // State field(s) for commune widget.
-  String? communeValue;
-  FormFieldController<String>? communeValueController;
+  // State field(s) for NormalReferral widget.
+  FocusNode? normalReferralFocusNode;
+  TextEditingController? normalReferralController;
+  String? Function(BuildContext, String?)? normalReferralControllerValidator;
+  // State field(s) for NormalInvite widget.
+  FocusNode? normalInviteFocusNode;
+  TextEditingController? normalInviteController;
+  String? Function(BuildContext, String?)? normalInviteControllerValidator;
+  // State field(s) for NormalSector widget.
+  String? normalSectorValue;
+  FormFieldController<String>? normalSectorValueController;
   bool isDataUploading2 = false;
   FFUploadedFile uploadedLocalFile2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -114,11 +109,14 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
     normalPasswordFocusNode?.dispose();
     normalPasswordController?.dispose();
 
-    normalInviteFocusNode?.dispose();
-    normalInviteController?.dispose();
-
     normalPhoneNumberFocusNode?.dispose();
     normalPhoneNumberController?.dispose();
+
+    normalReferralFocusNode?.dispose();
+    normalReferralController?.dispose();
+
+    normalInviteFocusNode?.dispose();
+    normalInviteController?.dispose();
 
     memberFullNameFocusNode?.dispose();
     memberFullNameController?.dispose();

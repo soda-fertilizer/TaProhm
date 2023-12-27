@@ -111,6 +111,10 @@ class LoginCall {
         response,
         r'''$[:].invite''',
       );
+  bool? isSubAdmin(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$[:].issubadmin''',
+      ));
 }
 
 class CheckReferralCall {

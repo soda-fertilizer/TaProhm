@@ -7,9 +7,8 @@ import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/permissions_util.dart';
 import 'dart:async';
 import 'home_page_widget.dart' show HomePageWidget;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -36,13 +35,13 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (Check Under Maintenance)] action in HomePage widget.
   ApiCallResponse? check;
+  bool requestCompleted = false;
+  String? requestLastUniqueKey;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  bool requestCompleted = false;
-  String? requestLastUniqueKey;
   // Model for NavPadding component.
   late NavPaddingModel navPaddingModel;
   // Model for NavBar component.
