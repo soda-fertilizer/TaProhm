@@ -98,19 +98,28 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                               child: Padding(
                                 padding: EdgeInsets.all(2.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  child: OctoImage(
-                                    placeholderBuilder:
-                                        OctoPlaceholder.blurHash(
-                                      FFAppConstants.BlurHash,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    await actions.inAppUpdate();
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    child: OctoImage(
+                                      placeholderBuilder:
+                                          OctoPlaceholder.blurHash(
+                                        FFAppConstants.BlurHash,
+                                      ),
+                                      image: CachedNetworkImageProvider(
+                                        FFAppState().UserInfo.profile,
+                                      ),
+                                      width: 60.0,
+                                      height: 60.0,
+                                      fit: BoxFit.cover,
                                     ),
-                                    image: CachedNetworkImageProvider(
-                                      FFAppState().UserInfo.profile,
-                                    ),
-                                    width: 60.0,
-                                    height: 60.0,
-                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
@@ -215,23 +224,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 16.0, 0.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await actions.inAppUpdate();
-                                },
-                                child: Text(
-                                  'Account',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelLarge
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        fontSize: 12.0,
-                                      ),
-                                ),
+                              child: Text(
+                                'Account',
+                                style: FlutterFlowTheme.of(context)
+                                    .labelLarge
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      fontSize: 12.0,
+                                    ),
                               ),
                             ),
                             Padding(
