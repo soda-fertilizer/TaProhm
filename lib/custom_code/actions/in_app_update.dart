@@ -20,7 +20,9 @@ Future inAppUpdate() async {
   await InAppUpdate.checkForUpdate().then((updateInfo) {
     if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
       // Update is available, prompt user to update
-      InAppUpdate.completeFlexibleUpdate().catchError((e) => print(e));
+      InAppUpdate.startFlexibleUpdate().catchError((e) => print(e));
     }
   }).catchError((e) => print(e));
 }
+// Set your action name, define your arguments and return parameter,
+// and then add the boilerplate code using the green button on the right!
