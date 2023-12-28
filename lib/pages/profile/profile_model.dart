@@ -1,14 +1,13 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/schema/structs/index.dart';
-import '/component/ios_update_alert/ios_update_alert_widget.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/component/show_qr_code/show_qr_code_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'profile_widget.dart' show ProfileWidget;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
