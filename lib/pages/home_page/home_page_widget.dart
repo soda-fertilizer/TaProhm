@@ -162,11 +162,33 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               if (FFAppState().UserInfo.isMember)
-                                Icon(
-                                  Icons.notifications_sharp,
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  size: 30.0,
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    if (Navigator.of(context).canPop()) {
+                                      context.pop();
+                                    }
+                                    context.pushNamed(
+                                      'Notification',
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                          duration: Duration(milliseconds: 0),
+                                        ),
+                                      },
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.notifications_sharp,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                    size: 30.0,
+                                  ),
                                 ),
                               InkWell(
                                 splashColor: Colors.transparent,
@@ -174,6 +196,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  if (Navigator.of(context).canPop()) {
+                                    context.pop();
+                                  }
                                   context.pushNamed(
                                     'SearchCompany',
                                     extra: <String, dynamic>{
@@ -249,8 +274,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                   unselectedLabelColor:
                                       FlutterFlowTheme.of(context)
                                           .secondaryText,
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).titleMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 14.0,
+                                      ),
                                   unselectedLabelStyle: TextStyle(),
                                   indicatorColor:
                                       FlutterFlowTheme.of(context).primary,
@@ -380,7 +409,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                             ..longitude = homePageVarItem.longitude,
                                                                         );
                                                                       });
-
+                                                                      if (Navigator.of(
+                                                                              context)
+                                                                          .canPop()) {
+                                                                        context
+                                                                            .pop();
+                                                                      }
                                                                       context
                                                                           .pushNamed(
                                                                         'Locator',
@@ -643,6 +677,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    if (Navigator.of(context)
+                                                        .canPop()) {
+                                                      context.pop();
+                                                    }
                                                     context.pushNamed(
                                                       'Locator',
                                                       queryParameters: {

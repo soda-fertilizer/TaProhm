@@ -8,4 +8,5 @@ abstract class FFAppConstants {
   static const String MapWeb = 'AIzaSyBxNrl-pEnUhD19SpXjQ4Qg1JBQ-N6X2mo';
   static const String OneSignalAppAndroidAPI =
       '8f42e7c6-99d1-4f73-aa4c-cc161bfa0f2a';
+  static const String enter = '\\n';
 }

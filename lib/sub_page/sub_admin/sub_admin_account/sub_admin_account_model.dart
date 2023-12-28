@@ -16,7 +16,8 @@ class SubAdminAccountModel extends FlutterFlowModel<SubAdminAccountWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  Completer<List<UsersRow>>? requestCompleter;
+  bool requestCompleted = false;
+  String? requestLastUniqueKey;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -43,7 +44,7 @@ class SubAdminAccountModel extends FlutterFlowModel<SubAdminAccountWidget> {
     while (true) {
       await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter?.isCompleted ?? false;
+      final requestComplete = requestCompleted;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

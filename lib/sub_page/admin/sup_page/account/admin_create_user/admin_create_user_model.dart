@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import 'admin_create_user_widget.dart' show AdminCreateUserWidget;
 import 'package:flutter/material.dart';
@@ -80,18 +81,20 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   FocusNode? memberFullNameFocusNode;
   TextEditingController? memberFullNameController;
   String? Function(BuildContext, String?)? memberFullNameControllerValidator;
-  // State field(s) for MemberReferr widget.
-  FocusNode? memberReferrFocusNode;
-  TextEditingController? memberReferrController;
-  String? Function(BuildContext, String?)? memberReferrControllerValidator;
   // State field(s) for MemberPassword widget.
   FocusNode? memberPasswordFocusNode;
   TextEditingController? memberPasswordController;
   late bool memberPasswordVisibility;
   String? Function(BuildContext, String?)? memberPasswordControllerValidator;
+  // State field(s) for MemberReferr widget.
+  FocusNode? memberReferrFocusNode;
+  TextEditingController? memberReferrController;
+  String? Function(BuildContext, String?)? memberReferrControllerValidator;
   // State field(s) for MemberSector widget.
   String? memberSectorValue;
   FormFieldController<String>? memberSectorValueController;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  UsersRow? createUser;
 
   /// Initialization and disposal methods.
 
@@ -121,11 +124,11 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
     memberFullNameFocusNode?.dispose();
     memberFullNameController?.dispose();
 
-    memberReferrFocusNode?.dispose();
-    memberReferrController?.dispose();
-
     memberPasswordFocusNode?.dispose();
     memberPasswordController?.dispose();
+
+    memberReferrFocusNode?.dispose();
+    memberReferrController?.dispose();
   }
 
   /// Action blocks are added here.

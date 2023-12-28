@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -512,55 +513,114 @@ class _AccountWidgetState extends State<AccountWidget> {
                           ),
                         ),
                       ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          _model.updatedUser = await UsersTable().update(
-                            data: {
-                              'PhoneNumber': _model.textController2.text,
-                              'IsApprove': true,
-                              'SectorID': _model.sectorID,
-                              'FullName': _model.textController1.text,
-                              'UserReferral': _model.textController3.text,
-                              'Invite': _model.textController4.text,
-                              'Profile': _model.uploadedFileUrl == null ||
-                                      _model.uploadedFileUrl == ''
-                                  ? accountUsersRow?.profile
-                                  : _model.uploadedFileUrl,
-                            },
-                            matchingRows: (rows) => rows.eq(
-                              'UserID',
-                              widget.userID,
-                            ),
-                            returnRows: true,
-                          );
-                          context.safePop();
-
-                          setState(() {});
-                        },
-                        text: 'Approved',
-                        options: FFButtonOptions(
-                          height: 40.0,
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
+                              0.0, 0.0, 0.0, 10.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              await UsersTable().delete(
+                                matchingRows: (rows) => rows.eq(
+                                  'UserID',
+                                  widget.userID,
+                                ),
+                              );
+                              context.safePop();
+                            },
+                            text: 'Detelete',
+                            options: FFButtonOptions(
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).error,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
                                   ),
-                          elevation: 3.0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
                         ),
-                      ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 10.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              _model.updatedUser = await UsersTable().update(
+                                data: {
+                                  'PhoneNumber': _model.textController2.text,
+                                  'IsApprove': true,
+                                  'SectorID': _model.sectorID,
+                                  'FullName': _model.textController1.text,
+                                  'UserReferral': _model.textController3.text,
+                                  'Invite': _model.textController4.text,
+                                  'Profile': _model.uploadedFileUrl == null ||
+                                          _model.uploadedFileUrl == ''
+                                      ? accountUsersRow?.profile
+                                      : _model.uploadedFileUrl,
+                                },
+                                matchingRows: (rows) => rows.eq(
+                                  'UserID',
+                                  widget.userID,
+                                ),
+                                returnRows: true,
+                              );
+                              _model.apiResulta5x = await EdgeFunctionGroup
+                                  .updateBalanceCall
+                                  .call(
+                                phoneNumber: 'admin',
+                                money: 1.0,
+                                action: 'plus',
+                              );
+                              await TransactionsTable().insert({
+                                'TypeID': 5,
+                                'Amount': 1.0,
+                                'UserPhoneNumber': 'admin',
+                                'Detail':
+                                    'Income: ${accountUsersRow?.fullName}',
+                              });
+                              context.safePop();
+
+                              setState(() {});
+                            },
+                            text: 'Approved',
+                            options: FFButtonOptions(
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ].divide(SizedBox(height: 15.0)),
                 ),

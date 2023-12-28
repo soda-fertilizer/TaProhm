@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -48,6 +49,8 @@ class AccountModel extends FlutterFlowModel<AccountWidget> {
   FormFieldController<String>? dropDownValueController;
   // Stores action output result for [Backend Call - Update Row] action in Button widget.
   List<UsersRow>? updatedUser;
+  // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
+  ApiCallResponse? apiResulta5x;
 
   /// Initialization and disposal methods.
 

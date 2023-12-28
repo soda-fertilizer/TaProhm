@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';

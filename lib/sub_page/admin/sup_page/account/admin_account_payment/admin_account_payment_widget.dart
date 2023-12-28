@@ -1,4 +1,3 @@
-import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/show_k_h_q_r/show_k_h_q_r_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -149,7 +148,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget> {
             ),
             Container(
               width: double.infinity,
-              height: MediaQuery.sizeOf(context).height * 0.3,
+              height: MediaQuery.sizeOf(context).height * 0.108,
               decoration: BoxDecoration(),
               child: ListView(
                 padding: EdgeInsets.zero,
@@ -165,7 +164,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget> {
                       highlightColor: Colors.transparent,
                       onTap: () async {
                         await launchURL(
-                            'https://pay.ababank.com/KYfxEcUDrhbSp3F18');
+                            'https://pay.ababank.com/womykVUC1qm5m4Pu8');
                       },
                       child: Container(
                         width: 100.0,
@@ -230,156 +229,158 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        await launchURL(
-                            'https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu8yRyA1YGYQ90srEOvcavYJlvCsAPlnE+KZKiMaf0qCB008tY/6/la639aRo6PWMGHDZlgm60e5FP6SbHHzy4FfoVJYOQKeQOxFjGisuPDk7jMSfSKil2ChwxO9ImDn65jsJdTeMlFZ3/Q45Ni5cbQXXA/cgzWE1PeC1qbyt+YHLOwrSqCsrmsx25WDDvF9O3G87tp60aWSEJze6A/+cOQo=&key=khqr');
-                      },
-                      child: Container(
-                        width: 100.0,
-                        height: 75.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 10.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/acleda.png',
-                                      width: 50.0,
-                                      height: 50.0,
-                                      fit: BoxFit.cover,
+                  if (false)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          await launchURL(
+                              'https://acledabank.com.kh/acleda?payment_data=qWY5B2SAUfIhLblxzOtfu8yRyA1YGYQ90srEOvcavYJlvCsAPlnE+KZKiMaf0qCB008tY/6/la639aRo6PWMGHDZlgm60e5FP6SbHHzy4FfoVJYOQKeQOxFjGisuPDk7jMSfSKil2ChwxO9ImDn65jsJdTeMlFZ3/Q45Ni5cbQXXA/cgzWE1PeC1qbyt+YHLOwrSqCsrmsx25WDDvF9O3G87tp60aWSEJze6A/+cOQo=&key=khqr');
+                        },
+                        child: Container(
+                          width: 100.0,
+                          height: 75.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/acleda.png',
+                                        width: 50.0,
+                                        height: 50.0,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Acleda Pay',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Text(
-                                          'Click to pay',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelSmall,
-                                        ),
-                                      ],
+                                    Padding(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Acleda Pay',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Text(
+                                            'Click to pay',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelSmall,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
+                                  ],
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        await launchURL(
-                            'https://wingmoney.app.link/l8Qk905COEb');
-                      },
-                      child: Container(
-                        width: 100.0,
-                        height: 75.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 10.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/wing.png',
-                                      width: 50.0,
-                                      height: 50.0,
-                                      fit: BoxFit.cover,
+                  if (false)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          await launchURL(
+                              'https://wingmoney.app.link/l8Qk905COEb');
+                        },
+                        child: Container(
+                          width: 100.0,
+                          height: 75.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/wing.png',
+                                        width: 50.0,
+                                        height: 50.0,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(10.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Wing Pay',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Text(
-                                          'Click to pay',
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelSmall,
-                                        ),
-                                      ],
+                                    Padding(
+                                      padding: EdgeInsets.all(10.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Wing Pay',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                          Text(
+                                            'Click to pay',
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelSmall,
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                            ],
+                                  ],
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
                 ].divide(SizedBox(height: 10.0)),
               ),
             ),
@@ -619,23 +620,6 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget> {
                     'IsMember': widget.isMember,
                     'Invite': widget.inviteID,
                     'IsApprove': false,
-                  });
-                  _model.apiResulta5x =
-                      await EdgeFunctionGroup.updateBalanceCall.call(
-                    phoneNumber: widget.phoneNumber,
-                    money: 1.0,
-                    action: 'plus',
-                  );
-                  await AllowToReferralsTable().insert({
-                    'UserPhoneNumber': _model.createUser?.phoneNumber,
-                  });
-                  await TransactionsTable().insert({
-                    'TypeID': 5,
-                    'Amount': 1.0,
-                    'IsApprove': false,
-                    'UserPhoneNumber': _model.createUser?.phoneNumber,
-                    'Detail':
-                        'Income: ${widget.name} (ID: ${widget.phoneNumber} )',
                   });
                   context.safePop();
 

@@ -110,7 +110,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.pop();
+                  context.safePop();
                 },
               ),
               title: Align(

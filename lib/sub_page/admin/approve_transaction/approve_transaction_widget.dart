@@ -778,54 +778,47 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                       CrossAxisAlignment
                                                                           .start,
                                                                   children: [
-                                                                    if (false)
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            4.0),
-                                                                        child:
-                                                                            Text(
-                                                                          '${getJsonField(
-                                                                            historyItem,
-                                                                            r'''$.username''',
-                                                                          ).toString()} - ${getJsonField(
-                                                                            historyItem,
-                                                                            r'''$.type''',
-                                                                          ).toString()}',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyLarge
-                                                                              .override(
-                                                                                fontFamily: 'Readex Pro',
-                                                                                fontSize: 12.0,
-                                                                              ),
-                                                                        ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        getJsonField(
+                                                                          historyItem,
+                                                                          r'''$.type''',
+                                                                        ).toString(),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyLarge
+                                                                            .override(
+                                                                              fontFamily: 'Readex Pro',
+                                                                              fontSize: 12.0,
+                                                                            ),
                                                                       ),
-                                                                    if (false)
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            4.0),
-                                                                        child:
-                                                                            Text(
-                                                                          '${getJsonField(
-                                                                            historyItem,
-                                                                            r'''$.username''',
-                                                                          ).toString()} - ${getJsonField(
-                                                                            historyItem,
-                                                                            r'''$.type''',
-                                                                          ).toString()}',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyLarge
-                                                                              .override(
-                                                                                fontFamily: 'Readex Pro',
-                                                                                fontSize: 12.0,
-                                                                              ),
-                                                                        ),
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        'user: ${getJsonField(
+                                                                          historyItem,
+                                                                          r'''$.username''',
+                                                                        ).toString()}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyLarge
+                                                                            .override(
+                                                                              fontFamily: 'Readex Pro',
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              fontSize: 12.0,
+                                                                            ),
                                                                       ),
+                                                                    ),
                                                                     Padding(
                                                                       padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,

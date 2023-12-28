@@ -37,7 +37,11 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
         'Users',
         () async {
           FFAppState().clearAdminRequestAccountCache();
-          setState(() => _model.requestCompleter = null);
+          setState(() {
+            FFAppState()
+                .clearAdminRequestAccountCacheKey(_model.requestLastUniqueKey);
+            _model.requestCompleted = false;
+          });
           await _model.waitForRequestCompleted();
         },
       );
@@ -108,32 +112,45 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
         body: SafeArea(
           top: true,
           child: FutureBuilder<List<UsersRow>>(
-            future: (_model.requestCompleter ??= Completer<List<UsersRow>>()
-                  ..complete(UsersTable().queryRows(
-                    queryFn: (q) => q
-                        .eq(
-                          'IsApprove',
-                          true,
-                        )
-                        .eq(
-                          'IsActive',
-                          true,
-                        )
-                        .eq(
-                          'IsAdmin',
-                          false,
-                        )
-                        .eq(
-                          'SectorID',
-                          FFAppState().UserInfo.sectorID,
-                        )
-                        .eq(
-                          'IsTestAccount',
-                          false,
-                        )
-                        .order('PhoneNumber', ascending: true),
-                  )))
-                .future,
+            future: FFAppState()
+                .adminRequestAccount(
+              uniqueQueryKey: FFAppState().UserInfo.phoneNumber,
+              requestFn: () => UsersTable().queryRows(
+                queryFn: (q) => q
+                    .eq(
+                      'IsApprove',
+                      true,
+                    )
+                    .eq(
+                      'IsActive',
+                      true,
+                    )
+                    .eq(
+                      'IsAdmin',
+                      false,
+                    )
+                    .eq(
+                      'IsTestAccount',
+                      false,
+                    )
+                    .eq(
+                      'UserReferral',
+                      FFAppState().UserInfo.phoneNumber,
+                    )
+                    .eq(
+                      'SectorID',
+                      FFAppState().UserInfo.sectorID,
+                    )
+                    .order('PhoneNumber', ascending: true),
+              ),
+            )
+                .then((result) {
+              try {
+                _model.requestCompleted = true;
+                _model.requestLastUniqueKey = FFAppState().UserInfo.phoneNumber;
+              } finally {}
+              return result;
+            }),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
@@ -180,17 +197,59 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 1.0, 0.0, 0.0),
-                          child: Builder(
-                            builder: (context) {
-                              final normal = tabBarUsersRowList
-                                  .where((e) => e.isMember == false)
-                                  .toList();
+                          child: FutureBuilder<List<UsersRow>>(
+                            future: UsersTable().queryRows(
+                              queryFn: (q) => q
+                                  .eq(
+                                    'IsApprove',
+                                    true,
+                                  )
+                                  .eq(
+                                    'IsActive',
+                                    true,
+                                  )
+                                  .eq(
+                                    'IsAdmin',
+                                    false,
+                                  )
+                                  .eq(
+                                    'IsTestAccount',
+                                    false,
+                                  )
+                                  .eq(
+                                    'SectorID',
+                                    FFAppState().UserInfo.sectorID,
+                                  )
+                                  .eq(
+                                    'IsMember',
+                                    false,
+                                  )
+                                  .order('PhoneNumber', ascending: true),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<UsersRow> listViewUsersRowList =
+                                  snapshot.data!;
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
-                                itemCount: normal.length,
-                                itemBuilder: (context, normalIndex) {
-                                  final normalItem = normal[normalIndex];
+                                itemCount: listViewUsersRowList.length,
+                                itemBuilder: (context, listViewIndex) {
+                                  final listViewUsersRow =
+                                      listViewUsersRowList[listViewIndex];
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
@@ -204,7 +263,7 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                                           'EditAccount',
                                           queryParameters: {
                                             'userID': serializeParam(
-                                              normalItem.userID,
+                                              listViewUsersRow.userID,
                                               ParamType.int,
                                             ),
                                           }.withoutNulls,
@@ -242,7 +301,7 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                                                       BorderRadius.circular(
                                                           44.0),
                                                   child: Image.network(
-                                                    normalItem.profile,
+                                                    listViewUsersRow.profile,
                                                     width: 44.0,
                                                     height: 44.0,
                                                     fit: BoxFit.cover,
@@ -273,14 +332,15 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                                                                     0.0,
                                                                     4.0),
                                                         child: Text(
-                                                          normalItem.fullName,
+                                                          listViewUsersRow
+                                                              .fullName,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyLarge,
                                                         ),
                                                       ),
                                                       Text(
-                                                        'ID: ${normalItem.phoneNumber}',
+                                                        'ID: ${listViewUsersRow.phoneNumber}',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -326,66 +386,75 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        context.pushNamed(
-                                          'EditAccount',
-                                          queryParameters: {
-                                            'userID': serializeParam(
-                                              tabBarVarItem.userID,
-                                              ParamType.int,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                      child: Container(
-                                        width: 100.0,
-                                        height: 72.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 0.0,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              offset: Offset(0.0, 1.0),
-                                            )
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 16.0, 0.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.all(2.0),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          44.0),
-                                                  child: Image.network(
-                                                    tabBarVarItem.profile,
-                                                    width: 44.0,
-                                                    height: 44.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                    child: Container(
+                                      width: 100.0,
+                                      height: 72.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 0.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            offset: Offset(0.0, 1.0),
+                                          )
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.all(2.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(44.0),
+                                                child: Image.network(
+                                                  tabBarVarItem.profile,
+                                                  width: 44.0,
+                                                  height: 44.0,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          12.0, 0.0, 0.0, 0.0),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 0.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'AdminSubAccount',
+                                                      queryParameters: {
+                                                        'phoneNumeber':
+                                                            serializeParam(
+                                                          tabBarVarItem
+                                                              .phoneNumber,
+                                                          ParamType.String,
+                                                        ),
+                                                        'tabIndex':
+                                                            serializeParam(
+                                                          _model
+                                                              .tabBarCurrentIndex,
+                                                          ParamType.int,
+                                                        ),
+                                                      }.withoutNulls,
+                                                    );
+                                                  },
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -423,15 +492,33 @@ class _SubAdminAccountWidgetState extends State<SubAdminAccountWidget>
                                                   ),
                                                 ),
                                               ),
-                                              Icon(
-                                                Icons.chevron_right_rounded,
+                                            ),
+                                            InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'EditAccount',
+                                                  queryParameters: {
+                                                    'userID': serializeParam(
+                                                      tabBarVarItem.userID,
+                                                      ParamType.int,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Icon(
+                                                Icons.edit_note,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
                                                 size: 24.0,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),

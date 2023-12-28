@@ -66,6 +66,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
+                if (Navigator.of(context).canPop()) {
+                  context.pop();
+                }
                 context.pushNamed(
                   'HomePage',
                   extra: <String, dynamic>{
@@ -112,6 +115,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
+                if (Navigator.of(context).canPop()) {
+                  context.pop();
+                }
                 context.pushNamed(
                   'Locator',
                   extra: <String, dynamic>{
@@ -160,6 +166,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   if (FFAppState().IsLogged) {
+                    if (Navigator.of(context).canPop()) {
+                      context.pop();
+                    }
                     context.pushNamed(
                       'Notification',
                       extra: <String, dynamic>{
@@ -223,6 +232,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
+                  if (Navigator.of(context).canPop()) {
+                    context.pop();
+                  }
                   context.pushNamed(
                     'Balance',
                     extra: <String, dynamic>{
@@ -269,6 +281,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
+                if (Navigator.of(context).canPop()) {
+                  context.pop();
+                }
                 context.pushNamed(
                   'Event',
                   extra: <String, dynamic>{
@@ -316,6 +331,9 @@ class _NavBarWidgetState extends State<NavBarWidget> {
               highlightColor: Colors.transparent,
               onTap: () async {
                 if (FFAppState().IsLogged) {
+                  if (Navigator.of(context).canPop()) {
+                    context.pop();
+                  }
                   context.pushNamed(
                     'Profile',
                     extra: <String, dynamic>{

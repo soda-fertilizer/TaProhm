@@ -14,3 +14,4 @@ export 'tables/sectors.dart';
 export 'tables/notification.dart';
 export 'tables/transaction_types.dart';
 export 'tables/users.dart';
+export 'tables/events.dart';

@@ -12,9 +12,10 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future inAppUpdate(
-  String? appVersion,
-  String? serverAppVersion,
-) async {
-  // Add your function code here!
+import 'package:in_app_update/in_app_update.dart';
+
+Future androidInAppUpdate() async {
+  InAppUpdate.performImmediateUpdate().catchError((e) => print(e));
 }
+// Set your action name, define your arguments and return parameter,
+// and then add the boilerplate code using the green button on the right!

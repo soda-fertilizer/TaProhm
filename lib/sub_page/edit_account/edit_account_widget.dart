@@ -460,51 +460,34 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        FFButtonWidget(
-                          onPressed: () async {
-                            var confirmDialogResponse = await showDialog<bool>(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Are you sure?'),
-                                      content: Text(
-                                          'Are you sure you want to delete the account?'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, false),
-                                          child: Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(
-                                              alertDialogContext, true),
-                                          child: Text('Confirm'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ) ??
-                                false;
-                            if (confirmDialogResponse) {
-                              await CompaniesTable().update(
-                                data: {
-                                  'IsActive': false,
-                                },
-                                matchingRows: (rows) => rows.eq(
-                                  'UserID',
-                                  editAccountUsersRow?.userID,
-                                ),
-                              );
-                              await UsersTable().update(
-                                data: {
-                                  'IsActive': false,
-                                },
-                                matchingRows: (rows) => rows.eq(
-                                  'PhoneNumber',
-                                  editAccountUsersRow?.phoneNumber,
-                                ),
-                              );
-                              if (FFAppState().UserInfo.isAdmin) {
+                        if (!FFAppState().UserInfo.isSubAdmin)
+                          FFButtonWidget(
+                            onPressed: () async {
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('Are you sure?'),
+                                            content: Text(
+                                                'Are you sure you want to delete the account?'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: Text('Confirm'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                              if (confirmDialogResponse) {
                                 await CompaniesTable().update(
                                   data: {
                                     'IsActive': false,
@@ -523,70 +506,88 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                     editAccountUsersRow?.phoneNumber,
                                   ),
                                 );
-                                context.safePop();
-                                return;
+                                if (FFAppState().UserInfo.isAdmin) {
+                                  await CompaniesTable().update(
+                                    data: {
+                                      'IsActive': false,
+                                    },
+                                    matchingRows: (rows) => rows.eq(
+                                      'UserID',
+                                      editAccountUsersRow?.userID,
+                                    ),
+                                  );
+                                  await UsersTable().update(
+                                    data: {
+                                      'IsActive': false,
+                                    },
+                                    matchingRows: (rows) => rows.eq(
+                                      'PhoneNumber',
+                                      editAccountUsersRow?.phoneNumber,
+                                    ),
+                                  );
+                                  context.safePop();
+                                  return;
+                                } else {
+                                  await CompaniesTable().update(
+                                    data: {
+                                      'IsActive': false,
+                                    },
+                                    matchingRows: (rows) => rows.eq(
+                                      'UserID',
+                                      editAccountUsersRow?.userID,
+                                    ),
+                                  );
+                                  await UsersTable().update(
+                                    data: {
+                                      'IsActive': false,
+                                    },
+                                    matchingRows: (rows) => rows.eq(
+                                      'PhoneNumber',
+                                      editAccountUsersRow?.phoneNumber,
+                                    ),
+                                  );
+                                  FFAppState().update(() {
+                                    FFAppState().deleteUserInfo();
+                                    FFAppState().UserInfo = UserInfoStruct
+                                        .fromSerializableMap(jsonDecode(
+                                            '{\"IsTestAccount\":\"false\"}'));
+
+                                    FFAppState().IsLogged = false;
+                                  });
+                                  GoRouter.of(context).prepareAuthEvent();
+                                  await authManager.signOut();
+                                  GoRouter.of(context).clearRedirectLocation();
+
+                                  context.safePop();
+                                  return;
+                                }
                               } else {
-                                await CompaniesTable().update(
-                                  data: {
-                                    'IsActive': false,
-                                  },
-                                  matchingRows: (rows) => rows.eq(
-                                    'UserID',
-                                    editAccountUsersRow?.userID,
-                                  ),
-                                );
-                                await UsersTable().update(
-                                  data: {
-                                    'IsActive': false,
-                                  },
-                                  matchingRows: (rows) => rows.eq(
-                                    'PhoneNumber',
-                                    editAccountUsersRow?.phoneNumber,
-                                  ),
-                                );
-                                FFAppState().update(() {
-                                  FFAppState().deleteUserInfo();
-                                  FFAppState().UserInfo =
-                                      UserInfoStruct.fromSerializableMap(
-                                          jsonDecode(
-                                              '{\"IsTestAccount\":\"false\"}'));
-
-                                  FFAppState().IsLogged = false;
-                                });
-                                GoRouter.of(context).prepareAuthEvent();
-                                await authManager.signOut();
-                                GoRouter.of(context).clearRedirectLocation();
-
-                                context.safePop();
                                 return;
                               }
-                            } else {
-                              return;
-                            }
-                          },
-                          text: 'Delete',
-                          options: FFButtonOptions(
-                            width: MediaQuery.sizeOf(context).width * 0.3,
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).error,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
+                            },
+                            text: 'Delete',
+                            options: FFButtonOptions(
+                              width: MediaQuery.sizeOf(context).width * 0.3,
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).error,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(20.0),
                             ),
-                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                        ),
                         FFButtonWidget(
                           onPressed: () async {
                             _model.updatedUser = await UsersTable().update(
@@ -607,7 +608,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               returnRows: true,
                             );
                             if (!FFAppState().UserInfo.isAdmin) {
-                              setState(() {
+                              FFAppState().update(() {
                                 FFAppState().updateUserInfoStruct(
                                   (e) => e
                                     ..fullName = _model.textController1.text

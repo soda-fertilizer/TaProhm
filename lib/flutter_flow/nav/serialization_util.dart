@@ -274,6 +274,8 @@ dynamic deserializeParam<T>(
             return TransactionTypesRow(data);
           case UsersRow:
             return UsersRow(data);
+          case EventsRow:
+            return EventsRow(data);
           default:
             return null;
         }

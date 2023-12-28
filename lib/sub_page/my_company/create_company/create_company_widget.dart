@@ -909,7 +909,9 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                               ),
                           );
                         });
-
+                        if (Navigator.of(context).canPop()) {
+                          context.pop();
+                        }
                         context.pushNamed(
                           'CompanyPayment',
                           extra: <String, dynamic>{
@@ -939,7 +941,9 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                               ),
                           );
                         });
-
+                        if (Navigator.of(context).canPop()) {
+                          context.pop();
+                        }
                         context.pushNamed(
                           'CompanyPayment',
                           extra: <String, dynamic>{

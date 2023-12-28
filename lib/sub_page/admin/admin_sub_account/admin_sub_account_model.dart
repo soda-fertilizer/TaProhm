@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
-import 'admin_account_widget.dart' show AdminAccountWidget;
+import 'admin_sub_account_widget.dart' show AdminSubAccountWidget;
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AdminAccountModel extends FlutterFlowModel<AdminAccountWidget> {
+class AdminSubAccountModel extends FlutterFlowModel<AdminSubAccountWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

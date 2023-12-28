@@ -269,20 +269,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'AdminUserReferral',
-          path: '/adminUserReferral',
-          builder: (context, params) => AdminUserReferralWidget(
-            sectorsID: params.getParam('sectorsID', ParamType.int),
-          ),
-        ),
-        FFRoute(
-          name: 'AdminReferralSubPage',
-          path: '/adminReferralSubPage',
-          builder: (context, params) => AdminReferralSubPageWidget(
-            user: params.getParam<UsersRow>('user', ParamType.SupabaseRow),
-          ),
-        ),
-        FFRoute(
           name: 'GraphTree',
           path: '/graphTree',
           builder: (context, params) => GraphTreeWidget(
@@ -377,11 +363,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SubAdminMainWidget(),
         ),
         FFRoute(
-          name: 'SubAdminAccount',
-          path: '/subAdminAccount',
-          builder: (context, params) => SubAdminAccountWidget(),
-        ),
-        FFRoute(
           name: 'SubAdminBusinesses',
           path: '/subAdminBusinesses',
           builder: (context, params) => SubAdminBusinessesWidget(),
@@ -404,6 +385,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'InvideMember',
           path: '/invideMember',
           builder: (context, params) => InvideMemberWidget(),
+        ),
+        FFRoute(
+          name: 'EventDetails',
+          path: '/eventDetails',
+          builder: (context, params) => EventDetailsWidget(
+            id: params.getParam('id', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'AdminCreateEvent',
+          path: '/adminCreateEvent',
+          builder: (context, params) => AdminCreateEventWidget(),
+        ),
+        FFRoute(
+          name: 'AdminSubAccount',
+          path: '/adminSubAccount',
+          builder: (context, params) => AdminSubAccountWidget(
+            phoneNumeber: params.getParam('phoneNumeber', ParamType.String),
+            tabIndex: params.getParam('tabIndex', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'SubAdminAccount',
+          path: '/subAdminAccount',
+          builder: (context, params) => SubAdminAccountWidget(),
+        ),
+        FFRoute(
+          name: 'SubAdminSubAccount',
+          path: '/subAdminSubAccount',
+          builder: (context, params) => SubAdminSubAccountWidget(
+            phoneNumber: params.getParam('phoneNumber', ParamType.String),
+            tabIndex: params.getParam('tabIndex', ParamType.int),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

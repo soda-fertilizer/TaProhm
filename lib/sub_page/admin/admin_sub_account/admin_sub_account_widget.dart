@@ -10,26 +10,33 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'admin_account_model.dart';
-export 'admin_account_model.dart';
+import 'admin_sub_account_model.dart';
+export 'admin_sub_account_model.dart';
 
-class AdminAccountWidget extends StatefulWidget {
-  const AdminAccountWidget({Key? key}) : super(key: key);
+class AdminSubAccountWidget extends StatefulWidget {
+  const AdminSubAccountWidget({
+    Key? key,
+    required this.phoneNumeber,
+    this.tabIndex,
+  }) : super(key: key);
+
+  final String? phoneNumeber;
+  final int? tabIndex;
 
   @override
-  _AdminAccountWidgetState createState() => _AdminAccountWidgetState();
+  _AdminSubAccountWidgetState createState() => _AdminSubAccountWidgetState();
 }
 
-class _AdminAccountWidgetState extends State<AdminAccountWidget>
+class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
     with TickerProviderStateMixin {
-  late AdminAccountModel _model;
+  late AdminSubAccountModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => AdminAccountModel());
+    _model = createModel(context, () => AdminSubAccountModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -50,7 +57,12 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
-      initialIndex: 0,
+      initialIndex: min(
+          valueOrDefault<int>(
+            widget.tabIndex,
+            0,
+          ),
+          1),
     )..addListener(() => setState(() {}));
   }
 
@@ -114,7 +126,10 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
           child: FutureBuilder<List<UsersRow>>(
             future: FFAppState()
                 .adminRequestAccount(
-              uniqueQueryKey: FFAppState().UserInfo.phoneNumber,
+              uniqueQueryKey: valueOrDefault<String>(
+                widget.phoneNumeber,
+                'null',
+              ),
               requestFn: () => UsersTable().queryRows(
                 queryFn: (q) => q
                     .eq(
@@ -135,7 +150,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                     )
                     .eq(
                       'UserReferral',
-                      FFAppState().UserInfo.phoneNumber,
+                      widget.phoneNumeber,
                     )
                     .order('PhoneNumber', ascending: true),
               ),
@@ -143,7 +158,10 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                 .then((result) {
               try {
                 _model.requestCompleted = true;
-                _model.requestLastUniqueKey = FFAppState().UserInfo.phoneNumber;
+                _model.requestLastUniqueKey = valueOrDefault<String>(
+                  widget.phoneNumeber,
+                  'null',
+                );
               } finally {}
               return result;
             }),
@@ -193,55 +211,17 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 1.0, 0.0, 0.0),
-                          child: FutureBuilder<List<UsersRow>>(
-                            future: UsersTable().queryRows(
-                              queryFn: (q) => q
-                                  .eq(
-                                    'IsApprove',
-                                    true,
-                                  )
-                                  .eq(
-                                    'IsActive',
-                                    true,
-                                  )
-                                  .eq(
-                                    'IsAdmin',
-                                    false,
-                                  )
-                                  .eq(
-                                    'IsTestAccount',
-                                    false,
-                                  )
-                                  .eq(
-                                    'IsMember',
-                                    false,
-                                  )
-                                  .order('PhoneNumber', ascending: true),
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<UsersRow> listViewUsersRowList =
-                                  snapshot.data!;
+                          child: Builder(
+                            builder: (context) {
+                              final normal = tabBarUsersRowList
+                                  .where((e) => e.isMember == false)
+                                  .toList();
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
-                                itemCount: listViewUsersRowList.length,
-                                itemBuilder: (context, listViewIndex) {
-                                  final listViewUsersRow =
-                                      listViewUsersRowList[listViewIndex];
+                                itemCount: normal.length,
+                                itemBuilder: (context, normalIndex) {
+                                  final normalItem = normal[normalIndex];
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
@@ -255,7 +235,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                           'EditAccount',
                                           queryParameters: {
                                             'userID': serializeParam(
-                                              listViewUsersRow.userID,
+                                              normalItem.userID,
                                               ParamType.int,
                                             ),
                                           }.withoutNulls,
@@ -293,7 +273,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                       BorderRadius.circular(
                                                           44.0),
                                                   child: Image.network(
-                                                    listViewUsersRow.profile,
+                                                    normalItem.profile,
                                                     width: 44.0,
                                                     height: 44.0,
                                                     fit: BoxFit.cover,
@@ -324,15 +304,14 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                                     0.0,
                                                                     4.0),
                                                         child: Text(
-                                                          listViewUsersRow
-                                                              .fullName,
+                                                          normalItem.fullName,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyLarge,
                                                         ),
                                                       ),
                                                       Text(
-                                                        'ID: ${listViewUsersRow.phoneNumber}',
+                                                        'ID: ${normalItem.phoneNumber}',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

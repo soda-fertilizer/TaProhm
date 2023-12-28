@@ -23,6 +23,6 @@ class LogsRow extends SupabaseDataRow {
   String? get details => getField<String>('Details');
   set details(String? value) => setField<String>('Details', value);
 
-  DateTime get createdDate => getField<DateTime>('CreatedDate')!;
-  set createdDate(DateTime value) => setField<DateTime>('CreatedDate', value);
+  DateTime? get createdDate => getField<DateTime>('CreatedDate');
+  set createdDate(DateTime? value) => setField<DateTime>('CreatedDate', value);
 }

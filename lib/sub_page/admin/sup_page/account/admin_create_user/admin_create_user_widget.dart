@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -71,11 +72,11 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
     _model.memberFullNameController ??= TextEditingController();
     _model.memberFullNameFocusNode ??= FocusNode();
 
-    _model.memberReferrController ??= TextEditingController();
-    _model.memberReferrFocusNode ??= FocusNode();
-
     _model.memberPasswordController ??= TextEditingController();
     _model.memberPasswordFocusNode ??= FocusNode();
+
+    _model.memberReferrController ??= TextEditingController();
+    _model.memberReferrFocusNode ??= FocusNode();
   }
 
   @override
@@ -485,7 +486,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      labelText: 'Referral',
+                                      labelText: 'Referral ID',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintStyle: FlutterFlowTheme.of(context)
@@ -704,17 +705,12 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      if ((_model.selectSectorPhoneNumber != null &&
-                                              _model.selectSectorPhoneNumber !=
-                                                  '') &&
-                                          (_model.normalFullNameController.text !=
-                                                  null &&
-                                              _model.normalFullNameController
+                                      if ((_model.normalFullNameController.text != null && _model.normalFullNameController.text != '') &&
+                                          (_model.normalPasswordController
                                                       .text !=
-                                                  '') &&
-                                          (_model.normalInviteController.text !=
                                                   null &&
-                                              _model.normalInviteController.text !=
+                                              _model.normalPasswordController
+                                                      .text !=
                                                   '') &&
                                           (_model.normalPhoneNumberController
                                                       .text !=
@@ -722,12 +718,20 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               _model.normalPhoneNumberController
                                                       .text !=
                                                   '') &&
-                                          (_model.normalPasswordController
+                                          (_model.normalReferralController
                                                       .text !=
                                                   null &&
-                                              _model.normalPasswordController
+                                              _model.normalReferralController
+                                                      .text !=
+                                                  '') &&
+                                          (_model.normalInviteController.text !=
+                                                  null &&
+                                              _model.normalInviteController
                                                       .text !=
                                                   '')) {
+                                        if (Navigator.of(context).canPop()) {
+                                          context.pop();
+                                        }
                                         context.pushNamed(
                                           'AdminAccountPayment',
                                           queryParameters: {
@@ -773,6 +777,15 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                            ),
+                                          },
                                         );
 
                                         return;
@@ -995,68 +1008,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 0.8,
                                 child: TextFormField(
-                                  controller: _model.memberReferrController,
-                                  focusNode: _model.memberReferrFocusNode,
-                                  obscureText: false,
-                                  decoration: InputDecoration(
-                                    isDense: true,
-                                    labelText: 'Referral',
-                                    labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
-                                    enabledBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color:
-                                            FlutterFlowTheme.of(context).error,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                  ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                  keyboardType: TextInputType.number,
-                                  validator: _model
-                                      .memberReferrControllerValidator
-                                      .asValidator(context),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp('^[^\\s]*\$'))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 0.0, 8.0, 0.0),
-                              child: Container(
-                                width: MediaQuery.sizeOf(context).width * 0.8,
-                                child: TextFormField(
                                   controller: _model.memberPasswordController,
                                   focusNode: _model.memberPasswordFocusNode,
                                   textCapitalization: TextCapitalization.none,
@@ -1119,6 +1070,68 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       FlutterFlowTheme.of(context).bodyMedium,
                                   validator: _model
                                       .memberPasswordControllerValidator
+                                      .asValidator(context),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp('^[^\\s]*\$'))
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 0.0, 8.0, 0.0),
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 0.8,
+                                child: TextFormField(
+                                  controller: _model.memberReferrController,
+                                  focusNode: _model.memberReferrFocusNode,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    labelText: 'Referral ID',
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color:
+                                            FlutterFlowTheme.of(context).error,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  keyboardType: TextInputType.number,
+                                  validator: _model
+                                      .memberReferrControllerValidator
                                       .asValidator(context),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
@@ -1223,6 +1236,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     0.0, 0.0, 0.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
+                                    var _shouldSetState = false;
                                     if ((_model.memberFullNameController.text !=
                                                 null &&
                                             _model.memberFullNameController
@@ -1238,7 +1252,8 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             _model.memberPasswordController
                                                     .text !=
                                                 '')) {
-                                      await UsersTable().insert({
+                                      _model.createUser =
+                                          await UsersTable().insert({
                                         'PhoneNumber': getJsonField(
                                           (_model.maxPhoneNumber?.jsonBody ??
                                               ''),
@@ -1259,8 +1274,20 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         'UserReferral':
                                             _model.memberReferrController.text,
                                         'IsMember': true,
+                                        'Invite':
+                                            _model.memberReferrController.text,
                                       });
+                                      _shouldSetState = true;
+                                      unawaited(
+                                        () async {
+                                          await AllowToReferralsTable().insert({
+                                            'UserPhoneNumber':
+                                                _model.createUser?.phoneNumber,
+                                          });
+                                        }(),
+                                      );
                                       context.safePop();
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
                                       await showDialog(
@@ -1280,8 +1307,11 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           );
                                         },
                                       );
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     }
+
+                                    if (_shouldSetState) setState(() {});
                                   },
                                   text: 'Create',
                                   options: FFButtonOptions(
