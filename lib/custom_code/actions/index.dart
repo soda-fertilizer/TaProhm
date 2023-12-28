@@ -8,7 +8,6 @@ export 'change_system_bar_color.dart' show changeSystemBarColor;
 export 'onesignal_initialise.dart' show onesignalInitialise;
 export 'onesignal_login.dart' show onesignalLogin;
 export 'onesignal_logout.dart' show onesignalLogout;
-export 'get_app_vertsion.dart' show getAppVertsion;
 export 'supa_realtime.dart' show supaRealtime;
 export 'android_in_app_update.dart' show androidInAppUpdate;
 export 'in_app_update.dart' show inAppUpdate;

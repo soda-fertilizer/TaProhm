@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
+import '/component/ios_update_alert/ios_update_alert_widget.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -43,6 +44,49 @@ class _HomePageWidgetState extends State<HomePageWidget>
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
+      _model.appVersion = await AppVersionCall.call();
+      await actions.inAppUpdate(
+        getJsonField(
+          (_model.appVersion?.jsonBody ?? ''),
+          r'''$''',
+        ).toString().toString(),
+        () async {
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return GestureDetector(
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
+                child: Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: IosUpdateAlertWidget(),
+                ),
+              );
+            },
+          ).then((value) => safeSetState(() {}));
+        },
+        () async {
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            context: context,
+            builder: (context) {
+              return GestureDetector(
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
+                child: Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: IosUpdateAlertWidget(),
+                ),
+              );
+            },
+          ).then((value) => safeSetState(() {}));
+        },
+      );
       _model.check = await CheckUnderMaintenanceCall.call();
       if (!FFAppState().UserInfo.isTestAccount) {
         if (CheckUnderMaintenanceCall.value(

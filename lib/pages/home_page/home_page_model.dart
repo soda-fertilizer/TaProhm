@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
+import '/component/ios_update_alert/ios_update_alert_widget.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -33,6 +34,8 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (App version)] action in HomePage widget.
+  ApiCallResponse? appVersion;
   // Stores action output result for [Backend Call - API (Check Under Maintenance)] action in HomePage widget.
   ApiCallResponse? check;
   bool requestCompleted = false;

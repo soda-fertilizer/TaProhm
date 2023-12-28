@@ -2,39 +2,29 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'support_model.dart';
-export 'support_model.dart';
+import 'about_model.dart';
+export 'about_model.dart';
 
-class SupportWidget extends StatefulWidget {
-  const SupportWidget({Key? key}) : super(key: key);
+class AboutWidget extends StatefulWidget {
+  const AboutWidget({Key? key}) : super(key: key);
 
   @override
-  _SupportWidgetState createState() => _SupportWidgetState();
+  _AboutWidgetState createState() => _AboutWidgetState();
 }
 
-class _SupportWidgetState extends State<SupportWidget> {
-  late SupportModel _model;
+class _AboutWidgetState extends State<AboutWidget> {
+  late AboutModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SupportModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.version = await actions.getAppVertsion();
-      setState(() {
-        _model.isVersionLoded = true;
-      });
-    });
+    _model = createModel(context, () => AboutModel());
   }
 
   @override
@@ -84,7 +74,7 @@ class _SupportWidgetState extends State<SupportWidget> {
           title: Align(
             alignment: AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Support',
+              'About',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -108,7 +98,7 @@ class _SupportWidgetState extends State<SupportWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'App version: ${_model.isVersionLoded ? _model.version : ' Loading...'}',
+                      'App version: ${FFAppConstants.AppVersion}',
                       style: FlutterFlowTheme.of(context).bodyLarge,
                     ),
                   ],

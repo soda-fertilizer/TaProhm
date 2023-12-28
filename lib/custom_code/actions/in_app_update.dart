@@ -12,9 +12,25 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:io';
+
 Future inAppUpdate(
-  String? appVersion,
   String? serverAppVersion,
+  Future<dynamic> Function() androidAction,
+  Future<dynamic> Function() iosAction,
 ) async {
   // Add your function code here!
+  String appVersion = FFAppConstants.AppVersion;
+  List<int> v1 = appVersion.split('.').map((e) => int.parse(e)).toList();
+  List<int> v2 = serverAppVersion!.split('.').map((e) => int.parse(e)).toList();
+
+  for (var i = 0; i < v1.length; i++) {
+    if (v2[i] > v1[i]) {
+      if (Platform.isAndroid) {
+        androidAction();
+      } else if (Platform.isIOS) {
+        iosAction();
+      }
+    }
+  }
 }

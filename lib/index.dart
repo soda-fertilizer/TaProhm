@@ -55,7 +55,7 @@ export '/sub_page/admin/admin_businesses/admin_businesses_widget.dart'
     show AdminBusinessesWidget;
 export '/sub_page/search_company/search_company_widget.dart'
     show SearchCompanyWidget;
-export '/sub_page/support/support_widget.dart' show SupportWidget;
+export '/sub_page/about/about_widget.dart' show AboutWidget;
 export '/pages/event/event_widget.dart' show EventWidget;
 export '/pages/notification/notification_widget.dart' show NotificationWidget;
 export '/pages/under_maintenance/under_maintenance_widget.dart'

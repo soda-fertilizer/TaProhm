@@ -311,9 +311,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SearchCompanyWidget(),
         ),
         FFRoute(
-          name: 'Support',
-          path: '/support',
-          builder: (context, params) => SupportWidget(),
+          name: 'About',
+          path: '/about',
+          builder: (context, params) => AboutWidget(),
         ),
         FFRoute(
           name: 'Event',
