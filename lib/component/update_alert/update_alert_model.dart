@@ -1,12 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'ios_update_alert_widget.dart' show IosUpdateAlertWidget;
+import 'update_alert_widget.dart' show UpdateAlertWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class IosUpdateAlertModel extends FlutterFlowModel<IosUpdateAlertWidget> {
+class UpdateAlertModel extends FlutterFlowModel<UpdateAlertWidget> {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

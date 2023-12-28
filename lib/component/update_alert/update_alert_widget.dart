@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'ios_update_alert_model.dart';
-export 'ios_update_alert_model.dart';
+import 'update_alert_model.dart';
+export 'update_alert_model.dart';
 
-class IosUpdateAlertWidget extends StatefulWidget {
-  const IosUpdateAlertWidget({Key? key}) : super(key: key);
+class UpdateAlertWidget extends StatefulWidget {
+  const UpdateAlertWidget({Key? key}) : super(key: key);
 
   @override
-  _IosUpdateAlertWidgetState createState() => _IosUpdateAlertWidgetState();
+  _UpdateAlertWidgetState createState() => _UpdateAlertWidgetState();
 }
 
-class _IosUpdateAlertWidgetState extends State<IosUpdateAlertWidget> {
-  late IosUpdateAlertModel _model;
+class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
+  late UpdateAlertModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -26,7 +26,7 @@ class _IosUpdateAlertWidgetState extends State<IosUpdateAlertWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => IosUpdateAlertModel());
+    _model = createModel(context, () => UpdateAlertModel());
   }
 
   @override
@@ -97,6 +97,10 @@ class _IosUpdateAlertWidgetState extends State<IosUpdateAlertWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
+                    if (isAndroid) {
+                      await launchURL(
+                          'https://play.google.com/store/apps/details?id=com.soda.taprohm');
+                    }
                     Navigator.pop(context);
                   },
                   child: Text(

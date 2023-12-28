@@ -2,9 +2,9 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
-import '/component/ios_update_alert/ios_update_alert_widget.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
+import '/component/update_alert/update_alert_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -52,7 +52,26 @@ class _HomePageWidgetState extends State<HomePageWidget>
           r'''$''',
         ).toString().toString(),
         () async {
-          await actions.androidInAppUpdate();
+          await showAlignedDialog(
+            context: context,
+            isGlobal: true,
+            avoidOverflow: false,
+            targetAnchor: AlignmentDirectional(0.0, 0.0)
+                .resolve(Directionality.of(context)),
+            followerAnchor: AlignmentDirectional(0.0, 0.0)
+                .resolve(Directionality.of(context)),
+            builder: (dialogContext) {
+              return Material(
+                color: Colors.transparent,
+                child: GestureDetector(
+                  onTap: () => _model.unfocusNode.canRequestFocus
+                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                      : FocusScope.of(context).unfocus(),
+                  child: UpdateAlertWidget(),
+                ),
+              );
+            },
+          ).then((value) => setState(() {}));
         },
         () async {
           await showAlignedDialog(
@@ -70,7 +89,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   onTap: () => _model.unfocusNode.canRequestFocus
                       ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                       : FocusScope.of(context).unfocus(),
-                  child: IosUpdateAlertWidget(),
+                  child: UpdateAlertWidget(),
                 ),
               );
             },
