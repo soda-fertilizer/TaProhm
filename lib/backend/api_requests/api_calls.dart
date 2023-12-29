@@ -170,10 +170,10 @@ class CheckPhoneNumberCall {
     );
   }
 
-  dynamic errorMessage(dynamic response) => getJsonField(
+  String? errorMessage(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.message''',
-      );
+      ));
 }
 
 class OneUserNameCall {
@@ -930,19 +930,37 @@ class GetUserReferralCall {
 
 /// End Edge Function Group Code
 
-class CheckUnderMaintenanceCall {
-  static Future<ApiCallResponse> call() async {
+/// Start Check Group Code
+
+class CheckGroup {
+  static String baseUrl =
+      'https://kwlydfajqnlgqirgtgze.supabase.co/rest/v1/rpc';
+  static Map<String, String> headers = {
+    'Authorization':
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+    'Content-Type': 'application/json',
+    'apikey':
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+  };
+  static CheckMaintenanceModeCall checkMaintenanceModeCall =
+      CheckMaintenanceModeCall();
+  static AppVersionCall appVersionCall = AppVersionCall();
+  static CheckUsablePhoneNumberCall checkUsablePhoneNumberCall =
+      CheckUsablePhoneNumberCall();
+}
+
+class CheckMaintenanceModeCall {
+  Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
-      callName: 'Check Under Maintenance',
-      apiUrl:
-          'https://kwlydfajqnlgqirgtgze.supabase.co/rest/v1/rpc/under_maintenance',
+      callName: 'Check Maintenance mode',
+      apiUrl: '${CheckGroup.baseUrl}/under_maintenance',
       callType: ApiCallType.GET,
       headers: {
         'Authorization':
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Content-Type': 'application/json',
         'apikey':
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -953,25 +971,24 @@ class CheckUnderMaintenanceCall {
     );
   }
 
-  static bool? value(dynamic response) => castToType<bool>(getJsonField(
+  dynamic value(dynamic response) => getJsonField(
         response,
         r'''$''',
-      ));
+      );
 }
 
 class AppVersionCall {
-  static Future<ApiCallResponse> call() async {
+  Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
-      callName: 'App version',
-      apiUrl:
-          'https://kwlydfajqnlgqirgtgze.supabase.co/rest/v1/rpc/app_version',
+      callName: 'AppVersion',
+      apiUrl: '${CheckGroup.baseUrl}/app_version',
       callType: ApiCallType.GET,
       headers: {
         'Authorization':
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Content-Type': 'application/json',
         'apikey':
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
-        'Content-Type': 'application/json',
       },
       params: {},
       returnBody: true,
@@ -982,11 +999,45 @@ class AppVersionCall {
     );
   }
 
-  static bool? value(dynamic response) => castToType<bool>(getJsonField(
+  String? value(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$''',
       ));
 }
+
+class CheckUsablePhoneNumberCall {
+  Future<ApiCallResponse> call({
+    String? phoneNumber = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'check usable phone number',
+      apiUrl: '${CheckGroup.baseUrl}/check_phone_number',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'phone_number': phoneNumber,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? value(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$''',
+      ));
+}
+
+/// End Check Group Code
 
 class GetMaxPhoneNumberCall {
   static Future<ApiCallResponse> call() async {

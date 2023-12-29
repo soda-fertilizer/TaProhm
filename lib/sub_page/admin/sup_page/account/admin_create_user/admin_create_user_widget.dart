@@ -464,7 +464,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
-                                    keyboardType: TextInputType.number,
                                     validator: _model
                                         .normalPhoneNumberControllerValidator
                                         .asValidator(context),
@@ -530,7 +529,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
-                                    keyboardType: TextInputType.number,
                                     validator: _model
                                         .normalReferralControllerValidator
                                         .asValidator(context),
@@ -596,7 +594,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
-                                    keyboardType: TextInputType.number,
                                     validator: _model
                                         .normalInviteControllerValidator
                                         .asValidator(context),
@@ -705,6 +702,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      var _shouldSetState = false;
                                       if ((_model.normalFullNameController.text != null && _model.normalFullNameController.text != '') &&
                                           (_model.normalPasswordController
                                                       .text !=
@@ -729,66 +727,180 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               _model.normalInviteController
                                                       .text !=
                                                   '')) {
-                                        if (Navigator.of(context).canPop()) {
-                                          context.pop();
-                                        }
-                                        context.pushNamed(
-                                          'AdminAccountPayment',
-                                          queryParameters: {
-                                            'name': serializeParam(
-                                              _model.normalFullNameController
-                                                  .text,
-                                              ParamType.String,
-                                            ),
-                                            'referral': serializeParam(
-                                              _model.normalReferralController
-                                                  .text,
-                                              ParamType.String,
-                                            ),
-                                            'password': serializeParam(
-                                              _model.normalPasswordController
-                                                  .text,
-                                              ParamType.String,
-                                            ),
-                                            'sectorID': serializeParam(
-                                              _model.selectSectorID,
-                                              ParamType.int,
-                                            ),
-                                            'isMember': serializeParam(
-                                              false,
-                                              ParamType.bool,
-                                            ),
-                                            'profile': serializeParam(
-                                              _model.uploadedFileUrl1 == null ||
-                                                      _model.uploadedFileUrl1 ==
-                                                          ''
-                                                  ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
-                                                  : _model.uploadedFileUrl1,
-                                              ParamType.String,
-                                            ),
-                                            'phoneNumber': serializeParam(
-                                              _model.normalPhoneNumberController
-                                                  .text,
-                                              ParamType.String,
-                                            ),
-                                            'inviteID': serializeParam(
-                                              _model
-                                                  .normalInviteController.text,
-                                              ParamType.String,
-                                            ),
-                                          }.withoutNulls,
-                                          extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
-                                              hasTransition: true,
-                                              transitionType:
-                                                  PageTransitionType.fade,
-                                              duration:
-                                                  Duration(milliseconds: 0),
-                                            ),
-                                          },
+                                        _model.checkphonenumber =
+                                            await UsersGroup
+                                                .checkPhoneNumberCall
+                                                .call(
+                                          phoneNumber: _model
+                                              .normalPhoneNumberController.text,
                                         );
+                                        _shouldSetState = true;
+                                        if ((_model
+                                                .checkphonenumber?.succeeded ??
+                                            true)) {
+                                          _model.checkreferral =
+                                              await UsersGroup.checkReferralCall
+                                                  .call(
+                                            phoneNumber: _model
+                                                .normalReferralController.text,
+                                          );
+                                          _shouldSetState = true;
+                                          if ((_model
+                                                  .checkreferral?.succeeded ??
+                                              true)) {
+                                            _model.checkinvide =
+                                                await UsersGroup
+                                                    .checkReferralCall
+                                                    .call(
+                                              phoneNumber: _model
+                                                  .normalInviteController.text,
+                                            );
+                                            _shouldSetState = true;
+                                            if ((_model
+                                                    .checkinvide?.succeeded ??
+                                                true)) {
+                                              if (Navigator.of(context)
+                                                  .canPop()) {
+                                                context.pop();
+                                              }
+                                              context.pushNamed(
+                                                'AdminAccountPayment',
+                                                queryParameters: {
+                                                  'name': serializeParam(
+                                                    _model
+                                                        .normalFullNameController
+                                                        .text,
+                                                    ParamType.String,
+                                                  ),
+                                                  'referral': serializeParam(
+                                                    _model
+                                                        .normalReferralController
+                                                        .text,
+                                                    ParamType.String,
+                                                  ),
+                                                  'password': serializeParam(
+                                                    _model
+                                                        .normalPasswordController
+                                                        .text,
+                                                    ParamType.String,
+                                                  ),
+                                                  'sectorID': serializeParam(
+                                                    _model.selectSectorID,
+                                                    ParamType.int,
+                                                  ),
+                                                  'isMember': serializeParam(
+                                                    false,
+                                                    ParamType.bool,
+                                                  ),
+                                                  'profile': serializeParam(
+                                                    _model.uploadedFileUrl1 ==
+                                                                null ||
+                                                            _model.uploadedFileUrl1 ==
+                                                                ''
+                                                        ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
+                                                        : _model
+                                                            .uploadedFileUrl1,
+                                                    ParamType.String,
+                                                  ),
+                                                  'phoneNumber': serializeParam(
+                                                    _model
+                                                        .normalPhoneNumberController
+                                                        .text,
+                                                    ParamType.String,
+                                                  ),
+                                                  'inviteID': serializeParam(
+                                                    _model
+                                                        .normalInviteController
+                                                        .text,
+                                                    ParamType.String,
+                                                  ),
+                                                }.withoutNulls,
+                                                extra: <String, dynamic>{
+                                                  kTransitionInfoKey:
+                                                      TransitionInfo(
+                                                    hasTransition: true,
+                                                    transitionType:
+                                                        PageTransitionType.fade,
+                                                    duration: Duration(
+                                                        milliseconds: 0),
+                                                  ),
+                                                },
+                                              );
 
-                                        return;
+                                              if (_shouldSetState)
+                                                setState(() {});
+                                              return;
+                                            } else {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Invide ID Unregisted!'),
+                                                    content: Text(
+                                                        'You can\'t use this Invide ID try another.'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              if (_shouldSetState)
+                                                setState(() {});
+                                              return;
+                                            }
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Referral ID Unregisted!'),
+                                                  content: Text(
+                                                      'You can\'t use this Referral ID try another.'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          }
+                                        } else {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                    'Phone number ready exist!'),
+                                                content:
+                                                    Text('Please try another.'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          if (_shouldSetState) setState(() {});
+                                          return;
+                                        }
                                       } else {
                                         await showDialog(
                                           context: context,
@@ -808,8 +920,11 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             );
                                           },
                                         );
+                                        if (_shouldSetState) setState(() {});
                                         return;
                                       }
+
+                                      if (_shouldSetState) setState(() {});
                                     },
                                     text: 'Next',
                                     options: FFButtonOptions(
@@ -1252,43 +1367,76 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             _model.memberPasswordController
                                                     .text !=
                                                 '')) {
-                                      _model.createUser =
-                                          await UsersTable().insert({
-                                        'PhoneNumber': getJsonField(
-                                          (_model.maxPhoneNumber?.jsonBody ??
-                                              ''),
-                                          r'''$''',
-                                        ).toString(),
-                                        'Password': _model
-                                            .memberPasswordController.text,
-                                        'IsApprove': true,
-                                        'Balance': 0.0,
-                                        'SectorID': _model.selectSectorID,
-                                        'Profile': _model.uploadedFileUrl2 ==
-                                                    null ||
-                                                _model.uploadedFileUrl2 == ''
-                                            ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
-                                            : _model.uploadedFileUrl2,
-                                        'FullName': _model
-                                            .memberFullNameController.text,
-                                        'UserReferral':
+                                      _model.apiResultbep = await UsersGroup
+                                          .checkReferralCall
+                                          .call(
+                                        phoneNumber:
                                             _model.memberReferrController.text,
-                                        'IsMember': true,
-                                        'Invite':
-                                            _model.memberReferrController.text,
-                                      });
-                                      _shouldSetState = true;
-                                      unawaited(
-                                        () async {
-                                          await AllowToReferralsTable().insert({
-                                            'UserPhoneNumber':
-                                                _model.createUser?.phoneNumber,
-                                          });
-                                        }(),
                                       );
-                                      context.safePop();
-                                      if (_shouldSetState) setState(() {});
-                                      return;
+                                      _shouldSetState = true;
+                                      if ((_model.apiResultbep?.succeeded ??
+                                          true)) {
+                                        _model.createUser =
+                                            await UsersTable().insert({
+                                          'PhoneNumber': getJsonField(
+                                            (_model.maxPhoneNumber?.jsonBody ??
+                                                ''),
+                                            r'''$''',
+                                          ).toString(),
+                                          'Password': _model
+                                              .memberPasswordController.text,
+                                          'IsApprove': true,
+                                          'Balance': 0.0,
+                                          'SectorID': _model.selectSectorID,
+                                          'Profile': _model.uploadedFileUrl2 ==
+                                                      null ||
+                                                  _model.uploadedFileUrl2 == ''
+                                              ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
+                                              : _model.uploadedFileUrl2,
+                                          'FullName': _model
+                                              .memberFullNameController.text,
+                                          'UserReferral': _model
+                                              .memberReferrController.text,
+                                          'IsMember': true,
+                                          'Invite': _model
+                                              .memberReferrController.text,
+                                        });
+                                        _shouldSetState = true;
+                                        unawaited(
+                                          () async {
+                                            await AllowToReferralsTable()
+                                                .insert({
+                                              'UserPhoneNumber': _model
+                                                  .createUser?.phoneNumber,
+                                            });
+                                          }(),
+                                        );
+                                        context.safePop();
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'Referral ID Unregisted!'),
+                                              content: Text(
+                                                  'You can\'t use this referral try another.'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      }
                                     } else {
                                       await showDialog(
                                         context: context,

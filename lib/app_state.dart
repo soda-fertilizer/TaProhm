@@ -362,6 +362,12 @@ class FFAppState extends ChangeNotifier {
     updateFn(_shopHolder);
   }
 
+  String _GrapTreeSelectUserPhoneNumber = '';
+  String get GrapTreeSelectUserPhoneNumber => _GrapTreeSelectUserPhoneNumber;
+  set GrapTreeSelectUserPhoneNumber(String _value) {
+    _GrapTreeSelectUserPhoneNumber = _value;
+  }
+
   UserInfoStruct _UserInfo = UserInfoStruct.fromSerializableMap(
       jsonDecode('{\"IsTestAccount\":\"false\"}'));
   UserInfoStruct get UserInfo => _UserInfo;

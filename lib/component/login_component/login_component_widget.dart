@@ -970,11 +970,21 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                       if (UsersGroup.checkPhoneNumberCall
-                                              .errorMessage(
-                                            (_model.apiResultwsd?.jsonBody ??
-                                                ''),
-                                          ) !=
-                                          null)
+                                                  .errorMessage(
+                                                    (_model.apiResultwsd
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  )
+                                                  .toString() !=
+                                              null &&
+                                          UsersGroup.checkPhoneNumberCall
+                                                  .errorMessage(
+                                                    (_model.apiResultwsd
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  )
+                                                  .toString() !=
+                                              '')
                                         Align(
                                           alignment:
                                               AlignmentDirectional(0.0, 0.0),
@@ -989,7 +999,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                             ?.jsonBody ??
                                                         ''),
                                                   )
-                                                  .toString(),
+                                                  .toString()!,
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium

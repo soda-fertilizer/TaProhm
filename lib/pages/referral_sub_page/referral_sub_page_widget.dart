@@ -15,10 +15,13 @@ export 'referral_sub_page_model.dart';
 class ReferralSubPageWidget extends StatefulWidget {
   const ReferralSubPageWidget({
     Key? key,
-    required this.user,
-  }) : super(key: key);
+    this.userPhoneNumber,
+    int? tabIndex,
+  })  : this.tabIndex = tabIndex ?? 0,
+        super(key: key);
 
-  final UsersRow? user;
+  final String? userPhoneNumber;
+  final int tabIndex;
 
   @override
   _ReferralSubPageWidgetState createState() => _ReferralSubPageWidgetState();
@@ -38,7 +41,12 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
-      initialIndex: 0,
+      initialIndex: min(
+          valueOrDefault<int>(
+            widget.tabIndex,
+            0,
+          ),
+          1),
     )..addListener(() => setState(() {}));
   }
 
@@ -67,7 +75,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
         queryFn: (q) => q
             .eq(
               'UserReferral',
-              widget.user?.phoneNumber,
+              widget.userPhoneNumber,
             )
             .eq(
               'IsApprove',
@@ -135,284 +143,361 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
             ),
             body: SafeArea(
               top: true,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Material(
-                    color: Colors.transparent,
-                    elevation: 1.0,
-                    child: Container(
-                      width: double.infinity,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+              child: FutureBuilder<List<UsersRow>>(
+                future: UsersTable().querySingleRow(
+                  queryFn: (q) => q.eq(
+                    'PhoneNumber',
+                    widget.userPhoneNumber,
+                  ),
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
                       ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            20.0, 0.0, 20.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 80.0,
-                              height: 80.0,
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: CachedNetworkImage(
-                                fadeInDuration: Duration(milliseconds: 500),
-                                fadeOutDuration: Duration(milliseconds: 500),
-                                imageUrl: widget.user!.profile,
-                                fit: BoxFit.cover,
-                              ),
+                    );
+                  }
+                  List<UsersRow> containerUsersRowList = snapshot.data!;
+                  final containerUsersRow = containerUsersRowList.isNotEmpty
+                      ? containerUsersRowList.first
+                      : null;
+                  return Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Material(
+                          color: Colors.transparent,
+                          elevation: 1.0,
+                          child: Container(
+                            width: double.infinity,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: Column(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 20.0, 0.0),
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    valueOrDefault<String>(
-                                      widget.user?.fullName,
-                                      'Null',
-                                    ).maybeHandleOverflow(
-                                      maxChars: 30,
-                                      replacement: '…',
+                                  Container(
+                                    width: 80.0,
+                                    height: 80.0,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    child: CachedNetworkImage(
+                                      fadeInDuration:
+                                          Duration(milliseconds: 500),
+                                      fadeOutDuration:
+                                          Duration(milliseconds: 500),
+                                      imageUrl: containerUsersRow!.profile,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  Text(
-                                    'ID: ${widget.user?.phoneNumber}',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 12.0,
+                                  Padding(
+                                    padding: EdgeInsets.all(15.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          valueOrDefault<String>(
+                                            containerUsersRow?.fullName,
+                                            'Null',
+                                          ).maybeHandleOverflow(
+                                            maxChars: 30,
+                                            replacement: '…',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
                                         ),
+                                        Text(
+                                          'ID: ${containerUsersRow?.phoneNumber}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment(0.0, 0),
-                          child: TabBar(
-                            labelColor:
-                                FlutterFlowTheme.of(context).primaryText,
-                            unselectedLabelColor:
-                                FlutterFlowTheme.of(context).secondaryText,
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .titleMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  fontSize: 14.0,
-                                ),
-                            unselectedLabelStyle: TextStyle(),
-                            indicatorColor:
-                                FlutterFlowTheme.of(context).primary,
-                            padding: EdgeInsets.all(4.0),
-                            tabs: [
-                              Tab(
-                                text: 'List view',
-                              ),
-                              Tab(
-                                text: 'Tree view',
-                              ),
-                            ],
-                            controller: _model.tabBarController,
                           ),
                         ),
                         Expanded(
-                          child: TabBarView(
-                            controller: _model.tabBarController,
-                            physics: const NeverScrollableScrollPhysics(),
+                          child: Column(
                             children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 10.0, 0.0, 0.0),
-                                child: Builder(
-                                  builder: (context) {
-                                    final referralSubPageVar =
-                                        referralSubPageUsersRowList.toList();
-                                    return ListView.builder(
-                                      padding: EdgeInsets.zero,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: referralSubPageVar.length,
-                                      itemBuilder:
-                                          (context, referralSubPageVarIndex) {
-                                        final referralSubPageVarItem =
-                                            referralSubPageVar[
-                                                referralSubPageVarIndex];
-                                        return Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 1.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              context.pushNamed(
-                                                'ReferralSubPage',
-                                                queryParameters: {
-                                                  'user': serializeParam(
-                                                    referralSubPageVarItem,
-                                                    ParamType.SupabaseRow,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
-                                            },
-                                            child: Container(
-                                              width: 100.0,
-                                              height: 72.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 0.0,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .alternate,
-                                                    offset: Offset(0.0, 1.0),
-                                                  )
-                                                ],
-                                              ),
-                                              child: Padding(
+                              Align(
+                                alignment: Alignment(0.0, 0),
+                                child: TabBar(
+                                  labelColor:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  unselectedLabelColor:
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 14.0,
+                                      ),
+                                  unselectedLabelStyle: TextStyle(),
+                                  indicatorColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  padding: EdgeInsets.all(4.0),
+                                  tabs: [
+                                    Tab(
+                                      text: 'List view',
+                                    ),
+                                    Tab(
+                                      text: 'Tree view',
+                                    ),
+                                  ],
+                                  controller: _model.tabBarController,
+                                ),
+                              ),
+                              Expanded(
+                                child: TabBarView(
+                                  controller: _model.tabBarController,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final referralSubPageVar =
+                                              referralSubPageUsersRowList
+                                                  .toList();
+                                          return ListView.builder(
+                                            padding: EdgeInsets.zero,
+                                            scrollDirection: Axis.vertical,
+                                            itemCount:
+                                                referralSubPageVar.length,
+                                            itemBuilder: (context,
+                                                referralSubPageVarIndex) {
+                                              final referralSubPageVarItem =
+                                                  referralSubPageVar[
+                                                      referralSubPageVarIndex];
+                                              return Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        16.0, 0.0, 16.0, 0.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.all(2.0),
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(44.0),
-                                                        child: Image.network(
+                                                        0.0, 0.0, 0.0, 1.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'ReferralSubPage',
+                                                      queryParameters: {
+                                                        'userPhoneNumber':
+                                                            serializeParam(
                                                           referralSubPageVarItem
-                                                              .profile,
-                                                          width: 44.0,
-                                                          height: 44.0,
-                                                          fit: BoxFit.cover,
+                                                              .phoneNumber,
+                                                          ParamType.String,
                                                         ),
-                                                      ),
+                                                      }.withoutNulls,
+                                                    );
+                                                  },
+                                                  child: Container(
+                                                    width: 100.0,
+                                                    height: 72.0,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          blurRadius: 0.0,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          offset:
+                                                              Offset(0.0, 1.0),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Padding(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16.0,
+                                                                  0.0,
+                                                                  16.0,
+                                                                  0.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    2.0),
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          44.0),
+                                                              child:
+                                                                  Image.network(
+                                                                referralSubPageVarItem
+                                                                    .profile,
+                                                                width: 44.0,
+                                                                height: 44.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          4.0),
-                                                              child: Text(
-                                                                referralSubPageVarItem
-                                                                    .fullName
-                                                                    .maybeHandleOverflow(
-                                                                  maxChars: 40,
-                                                                  replacement:
-                                                                      '…',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
                                                                           12.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            4.0),
+                                                                    child: Text(
+                                                                      referralSubPageVarItem
+                                                                          .fullName
+                                                                          .maybeHandleOverflow(
+                                                                        maxChars:
+                                                                            40,
+                                                                        replacement:
+                                                                            '…',
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyLarge
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            fontSize:
+                                                                                12.0,
+                                                                          ),
                                                                     ),
+                                                                  ),
+                                                                  Text(
+                                                                    'ID: ${referralSubPageVarItem.phoneNumber}',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          fontSize:
+                                                                              10.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
-                                                            Text(
-                                                              'ID: ${referralSubPageVarItem.phoneNumber}',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .labelMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Readex Pro',
-                                                                    fontSize:
-                                                                        10.0,
-                                                                  ),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                          Icon(
+                                                            Icons
+                                                                .chevron_right_rounded,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                            size: 24.0,
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
-                                                    Icon(
-                                                      Icons
-                                                          .chevron_right_rounded,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                      size: 24.0,
-                                                    ),
-                                                  ],
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                              Visibility(
-                                visible:
-                                    referralSubPageUsersRowList.length != 0,
-                                child: Container(
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  child: custom_widgets.GraphTree(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    listOfUsers: referralSubPageUsersRowList,
-                                    headOfUser: widget.user,
-                                  ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Visibility(
+                                      visible:
+                                          referralSubPageUsersRowList.length !=
+                                              0,
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        child: custom_widgets.GraphTree(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          listOfUsers:
+                                              referralSubPageUsersRowList,
+                                          headOfUser: containerUsersRow,
+                                          onNodeClick: () async {
+                                            context.pushNamed(
+                                              'ReferralSubPage',
+                                              queryParameters: {
+                                                'userPhoneNumber':
+                                                    serializeParam(
+                                                  FFAppState()
+                                                      .GrapTreeSelectUserPhoneNumber,
+                                                  ParamType.String,
+                                                ),
+                                                'tabIndex': serializeParam(
+                                                  1,
+                                                  ParamType.int,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -420,8 +505,8 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),

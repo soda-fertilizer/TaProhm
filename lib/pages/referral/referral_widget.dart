@@ -274,9 +274,11 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                                     context.pushNamed(
                                                       'ReferralSubPage',
                                                       queryParameters: {
-                                                        'user': serializeParam(
-                                                          referralVarItem,
-                                                          ParamType.SupabaseRow,
+                                                        'userPhoneNumber':
+                                                            serializeParam(
+                                                          referralVarItem
+                                                              .phoneNumber,
+                                                          ParamType.String,
                                                         ),
                                                       }.withoutNulls,
                                                       extra: <String, dynamic>{
@@ -495,6 +497,22 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                         height: double.infinity,
                                         listOfUsers: referralUsersRowList,
                                         headOfUser: graphTreeUsersRow,
+                                        onNodeClick: () async {
+                                          context.pushNamed(
+                                            'ReferralSubPage',
+                                            queryParameters: {
+                                              'tabIndex': serializeParam(
+                                                1,
+                                                ParamType.int,
+                                              ),
+                                              'userPhoneNumber': serializeParam(
+                                                FFAppState()
+                                                    .GrapTreeSelectUserPhoneNumber,
+                                                ParamType.String,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
                                       ),
                                     );
                                   },

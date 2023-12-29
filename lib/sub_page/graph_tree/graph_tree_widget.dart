@@ -107,6 +107,7 @@ class _GraphTreeWidgetState extends State<GraphTreeWidget> {
                 height: double.infinity,
                 listOfUsers: widget.users,
                 headOfUser: widget.headOfUser,
+                onNodeClick: () async {},
               ),
             ),
           ),

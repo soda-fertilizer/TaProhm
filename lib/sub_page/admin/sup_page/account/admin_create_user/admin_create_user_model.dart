@@ -72,6 +72,12 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   // State field(s) for NormalSector widget.
   String? normalSectorValue;
   FormFieldController<String>? normalSectorValueController;
+  // Stores action output result for [Backend Call - API (Check phone number)] action in Button widget.
+  ApiCallResponse? checkphonenumber;
+  // Stores action output result for [Backend Call - API (Check referral)] action in Button widget.
+  ApiCallResponse? checkreferral;
+  // Stores action output result for [Backend Call - API (Check referral)] action in Button widget.
+  ApiCallResponse? checkinvide;
   bool isDataUploading2 = false;
   FFUploadedFile uploadedLocalFile2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -93,6 +99,8 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   // State field(s) for MemberSector widget.
   String? memberSectorValue;
   FormFieldController<String>? memberSectorValueController;
+  // Stores action output result for [Backend Call - API (Check referral)] action in Button widget.
+  ApiCallResponse? apiResultbep;
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   UsersRow? createUser;
 

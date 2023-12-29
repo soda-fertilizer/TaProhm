@@ -45,7 +45,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
-      _model.appVersion = await AppVersionCall.call();
+      _model.appVersion = await CheckGroup.appVersionCall.call();
       await actions.inAppUpdate(
         getJsonField(
           (_model.appVersion?.jsonBody ?? ''),
@@ -96,11 +96,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
           ).then((value) => setState(() {}));
         },
       );
-      _model.check = await CheckUnderMaintenanceCall.call();
+      _model.check = await CheckGroup.checkMaintenanceModeCall.call();
       if (!FFAppState().UserInfo.isTestAccount) {
-        if (CheckUnderMaintenanceCall.value(
+        if (CheckGroup.checkMaintenanceModeCall.value(
           (_model.check?.jsonBody ?? ''),
-        )!) {
+        )) {
           if (Navigator.of(context).canPop()) {
             context.pop();
           }

@@ -22,12 +22,14 @@ class GraphTree extends StatefulWidget {
     this.height,
     this.listOfUsers,
     this.headOfUser,
+    this.onNodeClick,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final List<UsersRow>? listOfUsers;
   final UsersRow? headOfUser;
+  final Future<dynamic> Function()? onNodeClick;
 
   @override
   _GraphTreeState createState() => _GraphTreeState();
@@ -41,9 +43,10 @@ class _GraphTreeState extends State<GraphTree> {
     // Returning an InkWell widget with a Container as its child
     return InkWell(
       // ! This is for on tap action
-      // onTap: () {
-      //   print(user.phoneNumber);
-      // },
+      onTap: () {
+        FFAppState().GrapTreeSelectUserPhoneNumber = user.phoneNumber;
+        widget.onNodeClick!();
+      },
       child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(

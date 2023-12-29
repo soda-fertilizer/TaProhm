@@ -190,7 +190,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ReferralSubPage',
           path: '/referralSubPage',
           builder: (context, params) => ReferralSubPageWidget(
-            user: params.getParam<UsersRow>('user', ParamType.SupabaseRow),
+            userPhoneNumber:
+                params.getParam('userPhoneNumber', ParamType.String),
+            tabIndex: params.getParam('tabIndex', ParamType.int),
           ),
         ),
         FFRoute(

@@ -35,9 +35,9 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (App version)] action in HomePage widget.
+  // Stores action output result for [Backend Call - API (AppVersion)] action in HomePage widget.
   ApiCallResponse? appVersion;
-  // Stores action output result for [Backend Call - API (Check Under Maintenance)] action in HomePage widget.
+  // Stores action output result for [Backend Call - API (Check Maintenance mode)] action in HomePage widget.
   ApiCallResponse? check;
   bool requestCompleted = false;
   String? requestLastUniqueKey;
