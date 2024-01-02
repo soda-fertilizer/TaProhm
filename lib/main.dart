@@ -19,6 +19,7 @@ void main() async {
 
   // Start initial custom actions code
   await actions.changeSystemBarColor();
+  await actions.onesignalInitialise();
   // End initial custom actions code
 
   await SupaFlow.initialize();
