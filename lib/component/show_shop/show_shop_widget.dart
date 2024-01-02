@@ -6,8 +6,6 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -16,9 +14,9 @@ export 'show_shop_model.dart';
 
 class ShowShopWidget extends StatefulWidget {
   const ShowShopWidget({
-    Key? key,
+    super.key,
     this.locationPara,
-  }) : super(key: key);
+  });
 
   final CustomMapLocationStruct? locationPara;
 
@@ -84,7 +82,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -95,12 +93,12 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                         'CompanyInfo',
                         queryParameters: {
                           'companyID': serializeParam(
-                            showShopCompaniesRow?.companyID,
+                            showShopCompaniesRow.companyID,
                             ParamType.int,
                           ),
                         }.withoutNulls,
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.leftToRight,
                           ),
@@ -138,7 +136,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                   .secondaryBackground,
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 20.0),
                               child: SingleChildScrollView(
                                 child: Column(
@@ -146,7 +144,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      showShopCompaniesRow!.companyName
+                                      showShopCompaniesRow.companyName
                                           .maybeHandleOverflow(
                                         maxChars: 50,
                                         replacement: '…',
@@ -177,10 +175,10 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                           ),
                                           TextSpan(
                                             text: valueOrDefault<String>(
-                                              showShopCompaniesRow?.phoneNumber,
+                                              showShopCompaniesRow.phoneNumber,
                                               '0123456',
                                             ),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Color(0xFF1C81E0),
                                             ),
                                             mouseCursor:
@@ -189,8 +187,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                               ..onTap = () async {
                                                 await launchUrl(Uri(
                                                   scheme: 'tel',
-                                                  path: showShopCompaniesRow!
-                                                      .phoneNumber,
+                                                  path: showShopCompaniesRow.phoneNumber,
                                                 ));
                                               },
                                           )
@@ -217,9 +214,8 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                                 ),
                                           ),
                                           TextSpan(
-                                            text: showShopCompaniesRow!
-                                                .telegramUrl,
-                                            style: TextStyle(
+                                            text: showShopCompaniesRow.telegramUrl,
+                                            style: const TextStyle(
                                               color: Color(0xFF1C81E0),
                                             ),
                                             mouseCursor:
@@ -228,7 +224,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                               ..onTap = () async {
                                                 await actions.openUrl(
                                                   showShopCompaniesRow
-                                                      ?.telegramUrl,
+                                                      .telegramUrl,
                                                 );
                                               },
                                           )
@@ -237,12 +233,12 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                             .bodyMedium,
                                       ),
                                     ),
-                                  ].divide(SizedBox(height: 20.0)),
+                                  ].divide(const SizedBox(height: 20.0)),
                                 ),
                               ),
                             ),
                           ),
-                        ].divide(SizedBox(width: 20.0)),
+                        ].divide(const SizedBox(width: 20.0)),
                       ),
                     ),
                   ),
@@ -250,9 +246,9 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
               ],
             ),
             Align(
-              alignment: AlignmentDirectional(1.0, -1.0),
+              alignment: const AlignmentDirectional(1.0, -1.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -260,7 +256,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                   highlightColor: Colors.transparent,
                   onTap: () async {
                     await actions.openUrl(
-                      'google.navigation:q=${showShopCompaniesRow?.latitude?.toString()},${showShopCompaniesRow?.longitude?.toString()}&mode=d',
+                      'google.navigation:q=${showShopCompaniesRow.latitude.toString()},${showShopCompaniesRow.longitude.toString()}&mode=d',
                     );
                   },
                   child: Container(

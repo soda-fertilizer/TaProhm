@@ -12,13 +12,12 @@ import '/actions/actions.dart' as action_blocks;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'admin_create_user_model.dart';
 export 'admin_create_user_model.dart';
 
 class AdminCreateUserWidget extends StatefulWidget {
-  const AdminCreateUserWidget({Key? key}) : super(key: key);
+  const AdminCreateUserWidget({super.key});
 
   @override
   _AdminCreateUserWidgetState createState() => _AdminCreateUserWidgetState();
@@ -114,7 +113,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -124,7 +123,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Create user',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -134,7 +133,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -143,16 +142,16 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
           child: Column(
             children: [
               Align(
-                alignment: Alignment(0.0, 0),
+                alignment: const Alignment(0.0, 0),
                 child: TabBar(
                   labelColor: FlutterFlowTheme.of(context).primaryText,
                   unselectedLabelColor:
                       FlutterFlowTheme.of(context).secondaryText,
                   labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                  unselectedLabelStyle: TextStyle(),
+                  unselectedLabelStyle: const TextStyle(),
                   indicatorColor: FlutterFlowTheme.of(context).primary,
-                  padding: EdgeInsets.all(4.0),
-                  tabs: [
+                  padding: const EdgeInsets.all(4.0),
+                  tabs: const [
                     Tab(
                       text: 'Member',
                     ),
@@ -170,7 +169,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                     KeepAliveWidgetWrapper(
                       builder: (context) => Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -251,7 +250,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   width: 100.0,
                                   height: 100.0,
                                   clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
                                   child: Image.network(
@@ -264,9 +263,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 8.0, 0.0),
-                                child: Container(
+                                child: SizedBox(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: TextFormField(
                                     controller: _model.normalFullNameController,
@@ -325,9 +324,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 8.0, 0.0),
-                                child: Container(
+                                child: SizedBox(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: TextFormField(
                                     controller: _model.normalPasswordController,
@@ -390,7 +389,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           _model.normalPasswordVisibility
                                               ? Icons.visibility_outlined
                                               : Icons.visibility_off_outlined,
-                                          color: Color(0xFF757575),
+                                          color: const Color(0xFF757575),
                                           size: 24.0,
                                         ),
                                       ),
@@ -408,9 +407,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 8.0, 0.0),
-                                child: Container(
+                                child: SizedBox(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: TextFormField(
                                     controller:
@@ -475,9 +474,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 8.0, 0.0),
-                                child: Container(
+                                child: SizedBox(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: TextFormField(
                                     controller: _model.normalReferralController,
@@ -540,9 +539,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     8.0, 0.0, 8.0, 0.0),
-                                child: Container(
+                                child: SizedBox(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: TextFormField(
                                     controller: _model.normalInviteController,
@@ -683,7 +682,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         .secondaryText,
                                     borderWidth: 1.0,
                                     borderRadius: 30.0,
-                                    margin: EdgeInsetsDirectional.fromSTEB(
+                                    margin: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 4.0, 16.0, 4.0),
                                     hidesUnderline: true,
                                     isSearchable: false,
@@ -693,38 +692,27 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                               ),
                               Container(
                                 width: MediaQuery.sizeOf(context).width * 0.8,
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
-                                      if ((_model.normalFullNameController.text != null && _model.normalFullNameController.text != '') &&
+                                      var shouldSetState = false;
+                                      if ((_model.normalFullNameController.text != '') &&
                                           (_model.normalPasswordController
-                                                      .text !=
-                                                  null &&
-                                              _model.normalPasswordController
                                                       .text !=
                                                   '') &&
                                           (_model.normalPhoneNumberController
                                                       .text !=
-                                                  null &&
-                                              _model.normalPhoneNumberController
-                                                      .text !=
                                                   '') &&
                                           (_model.normalReferralController
                                                       .text !=
-                                                  null &&
-                                              _model.normalReferralController
-                                                      .text !=
                                                   '') &&
-                                          (_model.normalInviteController.text !=
-                                                  null &&
-                                              _model.normalInviteController
+                                          (_model.normalInviteController
                                                       .text !=
                                                   '')) {
                                         _model.checkphonenumber =
@@ -734,7 +722,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           phoneNumber: _model
                                               .normalPhoneNumberController.text,
                                         );
-                                        _shouldSetState = true;
+                                        shouldSetState = true;
                                         if ((_model
                                                 .checkphonenumber?.succeeded ??
                                             true)) {
@@ -744,7 +732,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             phoneNumber: _model
                                                 .normalReferralController.text,
                                           );
-                                          _shouldSetState = true;
+                                          shouldSetState = true;
                                           if ((_model
                                                   .checkreferral?.succeeded ??
                                               true)) {
@@ -755,7 +743,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               phoneNumber: _model
                                                   .normalInviteController.text,
                                             );
-                                            _shouldSetState = true;
+                                            shouldSetState = true;
                                             if ((_model
                                                     .checkinvide?.succeeded ??
                                                 true)) {
@@ -794,8 +782,6 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                   ),
                                                   'profile': serializeParam(
                                                     _model.uploadedFileUrl1 ==
-                                                                null ||
-                                                            _model.uploadedFileUrl1 ==
                                                                 ''
                                                         ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
                                                         : _model
@@ -817,7 +803,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 }.withoutNulls,
                                                 extra: <String, dynamic>{
                                                   kTransitionInfoKey:
-                                                      TransitionInfo(
+                                                      const TransitionInfo(
                                                     hasTransition: true,
                                                     transitionType:
                                                         PageTransitionType.fade,
@@ -827,31 +813,33 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 },
                                               );
 
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 setState(() {});
+                                              }
                                               return;
                                             } else {
                                               await showDialog(
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text(
+                                                    title: const Text(
                                                         'Invide ID Unregisted!'),
-                                                    content: Text(
+                                                    content: const Text(
                                                         'You can\'t use this Invide ID try another.'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
                                                             Navigator.pop(
                                                                 alertDialogContext),
-                                                        child: Text('Ok'),
+                                                        child: const Text('Ok'),
                                                       ),
                                                     ],
                                                   );
                                                 },
                                               );
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 setState(() {});
+                                              }
                                               return;
                                             }
                                           } else {
@@ -859,23 +847,24 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               context: context,
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
-                                                  title: Text(
+                                                  title: const Text(
                                                       'Referral ID Unregisted!'),
-                                                  content: Text(
+                                                  content: const Text(
                                                       'You can\'t use this Referral ID try another.'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext),
-                                                      child: Text('Ok'),
+                                                      child: const Text('Ok'),
                                                     ),
                                                   ],
                                                 );
                                               },
                                             );
-                                            if (_shouldSetState)
+                                            if (shouldSetState) {
                                               setState(() {});
+                                            }
                                             return;
                                           }
                                         } else {
@@ -883,22 +872,22 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
-                                                title: Text(
+                                                title: const Text(
                                                     'Phone number ready exist!'),
                                                 content:
-                                                    Text('Please try another.'),
+                                                    const Text('Please try another.'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text('Ok'),
+                                                    child: const Text('Ok'),
                                                   ),
                                                 ],
                                               );
                                             },
                                           );
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
@@ -906,34 +895,34 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: Text('Some fild is emty!'),
-                                              content: Text(
+                                              title: const Text('Some fild is emty!'),
+                                              content: const Text(
                                                   'Please complete all the fild!'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: Text('Ok'),
+                                                  child: const Text('Ok'),
                                                 ),
                                               ],
                                             );
                                           },
                                         );
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: 'Next',
                                     options: FFButtonOptions(
                                       width: 230.0,
                                       height: 52.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -944,7 +933,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             color: Colors.white,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -953,7 +942,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   ),
                                 ),
                               ),
-                            ].divide(SizedBox(height: 10.0)),
+                            ].divide(const SizedBox(height: 10.0)),
                           ),
                         ),
                       ),
@@ -961,7 +950,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                     KeepAliveWidgetWrapper(
                       builder: (context) => Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -1040,7 +1029,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 width: 100.0,
                                 height: 100.0,
                                 clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.network(
@@ -1061,9 +1050,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 8.0, 0.0),
-                              child: Container(
+                              child: SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.8,
                                 child: TextFormField(
                                   controller: _model.memberFullNameController,
@@ -1118,9 +1107,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 8.0, 0.0),
-                              child: Container(
+                              child: SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.8,
                                 child: TextFormField(
                                   controller: _model.memberPasswordController,
@@ -1176,7 +1165,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         _model.memberPasswordVisibility
                                             ? Icons.visibility_outlined
                                             : Icons.visibility_off_outlined,
-                                        color: Color(0xFF757575),
+                                        color: const Color(0xFF757575),
                                         size: 24.0,
                                       ),
                                     ),
@@ -1194,9 +1183,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 8.0, 0.0),
-                              child: Container(
+                              child: SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.8,
                                 child: TextFormField(
                                   controller: _model.memberReferrController,
@@ -1332,7 +1321,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       .secondaryText,
                                   borderWidth: 1.0,
                                   borderRadius: 30.0,
-                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                  margin: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 4.0, 16.0, 4.0),
                                   hidesUnderline: true,
                                   isSearchable: false,
@@ -1342,29 +1331,23 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                             ),
                             Container(
                               width: MediaQuery.sizeOf(context).width * 0.8,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 16.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    var _shouldSetState = false;
-                                    if ((_model.memberFullNameController.text !=
-                                                null &&
-                                            _model.memberFullNameController
+                                    var shouldSetState = false;
+                                    if ((_model.memberFullNameController
                                                     .text !=
                                                 '') &&
-                                        (_model.memberReferrController.text !=
-                                                null &&
-                                            _model.memberReferrController
+                                        (_model.memberReferrController
                                                     .text !=
                                                 '') &&
-                                        (_model.memberPasswordController.text !=
-                                                null &&
-                                            _model.memberPasswordController
+                                        (_model.memberPasswordController
                                                     .text !=
                                                 '')) {
                                       _model.apiResultbep = await UsersGroup
@@ -1373,7 +1356,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         phoneNumber:
                                             _model.memberReferrController.text,
                                       );
-                                      _shouldSetState = true;
+                                      shouldSetState = true;
                                       if ((_model.apiResultbep?.succeeded ??
                                           true)) {
                                         _model.createUser =
@@ -1388,9 +1371,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           'IsApprove': true,
                                           'Balance': 0.0,
                                           'SectorID': _model.selectSectorID,
-                                          'Profile': _model.uploadedFileUrl2 ==
-                                                      null ||
-                                                  _model.uploadedFileUrl2 == ''
+                                          'Profile': _model.uploadedFileUrl2 == ''
                                               ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
                                               : _model.uploadedFileUrl2,
                                           'FullName': _model
@@ -1401,7 +1382,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           'Invite': _model
                                               .memberReferrController.text,
                                         });
-                                        _shouldSetState = true;
+                                        shouldSetState = true;
                                         unawaited(
                                           () async {
                                             await AllowToReferralsTable()
@@ -1412,29 +1393,29 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           }(),
                                         );
                                         context.safePop();
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       } else {
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: Text(
+                                              title: const Text(
                                                   'Referral ID Unregisted!'),
-                                              content: Text(
+                                              content: const Text(
                                                   'You can\'t use this referral try another.'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: Text('Ok'),
+                                                  child: const Text('Ok'),
                                                 ),
                                               ],
                                             );
                                           },
                                         );
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
                                     } else {
@@ -1442,32 +1423,32 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: Text('Some fild is emty!'),
-                                            content: Text(
+                                            title: const Text('Some fild is emty!'),
+                                            content: const Text(
                                                 'Please complete all the fild!'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: Text('Ok'),
+                                                child: const Text('Ok'),
                                               ),
                                             ],
                                           );
                                         },
                                       );
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (_shouldSetState) setState(() {});
+                                    if (shouldSetState) setState(() {});
                                   },
                                   text: 'Create',
                                   options: FFButtonOptions(
                                     width: 230.0,
                                     height: 52.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -1477,7 +1458,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           color: Colors.white,
                                         ),
                                     elevation: 3.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -1486,7 +1467,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 ),
                               ),
                             ),
-                          ].divide(SizedBox(height: 10.0)),
+                          ].divide(const SizedBox(height: 10.0)),
                         ),
                       ),
                     ),

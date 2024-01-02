@@ -2,23 +2,20 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'referral_sub_page_model.dart';
 export 'referral_sub_page_model.dart';
 
 class ReferralSubPageWidget extends StatefulWidget {
   const ReferralSubPageWidget({
-    Key? key,
+    super.key,
     this.userPhoneNumber,
     int? tabIndex,
-  })  : this.tabIndex = tabIndex ?? 0,
-        super(key: key);
+  })  : tabIndex = tabIndex ?? 0;
 
   final String? userPhoneNumber;
   final int tabIndex;
@@ -117,7 +114,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -127,7 +124,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Sub Referral',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -137,7 +134,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                       ),
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
@@ -172,7 +169,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                   return Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -187,7 +184,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                   .secondaryBackground,
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   20.0, 0.0, 20.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -196,20 +193,20 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                     width: 80.0,
                                     height: 80.0,
                                     clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                     ),
                                     child: CachedNetworkImage(
                                       fadeInDuration:
-                                          Duration(milliseconds: 500),
+                                          const Duration(milliseconds: 500),
                                       fadeOutDuration:
-                                          Duration(milliseconds: 500),
+                                          const Duration(milliseconds: 500),
                                       imageUrl: containerUsersRow!.profile,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(15.0),
+                                    padding: const EdgeInsets.all(15.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -219,7 +216,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                       children: [
                                         Text(
                                           valueOrDefault<String>(
-                                            containerUsersRow?.fullName,
+                                            containerUsersRow.fullName,
                                             'Null',
                                           ).maybeHandleOverflow(
                                             maxChars: 30,
@@ -229,7 +226,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          'ID: ${containerUsersRow?.phoneNumber}',
+                                          'ID: ${containerUsersRow.phoneNumber}',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -252,7 +249,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                           child: Column(
                             children: [
                               Align(
-                                alignment: Alignment(0.0, 0),
+                                alignment: const Alignment(0.0, 0),
                                 child: TabBar(
                                   labelColor:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -265,11 +262,11 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                         fontFamily: 'Readex Pro',
                                         fontSize: 14.0,
                                       ),
-                                  unselectedLabelStyle: TextStyle(),
+                                  unselectedLabelStyle: const TextStyle(),
                                   indicatorColor:
                                       FlutterFlowTheme.of(context).primary,
-                                  padding: EdgeInsets.all(4.0),
-                                  tabs: [
+                                  padding: const EdgeInsets.all(4.0),
+                                  tabs: const [
                                     Tab(
                                       text: 'List view',
                                     ),
@@ -286,7 +283,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                   physics: const NeverScrollableScrollPhysics(),
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 10.0, 0.0, 0.0),
                                       child: Builder(
                                         builder: (context) {
@@ -304,7 +301,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                   referralSubPageVar[
                                                       referralSubPageVarIndex];
                                               return Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 1.0),
                                                 child: InkWell(
@@ -343,13 +340,13 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                                   .of(context)
                                                               .alternate,
                                                           offset:
-                                                              Offset(0.0, 1.0),
+                                                              const Offset(0.0, 1.0),
                                                         )
                                                       ],
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   0.0,
@@ -364,7 +361,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsets.all(
+                                                                const EdgeInsets.all(
                                                                     2.0),
                                                             child: ClipRRect(
                                                               borderRadius:
@@ -385,7 +382,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                           Expanded(
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           12.0,
                                                                           0.0,
@@ -403,7 +400,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                                         .start,
                                                                 children: [
                                                                   Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -466,9 +463,8 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                     ),
                                     Visibility(
                                       visible:
-                                          referralSubPageUsersRowList.length !=
-                                              0,
-                                      child: Container(
+                                          referralSubPageUsersRowList.isNotEmpty,
+                                      child: SizedBox(
                                         width: double.infinity,
                                         height: double.infinity,
                                         child: custom_widgets.GraphTree(

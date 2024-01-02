@@ -1,23 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
-import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
 import '/index.dart';
-import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -82,7 +73,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => RootPageContext.wrap(
-        appStateNotifier.loggedIn ? HomePageWidget() : HomePageWidget(),
+        appStateNotifier.loggedIn ? const HomePageWidget() : const HomePageWidget(),
         errorRoute: state.location,
       ),
       routes: [
@@ -90,13 +81,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => RootPageContext.wrap(
-            appStateNotifier.loggedIn ? HomePageWidget() : HomePageWidget(),
+            appStateNotifier.loggedIn ? const HomePageWidget() : const HomePageWidget(),
           ),
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, params) => const HomePageWidget(),
         ),
         FFRoute(
           name: 'Locator',
@@ -109,17 +100,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AcountPayment',
           path: '/acountPayment',
-          builder: (context, params) => AcountPaymentWidget(),
+          builder: (context, params) => const AcountPaymentWidget(),
         ),
         FFRoute(
           name: 'Balance',
           path: '/balance',
-          builder: (context, params) => BalanceWidget(),
+          builder: (context, params) => const BalanceWidget(),
         ),
         FFRoute(
           name: 'MyCompany',
           path: '/myCompany',
-          builder: (context, params) => MyCompanyWidget(),
+          builder: (context, params) => const MyCompanyWidget(),
         ),
         FFRoute(
           name: 'CreateCompany',
@@ -131,47 +122,47 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'PinLocation',
           path: '/pinLocation',
-          builder: (context, params) => PinLocationWidget(),
+          builder: (context, params) => const PinLocationWidget(),
         ),
         FFRoute(
           name: 'Profile',
           path: '/profile',
-          builder: (context, params) => ProfileWidget(),
+          builder: (context, params) => const ProfileWidget(),
         ),
         FFRoute(
           name: 'Withdrawal',
           path: '/withdrawal',
-          builder: (context, params) => WithdrawalWidget(),
+          builder: (context, params) => const WithdrawalWidget(),
         ),
         FFRoute(
           name: 'Referral',
           path: '/referral',
-          builder: (context, params) => ReferralWidget(),
+          builder: (context, params) => const ReferralWidget(),
         ),
         FFRoute(
           name: 'LoginPage',
           path: '/loginPage',
-          builder: (context, params) => LoginPageWidget(),
+          builder: (context, params) => const LoginPageWidget(),
         ),
         FFRoute(
           name: 'AdminMain',
           path: '/adminMain',
-          builder: (context, params) => AdminMainWidget(),
+          builder: (context, params) => const AdminMainWidget(),
         ),
         FFRoute(
           name: 'ApproveCompany',
           path: '/approveCompany',
-          builder: (context, params) => ApproveCompanyWidget(),
+          builder: (context, params) => const ApproveCompanyWidget(),
         ),
         FFRoute(
           name: 'ApproveTransaction',
           path: '/approveTransaction',
-          builder: (context, params) => ApproveTransactionWidget(),
+          builder: (context, params) => const ApproveTransactionWidget(),
         ),
         FFRoute(
           name: 'ApproveAccount',
           path: '/approveAccount',
-          builder: (context, params) => ApproveAccountWidget(),
+          builder: (context, params) => const ApproveAccountWidget(),
         ),
         FFRoute(
           name: 'Transfer',
@@ -184,7 +175,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AdminMainReferral',
           path: '/adminMainReferral',
-          builder: (context, params) => AdminMainReferralWidget(),
+          builder: (context, params) => const AdminMainReferralWidget(),
         ),
         FFRoute(
           name: 'ReferralSubPage',
@@ -221,7 +212,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'CompanyPayment',
           path: '/companyPayment',
-          builder: (context, params) => CompanyPaymentWidget(),
+          builder: (context, params) => const CompanyPaymentWidget(),
         ),
         FFRoute(
           name: 'ViewCompany',
@@ -233,7 +224,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Deposit',
           path: '/deposit',
-          builder: (context, params) => DepositWidget(),
+          builder: (context, params) => const DepositWidget(),
         ),
         FFRoute(
           name: 'CompanyInfo',
@@ -283,7 +274,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ChangePassword',
           path: '/changePassword',
-          builder: (context, params) => ChangePasswordWidget(),
+          builder: (context, params) => const ChangePasswordWidget(),
         ),
         FFRoute(
           name: 'EditAccount',
@@ -295,42 +286,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AdminCreateUser',
           path: '/adminCreateUser',
-          builder: (context, params) => AdminCreateUserWidget(),
+          builder: (context, params) => const AdminCreateUserWidget(),
         ),
         FFRoute(
           name: 'AdminAccount',
           path: '/adminAccount',
-          builder: (context, params) => AdminAccountWidget(),
+          builder: (context, params) => const AdminAccountWidget(),
         ),
         FFRoute(
           name: 'AdminBusinesses',
           path: '/adminBusinesses',
-          builder: (context, params) => AdminBusinessesWidget(),
+          builder: (context, params) => const AdminBusinessesWidget(),
         ),
         FFRoute(
           name: 'SearchCompany',
           path: '/searchCompany',
-          builder: (context, params) => SearchCompanyWidget(),
+          builder: (context, params) => const SearchCompanyWidget(),
         ),
         FFRoute(
           name: 'About',
           path: '/about',
-          builder: (context, params) => AboutWidget(),
+          builder: (context, params) => const AboutWidget(),
         ),
         FFRoute(
           name: 'Event',
           path: '/event',
-          builder: (context, params) => EventWidget(),
+          builder: (context, params) => const EventWidget(),
         ),
         FFRoute(
           name: 'Notification',
           path: '/notification',
-          builder: (context, params) => NotificationWidget(),
+          builder: (context, params) => const NotificationWidget(),
         ),
         FFRoute(
           name: 'UnderMaintenance',
           path: '/underMaintenance',
-          builder: (context, params) => UnderMaintenanceWidget(),
+          builder: (context, params) => const UnderMaintenanceWidget(),
         ),
         FFRoute(
           name: 'MemberPayment',
@@ -362,12 +353,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'SubAdminMain',
           path: '/subAdminMain',
-          builder: (context, params) => SubAdminMainWidget(),
+          builder: (context, params) => const SubAdminMainWidget(),
         ),
         FFRoute(
           name: 'SubAdminBusinesses',
           path: '/subAdminBusinesses',
-          builder: (context, params) => SubAdminBusinessesWidget(),
+          builder: (context, params) => const SubAdminBusinessesWidget(),
         ),
         FFRoute(
           name: 'AdminAccountPayment',
@@ -386,7 +377,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'InvideMember',
           path: '/invideMember',
-          builder: (context, params) => InvideMemberWidget(),
+          builder: (context, params) => const InvideMemberWidget(),
         ),
         FFRoute(
           name: 'EventDetails',
@@ -398,7 +389,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AdminCreateEvent',
           path: '/adminCreateEvent',
-          builder: (context, params) => AdminCreateEventWidget(),
+          builder: (context, params) => const AdminCreateEventWidget(),
         ),
         FFRoute(
           name: 'AdminSubAccount',
@@ -411,7 +402,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'SubAdminAccount',
           path: '/subAdminAccount',
-          builder: (context, params) => SubAdminAccountWidget(),
+          builder: (context, params) => const SubAdminAccountWidget(),
         ),
         FFRoute(
           name: 'SubAdminSubAccount',
@@ -668,7 +659,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

@@ -11,7 +11,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'company_model.dart';
@@ -19,10 +18,10 @@ export 'company_model.dart';
 
 class CompanyWidget extends StatefulWidget {
   const CompanyWidget({
-    Key? key,
+    super.key,
     required this.companyID,
     required this.userID,
-  }) : super(key: key);
+  });
 
   final int? companyID;
   final int? userID;
@@ -130,7 +129,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -140,7 +139,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Company',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -150,7 +149,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                       ),
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
@@ -183,9 +182,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                       ? containerUsersRowList.first
                       : null;
                   return Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
-                      padding: EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -198,7 +197,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                   width: 120.0,
                                   height: 120.0,
                                   clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
                                   child: Image.network(
@@ -211,7 +210,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                             TextFormField(
                               controller: _model.amountController ??=
                                   TextEditingController(
-                                text: companyCompaniesRow?.amount?.toString(),
+                                text: companyCompaniesRow.amount.toString(),
                               ),
                               focusNode: _model.amountFocusNode,
                               obscureText: false,
@@ -264,7 +263,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                             TextFormField(
                               controller: _model.companyNameController ??=
                                   TextEditingController(
-                                text: companyCompaniesRow?.companyName,
+                                text: companyCompaniesRow.companyName,
                               ),
                               focusNode: _model.companyNameFocusNode,
                               obscureText: false,
@@ -312,7 +311,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                             TextFormField(
                               controller: _model.telegramNumberController ??=
                                   TextEditingController(
-                                text: companyCompaniesRow?.phoneNumber,
+                                text: companyCompaniesRow.phoneNumber,
                               ),
                               focusNode: _model.telegramNumberFocusNode,
                               obscureText: false,
@@ -361,7 +360,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                             TextFormField(
                               controller: _model.telegramUsernameController ??=
                                   TextEditingController(
-                                text: companyCompaniesRow?.telegramUrl,
+                                text: companyCompaniesRow.telegramUrl,
                               ),
                               focusNode: _model.telegramUsernameFocusNode,
                               obscureText: false,
@@ -423,7 +422,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               child: TextFormField(
                                 controller: _model.textController5 ??=
                                     TextEditingController(
-                                  text: companyCompaniesRow?.detail,
+                                  text: companyCompaniesRow.detail,
                                 ),
                                 focusNode: _model.textFieldFocusNode,
                                 obscureText: false,
@@ -434,28 +433,28 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                   hintStyle:
                                       FlutterFlowTheme.of(context).labelMedium,
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Color(0x00000000),
                                       width: 1.0,
                                     ),
@@ -476,7 +475,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                 context.pushNamed(
                                   'PinLocation',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -485,13 +484,13 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                 );
                               },
                               text:
-                                  'lat: ${companyCompaniesRow?.latitude?.toString()}lng: ${companyCompaniesRow?.longitude?.toString()}',
+                                  'lat: ${companyCompaniesRow.latitude.toString()}lng: ${companyCompaniesRow.longitude.toString()}',
                               options: FFButtonOptions(
                                 width: double.infinity,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
@@ -502,7 +501,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       color: Colors.white,
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -516,7 +515,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Add image',
@@ -529,8 +528,8 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                             Builder(
                               builder: (context) {
                                 final images = companyCompaniesRow
-                                        ?.companyImages
-                                        ?.toList() ??
+                                        .companyImages
+                                        .toList() ??
                                     [];
                                 return Wrap(
                                   spacing: 10.0,
@@ -602,9 +601,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                             Container(
                               width: double.infinity,
                               height: 30.0,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   'Payment image',
                                   style:
@@ -615,7 +614,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: Image.network(
-                                companyCompaniesRow!.paymentImage,
+                                companyCompaniesRow.paymentImage,
                                 width: double.infinity,
                                 height: MediaQuery.sizeOf(context).height * 0.4,
                                 fit: BoxFit.contain,
@@ -632,8 +631,8 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                               context: context,
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
-                                                  title: Text('Are you sure?'),
-                                                  content: Text(
+                                                  title: const Text('Are you sure?'),
+                                                  content: const Text(
                                                       'Are you sure you want to delete it?'),
                                                   actions: [
                                                     TextButton(
@@ -641,14 +640,14 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                                           Navigator.pop(
                                                               alertDialogContext,
                                                               false),
-                                                      child: Text('Cancel'),
+                                                      child: const Text('Cancel'),
                                                     ),
                                                     TextButton(
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext,
                                                               true),
-                                                      child: Text('Confirm'),
+                                                      child: const Text('Confirm'),
                                                     ),
                                                   ],
                                                 );
@@ -673,9 +672,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.4,
                                     height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).error,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -685,7 +684,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                           color: Colors.white,
                                         ),
                                     elevation: 3.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -700,7 +699,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             .telegramNumberController.text,
                                         'Detail': _model.textController5.text,
                                         'CompanyName':
-                                            companyCompaniesRow?.companyName,
+                                            companyCompaniesRow.companyName,
                                         'TelegramUrl': _model
                                             .telegramUsernameController.text,
                                         'IsApprove': true,
@@ -731,9 +730,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.4,
                                     height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -743,7 +742,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                           color: Colors.white,
                                         ),
                                     elevation: 3.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -752,7 +751,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                 ),
                               ],
                             ),
-                          ].divide(SizedBox(height: 10.0)),
+                          ].divide(const SizedBox(height: 10.0)),
                         ),
                       ),
                     ),

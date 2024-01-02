@@ -3,20 +3,18 @@ import '/backend/supabase/supabase.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'balance_model.dart';
 export 'balance_model.dart';
 
 class BalanceWidget extends StatefulWidget {
-  const BalanceWidget({Key? key}) : super(key: key);
+  const BalanceWidget({super.key});
 
   @override
   _BalanceWidgetState createState() => _BalanceWidgetState();
@@ -92,7 +90,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                   fontSize: 22.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 0.0,
         ),
@@ -111,7 +109,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
                           20.0, 10.0, 20.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -123,12 +121,12 @@ class _BalanceWidgetState extends State<BalanceWidget>
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
-                                  Color(0xFFCDF57E),
+                                  const Color(0xFFCDF57E),
                                   FlutterFlowTheme.of(context).secondary
                                 ],
-                                stops: [0.0, 1.0],
-                                begin: AlignmentDirectional(0.0, 1.0),
-                                end: AlignmentDirectional(0, -1.0),
+                                stops: const [0.0, 1.0],
+                                begin: const AlignmentDirectional(0.0, 1.0),
+                                end: const AlignmentDirectional(0, -1.0),
                               ),
                               shape: BoxShape.circle,
                             ),
@@ -149,7 +147,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                     ),
                                   ),
                                   child: Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Text(
                                       'Account\nsummary',
                                       textAlign: TextAlign.center,
@@ -225,7 +223,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
                                         await actions.printAction(
-                                          'Money: ${moneyUsersRow?.balance?.toString()}',
+                                          'Money: ${moneyUsersRow?.balance.toString()}',
                                         );
                                       },
                                       child: Text(
@@ -265,7 +263,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Wrap(
                               spacing: 10.0,
@@ -301,7 +299,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                         context.pushNamed(
                                           'Deposit',
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
+                                            kTransitionInfoKey: const TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.fade,
@@ -365,7 +363,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                         context.pushNamed(
                                           'Transfer',
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
+                                            kTransitionInfoKey: const TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.fade,
@@ -429,7 +427,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                         context.pushNamed(
                                           'Withdrawal',
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
+                                            kTransitionInfoKey: const TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.fade,
@@ -514,7 +512,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                 return Column(
                                   children: [
                                     Align(
-                                      alignment: Alignment(0.0, 0),
+                                      alignment: const Alignment(0.0, 0),
                                       child: TabBar(
                                         labelColor: FlutterFlowTheme.of(context)
                                             .primaryText,
@@ -527,12 +525,12 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                               fontFamily: 'Readex Pro',
                                               fontSize: 14.0,
                                             ),
-                                        unselectedLabelStyle: TextStyle(),
+                                        unselectedLabelStyle: const TextStyle(),
                                         indicatorColor:
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
-                                        padding: EdgeInsets.all(4.0),
-                                        tabs: [
+                                        padding: const EdgeInsets.all(4.0),
+                                        tabs: const [
                                           Tab(
                                             text: 'Transaction',
                                           ),
@@ -564,7 +562,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                   r'''$.isapprove''',
                                                                 ))
                                                             .toList()
-                                                            ?.toList() ??
+                                                            .toList() ??
                                                         [];
                                                 return ListView.separated(
                                                   padding: EdgeInsets.zero,
@@ -572,7 +570,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                       Axis.vertical,
                                                   itemCount: transations.length,
                                                   separatorBuilder: (_, __) =>
-                                                      SizedBox(height: 10.0),
+                                                      const SizedBox(height: 10.0),
                                                   itemBuilder: (context,
                                                       transationsIndex) {
                                                     final transationsItem =
@@ -592,7 +590,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       10.0,
                                                                       0.0,
@@ -649,7 +647,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               context)
                                                                           .labelSmall,
                                                                     ),
-                                                                  ].divide(SizedBox(
+                                                                  ].divide(const SizedBox(
                                                                       height:
                                                                           10.0)),
                                                                 ),
@@ -667,10 +665,10 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                           .end,
                                                                   children: [
                                                                     Text(
-                                                                      '${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                      dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
                                                                                 transationsItem,
                                                                                 r'''$.createddate''',
-                                                                              ).toString()))}'
+                                                                              ).toString()))
                                                                           .maybeHandleOverflow(
                                                                         maxChars:
                                                                             50,
@@ -752,7 +750,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                               r'''$.isapprove''',
                                                             ))
                                                         .toList()
-                                                        ?.toList() ??
+                                                        .toList() ??
                                                     [];
                                                 return ListView.separated(
                                                   padding: EdgeInsets.zero,
@@ -760,7 +758,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                       Axis.vertical,
                                                   itemCount: pandings.length,
                                                   separatorBuilder: (_, __) =>
-                                                      SizedBox(height: 10.0),
+                                                      const SizedBox(height: 10.0),
                                                   itemBuilder:
                                                       (context, pandingsIndex) {
                                                     final pandingsItem =
@@ -779,7 +777,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                         ),
                                                         child: Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       10.0,
                                                                       0.0,
@@ -850,7 +848,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               12.0,
                                                                         ),
                                                                   ),
-                                                                ].divide(SizedBox(
+                                                                ].divide(const SizedBox(
                                                                     height:
                                                                         10.0)),
                                                               ),
@@ -866,10 +864,10 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                         .end,
                                                                 children: [
                                                                   Text(
-                                                                    '${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                    dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
                                                                               pandingsItem,
                                                                               r'''$.createddate''',
-                                                                            ).toString()))}'
+                                                                            ).toString()))
                                                                         .maybeHandleOverflow(
                                                                       maxChars:
                                                                           50,
@@ -937,7 +935,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                               },
                             ),
                           ),
-                        ].divide(SizedBox(height: 10.0)),
+                        ].divide(const SizedBox(height: 10.0)),
                       ),
                     ),
                   ),
@@ -948,14 +946,14 @@ class _BalanceWidgetState extends State<BalanceWidget>
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                   ),
-                ].divide(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.navBarModel,
                   updateCallback: () => setState(() {}),
-                  child: NavBarWidget(
+                  child: const NavBarWidget(
                     selectPageIndex: 3,
                   ),
                 ),

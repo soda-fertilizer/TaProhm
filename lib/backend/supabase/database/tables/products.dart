@@ -9,7 +9,7 @@ class ProductsTable extends SupabaseTable<ProductsRow> {
 }
 
 class ProductsRow extends SupabaseDataRow {
-  ProductsRow(Map<String, dynamic> data) : super(data);
+  ProductsRow(super.data);
 
   @override
   SupabaseTable get table => ProductsTable();
@@ -20,7 +20,7 @@ class ProductsRow extends SupabaseDataRow {
   String get productName => getField<String>('ProductName')!;
   set productName(String value) => setField<String>('ProductName', value);
 
-  List<String> get productImages => getListField<String>('ProductImages')!;
+  List<String> get productImages => getListField<String>('ProductImages');
   set productImages(List<String> value) =>
       setListField<String>('ProductImages', value);
 

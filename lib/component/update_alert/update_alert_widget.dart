@@ -1,14 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'update_alert_model.dart';
 export 'update_alert_model.dart';
 
 class UpdateAlertWidget extends StatefulWidget {
-  const UpdateAlertWidget({Key? key}) : super(key: key);
+  const UpdateAlertWidget({super.key});
 
   @override
   _UpdateAlertWidgetState createState() => _UpdateAlertWidgetState();
@@ -51,7 +49,7 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
             child: Icon(
               Icons.update,
               color: FlutterFlowTheme.of(context).primary,
@@ -63,14 +61,14 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
             style: FlutterFlowTheme.of(context).titleLarge,
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
             child: Text(
               '    We would like to inform you that a new version of our app is available for download. To enjoy the latest benefits of our app, please update it as soon as possible. ',
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -114,7 +112,7 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
               ],
             ),
           ),
-        ].divide(SizedBox(height: 20.0)),
+        ].divide(const SizedBox(height: 20.0)),
       ),
     );
   }

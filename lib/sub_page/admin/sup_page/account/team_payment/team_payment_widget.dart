@@ -9,14 +9,13 @@ import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'team_payment_model.dart';
 export 'team_payment_model.dart';
 
 class TeamPaymentWidget extends StatefulWidget {
   const TeamPaymentWidget({
-    Key? key,
+    super.key,
     required this.name,
     required this.referral,
     required this.invite,
@@ -25,7 +24,7 @@ class TeamPaymentWidget extends StatefulWidget {
     required this.profile,
     required this.phoneNumber,
     required this.isNew,
-  }) : super(key: key);
+  });
 
   final String? name;
   final String? referral;
@@ -94,7 +93,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -107,12 +106,12 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                     onTap: () async {
                       await showModalBottomSheet(
                         isScrollControlled: true,
-                        backgroundColor: Color(0x73000000),
+                        backgroundColor: const Color(0x73000000),
                         context: context,
                         builder: (context) {
                           return Padding(
                             padding: MediaQuery.viewInsetsOf(context),
-                            child: ShowKHQRWidget(),
+                            child: const ShowKHQRWidget(),
                           );
                         },
                       ).then((value) => safeSetState(() {}));
@@ -120,7 +119,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                     child: Container(
                       width: 50.0,
                       height: 50.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -149,14 +148,14 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
             Container(
               width: double.infinity,
               height: MediaQuery.sizeOf(context).height * 0.3,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: ListView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -175,7 +174,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -194,7 +193,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -231,7 +230,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -250,7 +249,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -269,7 +268,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -306,7 +305,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -325,7 +324,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -344,7 +343,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -379,13 +378,13 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                       ),
                     ),
                   ),
-                ].divide(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)),
               ),
             ),
             Container(
               width: double.infinity,
               height: 39.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFE9ECEE),
               ),
               child: Row(
@@ -394,7 +393,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
                       'Add image',
                       style: FlutterFlowTheme.of(context).bodyMedium,
@@ -402,7 +401,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -580,7 +579,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                             ),
                           ),
                         ),
-                      ].divide(SizedBox(width: 10.0)),
+                      ].divide(const SizedBox(width: 10.0)),
                     ),
                   ),
                 ],
@@ -588,7 +587,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
             ),
             if (_model.uploadedImage != null && _model.uploadedImage != '')
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
@@ -603,7 +602,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                 ),
               ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   await UsersTable().insert({
@@ -627,13 +626,13 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).secondary,
                   textStyle: FlutterFlowTheme.of(context).bodyLarge,
                   elevation: 0.0,
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 1.0,
                   ),

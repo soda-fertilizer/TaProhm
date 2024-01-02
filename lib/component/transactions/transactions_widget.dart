@@ -1,14 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'transactions_model.dart';
 export 'transactions_model.dart';
 
 class TransactionsWidget extends StatefulWidget {
-  const TransactionsWidget({Key? key}) : super(key: key);
+  const TransactionsWidget({super.key});
 
   @override
   _TransactionsWidgetState createState() => _TransactionsWidgetState();
@@ -41,9 +39,9 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.0, -1.0),
+      alignment: const AlignmentDirectional(0.0, -1.0),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
         child: Wrap(
           spacing: 10.0,
           runSpacing: 10.0,
@@ -76,7 +74,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                     context.pushNamed(
                       'Deposit',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
+                        kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -132,7 +130,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                     context.pushNamed(
                       'Transfer',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
+                        kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -188,7 +186,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                     context.pushNamed(
                       'Withdrawal',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
+                        kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),

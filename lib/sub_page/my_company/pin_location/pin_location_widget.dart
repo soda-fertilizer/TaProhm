@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -6,14 +5,13 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'pin_location_model.dart';
 export 'pin_location_model.dart';
 
 class PinLocationWidget extends StatefulWidget {
-  const PinLocationWidget({Key? key}) : super(key: key);
+  const PinLocationWidget({super.key});
 
   @override
   _PinLocationWidgetState createState() => _PinLocationWidgetState();
@@ -30,7 +28,7 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
     super.initState();
     _model = createModel(context, () => PinLocationModel());
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
@@ -110,7 +108,7 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
                             centerMapOnMarkerTap: true,
                           ),
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: PointerInterceptor(
                               intercepting: isWeb,
                               child: ClipRRect(
@@ -140,10 +138,10 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 50.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -162,10 +160,10 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
                   ],
                 ),
                 Align(
-                  alignment: AlignmentDirectional(1.0, 1.0),
+                  alignment: const AlignmentDirectional(1.0, 1.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 100.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 100.0),
                     child: FlutterFlowIconButton(
                       borderColor: Colors.transparent,
                       borderRadius: 20.0,
@@ -179,7 +177,7 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
                       ),
                       onPressed: () async {
                         currentUserLocationValue = await getCurrentUserLocation(
-                            defaultLocation: LatLng(0.0, 0.0));
+                            defaultLocation: const LatLng(0.0, 0.0));
                         await _model.googleMapsController.future.then(
                           (c) => c.animateCamera(
                             CameraUpdate.newLatLng(

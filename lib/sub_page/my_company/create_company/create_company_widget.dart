@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -11,7 +10,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'create_company_model.dart';
@@ -19,9 +17,9 @@ export 'create_company_model.dart';
 
 class CreateCompanyWidget extends StatefulWidget {
   const CreateCompanyWidget({
-    Key? key,
+    super.key,
     this.pickedLatLng,
-  }) : super(key: key);
+  });
 
   final LatLng? pickedLatLng;
 
@@ -110,7 +108,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -120,7 +118,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Create Company',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -130,21 +128,21 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -212,17 +210,12 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                         width: 100.0,
                         height: 100.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
                           valueOrDefault<String>(
                             valueOrDefault<String>(
-                                          _model.uploadedFileUrl1,
-                                          'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                                        ) ==
-                                        null ||
-                                    valueOrDefault<String>(
                                           _model.uploadedFileUrl1,
                                           'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
                                         ) ==
@@ -376,7 +369,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                         'Discount (%): ',
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.sizeOf(context).width * 0.4,
                         child: TextFormField(
                           controller: _model.discountController,
@@ -495,28 +488,28 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                         hintText: 'Company detail',
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
@@ -534,7 +527,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                       context.pushNamed(
                         'PinLocation',
                         extra: <String, dynamic>{
-                          kTransitionInfoKey: TransitionInfo(
+                          kTransitionInfoKey: const TransitionInfo(
                             hasTransition: true,
                             transitionType: PageTransitionType.fade,
                             duration: Duration(milliseconds: 0),
@@ -549,9 +542,9 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                       width: double.infinity,
                       height: 40.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).secondaryText,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -559,7 +552,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 color: Colors.white,
                               ),
                       elevation: 3.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),
@@ -572,7 +565,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -591,7 +584,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -818,7 +811,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 ),
                               ),
                             ),
-                          ].divide(SizedBox(width: 10.0)),
+                          ].divide(const SizedBox(width: 10.0)),
                         ),
                       ),
                     ],
@@ -890,7 +883,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                   FFButtonWidget(
                     onPressed: () async {
                       currentUserLocationValue = await getCurrentUserLocation(
-                          defaultLocation: LatLng(0.0, 0.0));
+                          defaultLocation: const LatLng(0.0, 0.0));
                       if (FFAppState().CreateCompanyHolder.location == null) {
                         setState(() {
                           FFAppState().updateCreateCompanyHolderStruct(
@@ -915,7 +908,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                         context.pushNamed(
                           'CompanyPayment',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -947,7 +940,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                         context.pushNamed(
                           'CompanyPayment',
                           extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
+                            kTransitionInfoKey: const TransitionInfo(
                               hasTransition: true,
                               transitionType: PageTransitionType.fade,
                               duration: Duration(milliseconds: 0),
@@ -963,9 +956,9 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                       width: double.infinity,
                       height: 40.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -973,14 +966,14 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 color: Colors.white,
                               ),
                       elevation: 3.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
-                ].divide(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)),
               ),
             ),
           ),

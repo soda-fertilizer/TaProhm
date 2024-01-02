@@ -10,14 +10,13 @@ import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'admin_account_payment_model.dart';
 export 'admin_account_payment_model.dart';
 
 class AdminAccountPaymentWidget extends StatefulWidget {
   const AdminAccountPaymentWidget({
-    Key? key,
+    super.key,
     required this.name,
     required this.referral,
     required this.password,
@@ -26,7 +25,7 @@ class AdminAccountPaymentWidget extends StatefulWidget {
     required this.profile,
     required this.phoneNumber,
     this.inviteID,
-  }) : super(key: key);
+  });
 
   final String? name;
   final String? referral;
@@ -108,7 +107,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                 fontSize: 22.0,
               ),
         ),
-        actions: [],
+        actions: const [],
         centerTitle: false,
         elevation: 2.0,
       ),
@@ -121,16 +120,16 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
               child: Column(
                 children: [
                   Align(
-                    alignment: Alignment(0.0, 0),
+                    alignment: const Alignment(0.0, 0),
                     child: TabBar(
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
                       labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                      unselectedLabelStyle: TextStyle(),
+                      unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
-                      padding: EdgeInsets.all(4.0),
-                      tabs: [
+                      padding: const EdgeInsets.all(4.0),
+                      tabs: const [
                         Tab(
                           text: 'Bank',
                         ),
@@ -149,7 +148,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 20.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -163,13 +162,13 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     onTap: () async {
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
-                                        backgroundColor: Color(0x73000000),
+                                        backgroundColor: const Color(0x73000000),
                                         context: context,
                                         builder: (context) {
                                           return Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
-                                            child: ShowKHQRWidget(),
+                                            child: const ShowKHQRWidget(),
                                           );
                                         },
                                       ).then((value) => safeSetState(() {}));
@@ -177,7 +176,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     child: Container(
                                       width: 50.0,
                                       height: 50.0,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -208,13 +207,13 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                             Container(
                               width: double.infinity,
                               height: MediaQuery.sizeOf(context).height * 0.108,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: ListView(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 10.0, 0.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -236,7 +235,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 10.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -259,7 +258,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsets.all(10.0),
+                                                        const EdgeInsets.all(10.0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -302,7 +301,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                   ),
                                   if (false)
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 10.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -324,7 +323,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -349,7 +348,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsets.all(10.0),
+                                                          const EdgeInsets.all(10.0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -392,7 +391,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     ),
                                   if (false)
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10.0, 0.0, 10.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -414,7 +413,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 10.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -439,7 +438,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          EdgeInsets.all(10.0),
+                                                          const EdgeInsets.all(10.0),
                                                       child: Column(
                                                         mainAxisSize:
                                                             MainAxisSize.max,
@@ -480,13 +479,13 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                         ),
                                       ),
                                     ),
-                                ].divide(SizedBox(height: 10.0)),
+                                ].divide(const SizedBox(height: 10.0)),
                               ),
                             ),
                             Container(
                               width: double.infinity,
                               height: 39.0,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFE9ECEE),
                               ),
                               child: Row(
@@ -495,7 +494,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Add image',
@@ -504,7 +503,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 10.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -730,7 +729,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                             ),
                                           ),
                                         ),
-                                      ].divide(SizedBox(width: 10.0)),
+                                      ].divide(const SizedBox(width: 10.0)),
                                     ),
                                   ),
                                 ],
@@ -739,7 +738,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                             if (_model.uploadedImage != null &&
                                 _model.uploadedImage != '')
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -755,7 +754,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                 ),
                               ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 20.0, 0.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -779,7 +778,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                       await LogsTable().insert({
                                         'Title': 'Create Member Account',
                                         'Details':
-                                            'Create by: ${FFAppState().UserInfo.fullName}, By PhoneNumber: ${FFAppState().UserInfo.phoneNumber}, Create User ID: ${_model.createUser?.userID?.toString()}, Create Name: ${_model.createUser?.fullName}',
+                                            'Create by: ${FFAppState().UserInfo.fullName}, By PhoneNumber: ${FFAppState().UserInfo.phoneNumber}, Create User ID: ${_model.createUser?.userID.toString()}, Create Name: ${_model.createUser?.fullName}',
                                       });
                                     }(),
                                   );
@@ -791,15 +790,15 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                 options: FFButtonOptions(
                                   width: 230.0,
                                   height: 50.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).secondary,
                                   textStyle:
                                       FlutterFlowTheme.of(context).bodyLarge,
                                   elevation: 0.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -838,16 +837,16 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     ? containerUsersRowList.first
                                     : null;
                             return Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 20.0),
                                       child: Text(
                                         '\$ 1',
@@ -866,34 +865,35 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                           .bodyLarge,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          var _shouldSetState = false;
+                                          var shouldSetState = false;
                                           if (containerUsersRow!.balance <
                                               1.0) {
                                             await showDialog(
                                               context: context,
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
-                                                  title: Text(
+                                                  title: const Text(
                                                       'Insufficient balance!'),
-                                                  content: Text(
+                                                  content: const Text(
                                                       'you don\'t have enough money in your balance.'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext),
-                                                      child: Text('Ok'),
+                                                      child: const Text('Ok'),
                                                     ),
                                                   ],
                                                 );
                                               },
                                             );
-                                            if (_shouldSetState)
+                                            if (shouldSetState) {
                                               setState(() {});
+                                            }
                                             return;
                                           } else {
                                             _model.createUser2 =
@@ -909,7 +909,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                               'IsMember': widget.isMember,
                                               'Invite': widget.inviteID,
                                             });
-                                            _shouldSetState = true;
+                                            shouldSetState = true;
                                             // Transaction
                                             unawaited(
                                               () async {
@@ -957,27 +957,28 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                   'Title':
                                                       'Create Member Account',
                                                   'Details':
-                                                      'Create by: ${FFAppState().UserInfo.fullName}, By PhoneNumber: ${FFAppState().UserInfo.phoneNumber}, Create User ID: ${_model.createUser2?.userID?.toString()}, Create Name: ${_model.createUser2?.fullName}',
+                                                      'Create by: ${FFAppState().UserInfo.fullName}, By PhoneNumber: ${FFAppState().UserInfo.phoneNumber}, Create User ID: ${_model.createUser2?.userID.toString()}, Create Name: ${_model.createUser2?.fullName}',
                                                 });
                                               }(),
                                             );
                                             context.safePop();
-                                            if (_shouldSetState)
+                                            if (shouldSetState) {
                                               setState(() {});
+                                            }
                                             return;
                                           }
 
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                         },
                                         text: 'Active',
                                         options: FFButtonOptions(
                                           width: 230.0,
                                           height: 50.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .secondary,
@@ -985,7 +986,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                               FlutterFlowTheme.of(context)
                                                   .bodyLarge,
                                           elevation: 0.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),

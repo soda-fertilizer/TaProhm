@@ -2,19 +2,16 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'admin_account_model.dart';
 export 'admin_account_model.dart';
 
 class AdminAccountWidget extends StatefulWidget {
-  const AdminAccountWidget({Key? key}) : super(key: key);
+  const AdminAccountWidget({super.key});
 
   @override
   _AdminAccountWidgetState createState() => _AdminAccountWidgetState();
@@ -89,7 +86,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -99,13 +96,13 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Account',
               style: FlutterFlowTheme.of(context).titleMedium,
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -166,16 +163,16 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
               return Column(
                 children: [
                   Align(
-                    alignment: Alignment(0.0, 0),
+                    alignment: const Alignment(0.0, 0),
                     child: TabBar(
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
                       labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                      unselectedLabelStyle: TextStyle(),
+                      unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
-                      padding: EdgeInsets.all(4.0),
-                      tabs: [
+                      padding: const EdgeInsets.all(4.0),
+                      tabs: const [
                         Tab(
                           text: 'Member',
                         ),
@@ -191,7 +188,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                       controller: _model.tabBarController,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 1.0, 0.0, 0.0),
                           child: FutureBuilder<List<UsersRow>>(
                             future: UsersTable().queryRows(
@@ -243,7 +240,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                   final listViewUsersRow =
                                       listViewUsersRowList[listViewIndex];
                                   return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -273,13 +270,13 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: Offset(0.0, 1.0),
+                                              offset: const Offset(0.0, 1.0),
                                             )
                                           ],
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -287,7 +284,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                 MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsets.all(2.0),
+                                                padding: const EdgeInsets.all(2.0),
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -302,7 +299,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -317,7 +314,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -361,7 +358,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 1.0, 0.0, 0.0),
                           child: Builder(
                             builder: (context) {
@@ -376,7 +373,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                   final tabBarVarItem =
                                       tabBarVar[tabBarVarIndex];
                                   return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
                                     child: Container(
                                       width: 100.0,
@@ -389,12 +386,12 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                             blurRadius: 0.0,
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
-                                            offset: Offset(0.0, 1.0),
+                                            offset: const Offset(0.0, 1.0),
                                           )
                                         ],
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -402,7 +399,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                               MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.all(2.0),
+                                              padding: const EdgeInsets.all(2.0),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(44.0),
@@ -416,7 +413,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                             ),
                                             Expanded(
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         12.0, 0.0, 0.0, 0.0),
                                                 child: InkWell(
@@ -459,7 +456,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,

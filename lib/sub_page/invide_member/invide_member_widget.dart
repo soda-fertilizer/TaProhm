@@ -2,17 +2,15 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'invide_member_model.dart';
 export 'invide_member_model.dart';
 
 class InvideMemberWidget extends StatefulWidget {
-  const InvideMemberWidget({Key? key}) : super(key: key);
+  const InvideMemberWidget({super.key});
 
   @override
   _InvideMemberWidgetState createState() => _InvideMemberWidgetState();
@@ -64,7 +62,7 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -74,20 +72,20 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Invide Member',
               style: FlutterFlowTheme.of(context).titleMedium,
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
             child: FutureBuilder<List<UsersRow>>(
               future: (_model.requestCompleter ??= Completer<List<UsersRow>>()
                     ..complete(UsersTable().queryRows(
@@ -141,7 +139,7 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget> {
                           listViewUsersRowList[listViewIndex];
                       return Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
                         child: Container(
                           width: 100.0,
                           height: 72.0,
@@ -152,19 +150,19 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget> {
                               BoxShadow(
                                 blurRadius: 0.0,
                                 color: FlutterFlowTheme.of(context).alternate,
-                                offset: Offset(0.0, 1.0),
+                                offset: const Offset(0.0, 1.0),
                               )
                             ],
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(2.0),
+                                  padding: const EdgeInsets.all(2.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(44.0),
                                     child: Image.network(
@@ -177,7 +175,7 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget> {
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -188,7 +186,7 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget> {
                                       children: [
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 4.0),
                                           child: Text(
                                             listViewUsersRow.fullName

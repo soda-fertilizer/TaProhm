@@ -10,7 +10,7 @@ class AllowToReferralsTable extends SupabaseTable<AllowToReferralsRow> {
 }
 
 class AllowToReferralsRow extends SupabaseDataRow {
-  AllowToReferralsRow(Map<String, dynamic> data) : super(data);
+  AllowToReferralsRow(super.data);
 
   @override
   SupabaseTable get table => AllowToReferralsTable();

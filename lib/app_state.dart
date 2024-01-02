@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'flutter_flow/request_manager.dart';
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
-import '/backend/schema/enums/enums.dart';
 import 'backend/api_requests/api_manager.dart';
 import 'backend/supabase/supabase.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -24,7 +22,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   Future initializePersistedState() async {
-    secureStorage = FlutterSecureStorage();
+    secureStorage = const FlutterSecureStorage();
     await _safeInitAsync(() async {
       _IsLogged = await secureStorage.getBool('ff_IsLogged') ?? _IsLogged;
     });
@@ -74,36 +72,36 @@ class FFAppState extends ChangeNotifier {
   late FlutterSecureStorage secureStorage;
 
   List<LatLng> _testLocation = [
-    LatLng(11.5563738, 104.9282099),
-    LatLng(13.330266, 104.1001326),
-    LatLng(13.576473, 105.9699878)
+    const LatLng(11.5563738, 104.9282099),
+    const LatLng(13.330266, 104.1001326),
+    const LatLng(13.576473, 105.9699878)
   ];
   List<LatLng> get testLocation => _testLocation;
-  set testLocation(List<LatLng> _value) {
-    _testLocation = _value;
+  set testLocation(List<LatLng> value) {
+    _testLocation = value;
   }
 
-  void addToTestLocation(LatLng _value) {
-    _testLocation.add(_value);
+  void addToTestLocation(LatLng value) {
+    _testLocation.add(value);
   }
 
-  void removeFromTestLocation(LatLng _value) {
-    _testLocation.remove(_value);
+  void removeFromTestLocation(LatLng value) {
+    _testLocation.remove(value);
   }
 
-  void removeAtIndexFromTestLocation(int _index) {
-    _testLocation.removeAt(_index);
+  void removeAtIndexFromTestLocation(int index) {
+    _testLocation.removeAt(index);
   }
 
   void updateTestLocationAtIndex(
-    int _index,
+    int index,
     LatLng Function(LatLng) updateFn,
   ) {
-    _testLocation[_index] = updateFn(_testLocation[_index]);
+    _testLocation[index] = updateFn(_testLocation[index]);
   }
 
-  void insertAtIndexInTestLocation(int _index, LatLng _value) {
-    _testLocation.insert(_index, _value);
+  void insertAtIndexInTestLocation(int index, LatLng value) {
+    _testLocation.insert(index, value);
   }
 
   List<String> _Letters = [
@@ -136,31 +134,31 @@ class FFAppState extends ChangeNotifier {
     'other'
   ];
   List<String> get Letters => _Letters;
-  set Letters(List<String> _value) {
-    _Letters = _value;
+  set Letters(List<String> value) {
+    _Letters = value;
   }
 
-  void addToLetters(String _value) {
-    _Letters.add(_value);
+  void addToLetters(String value) {
+    _Letters.add(value);
   }
 
-  void removeFromLetters(String _value) {
-    _Letters.remove(_value);
+  void removeFromLetters(String value) {
+    _Letters.remove(value);
   }
 
-  void removeAtIndexFromLetters(int _index) {
-    _Letters.removeAt(_index);
+  void removeAtIndexFromLetters(int index) {
+    _Letters.removeAt(index);
   }
 
   void updateLettersAtIndex(
-    int _index,
+    int index,
     String Function(String) updateFn,
   ) {
-    _Letters[_index] = updateFn(_Letters[_index]);
+    _Letters[index] = updateFn(_Letters[index]);
   }
 
-  void insertAtIndexInLetters(int _index, String _value) {
-    _Letters.insert(_index, _value);
+  void insertAtIndexInLetters(int index, String value) {
+    _Letters.insert(index, value);
   }
 
   List<String> _name = [
@@ -175,31 +173,31 @@ class FFAppState extends ChangeNotifier {
     'សុខា'
   ];
   List<String> get name => _name;
-  set name(List<String> _value) {
-    _name = _value;
+  set name(List<String> value) {
+    _name = value;
   }
 
-  void addToName(String _value) {
-    _name.add(_value);
+  void addToName(String value) {
+    _name.add(value);
   }
 
-  void removeFromName(String _value) {
-    _name.remove(_value);
+  void removeFromName(String value) {
+    _name.remove(value);
   }
 
-  void removeAtIndexFromName(int _index) {
-    _name.removeAt(_index);
+  void removeAtIndexFromName(int index) {
+    _name.removeAt(index);
   }
 
   void updateNameAtIndex(
-    int _index,
+    int index,
     String Function(String) updateFn,
   ) {
-    _name[_index] = updateFn(_name[_index]);
+    _name[index] = updateFn(_name[index]);
   }
 
-  void insertAtIndexInName(int _index, String _value) {
-    _name.insert(_index, _value);
+  void insertAtIndexInName(int index, String value) {
+    _name.insert(index, value);
   }
 
   List<String> _SelectCompanyImage = [
@@ -210,38 +208,38 @@ class FFAppState extends ChangeNotifier {
     'https://images.pexels.com/photos/19010243/pexels-photo-19010243/free-photo-of-mount-fuji-in-the-distance-with-a-blue-sky.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
   ];
   List<String> get SelectCompanyImage => _SelectCompanyImage;
-  set SelectCompanyImage(List<String> _value) {
-    _SelectCompanyImage = _value;
+  set SelectCompanyImage(List<String> value) {
+    _SelectCompanyImage = value;
   }
 
-  void addToSelectCompanyImage(String _value) {
-    _SelectCompanyImage.add(_value);
+  void addToSelectCompanyImage(String value) {
+    _SelectCompanyImage.add(value);
   }
 
-  void removeFromSelectCompanyImage(String _value) {
-    _SelectCompanyImage.remove(_value);
+  void removeFromSelectCompanyImage(String value) {
+    _SelectCompanyImage.remove(value);
   }
 
-  void removeAtIndexFromSelectCompanyImage(int _index) {
-    _SelectCompanyImage.removeAt(_index);
+  void removeAtIndexFromSelectCompanyImage(int index) {
+    _SelectCompanyImage.removeAt(index);
   }
 
   void updateSelectCompanyImageAtIndex(
-    int _index,
+    int index,
     String Function(String) updateFn,
   ) {
-    _SelectCompanyImage[_index] = updateFn(_SelectCompanyImage[_index]);
+    _SelectCompanyImage[index] = updateFn(_SelectCompanyImage[index]);
   }
 
-  void insertAtIndexInSelectCompanyImage(int _index, String _value) {
-    _SelectCompanyImage.insert(_index, _value);
+  void insertAtIndexInSelectCompanyImage(int index, String value) {
+    _SelectCompanyImage.insert(index, value);
   }
 
   bool _IsLogged = false;
   bool get IsLogged => _IsLogged;
-  set IsLogged(bool _value) {
-    _IsLogged = _value;
-    secureStorage.setBool('ff_IsLogged', _value);
+  set IsLogged(bool value) {
+    _IsLogged = value;
+    secureStorage.setBool('ff_IsLogged', value);
   }
 
   void deleteIsLogged() {
@@ -250,40 +248,40 @@ class FFAppState extends ChangeNotifier {
 
   List<String> _AdminCompanyImage = [];
   List<String> get AdminCompanyImage => _AdminCompanyImage;
-  set AdminCompanyImage(List<String> _value) {
-    _AdminCompanyImage = _value;
+  set AdminCompanyImage(List<String> value) {
+    _AdminCompanyImage = value;
   }
 
-  void addToAdminCompanyImage(String _value) {
-    _AdminCompanyImage.add(_value);
+  void addToAdminCompanyImage(String value) {
+    _AdminCompanyImage.add(value);
   }
 
-  void removeFromAdminCompanyImage(String _value) {
-    _AdminCompanyImage.remove(_value);
+  void removeFromAdminCompanyImage(String value) {
+    _AdminCompanyImage.remove(value);
   }
 
-  void removeAtIndexFromAdminCompanyImage(int _index) {
-    _AdminCompanyImage.removeAt(_index);
+  void removeAtIndexFromAdminCompanyImage(int index) {
+    _AdminCompanyImage.removeAt(index);
   }
 
   void updateAdminCompanyImageAtIndex(
-    int _index,
+    int index,
     String Function(String) updateFn,
   ) {
-    _AdminCompanyImage[_index] = updateFn(_AdminCompanyImage[_index]);
+    _AdminCompanyImage[index] = updateFn(_AdminCompanyImage[index]);
   }
 
-  void insertAtIndexInAdminCompanyImage(int _index, String _value) {
-    _AdminCompanyImage.insert(_index, _value);
+  void insertAtIndexInAdminCompanyImage(int index, String value) {
+    _AdminCompanyImage.insert(index, value);
   }
 
   UserCreationStruct _CreatAccountHolder =
       UserCreationStruct.fromSerializableMap(jsonDecode(
-          '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\"}'));
+          '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png"}'));
   UserCreationStruct get CreatAccountHolder => _CreatAccountHolder;
-  set CreatAccountHolder(UserCreationStruct _value) {
-    _CreatAccountHolder = _value;
-    secureStorage.setString('ff_CreatAccountHolder', _value.serialize());
+  set CreatAccountHolder(UserCreationStruct value) {
+    _CreatAccountHolder = value;
+    secureStorage.setString('ff_CreatAccountHolder', value.serialize());
   }
 
   void deleteCreatAccountHolder() {
@@ -298,11 +296,11 @@ class FFAppState extends ChangeNotifier {
 
   CompanyCreationStruct _CreateCompanyHolder =
       CompanyCreationStruct.fromSerializableMap(jsonDecode(
-          '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\",\"ImageDetails\":\"[]\",\"IsVertify\":\"false\"}'));
+          '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png","ImageDetails":"[]","IsVertify":"false"}'));
   CompanyCreationStruct get CreateCompanyHolder => _CreateCompanyHolder;
-  set CreateCompanyHolder(CompanyCreationStruct _value) {
-    _CreateCompanyHolder = _value;
-    secureStorage.setString('ff_CreateCompanyHolder', _value.serialize());
+  set CreateCompanyHolder(CompanyCreationStruct value) {
+    _CreateCompanyHolder = value;
+    secureStorage.setString('ff_CreateCompanyHolder', value.serialize());
   }
 
   void deleteCreateCompanyHolder() {
@@ -318,44 +316,44 @@ class FFAppState extends ChangeNotifier {
 
   List<LocationStruct> _testUserLocation = [
     LocationStruct.fromSerializableMap(jsonDecode(
-        '{\"UserID\":\"1\",\"Location\":\"11.5563738,104.9282099\"}')),
+        '{"UserID":"1","Location":"11.5563738,104.9282099"}')),
     LocationStruct.fromSerializableMap(jsonDecode(
-        '{\"UserID\":\"2\",\"Location\":\"12.0982918,105.3131185\"}')),
+        '{"UserID":"2","Location":"12.0982918,105.3131185"}')),
     LocationStruct.fromSerializableMap(jsonDecode(
-        '{\"UserID\":\"3\",\"Location\":\"11.5103727,104.7514569\"}'))
+        '{"UserID":"3","Location":"11.5103727,104.7514569"}'))
   ];
   List<LocationStruct> get testUserLocation => _testUserLocation;
-  set testUserLocation(List<LocationStruct> _value) {
-    _testUserLocation = _value;
+  set testUserLocation(List<LocationStruct> value) {
+    _testUserLocation = value;
   }
 
-  void addToTestUserLocation(LocationStruct _value) {
-    _testUserLocation.add(_value);
+  void addToTestUserLocation(LocationStruct value) {
+    _testUserLocation.add(value);
   }
 
-  void removeFromTestUserLocation(LocationStruct _value) {
-    _testUserLocation.remove(_value);
+  void removeFromTestUserLocation(LocationStruct value) {
+    _testUserLocation.remove(value);
   }
 
-  void removeAtIndexFromTestUserLocation(int _index) {
-    _testUserLocation.removeAt(_index);
+  void removeAtIndexFromTestUserLocation(int index) {
+    _testUserLocation.removeAt(index);
   }
 
   void updateTestUserLocationAtIndex(
-    int _index,
+    int index,
     LocationStruct Function(LocationStruct) updateFn,
   ) {
-    _testUserLocation[_index] = updateFn(_testUserLocation[_index]);
+    _testUserLocation[index] = updateFn(_testUserLocation[index]);
   }
 
-  void insertAtIndexInTestUserLocation(int _index, LocationStruct _value) {
-    _testUserLocation.insert(_index, _value);
+  void insertAtIndexInTestUserLocation(int index, LocationStruct value) {
+    _testUserLocation.insert(index, value);
   }
 
   CustomMapLocationStruct _shopHolder = CustomMapLocationStruct();
   CustomMapLocationStruct get shopHolder => _shopHolder;
-  set shopHolder(CustomMapLocationStruct _value) {
-    _shopHolder = _value;
+  set shopHolder(CustomMapLocationStruct value) {
+    _shopHolder = value;
   }
 
   void updateShopHolderStruct(Function(CustomMapLocationStruct) updateFn) {
@@ -364,16 +362,16 @@ class FFAppState extends ChangeNotifier {
 
   String _GrapTreeSelectUserPhoneNumber = '';
   String get GrapTreeSelectUserPhoneNumber => _GrapTreeSelectUserPhoneNumber;
-  set GrapTreeSelectUserPhoneNumber(String _value) {
-    _GrapTreeSelectUserPhoneNumber = _value;
+  set GrapTreeSelectUserPhoneNumber(String value) {
+    _GrapTreeSelectUserPhoneNumber = value;
   }
 
   UserInfoStruct _UserInfo = UserInfoStruct.fromSerializableMap(
-      jsonDecode('{\"IsTestAccount\":\"false\"}'));
+      jsonDecode('{"IsTestAccount":"false"}'));
   UserInfoStruct get UserInfo => _UserInfo;
-  set UserInfo(UserInfoStruct _value) {
-    _UserInfo = _value;
-    secureStorage.setString('ff_UserInfo', _value.serialize());
+  set UserInfo(UserInfoStruct value) {
+    _UserInfo = value;
+    secureStorage.setString('ff_UserInfo', value.serialize());
   }
 
   void deleteUserInfo() {
@@ -486,12 +484,12 @@ extension FlutterSecureStorageExtensions on FlutterSecureStorage {
         if (result == null || result.isEmpty) {
           return null;
         }
-        return CsvToListConverter()
+        return const CsvToListConverter()
             .convert(result)
             .first
             .map((e) => e.toString())
             .toList();
       });
   Future<void> setStringList(String key, List<String> value) async =>
-      await writeSync(key: key, value: ListToCsvConverter().convert([value]));
+      await writeSync(key: key, value: const ListToCsvConverter().convert([value]));
 }

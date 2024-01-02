@@ -1,19 +1,16 @@
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'image_gallery_model.dart';
 export 'image_gallery_model.dart';
 
 class ImageGalleryWidget extends StatefulWidget {
   const ImageGalleryWidget({
-    Key? key,
+    super.key,
     required this.images,
-  }) : super(key: key);
+  });
 
   final List<String>? images;
 
@@ -53,8 +50,8 @@ class _ImageGalleryWidgetState extends State<ImageGalleryWidget> {
         sigmaY: 2.0,
       ),
       child: Align(
-        alignment: AlignmentDirectional(0.0, 1.0),
-        child: Container(
+        alignment: const AlignmentDirectional(0.0, 1.0),
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: custom_widgets.Gallery(

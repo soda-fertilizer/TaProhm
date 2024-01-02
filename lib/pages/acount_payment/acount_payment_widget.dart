@@ -9,13 +9,12 @@ import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'acount_payment_model.dart';
 export 'acount_payment_model.dart';
 
 class AcountPaymentWidget extends StatefulWidget {
-  const AcountPaymentWidget({Key? key}) : super(key: key);
+  const AcountPaymentWidget({super.key});
 
   @override
   _AcountPaymentWidgetState createState() => _AcountPaymentWidgetState();
@@ -75,7 +74,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -88,12 +87,12 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                     onTap: () async {
                       await showModalBottomSheet(
                         isScrollControlled: true,
-                        backgroundColor: Color(0x73000000),
+                        backgroundColor: const Color(0x73000000),
                         context: context,
                         builder: (context) {
                           return Padding(
                             padding: MediaQuery.viewInsetsOf(context),
-                            child: ShowKHQRWidget(),
+                            child: const ShowKHQRWidget(),
                           );
                         },
                       ).then((value) => safeSetState(() {}));
@@ -101,7 +100,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                     child: Container(
                       width: 50.0,
                       height: 50.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -129,14 +128,14 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
             Container(
               width: double.infinity,
               height: MediaQuery.sizeOf(context).height * 0.108,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: ListView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -155,7 +154,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -174,7 +173,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -212,7 +211,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                   if (false)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -231,7 +230,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 10.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -250,7 +249,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -288,7 +287,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                   if (false)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -307,7 +306,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 10.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -326,7 +325,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -361,13 +360,13 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                         ),
                       ),
                     ),
-                ].divide(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)),
               ),
             ),
             Container(
               width: double.infinity,
               height: 39.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFE9ECEE),
               ),
               child: Row(
@@ -376,7 +375,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
                       'Add image',
                       style: FlutterFlowTheme.of(context).bodyMedium,
@@ -384,7 +383,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -560,14 +559,14 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                             ),
                           ),
                         ),
-                      ].divide(SizedBox(width: 10.0)),
+                      ].divide(const SizedBox(width: 10.0)),
                     ),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
@@ -582,7 +581,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   setState(() {
@@ -605,19 +604,19 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                     FFAppState().deleteCreatAccountHolder();
                     FFAppState().CreatAccountHolder =
                         UserCreationStruct.fromSerializableMap(jsonDecode(
-                            '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\"}'));
+                            '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png"}'));
                   });
                   await showDialog(
                     context: context,
                     builder: (alertDialogContext) {
                       return AlertDialog(
-                        title: Text('Complete!'),
+                        title: const Text('Complete!'),
                         content:
-                            Text('Please our team will contact you shortly.'),
+                            const Text('Please our team will contact you shortly.'),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(alertDialogContext),
-                            child: Text('Ok'),
+                            child: const Text('Ok'),
                           ),
                         ],
                       );
@@ -629,13 +628,13 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).secondary,
                   textStyle: FlutterFlowTheme.of(context).bodyLarge,
                   elevation: 0.0,
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 1.0,
                   ),

@@ -1,30 +1,27 @@
 import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/component/show_shop/show_shop_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'single_company_map_model.dart';
 export 'single_company_map_model.dart';
 
 class SingleCompanyMapWidget extends StatefulWidget {
   const SingleCompanyMapWidget({
-    Key? key,
+    super.key,
     required this.companyID,
     required this.companyLatitude,
     required this.companyLongitude,
-  }) : super(key: key);
+  });
 
   final int? companyID;
   final double? companyLatitude;
@@ -57,7 +54,7 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
       });
     });
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
@@ -147,8 +144,8 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
                     children: [
                       Expanded(
                         child: Container(
-                          decoration: BoxDecoration(),
-                          child: Container(
+                          decoration: const BoxDecoration(),
+                          child: SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: custom_widgets.CustomMap(
@@ -175,7 +172,7 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
                                       child: Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 200.0,
                                           child: ShowShopWidget(
                                             locationPara:
@@ -192,21 +189,21 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 1.0),
+                        alignment: const AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
                           model: _model.navPaddingModel,
                           updateCallback: () => setState(() {}),
-                          child: NavPaddingWidget(),
+                          child: const NavPaddingWidget(),
                         ),
                       ),
                     ],
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: wrapWithModel(
                       model: _model.navBarModel,
                       updateCallback: () => setState(() {}),
-                      child: NavBarWidget(
+                      child: const NavBarWidget(
                         selectPageIndex: 2,
                       ),
                     ),

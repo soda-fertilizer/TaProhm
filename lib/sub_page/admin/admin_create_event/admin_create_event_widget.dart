@@ -5,17 +5,15 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'admin_create_event_model.dart';
 export 'admin_create_event_model.dart';
 
 class AdminCreateEventWidget extends StatefulWidget {
-  const AdminCreateEventWidget({Key? key}) : super(key: key);
+  const AdminCreateEventWidget({super.key});
 
   @override
   _AdminCreateEventWidgetState createState() => _AdminCreateEventWidgetState();
@@ -86,7 +84,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -103,7 +101,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                   fontSize: 22.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -112,16 +110,16 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
           child: Column(
             children: [
               Align(
-                alignment: Alignment(0.0, 0),
+                alignment: const Alignment(0.0, 0),
                 child: TabBar(
                   labelColor: FlutterFlowTheme.of(context).primaryText,
                   unselectedLabelColor:
                       FlutterFlowTheme.of(context).secondaryText,
                   labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                  unselectedLabelStyle: TextStyle(),
+                  unselectedLabelStyle: const TextStyle(),
                   indicatorColor: FlutterFlowTheme.of(context).primary,
-                  padding: EdgeInsets.all(4.0),
-                  tabs: [
+                  padding: const EdgeInsets.all(4.0),
+                  tabs: const [
                     Tab(
                       text: 'Create',
                     ),
@@ -138,14 +136,14 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 8.0, 0.0, 8.0, 0.0),
-                            child: Container(
+                            child: SizedBox(
                               width: MediaQuery.sizeOf(context).width * 0.8,
                               child: TextFormField(
                                 controller: _model.titleController,
@@ -207,9 +205,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                               ),
                             ),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 8.0, 0.0),
-                              child: Container(
+                              child: SizedBox(
                                 width: double.infinity,
                                 child: TextFormField(
                                   controller: _model.detailsController,
@@ -237,7 +235,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                           ),
                           FFButtonWidget(
                             onPressed: () async {
-                              final _datePickedDate = await showDatePicker(
+                              final datePickedDate = await showDatePicker(
                                 context: context,
                                 initialDate: getCurrentTimestamp,
                                 firstDate: getCurrentTimestamp,
@@ -276,9 +274,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                 },
                               );
 
-                              TimeOfDay? _datePickedTime;
-                              if (_datePickedDate != null) {
-                                _datePickedTime = await showTimePicker(
+                              TimeOfDay? datePickedTime;
+                              if (datePickedDate != null) {
+                                datePickedTime = await showTimePicker(
                                   context: context,
                                   initialTime: TimeOfDay.fromDateTime(
                                       getCurrentTimestamp),
@@ -317,22 +315,20 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                 );
                               }
 
-                              if (_datePickedDate != null &&
-                                  _datePickedTime != null) {
+                              if (datePickedDate != null &&
+                                  datePickedTime != null) {
                                 safeSetState(() {
                                   _model.datePicked = DateTime(
-                                    _datePickedDate.year,
-                                    _datePickedDate.month,
-                                    _datePickedDate.day,
-                                    _datePickedTime!.hour,
-                                    _datePickedTime.minute,
+                                    datePickedDate.year,
+                                    datePickedDate.month,
+                                    datePickedDate.day,
+                                    datePickedTime!.hour,
+                                    datePickedTime.minute,
                                   );
                                 });
                               }
                               setState(() {
-                                _model.eventDate = _model.datePicked == null
-                                    ? getCurrentTimestamp
-                                    : _model.datePicked;
+                                _model.eventDate = _model.datePicked ?? getCurrentTimestamp;
                               });
                             },
                             text: dateTimeFormat(
@@ -340,9 +336,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.8,
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
@@ -365,7 +361,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                           Container(
                             width: double.infinity,
                             height: 39.0,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Color(0xFFE9ECEE),
                             ),
                             child: Row(
@@ -373,7 +369,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     'Add image',
@@ -382,7 +378,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 10.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -603,7 +599,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                           ),
                                         ),
                                       ),
-                                    ].divide(SizedBox(width: 10.0)),
+                                    ].divide(const SizedBox(width: 10.0)),
                                   ),
                                 ),
                               ],
@@ -615,8 +611,8 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: CachedNetworkImage(
-                                  fadeInDuration: Duration(milliseconds: 500),
-                                  fadeOutDuration: Duration(milliseconds: 500),
+                                  fadeInDuration: const Duration(milliseconds: 500),
+                                  fadeOutDuration: const Duration(milliseconds: 500),
                                   imageUrl: _model.selectImage!,
                                   width: 300.0,
                                   height: 200.0,
@@ -625,14 +621,12 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                               ),
                             ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 10.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                if ((_model.titleController.text != null &&
-                                        _model.titleController.text != '') &&
-                                    (_model.detailsController.text != null &&
-                                        _model.detailsController.text != '') &&
+                                if ((_model.titleController.text != '') &&
+                                    (_model.detailsController.text != '') &&
                                     (_model.selectImage != null &&
                                         _model.selectImage != '')) {
                                   await EventsTable().insert({
@@ -650,14 +644,14 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                     context: context,
                                     builder: (alertDialogContext) {
                                       return AlertDialog(
-                                        title: Text('Some field are emty.'),
-                                        content: Text(
+                                        title: const Text('Some field are emty.'),
+                                        content: const Text(
                                             'Please make sure you field title, details and image.'),
                                         actions: [
                                           TextButton(
                                             onPressed: () => Navigator.pop(
                                                 alertDialogContext),
-                                            child: Text('Ok'),
+                                            child: const Text('Ok'),
                                           ),
                                         ],
                                       );
@@ -670,9 +664,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                               options: FFButtonOptions(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).primary,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -682,7 +676,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                       color: Colors.white,
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -690,7 +684,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                               ),
                             ),
                           ),
-                        ].divide(SizedBox(height: 15.0)),
+                        ].divide(const SizedBox(height: 15.0)),
                       ),
                     ),
                     FutureBuilder<List<EventsRow>>(
@@ -741,7 +735,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                     ),
                                   }.withoutNulls,
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -758,7 +752,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                         .primaryBackground,
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         16.0, 10.0, 16.0, 10.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -774,9 +768,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                 BorderRadius.circular(8.0),
                                             child: CachedNetworkImage(
                                               fadeInDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               fadeOutDuration:
-                                                  Duration(milliseconds: 500),
+                                                  const Duration(milliseconds: 500),
                                               imageUrl:
                                                   listViewEventsRow.image!,
                                               width: 100.0,
@@ -786,9 +780,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                           ),
                                         Expanded(
                                           child: Container(
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 0.0, 0.0),
                                               child: SingleChildScrollView(
@@ -859,7 +853,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                               ),
                                                     ),
                                                   ].divide(
-                                                      SizedBox(height: 5.0)),
+                                                      const SizedBox(height: 5.0)),
                                                 ),
                                               ),
                                             ),

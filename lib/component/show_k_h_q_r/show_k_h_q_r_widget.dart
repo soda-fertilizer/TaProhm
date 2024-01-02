@@ -6,15 +6,13 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'show_k_h_q_r_model.dart';
 export 'show_k_h_q_r_model.dart';
 
 class ShowKHQRWidget extends StatefulWidget {
-  const ShowKHQRWidget({Key? key}) : super(key: key);
+  const ShowKHQRWidget({super.key});
 
   @override
   _ShowKHQRWidgetState createState() => _ShowKHQRWidgetState();
@@ -61,7 +59,7 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +74,7 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
                   placeholderBuilder: OctoPlaceholder.blurHash(
                     FFAppConstants.BlurHash,
                   ),
-                  image: CachedNetworkImageProvider(
+                  image: const CachedNetworkImageProvider(
                     'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/KHQR.jpg',
                   ),
                   width: 300.0,
@@ -96,23 +94,23 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                     iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Readex Pro',
                           color: Colors.white,
                         ),
                     elevation: 3.0,
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.transparent,
                       width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-            ].divide(SizedBox(height: 20.0)),
+            ].divide(const SizedBox(height: 20.0)),
           ),
         ),
       ),

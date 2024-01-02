@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:provider/provider.dart';
 import 'select_location_model.dart';
@@ -13,9 +11,9 @@ export 'select_location_model.dart';
 
 class SelectLocationWidget extends StatefulWidget {
   const SelectLocationWidget({
-    Key? key,
+    super.key,
     this.save,
-  }) : super(key: key);
+  });
 
   final Future<dynamic> Function()? save;
 
@@ -39,7 +37,7 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
     super.initState();
     _model = createModel(context, () => SelectLocationModel());
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
@@ -97,7 +95,7 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
                     centerMapOnMarkerTap: true,
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: PointerInterceptor(
                       intercepting: isWeb,
                       child: ClipRRect(
@@ -123,15 +121,15 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
               options: FFButtonOptions(
                 width: double.infinity,
                 height: 50.0,
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                iconPadding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 color: FlutterFlowTheme.of(context).primary,
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Readex Pro',
                       color: Colors.white,
                     ),
                 elevation: 3.0,
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.transparent,
                   width: 1.0,
                 ),
@@ -141,9 +139,9 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
           ],
         ),
         Align(
-          alignment: AlignmentDirectional(1.0, 1.0),
+          alignment: const AlignmentDirectional(1.0, 1.0),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 100.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 100.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 20.0,
@@ -157,7 +155,7 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
               ),
               onPressed: () async {
                 currentUserLocationValue = await getCurrentUserLocation(
-                    defaultLocation: LatLng(0.0, 0.0));
+                    defaultLocation: const LatLng(0.0, 0.0));
                 await _model.googleMapsController.future.then(
                   (c) => c.animateCamera(
                     CameraUpdate.newLatLng(

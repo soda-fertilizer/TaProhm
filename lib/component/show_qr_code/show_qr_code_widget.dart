@@ -1,19 +1,16 @@
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'show_qr_code_model.dart';
 export 'show_qr_code_model.dart';
 
 class ShowQrCodeWidget extends StatefulWidget {
   const ShowQrCodeWidget({
-    Key? key,
+    super.key,
     required this.data,
     required this.size,
-  }) : super(key: key);
+  });
 
   final String? data;
   final double? size;
@@ -49,12 +46,12 @@ class _ShowQrCodeWidgetState extends State<ShowQrCodeWidget> {
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.0, 0.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Container(
         width: widget.size,
         height: widget.size,
-        decoration: BoxDecoration(),
-        child: Container(
+        decoration: const BoxDecoration(),
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: custom_widgets.QrCode(

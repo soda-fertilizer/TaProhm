@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
-import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -107,7 +105,7 @@ class LoginCall {
         response,
         r'''$[:].istestaccount''',
       ));
-  dynamic? invite(dynamic response) => getJsonField(
+  dynamic invite(dynamic response) => getJsonField(
         response,
         r'''$[:].invite''',
       );
@@ -767,9 +765,9 @@ class UpdateBalanceCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "phone_number": "${phoneNumber}",
-  "money": ${money},
-  "action": "${action}"
+  "phone_number": "$phoneNumber",
+  "money": $money,
+  "action": "$action"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update Balance',
@@ -800,10 +798,10 @@ class ReferralCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "phone_number": "${phoneNumber}",
-  "money": ${money},
+  "phone_number": "$phoneNumber",
+  "money": $money,
   "admin": "admin",
-  "invite_phone_number": "${invitePhoneNumber}"
+  "invite_phone_number": "$invitePhoneNumber"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Referral',
@@ -832,7 +830,7 @@ class GetUserReferralCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "phone_number": "${phoneNumber}"
+  "phone_number": "$phoneNumber"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Get User Referral',

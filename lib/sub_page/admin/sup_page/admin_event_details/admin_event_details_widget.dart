@@ -7,16 +7,15 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'admin_event_details_model.dart';
 export 'admin_event_details_model.dart';
 
 class AdminEventDetailsWidget extends StatefulWidget {
   const AdminEventDetailsWidget({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   final int? id;
 
@@ -101,7 +100,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -118,7 +117,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                       fontSize: 22.0,
                     ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: false,
               elevation: 2.0,
             ),
@@ -130,9 +129,9 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: EdgeInsets.all(22.0),
+                        padding: const EdgeInsets.all(22.0),
                         child: Text(
                           valueOrDefault<String>(
                             adminEventDetailsEventsRow?.title,
@@ -148,8 +147,8 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: CachedNetworkImage(
-                          fadeInDuration: Duration(milliseconds: 500),
-                          fadeOutDuration: Duration(milliseconds: 500),
+                          fadeInDuration: const Duration(milliseconds: 500),
+                          fadeOutDuration: const Duration(milliseconds: 500),
                           imageUrl: adminEventDetailsEventsRow!.image!,
                           width: double.infinity,
                           height: 200.0,
@@ -157,7 +156,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                         ),
                       ),
                     Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(
                         valueOrDefault<String>(
                           adminEventDetailsEventsRow?.details,
@@ -171,7 +170,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                             adminEventDetailsEventsRow!.eventDate.toString())! <
                         1)
                       Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -190,9 +189,9 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                               options: FFButtonOptions(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).error,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -202,7 +201,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                       color: Colors.white,
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -222,16 +221,16 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                       ParamType.int,
                                     ),
                                     'evenDate': serializeParam(
-                                      adminEventDetailsEventsRow?.eventDate,
+                                      adminEventDetailsEventsRow.eventDate,
                                       ParamType.DateTime,
                                     ),
                                     'image': serializeParam(
-                                      adminEventDetailsEventsRow?.image,
+                                      adminEventDetailsEventsRow.image,
                                       ParamType.String,
                                     ),
                                   }.withoutNulls,
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -243,9 +242,9 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                               options: FFButtonOptions(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).primary,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -255,7 +254,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                       color: Colors.white,
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -265,7 +264,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                           ],
                         ),
                       ),
-                  ].divide(SizedBox(height: 16.0)),
+                  ].divide(const SizedBox(height: 16.0)),
                 ),
               ),
             ),

@@ -2,18 +2,16 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'sub_admin_businesses_model.dart';
 export 'sub_admin_businesses_model.dart';
 
 class SubAdminBusinessesWidget extends StatefulWidget {
-  const SubAdminBusinessesWidget({Key? key}) : super(key: key);
+  const SubAdminBusinessesWidget({super.key});
 
   @override
   _SubAdminBusinessesWidgetState createState() =>
@@ -92,7 +90,7 @@ class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -102,20 +100,20 @@ class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Businesses',
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 0.0),
                 child: FutureBuilder<List<CompaniesRow>>(
                   future: (_model.requestCompleter ??=
                           Completer<List<CompaniesRow>>()
@@ -169,7 +167,7 @@ class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
                           final listViewCompaniesRow =
                               listViewCompaniesRowList[listViewIndex];
                           return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 1.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -241,19 +239,19 @@ class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
                                       blurRadius: 0.0,
                                       color: FlutterFlowTheme.of(context)
                                           .alternate,
-                                      offset: Offset(0.0, 1.0),
+                                      offset: const Offset(0.0, 1.0),
                                     )
                                   ],
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16.0, 0.0, 16.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(2.0),
+                                        padding: const EdgeInsets.all(2.0),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(44.0),
@@ -268,7 +266,7 @@ class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   12.0, 0.0, 0.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -278,7 +276,7 @@ class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 4.0),
                                                 child: Text(

@@ -8,13 +8,12 @@ import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'deposit_model.dart';
 export 'deposit_model.dart';
 
 class DepositWidget extends StatefulWidget {
-  const DepositWidget({Key? key}) : super(key: key);
+  const DepositWidget({super.key});
 
   @override
   _DepositWidgetState createState() => _DepositWidgetState();
@@ -77,7 +76,7 @@ class _DepositWidgetState extends State<DepositWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -90,12 +89,12 @@ class _DepositWidgetState extends State<DepositWidget> {
                     onTap: () async {
                       await showModalBottomSheet(
                         isScrollControlled: true,
-                        backgroundColor: Color(0x73000000),
+                        backgroundColor: const Color(0x73000000),
                         context: context,
                         builder: (context) {
                           return Padding(
                             padding: MediaQuery.viewInsetsOf(context),
-                            child: ShowKHQRWidget(),
+                            child: const ShowKHQRWidget(),
                           );
                         },
                       ).then((value) => safeSetState(() {}));
@@ -103,7 +102,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                     child: Container(
                       width: 50.0,
                       height: 50.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,7 +124,7 @@ class _DepositWidgetState extends State<DepositWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
               child: TextFormField(
                 controller: _model.amountController,
                 focusNode: _model.amountFocusNode,
@@ -176,14 +175,14 @@ class _DepositWidgetState extends State<DepositWidget> {
             Container(
               width: double.infinity,
               height: MediaQuery.sizeOf(context).height * 0.108,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: ListView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -202,7 +201,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -221,7 +220,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -259,7 +258,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                   if (false)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -278,7 +277,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 10.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -297,7 +296,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -335,7 +334,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                   if (false)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -354,7 +353,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 10.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -373,7 +372,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
@@ -408,13 +407,13 @@ class _DepositWidgetState extends State<DepositWidget> {
                         ),
                       ),
                     ),
-                ].divide(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)),
               ),
             ),
             Container(
               width: double.infinity,
               height: 39.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFE9ECEE),
               ),
               child: Row(
@@ -423,7 +422,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
                       'Add image',
                       style: FlutterFlowTheme.of(context).bodyMedium,
@@ -431,7 +430,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -607,7 +606,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                             ),
                           ),
                         ),
-                      ].divide(SizedBox(width: 10.0)),
+                      ].divide(const SizedBox(width: 10.0)),
                     ),
                   ),
                 ],
@@ -615,7 +614,7 @@ class _DepositWidgetState extends State<DepositWidget> {
             ),
             if (_model.uploadedImage != null && _model.uploadedImage != '')
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
@@ -630,7 +629,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                 ),
               ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   _model.requestWithdrawal = await TransactionsTable().insert({
@@ -644,7 +643,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                   // Log
                   await LogsTable().insert({
                     'Details':
-                        'Request Withdrawal by name: ${FFAppState().UserInfo.fullName}, By phone number: ${FFAppState().UserInfo.phoneNumber},Transaction ID: ${_model.requestWithdrawal?.transactionID?.toString()}',
+                        'Request Withdrawal by name: ${FFAppState().UserInfo.fullName}, By phone number: ${FFAppState().UserInfo.phoneNumber},Transaction ID: ${_model.requestWithdrawal?.transactionID.toString()}',
                     'Title': 'Request Withdrawal',
                   });
                   context.safePop();
@@ -655,13 +654,13 @@ class _DepositWidgetState extends State<DepositWidget> {
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).secondary,
                   textStyle: FlutterFlowTheme.of(context).bodyLarge,
                   elevation: 0.0,
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 1.0,
                   ),

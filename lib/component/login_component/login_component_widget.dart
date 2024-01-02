@@ -10,16 +10,14 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'login_component_model.dart';
 export 'login_component_model.dart';
 
 class LoginComponentWidget extends StatefulWidget {
-  const LoginComponentWidget({Key? key}) : super(key: key);
+  const LoginComponentWidget({super.key});
 
   @override
   _LoginComponentWidgetState createState() => _LoginComponentWidgetState();
@@ -45,15 +43,15 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 400.ms,
-          begin: Offset(0.0, 80.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 80.0),
+          end: const Offset(0.0, 0.0),
         ),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 150.ms,
           duration: 400.ms,
-          begin: Offset(0.8, 0.8),
-          end: Offset(1.0, 1.0),
+          begin: const Offset(0.8, 0.8),
+          end: const Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -72,8 +70,8 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
           curve: Curves.easeInOut,
           delay: 300.ms,
           duration: 400.ms,
-          begin: Offset(0.0, 20.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 20.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -126,24 +124,24 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
     context.watch<FFAppState>();
 
     return Align(
-      alignment: AlignmentDirectional(0.0, -1.0),
+      alignment: const AlignmentDirectional(0.0, -1.0),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Container(
                 width: double.infinity,
                 height:
                     MediaQuery.sizeOf(context).width >= 768.0 ? 530.0 : 630.0,
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   maxWidth: 570.0,
                 ),
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       blurRadius: 4.0,
                       color: Color(0x33000000),
@@ -157,16 +155,16 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                   child: Column(
                     children: [
                       Align(
-                        alignment: Alignment(0.0, 0),
+                        alignment: const Alignment(0.0, 0),
                         child: FlutterFlowButtonTabBar(
                           useToggleButtonStyle: true,
                           isScrollable: true,
                           labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                          unselectedLabelStyle: TextStyle(),
+                          unselectedLabelStyle: const TextStyle(),
                           labelColor: FlutterFlowTheme.of(context).primaryText,
                           unselectedLabelColor:
                               FlutterFlowTheme.of(context).secondaryText,
@@ -178,9 +176,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                           borderWidth: 2.0,
                           borderRadius: 12.0,
                           elevation: 0.0,
-                          labelPadding: EdgeInsetsDirectional.fromSTEB(
+                          labelPadding: const EdgeInsetsDirectional.fromSTEB(
                               32.0, 0.0, 32.0, 0.0),
-                          tabs: [
+                          tabs: const [
                             Tab(
                               text: 'Sign In',
                             ),
@@ -196,9 +194,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                           controller: _model.tabBarController,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, -1.0),
+                              alignment: const AlignmentDirectional(0.0, -1.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 16.0, 24.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -224,7 +222,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           .headlineMedium,
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 4.0, 0.0, 24.0),
                                       child: Text(
                                         'Fill out the information below in order to access your account.',
@@ -234,7 +232,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 16.0),
                                       child: TextFormField(
                                         controller:
@@ -316,7 +314,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 16.0),
                                       child: TextFormField(
                                         controller:
@@ -418,20 +416,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       ''),
                                                 )
                                                 .toString() !=
-                                            null &&
-                                        UsersGroup.loginCall
-                                                .errorMessage(
-                                                  (_model.login?.jsonBody ??
-                                                      ''),
-                                                )
-                                                .toString() !=
                                             '')
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 10.0),
                                           child: Text(
                                             UsersGroup.loginCall
@@ -439,7 +430,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   (_model.login?.jsonBody ??
                                                       ''),
                                                 )
-                                                .toString()!,
+                                                .toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -452,13 +443,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                     Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 16.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            var _shouldSetState = false;
+                                            var shouldSetState = false;
                                             _model.login =
                                                 await UsersGroup.loginCall.call(
                                               phoneNumber: _model
@@ -467,7 +458,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               password: _model
                                                   .loginPasswordController.text,
                                             );
-                                            _shouldSetState = true;
+                                            shouldSetState = true;
                                             if ((_model.login?.succeeded ??
                                                 true)) {
                                               GoRouter.of(context)
@@ -493,7 +484,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       (_model.login?.jsonBody ??
                                                           ''),
                                                     )
-                                                    .toString()!,
+                                                    .toString(),
                                               );
                                               setState(() {
                                                 FFAppState().IsLogged = true;
@@ -571,27 +562,30 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               context.pushNamedAuth(
                                                   'HomePage', context.mounted);
 
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 setState(() {});
+                                              }
                                               return;
                                             } else {
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 setState(() {});
+                                              }
                                               return;
                                             }
 
-                                            if (_shouldSetState)
+                                            if (shouldSetState) {
                                               setState(() {});
+                                            }
                                           },
                                           text: 'Sign in',
                                           options: FFButtonOptions(
                                             width: 230.0,
                                             height: 52.0,
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -603,7 +597,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       color: Colors.white,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -623,7 +617,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 20.0, 0.0, 20.0),
                                     child: Text(
                                       'Create Account',
@@ -709,7 +703,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           width: 100.0,
                                           height: 100.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.network(
@@ -722,9 +716,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             8.0, 0.0, 8.0, 0.0),
-                                        child: Container(
+                                        child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.8,
@@ -794,9 +788,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             8.0, 0.0, 8.0, 0.0),
-                                        child: Container(
+                                        child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.8,
@@ -871,9 +865,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             8.0, 0.0, 8.0, 0.0),
-                                        child: Container(
+                                        child: SizedBox(
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.8,
@@ -951,7 +945,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                           .visibility_outlined
                                                       : Icons
                                                           .visibility_off_outlined,
-                                                  color: Color(0xFF757575),
+                                                  color: const Color(0xFF757575),
                                                   size: 24.0,
                                                 ),
                                               ),
@@ -975,21 +969,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                         ''),
                                                   )
                                                   .toString() !=
-                                              null &&
-                                          UsersGroup.checkPhoneNumberCall
-                                                  .errorMessage(
-                                                    (_model.apiResultwsd
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  )
-                                                  .toString() !=
                                               '')
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 10.0),
                                             child: Text(
                                               UsersGroup.checkPhoneNumberCall
@@ -998,7 +984,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                             ?.jsonBody ??
                                                         ''),
                                                   )
-                                                  .toString()!,
+                                                  .toString(),
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -1011,33 +997,24 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             ),
                                           ),
                                         ),
-                                    ].divide(SizedBox(height: 10.0)),
+                                    ].divide(const SizedBox(height: 10.0)),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 16.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          var _shouldSetState = false;
-                                          if ((_model.signUpFullNameController
-                                                          .text !=
-                                                      null &&
-                                                  _model
+                                          var shouldSetState = false;
+                                          if ((_model
                                                           .signUpFullNameController
                                                           .text !=
                                                       '') &&
                                               (_model.signUpTelegramNumberController
                                                           .text !=
-                                                      null &&
-                                                  _model.signUpTelegramNumberController
-                                                          .text !=
                                                       '') &&
                                               (_model.signUpPasswordController
-                                                          .text !=
-                                                      null &&
-                                                  _model.signUpPasswordController
                                                           .text !=
                                                       '')) {
                                             _model.apiResultwsd =
@@ -1048,7 +1025,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   .signUpTelegramNumberController
                                                   .text,
                                             );
-                                            _shouldSetState = true;
+                                            shouldSetState = true;
                                             if ((_model
                                                     .apiResultwsd?.succeeded ??
                                                 true)) {
@@ -1064,10 +1041,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 'IsActive': true,
                                                 'Balance': 0.0,
                                                 'SectorID': 1,
-                                                'Profile': _model
-                                                                .uploadedFileUrl ==
-                                                            null ||
-                                                        _model.uploadedFileUrl ==
+                                                'Profile': _model.uploadedFileUrl ==
                                                             ''
                                                     ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
                                                     : _model.uploadedFileUrl,
@@ -1075,7 +1049,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     .signUpFullNameController
                                                     .text,
                                               });
-                                              _shouldSetState = true;
+                                              shouldSetState = true;
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
                                               await authManager.signIn(
@@ -1083,7 +1057,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     _model.createdUser?.token,
                                                 authUid: _model
                                                     .createdUser?.userID
-                                                    ?.toString(),
+                                                    .toString(),
                                               );
                                               await actions.onesignalLogin(
                                                 _model.createdUser!.token,
@@ -1121,12 +1095,14 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               context.pushNamedAuth(
                                                   'HomePage', context.mounted);
 
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 setState(() {});
+                                              }
                                               return;
                                             } else {
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 setState(() {});
+                                              }
                                               return;
                                             }
                                           } else {
@@ -1134,37 +1110,38 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               context: context,
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
-                                                  title: Text(
+                                                  title: const Text(
                                                       'Some fild is emty!'),
-                                                  content: Text(
+                                                  content: const Text(
                                                       'Please complete all the fild!'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext),
-                                                      child: Text('Ok'),
+                                                      child: const Text('Ok'),
                                                     ),
                                                   ],
                                                 );
                                               },
                                             );
-                                            if (_shouldSetState)
+                                            if (shouldSetState) {
                                               setState(() {});
+                                            }
                                             return;
                                           }
 
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                         },
                                         text: 'Sign Up',
                                         options: FFButtonOptions(
                                           width: 230.0,
                                           height: 52.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -1176,7 +1153,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     color: Colors.white,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -1188,23 +1165,17 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                   ),
                                   if (false)
                                     Align(
-                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 16.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            if ((_model.signUpFullNameController.text != null && _model.signUpFullNameController.text != '') &&
+                                            if ((_model.signUpFullNameController.text != '') &&
                                                 (_model.signUpTelegramNumberController
-                                                            .text !=
-                                                        null &&
-                                                    _model.signUpTelegramNumberController
                                                             .text !=
                                                         '') &&
                                                 (_model.signUpPasswordController
-                                                            .text !=
-                                                        null &&
-                                                    _model.signUpPasswordController
                                                             .text !=
                                                         '')) {
                                               setState(() {
@@ -1239,16 +1210,16 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text(
+                                                    title: const Text(
                                                         'Some fild is emty!'),
-                                                    content: Text(
+                                                    content: const Text(
                                                         'Please complete all the fild!'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
                                                             Navigator.pop(
                                                                 alertDialogContext),
-                                                        child: Text('Ok'),
+                                                        child: const Text('Ok'),
                                                       ),
                                                     ],
                                                   );
@@ -1262,10 +1233,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             width: 230.0,
                                             height: 52.0,
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -1277,7 +1248,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       color: Colors.white,
                                                     ),
                                             elevation: 3.0,
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -1287,7 +1258,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                     ),
-                                ].divide(SizedBox(height: 10.0)),
+                                ].divide(const SizedBox(height: 10.0)),
                               ),
                             ),
                           ],

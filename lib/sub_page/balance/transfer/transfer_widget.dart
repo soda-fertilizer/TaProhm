@@ -10,17 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'transfer_model.dart';
 export 'transfer_model.dart';
 
 class TransferWidget extends StatefulWidget {
   const TransferWidget({
-    Key? key,
+    super.key,
     this.qrCode,
     this.amount,
-  }) : super(key: key);
+  });
 
   final String? qrCode;
   final double? amount;
@@ -121,7 +120,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -131,7 +130,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Transfer',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -141,7 +140,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                       ),
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
@@ -161,7 +160,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -254,7 +253,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                           validator: _model.amountControllerValidator
                               .asValidator(context),
                         ),
-                      ].divide(SizedBox(height: 10.0)),
+                      ].divide(const SizedBox(height: 10.0)),
                     ),
                   ),
                   Row(
@@ -287,7 +286,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                               ),
                             }.withoutNulls,
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -301,9 +300,9 @@ class _TransferWidgetState extends State<TransferWidget> {
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
@@ -312,7 +311,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -321,16 +320,15 @@ class _TransferWidgetState extends State<TransferWidget> {
                       ),
                       FFButtonWidget(
                         onPressed: () async {
-                          var _shouldSetState = false;
+                          var shouldSetState = false;
                           if (transferUsersRow!.balance >
                               double.parse(_model.amountController.text)) {
-                            if (_model.amountController.text != null &&
-                                _model.amountController.text != '') {
+                            if (_model.amountController.text != '') {
                               _model.responseUserName =
                                   await UsersGroup.oneUserNameCall.call(
                                 phoneNumber: _model.phoneNumberController.text,
                               );
-                              _shouldSetState = true;
+                              shouldSetState = true;
                               if ((_model.responseUserName?.succeeded ??
                                   true)) {
                                 // Insert own history
@@ -351,7 +349,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                                 ''),
                                           ).toString()}',
                                 });
-                                _shouldSetState = true;
+                                shouldSetState = true;
                                 // Minus money own balance
                                 unawaited(
                                   () async {
@@ -367,7 +365,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                     );
                                   }(),
                                 );
-                                _shouldSetState = true;
+                                shouldSetState = true;
                                 // Insert other history
                                 _model.userTranfer =
                                     await TransactionsTable().insert({
@@ -382,7 +380,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                   'Detail':
                                       'From: ${FFAppState().UserInfo.fullName}',
                                 });
-                                _shouldSetState = true;
+                                shouldSetState = true;
                                 // Minus money other balance
                                 unawaited(
                                   () async {
@@ -398,7 +396,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                     );
                                   }(),
                                 );
-                                _shouldSetState = true;
+                                shouldSetState = true;
                                 // Log
                                 unawaited(
                                   () async {
@@ -408,33 +406,33 @@ class _TransferWidgetState extends State<TransferWidget> {
                                                 (_model.responseUserName
                                                         ?.jsonBody ??
                                                     ''),
-                                              ).toString()} ID: ${_model.phoneNumberController.text}, Transfer ID: ${_model.ownTransfer?.transactionID?.toString()} Receive ID: ${_model.userTranfer?.transactionID?.toString()}',
+                                              ).toString()} ID: ${_model.phoneNumberController.text}, Transfer ID: ${_model.ownTransfer?.transactionID.toString()} Receive ID: ${_model.userTranfer?.transactionID.toString()}',
                                       'Title': 'Tranfer Money',
                                     });
                                   }(),
                                 );
                                 context.safePop();
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               } else {
                                 await showDialog(
                                   context: context,
                                   builder: (alertDialogContext) {
                                     return AlertDialog(
-                                      title: Text('User not found!'),
-                                      content: Text(
+                                      title: const Text('User not found!'),
+                                      content: const Text(
                                           'Please check ID and try again.'),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
                                               Navigator.pop(alertDialogContext),
-                                          child: Text('Ok'),
+                                          child: const Text('Ok'),
                                         ),
                                       ],
                                     );
                                   },
                                 );
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
                             } else {
@@ -442,20 +440,20 @@ class _TransferWidgetState extends State<TransferWidget> {
                                 context: context,
                                 builder: (alertDialogContext) {
                                   return AlertDialog(
-                                    title: Text('Amount can\'t be emty!'),
-                                    content: Text(
+                                    title: const Text('Amount can\'t be emty!'),
+                                    content: const Text(
                                         'Please input amount of money to tranfer.'),
                                     actions: [
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
+                                        child: const Text('Ok'),
                                       ),
                                     ],
                                   );
                                 },
                               );
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                               return;
                             }
                           } else {
@@ -463,32 +461,32 @@ class _TransferWidgetState extends State<TransferWidget> {
                               context: context,
                               builder: (alertDialogContext) {
                                 return AlertDialog(
-                                  title: Text('Insufficient Balance!'),
-                                  content: Text(
+                                  title: const Text('Insufficient Balance!'),
+                                  content: const Text(
                                       'User don\'t have enough money to Transfer.'),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pop(alertDialogContext),
-                                      child: Text('Ok'),
+                                      child: const Text('Ok'),
                                     ),
                                   ],
                                 );
                               },
                             );
-                            if (_shouldSetState) setState(() {});
+                            if (shouldSetState) setState(() {});
                             return;
                           }
 
-                          if (_shouldSetState) setState(() {});
+                          if (shouldSetState) setState(() {});
                         },
                         text: 'Confirm',
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
@@ -497,7 +495,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -506,7 +504,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                       ),
                     ],
                   ),
-                ].divide(SizedBox(height: 20.0)),
+                ].divide(const SizedBox(height: 20.0)),
               ),
             ),
           ),

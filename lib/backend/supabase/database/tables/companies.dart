@@ -9,7 +9,7 @@ class CompaniesTable extends SupabaseTable<CompaniesRow> {
 }
 
 class CompaniesRow extends SupabaseDataRow {
-  CompaniesRow(Map<String, dynamic> data) : super(data);
+  CompaniesRow(super.data);
 
   @override
   SupabaseTable get table => CompaniesTable();
@@ -26,7 +26,7 @@ class CompaniesRow extends SupabaseDataRow {
   String get companyProfile => getField<String>('CompanyProfile')!;
   set companyProfile(String value) => setField<String>('CompanyProfile', value);
 
-  List<String> get companyImages => getListField<String>('CompanyImages')!;
+  List<String> get companyImages => getListField<String>('CompanyImages');
   set companyImages(List<String> value) =>
       setListField<String>('CompanyImages', value);
 

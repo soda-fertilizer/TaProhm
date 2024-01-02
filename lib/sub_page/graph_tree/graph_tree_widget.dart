@@ -2,21 +2,19 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'graph_tree_model.dart';
 export 'graph_tree_model.dart';
 
 class GraphTreeWidget extends StatefulWidget {
   const GraphTreeWidget({
-    Key? key,
+    super.key,
     required this.users,
     this.headOfUser,
-  }) : super(key: key);
+  });
 
   final List<UsersRow>? users;
   final UsersRow? headOfUser;
@@ -71,7 +69,7 @@ class _GraphTreeWidgetState extends State<GraphTreeWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -81,7 +79,7 @@ class _GraphTreeWidgetState extends State<GraphTreeWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Graph tree',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -91,15 +89,15 @@ class _GraphTreeWidgetState extends State<GraphTreeWidget> {
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
           child: Container(
-            decoration: BoxDecoration(),
-            child: Container(
+            decoration: const BoxDecoration(),
+            child: SizedBox(
               width: double.infinity,
               height: double.infinity,
               child: custom_widgets.GraphTree(

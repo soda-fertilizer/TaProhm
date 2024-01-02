@@ -2,23 +2,20 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'sub_admin_sub_account_model.dart';
 export 'sub_admin_sub_account_model.dart';
 
 class SubAdminSubAccountWidget extends StatefulWidget {
   const SubAdminSubAccountWidget({
-    Key? key,
+    super.key,
     required this.phoneNumber,
     this.tabIndex,
-  }) : super(key: key);
+  });
 
   final String? phoneNumber;
   final int? tabIndex;
@@ -102,7 +99,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -112,13 +109,13 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Account',
               style: FlutterFlowTheme.of(context).titleMedium,
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -193,16 +190,16 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
               return Column(
                 children: [
                   Align(
-                    alignment: Alignment(0.0, 0),
+                    alignment: const Alignment(0.0, 0),
                     child: TabBar(
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
                       labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                      unselectedLabelStyle: TextStyle(),
+                      unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
-                      padding: EdgeInsets.all(4.0),
-                      tabs: [
+                      padding: const EdgeInsets.all(4.0),
+                      tabs: const [
                         Tab(
                           text: 'Member',
                         ),
@@ -218,7 +215,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                       controller: _model.tabBarController,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 1.0, 0.0, 0.0),
                           child: Builder(
                             builder: (context) {
@@ -232,7 +229,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                 itemBuilder: (context, normalIndex) {
                                   final normalItem = normal[normalIndex];
                                   return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -262,13 +259,13 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: Offset(0.0, 1.0),
+                                              offset: const Offset(0.0, 1.0),
                                             )
                                           ],
                                         ),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 16.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -276,7 +273,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                                 MainAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: EdgeInsets.all(2.0),
+                                                padding: const EdgeInsets.all(2.0),
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -291,7 +288,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -306,7 +303,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -349,7 +346,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 1.0, 0.0, 0.0),
                           child: Builder(
                             builder: (context) {
@@ -364,7 +361,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                   final tabBarVarItem =
                                       tabBarVar[tabBarVarIndex];
                                   return Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 1.0),
                                     child: Container(
                                       width: 100.0,
@@ -377,12 +374,12 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                             blurRadius: 0.0,
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
-                                            offset: Offset(0.0, 1.0),
+                                            offset: const Offset(0.0, 1.0),
                                           )
                                         ],
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -390,7 +387,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                               MainAxisAlignment.start,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.all(2.0),
+                                              padding: const EdgeInsets.all(2.0),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(44.0),
@@ -404,7 +401,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                             ),
                                             Expanded(
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         12.0, 0.0, 0.0, 0.0),
                                                 child: InkWell(
@@ -435,7 +432,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                                       }.withoutNulls,
                                                       extra: <String, dynamic>{
                                                         kTransitionInfoKey:
-                                                            TransitionInfo(
+                                                            const TransitionInfo(
                                                           hasTransition: true,
                                                           transitionType:
                                                               PageTransitionType
@@ -458,7 +455,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                                     children: [
                                                       Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,

@@ -10,14 +10,13 @@ import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'member_payment_model.dart';
 export 'member_payment_model.dart';
 
 class MemberPaymentWidget extends StatefulWidget {
   const MemberPaymentWidget({
-    Key? key,
+    super.key,
     required this.name,
     required this.referral,
     required this.password,
@@ -25,7 +24,7 @@ class MemberPaymentWidget extends StatefulWidget {
     required this.isNewMember,
     required this.profile,
     required this.phoneNumber,
-  }) : super(key: key);
+  });
 
   final String? name;
   final String? referral;
@@ -93,7 +92,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -106,12 +105,12 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                     onTap: () async {
                       await showModalBottomSheet(
                         isScrollControlled: true,
-                        backgroundColor: Color(0x73000000),
+                        backgroundColor: const Color(0x73000000),
                         context: context,
                         builder: (context) {
                           return Padding(
                             padding: MediaQuery.viewInsetsOf(context),
-                            child: ShowKHQRWidget(),
+                            child: const ShowKHQRWidget(),
                           );
                         },
                       ).then((value) => safeSetState(() {}));
@@ -119,7 +118,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                     child: Container(
                       width: 50.0,
                       height: 50.0,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -148,14 +147,14 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
             Container(
               width: double.infinity,
               height: MediaQuery.sizeOf(context).height * 0.3,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: ListView(
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -174,7 +173,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -193,7 +192,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -230,7 +229,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -249,7 +248,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -268,7 +267,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -305,7 +304,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -324,7 +323,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 10.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -343,7 +342,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -378,13 +377,13 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                       ),
                     ),
                   ),
-                ].divide(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)),
               ),
             ),
             Container(
               width: double.infinity,
               height: 39.0,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFE9ECEE),
               ),
               child: Row(
@@ -393,7 +392,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
                       'Add image',
                       style: FlutterFlowTheme.of(context).bodyMedium,
@@ -401,7 +400,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -579,7 +578,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                             ),
                           ),
                         ),
-                      ].divide(SizedBox(width: 10.0)),
+                      ].divide(const SizedBox(width: 10.0)),
                     ),
                   ),
                 ],
@@ -587,7 +586,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
             ),
             if (_model.uploadedImage != null && _model.uploadedImage != '')
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(
@@ -602,7 +601,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                 ),
               ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   _model.createUser = await UsersTable().insert({
@@ -653,13 +652,13 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).secondary,
                   textStyle: FlutterFlowTheme.of(context).bodyLarge,
                   elevation: 0.0,
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 1.0,
                   ),

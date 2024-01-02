@@ -7,16 +7,15 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'transaction_model.dart';
 export 'transaction_model.dart';
 
 class TransactionWidget extends StatefulWidget {
   const TransactionWidget({
-    Key? key,
+    super.key,
     required this.transactionID,
-  }) : super(key: key);
+  });
 
   final int? transactionID;
 
@@ -105,7 +104,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -115,13 +114,13 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Transaction',
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
@@ -154,24 +153,24 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                       ? containerUsersRowList.first
                       : null;
                   return Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           if (transactionTransactionsRow?.typeID == 1)
                             Text(
-                              'User Balance: ${containerUsersRow?.balance?.toString()}',
+                              'User Balance: ${containerUsersRow?.balance.toString()}',
                               style: FlutterFlowTheme.of(context).bodyLarge,
                             ),
                           TextFormField(
                             controller: _model.amountController ??=
                                 TextEditingController(
                               text: transactionTransactionsRow?.amount
-                                  ?.toString(),
+                                  .toString(),
                             ),
                             focusNode: _model.amountFocusNode,
                             readOnly: true,
@@ -294,7 +293,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                     () async {
                                       await LogsTable().insert({
                                         'Details':
-                                            'Deleted Transaction ID: ${transactionTransactionsRow?.transactionID?.toString()}',
+                                            'Deleted Transaction ID: ${transactionTransactionsRow?.transactionID.toString()}',
                                         'Title':
                                             'Approved ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'}',
                                       });
@@ -306,9 +305,9 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 0.4,
                                   height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).error,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -318,7 +317,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                         color: Colors.white,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -335,14 +334,14 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
                                             title:
-                                                Text('Insufficient Balance!'),
-                                            content: Text(
+                                                const Text('Insufficient Balance!'),
+                                            content: const Text(
                                                 'User don\'t have enough money to Withdrawal.'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: Text('Ok'),
+                                                child: const Text('Ok'),
                                               ),
                                             ],
                                           );
@@ -366,15 +365,15 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                               .updateBalanceCall
                                               .call(
                                             money: transactionTransactionsRow
-                                                ?.amount,
+                                                .amount,
                                             action: transactionTransactionsRow
-                                                        ?.typeID ==
+                                                        .typeID ==
                                                     2
                                                 ? 'plus'
                                                 : 'minus',
                                             phoneNumber:
                                                 transactionTransactionsRow
-                                                    ?.userPhoneNumber,
+                                                    .userPhoneNumber,
                                           );
                                         }(),
                                       );
@@ -383,9 +382,9 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                         () async {
                                           await LogsTable().insert({
                                             'Details':
-                                                'Approved Transaction ID: ${transactionTransactionsRow?.transactionID?.toString()}',
+                                                'Approved Transaction ID: ${transactionTransactionsRow.transactionID.toString()}',
                                             'Title':
-                                                'Approved ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'}',
+                                                'Approved ${transactionTransactionsRow.typeID == 1 ? 'Withdrawal' : 'Deposit'}',
                                           });
                                         }(),
                                       );
@@ -400,9 +399,9 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 0.4,
                                   height: 40.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
@@ -412,7 +411,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                         color: Colors.white,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -421,7 +420,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                               ),
                             ],
                           ),
-                        ].divide(SizedBox(height: 15.0)),
+                        ].divide(const SizedBox(height: 15.0)),
                       ),
                     ),
                   );

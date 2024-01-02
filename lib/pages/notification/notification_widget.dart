@@ -2,16 +2,14 @@ import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notification_model.dart';
 export 'notification_model.dart';
 
 class NotificationWidget extends StatefulWidget {
-  const NotificationWidget({Key? key}) : super(key: key);
+  const NotificationWidget({super.key});
 
   @override
   _NotificationWidgetState createState() => _NotificationWidgetState();
@@ -66,7 +64,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                   fontSize: 22.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -80,16 +78,16 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                   wrapWithModel(
                     model: _model.navPaddingModel,
                     updateCallback: () => setState(() {}),
-                    child: NavPaddingWidget(),
+                    child: const NavPaddingWidget(),
                   ),
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.navBarModel,
                   updateCallback: () => setState(() {}),
-                  child: NavBarWidget(
+                  child: const NavBarWidget(
                     selectPageIndex: 3,
                   ),
                 ),

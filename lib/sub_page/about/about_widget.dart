@@ -1,16 +1,14 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'about_model.dart';
 export 'about_model.dart';
 
 class AboutWidget extends StatefulWidget {
-  const AboutWidget({Key? key}) : super(key: key);
+  const AboutWidget({super.key});
 
   @override
   _AboutWidgetState createState() => _AboutWidgetState();
@@ -62,7 +60,7 @@ class _AboutWidgetState extends State<AboutWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -72,7 +70,7 @@ class _AboutWidgetState extends State<AboutWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'About',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -82,7 +80,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -92,7 +90,7 @@ class _AboutWidgetState extends State<AboutWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

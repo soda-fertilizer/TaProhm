@@ -1,17 +1,15 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'nav_bar_model.dart';
 export 'nav_bar_model.dart';
 
 class NavBarWidget extends StatefulWidget {
   const NavBarWidget({
-    Key? key,
+    super.key,
     required this.selectPageIndex,
-  }) : super(key: key);
+  });
 
   final int? selectPageIndex;
 
@@ -49,7 +47,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
       width: double.infinity,
       height: 50.0,
       decoration: BoxDecoration(
-        color: Color(0xFFF7F7F7),
+        color: const Color(0xFFF7F7F7),
         borderRadius: BorderRadius.circular(0.0),
       ),
       child: Row(
@@ -59,7 +57,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
           Container(
             width: 50.0,
             height: double.infinity,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -72,7 +70,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 context.pushNamed(
                   'HomePage',
                   extra: <String, dynamic>{
-                    kTransitionInfoKey: TransitionInfo(
+                    kTransitionInfoKey: const TransitionInfo(
                       hasTransition: true,
                       transitionType: PageTransitionType.fade,
                       duration: Duration(milliseconds: 0),
@@ -108,7 +106,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
           Container(
             width: 50.0,
             height: double.infinity,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -121,7 +119,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 context.pushNamed(
                   'Locator',
                   extra: <String, dynamic>{
-                    kTransitionInfoKey: TransitionInfo(
+                    kTransitionInfoKey: const TransitionInfo(
                       hasTransition: true,
                       transitionType: PageTransitionType.fade,
                       duration: Duration(milliseconds: 0),
@@ -158,7 +156,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             Container(
               width: 50.0,
               height: double.infinity,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -172,7 +170,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     context.pushNamed(
                       'Notification',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
+                        kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -185,7 +183,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     context.pushNamed(
                       'LoginPage',
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: TransitionInfo(
+                        kTransitionInfoKey: const TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.fade,
                           duration: Duration(milliseconds: 0),
@@ -225,7 +223,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             Container(
               width: 50.0,
               height: double.infinity,
-              decoration: BoxDecoration(),
+              decoration: const BoxDecoration(),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -238,7 +236,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                   context.pushNamed(
                     'Balance',
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                         duration: Duration(milliseconds: 0),
@@ -274,7 +272,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
           Container(
             width: 50.0,
             height: double.infinity,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -287,7 +285,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 context.pushNamed(
                   'Event',
                   extra: <String, dynamic>{
-                    kTransitionInfoKey: TransitionInfo(
+                    kTransitionInfoKey: const TransitionInfo(
                       hasTransition: true,
                       transitionType: PageTransitionType.fade,
                       duration: Duration(milliseconds: 0),
@@ -323,7 +321,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
           Container(
             width: 50.0,
             height: double.infinity,
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
@@ -337,7 +335,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                   context.pushNamed(
                     'Profile',
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                         duration: Duration(milliseconds: 0),
@@ -350,7 +348,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                   context.pushNamed(
                     'LoginPage',
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
+                      kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.fade,
                         duration: Duration(milliseconds: 0),

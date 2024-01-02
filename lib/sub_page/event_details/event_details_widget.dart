@@ -2,20 +2,18 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'event_details_model.dart';
 export 'event_details_model.dart';
 
 class EventDetailsWidget extends StatefulWidget {
   const EventDetailsWidget({
-    Key? key,
+    super.key,
     required this.id,
-  }) : super(key: key);
+  });
 
   final int? id;
 
@@ -98,7 +96,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -115,7 +113,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       fontSize: 22.0,
                     ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: false,
               elevation: 2.0,
             ),
@@ -127,9 +125,9 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
+                      alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: EdgeInsets.all(22.0),
+                        padding: const EdgeInsets.all(22.0),
                         child: Text(
                           valueOrDefault<String>(
                             eventDetailsEventsRow?.title,
@@ -145,8 +143,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: CachedNetworkImage(
-                          fadeInDuration: Duration(milliseconds: 500),
-                          fadeOutDuration: Duration(milliseconds: 500),
+                          fadeInDuration: const Duration(milliseconds: 500),
+                          fadeOutDuration: const Duration(milliseconds: 500),
                           imageUrl: eventDetailsEventsRow!.image!,
                           width: double.infinity,
                           height: 200.0,
@@ -154,7 +152,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         ),
                       ),
                     Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Text(
                         valueOrDefault<String>(
                           eventDetailsEventsRow?.details,
@@ -163,7 +161,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                     ),
-                  ].divide(SizedBox(height: 16.0)),
+                  ].divide(const SizedBox(height: 16.0)),
                 ),
               ),
             ),

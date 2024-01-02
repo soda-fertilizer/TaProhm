@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,13 +7,12 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'change_password_model.dart';
 export 'change_password_model.dart';
 
 class ChangePasswordWidget extends StatefulWidget {
-  const ChangePasswordWidget({Key? key}) : super(key: key);
+  const ChangePasswordWidget({super.key});
 
   @override
   _ChangePasswordWidgetState createState() => _ChangePasswordWidgetState();
@@ -72,7 +70,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -82,7 +80,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Change password',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -92,7 +90,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -103,35 +101,35 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 16.0),
                 child: TextFormField(
                   controller: _model.oldPasswordController,
                   focusNode: _model.oldPasswordFocusNode,
                   onChanged: (_) => EasyDebounce.debounce(
                     '_model.oldPasswordController',
-                    Duration(milliseconds: 2000),
+                    const Duration(milliseconds: 2000),
                     () async {
-                      var _shouldSetState = false;
+                      var shouldSetState = false;
                       _model.hashedPassword = await actions.passwordHash(
                         _model.oldPasswordController.text,
                       );
-                      _shouldSetState = true;
+                      shouldSetState = true;
                       if (_model.hashedPassword ==
                           FFAppState().UserInfo.hashedPassword) {
                         setState(() {
                           _model.isOldPasswordNotCorrect = false;
                         });
-                        if (_shouldSetState) setState(() {});
+                        if (shouldSetState) setState(() {});
                         return;
                       } else {
                         setState(() {
                           _model.isOldPasswordNotCorrect = true;
                         });
-                        if (_shouldSetState) setState(() {});
+                        if (shouldSetState) setState(() {});
                         return;
                       }
 
-                      if (_shouldSetState) setState(() {});
+                      if (shouldSetState) setState(() {});
                     },
                   ),
                   textCapitalization: TextCapitalization.none,
@@ -179,7 +177,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 16.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 16.0),
                 child: TextFormField(
                   controller: _model.newPasswordController,
                   focusNode: _model.newPasswordFocusNode,
@@ -243,7 +241,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
               ),
               if (_model.isOldPasswordNotCorrect)
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: Text(
                     'Old password is not correct',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -258,22 +256,20 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      if ((_model.oldPasswordController.text == null ||
-                              _model.oldPasswordController.text == '') &&
-                          (_model.newPasswordController.text == null ||
-                              _model.newPasswordController.text == '') &&
+                      if ((_model.oldPasswordController.text == '') &&
+                          (_model.newPasswordController.text == '') &&
                           !_model.isOldPasswordNotCorrect) {
                         await showDialog(
                           context: context,
                           builder: (alertDialogContext) {
                             return AlertDialog(
-                              title: Text('The Fields is emty!'),
-                              content: Text('please field all the field.'),
+                              title: const Text('The Fields is emty!'),
+                              content: const Text('please field all the field.'),
                               actions: [
                                 TextButton(
                                   onPressed: () =>
                                       Navigator.pop(alertDialogContext),
-                                  child: Text('Ok'),
+                                  child: const Text('Ok'),
                                 ),
                               ],
                             );
@@ -303,9 +299,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                     options: FFButtonOptions(
                       height: 40.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -313,7 +309,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                                 color: Colors.white,
                               ),
                       elevation: 3.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),

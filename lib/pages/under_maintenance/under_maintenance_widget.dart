@@ -1,15 +1,13 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'under_maintenance_model.dart';
 export 'under_maintenance_model.dart';
 
 class UnderMaintenanceWidget extends StatefulWidget {
-  const UnderMaintenanceWidget({Key? key}) : super(key: key);
+  const UnderMaintenanceWidget({super.key});
 
   @override
   _UnderMaintenanceWidgetState createState() => _UnderMaintenanceWidgetState();
@@ -71,7 +69,7 @@ class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                   child: Text(
                     'We are Under Maintenance',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(

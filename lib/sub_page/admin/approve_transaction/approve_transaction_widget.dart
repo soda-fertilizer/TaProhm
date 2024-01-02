@@ -4,17 +4,15 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'approve_transaction_model.dart';
 export 'approve_transaction_model.dart';
 
 class ApproveTransactionWidget extends StatefulWidget {
-  const ApproveTransactionWidget({Key? key}) : super(key: key);
+  const ApproveTransactionWidget({super.key});
 
   @override
   _ApproveTransactionWidgetState createState() =>
@@ -103,7 +101,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -113,7 +111,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Request Transaction',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -123,7 +121,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                       ),
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
@@ -132,7 +130,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
               child: Column(
                 children: [
                   Align(
-                    alignment: Alignment(0.0, 0),
+                    alignment: const Alignment(0.0, 0),
                     child: TabBar(
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
@@ -142,10 +140,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                 fontFamily: 'Readex Pro',
                                 fontSize: 14.0,
                               ),
-                      unselectedLabelStyle: TextStyle(),
+                      unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
-                      padding: EdgeInsets.all(4.0),
-                      tabs: [
+                      padding: const EdgeInsets.all(4.0),
+                      tabs: const [
                         Tab(
                           text: 'Deposit',
                         ),
@@ -165,7 +163,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                       children: [
                         KeepAliveWidgetWrapper(
                           builder: (context) => Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 1.0, 0.0, 0.0),
                             child: Builder(
                               builder: (context) {
@@ -182,7 +180,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   r'''$.type''',
                                                 ))
                                             .toList()
-                                            ?.toList() ??
+                                            .toList() ??
                                         [];
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
@@ -191,7 +189,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                   itemBuilder: (context, depositIndex) {
                                     final depositItem = deposit[depositIndex];
                                     return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -212,7 +210,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
-                                                  TransitionInfo(
+                                                  const TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
                                                     PageTransitionType.fade,
@@ -234,13 +232,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
-                                                offset: Offset(0.0, 1.0),
+                                                offset: const Offset(0.0, 1.0),
                                               )
                                             ],
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 16.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -248,7 +246,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.all(2.0),
+                                                  padding: const EdgeInsets.all(2.0),
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -266,10 +264,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                 ),
                                                 Expanded(
                                                   child: Container(
-                                                    decoration: BoxDecoration(),
+                                                    decoration: const BoxDecoration(),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   12.0,
                                                                   10.0,
@@ -287,7 +285,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -309,7 +307,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                EdgeInsetsDirectional
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         0.0,
@@ -344,11 +342,11 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                 ),
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           0.0, 1.0),
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 10.0),
                                                     child: Text(
@@ -384,7 +382,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                         ),
                         KeepAliveWidgetWrapper(
                           builder: (context) => Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 1.0, 0.0, 0.0),
                             child: Builder(
                               builder: (context) {
@@ -401,7 +399,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   r'''$.type''',
                                                 ))
                                             .toList()
-                                            ?.toList() ??
+                                            .toList() ??
                                         [];
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
@@ -411,7 +409,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                     final withdrawalItem =
                                         withdrawal[withdrawalIndex];
                                     return Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -432,7 +430,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
-                                                  TransitionInfo(
+                                                  const TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
                                                     PageTransitionType.fade,
@@ -454,13 +452,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
-                                                offset: Offset(0.0, 1.0),
+                                                offset: const Offset(0.0, 1.0),
                                               )
                                             ],
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 16.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -468,7 +466,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsets.all(2.0),
+                                                  padding: const EdgeInsets.all(2.0),
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -487,7 +485,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(12.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Column(
@@ -502,7 +500,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsetsDirectional
+                                                              const EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -570,7 +568,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          final _datePicked1Date =
+                                          final datePicked1Date =
                                               await showDatePicker(
                                             context: context,
                                             initialDate: getCurrentTimestamp,
@@ -578,20 +576,18 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                             lastDate: DateTime(2050),
                                           );
 
-                                          if (_datePicked1Date != null) {
+                                          if (datePicked1Date != null) {
                                             safeSetState(() {
                                               _model.datePicked1 = DateTime(
-                                                _datePicked1Date.year,
-                                                _datePicked1Date.month,
-                                                _datePicked1Date.day,
+                                                datePicked1Date.year,
+                                                datePicked1Date.month,
+                                                datePicked1Date.day,
                                               );
                                             });
                                           }
                                           setState(() {
                                             _model.fromDate =
-                                                _model.datePicked1 == null
-                                                    ? getCurrentTimestamp
-                                                    : _model.datePicked1;
+                                                _model.datePicked1 ?? getCurrentTimestamp;
                                           });
                                         },
                                         text: dateTimeFormat(
@@ -599,10 +595,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   18.0, 0.0, 18.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -615,7 +611,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                     fontSize: 10.0,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -623,7 +619,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                               BorderRadius.circular(8.0),
                                         ),
                                       ),
-                                    ].divide(SizedBox(width: 10.0)),
+                                    ].divide(const SizedBox(width: 10.0)),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -635,7 +631,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          final _datePicked2Date =
+                                          final datePicked2Date =
                                               await showDatePicker(
                                             context: context,
                                             initialDate: getCurrentTimestamp,
@@ -643,20 +639,18 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                             lastDate: DateTime(2050),
                                           );
 
-                                          if (_datePicked2Date != null) {
+                                          if (datePicked2Date != null) {
                                             safeSetState(() {
                                               _model.datePicked2 = DateTime(
-                                                _datePicked2Date.year,
-                                                _datePicked2Date.month,
-                                                _datePicked2Date.day,
+                                                datePicked2Date.year,
+                                                datePicked2Date.month,
+                                                datePicked2Date.day,
                                               );
                                             });
                                           }
                                           setState(() {
                                             _model.toDate =
-                                                _model.datePicked2 == null
-                                                    ? getCurrentTimestamp
-                                                    : _model.datePicked2;
+                                                _model.datePicked2 ?? getCurrentTimestamp;
                                           });
                                         },
                                         text: dateTimeFormat(
@@ -664,10 +658,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   18.0, 0.0, 18.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -680,7 +674,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                     fontSize: 10.0,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -688,13 +682,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                               BorderRadius.circular(8.0),
                                         ),
                                       ),
-                                    ].divide(SizedBox(width: 10.0)),
+                                    ].divide(const SizedBox(width: 10.0)),
                                   ),
                                 ],
                               ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 0.0),
                                   child: Container(
                                     width: double.infinity,
@@ -749,7 +743,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                 final historyItem =
                                                     history[historyIndex];
                                                 return Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 1.0),
                                                   child: Container(
@@ -766,13 +760,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                   .of(context)
                                                               .alternate,
                                                           offset:
-                                                              Offset(0.0, 1.0),
+                                                              const Offset(0.0, 1.0),
                                                         )
                                                       ],
                                                     ),
                                                     child: Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   16.0,
                                                                   0.0,
@@ -787,7 +781,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                EdgeInsets.all(
+                                                                const EdgeInsets.all(
                                                                     2.0),
                                                             child: ClipRRect(
                                                               borderRadius:
@@ -810,7 +804,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                           Expanded(
                                                             child: Padding(
                                                               padding:
-                                                                  EdgeInsetsDirectional
+                                                                  const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           12.0,
                                                                           0.0,
@@ -830,7 +824,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                           .start,
                                                                   children: [
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,
@@ -850,7 +844,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                       ),
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,
@@ -871,7 +865,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                       ),
                                                                     ),
                                                                     Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           0.0,
                                                                           0.0,

@@ -10,7 +10,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'view_company_model.dart';
@@ -18,9 +17,9 @@ export 'view_company_model.dart';
 
 class ViewCompanyWidget extends StatefulWidget {
   const ViewCompanyWidget({
-    Key? key,
+    super.key,
     required this.companyID,
-  }) : super(key: key);
+  });
 
   final int? companyID;
 
@@ -125,7 +124,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -135,7 +134,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Company',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -145,14 +144,14 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                       ),
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -165,7 +164,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                             width: 120.0,
                             height: 120.0,
                             clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: Image.network(
@@ -178,7 +177,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                       TextFormField(
                         controller: _model.companyNameController ??=
                             TextEditingController(
-                          text: viewCompanyCompaniesRow?.companyName,
+                          text: viewCompanyCompaniesRow.companyName,
                         ),
                         focusNode: _model.companyNameFocusNode,
                         obscureText: false,
@@ -223,7 +222,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                       TextFormField(
                         controller: _model.telegramNumberController ??=
                             TextEditingController(
-                          text: viewCompanyCompaniesRow?.phoneNumber,
+                          text: viewCompanyCompaniesRow.phoneNumber,
                         ),
                         focusNode: _model.telegramNumberFocusNode,
                         obscureText: false,
@@ -268,7 +267,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                       TextFormField(
                         controller: _model.telegramUsernameController ??=
                             TextEditingController(
-                          text: viewCompanyCompaniesRow?.telegramUrl,
+                          text: viewCompanyCompaniesRow.telegramUrl,
                         ),
                         focusNode: _model.telegramUsernameFocusNode,
                         obscureText: false,
@@ -325,7 +324,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                         child: TextFormField(
                           controller: _model.textController4 ??=
                               TextEditingController(
-                            text: viewCompanyCompaniesRow?.detail,
+                            text: viewCompanyCompaniesRow.detail,
                           ),
                           focusNode: _model.textFieldFocusNode,
                           obscureText: false,
@@ -335,28 +334,28 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                             hintText: 'Company detail',
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -377,7 +376,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                           context.pushNamed(
                             'PinLocation',
                             extra: <String, dynamic>{
-                              kTransitionInfoKey: TransitionInfo(
+                              kTransitionInfoKey: const TransitionInfo(
                                 hasTransition: true,
                                 transitionType: PageTransitionType.fade,
                                 duration: Duration(milliseconds: 0),
@@ -386,13 +385,13 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                           );
                         },
                         text:
-                            'lat: ${viewCompanyCompaniesRow?.latitude?.toString()}lng: ${viewCompanyCompaniesRow?.longitude?.toString()}',
+                            'lat: ${viewCompanyCompaniesRow.latitude.toString()}lng: ${viewCompanyCompaniesRow.longitude.toString()}',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).secondaryText,
                           textStyle:
@@ -401,7 +400,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -414,7 +413,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Add image',
@@ -422,7 +421,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 10.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -588,15 +587,15 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                       ),
                                     ),
                                   ),
-                                ].divide(SizedBox(width: 10.0)),
+                                ].divide(const SizedBox(width: 10.0)),
                               ),
                             ),
                           ],
                         ),
                       Builder(
                         builder: (context) {
-                          final images = viewCompanyCompaniesRow?.companyImages
-                                  ?.toList() ??
+                          final images = viewCompanyCompaniesRow.companyImages
+                                  .toList() ??
                               [];
                           return Wrap(
                             spacing: 10.0,
@@ -663,9 +662,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                       Container(
                         width: double.infinity,
                         height: 30.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Text(
                             'Payment image',
                             style: FlutterFlowTheme.of(context).bodyMedium,
@@ -675,7 +674,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
-                          viewCompanyCompaniesRow!.paymentImage,
+                          viewCompanyCompaniesRow.paymentImage,
                           width: double.infinity,
                           height: MediaQuery.sizeOf(context).height * 0.4,
                           fit: BoxFit.contain,
@@ -692,19 +691,19 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: Text('Are you sure?'),
-                                            content: Text(
+                                            title: const Text('Are you sure?'),
+                                            content: const Text(
                                                 'Are you sure you want to delete it?'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext, false),
-                                                child: Text('Cancel'),
+                                                child: const Text('Cancel'),
                                               ),
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext, true),
-                                                child: Text('Confirm'),
+                                                child: const Text('Confirm'),
                                               ),
                                             ],
                                           );
@@ -728,9 +727,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).error,
                               textStyle: FlutterFlowTheme.of(context)
@@ -740,7 +739,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                     color: Colors.white,
                                   ),
                               elevation: 3.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
@@ -755,7 +754,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                       _model.telegramNumberController.text,
                                   'Detail': _model.textController4.text,
                                   'CompanyName':
-                                      viewCompanyCompaniesRow?.companyName,
+                                      viewCompanyCompaniesRow.companyName,
                                   'TelegramUrl':
                                       _model.telegramUsernameController.text,
                                 },
@@ -770,9 +769,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
@@ -782,7 +781,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                     color: Colors.white,
                                   ),
                               elevation: 3.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
@@ -791,7 +790,7 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                           ),
                         ],
                       ),
-                    ].divide(SizedBox(height: 10.0)),
+                    ].divide(const SizedBox(height: 10.0)),
                   ),
                 ),
               ),

@@ -11,17 +11,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'account_model.dart';
 export 'account_model.dart';
 
 class AccountWidget extends StatefulWidget {
   const AccountWidget({
-    Key? key,
+    super.key,
     required this.userID,
     this.sectorID,
-  }) : super(key: key);
+  });
 
   final int? userID;
   final int? sectorID;
@@ -126,7 +125,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -136,20 +135,20 @@ class _AccountWidgetState extends State<AccountWidget> {
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Account',
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -222,12 +221,12 @@ class _AccountWidgetState extends State<AccountWidget> {
                           width: 120.0,
                           height: 120.0,
                           clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           child: CachedNetworkImage(
-                            fadeInDuration: Duration(milliseconds: 500),
-                            fadeOutDuration: Duration(milliseconds: 500),
+                            fadeInDuration: const Duration(milliseconds: 500),
+                            fadeOutDuration: const Duration(milliseconds: 500),
                             imageUrl: accountUsersRow!.profile,
                             fit: BoxFit.cover,
                           ),
@@ -492,7 +491,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                 FlutterFlowTheme.of(context).secondaryText,
                             borderWidth: 1.0,
                             borderRadius: 30.0,
-                            margin: EdgeInsetsDirectional.fromSTEB(
+                            margin: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 4.0, 16.0, 4.0),
                             hidesUnderline: true,
                             isSearchable: false,
@@ -518,7 +517,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 10.0),
                           child: FFButtonWidget(
                             onPressed: () async {
@@ -534,9 +533,9 @@ class _AccountWidgetState extends State<AccountWidget> {
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).error,
                               textStyle: FlutterFlowTheme.of(context)
@@ -546,7 +545,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     color: Colors.white,
                                   ),
                               elevation: 3.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
@@ -555,7 +554,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 10.0),
                           child: FFButtonWidget(
                             onPressed: () async {
@@ -567,8 +566,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   'FullName': _model.textController1.text,
                                   'UserReferral': _model.textController3.text,
                                   'Invite': _model.textController4.text,
-                                  'Profile': _model.uploadedFileUrl == null ||
-                                          _model.uploadedFileUrl == ''
+                                  'Profile': _model.uploadedFileUrl == ''
                                       ? accountUsersRow?.profile
                                       : _model.uploadedFileUrl,
                                 },
@@ -600,9 +598,9 @@ class _AccountWidgetState extends State<AccountWidget> {
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
@@ -612,7 +610,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     color: Colors.white,
                                   ),
                               elevation: 3.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
@@ -622,7 +620,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         ),
                       ],
                     ),
-                  ].divide(SizedBox(height: 15.0)),
+                  ].divide(const SizedBox(height: 15.0)),
                 ),
               ),
             ),

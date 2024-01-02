@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/select_location/select_location_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -12,7 +11,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'edit_company_model.dart';
@@ -20,7 +18,7 @@ export 'edit_company_model.dart';
 
 class EditCompanyWidget extends StatefulWidget {
   const EditCompanyWidget({
-    Key? key,
+    super.key,
     required this.companyID,
     required this.name,
     required this.phoneNumber,
@@ -32,7 +30,7 @@ class EditCompanyWidget extends StatefulWidget {
     required this.profile,
     required this.detail,
     required this.userID,
-  }) : super(key: key);
+  });
 
   final int? companyID;
   final String? name;
@@ -122,7 +120,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -132,7 +130,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Edit Company',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -142,14 +140,14 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -192,7 +190,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                 .secondaryBackground,
                           ),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 20.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -201,19 +199,19 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   width: 80.0,
                                   height: 80.0,
                                   clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
                                   child: CachedNetworkImage(
-                                    fadeInDuration: Duration(milliseconds: 500),
+                                    fadeInDuration: const Duration(milliseconds: 500),
                                     fadeOutDuration:
-                                        Duration(milliseconds: 500),
+                                        const Duration(milliseconds: 500),
                                     imageUrl: containerUsersRow!.profile,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(15.0),
+                                  padding: const EdgeInsets.all(15.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -222,14 +220,14 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                     children: [
                                       Text(
                                         valueOrDefault<String>(
-                                          containerUsersRow?.fullName,
+                                          containerUsersRow.fullName,
                                           'null',
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
                                       Text(
-                                        'ID: ${containerUsersRow?.phoneNumber}',
+                                        'ID: ${containerUsersRow.phoneNumber}',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
@@ -251,7 +249,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                     },
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -313,7 +311,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                         width: 100.0,
                         height: 100.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: Image.network(
@@ -460,7 +458,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                         'Discount (%): ',
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.sizeOf(context).width * 0.4,
                         child: TextFormField(
                           controller: _model.discountController,
@@ -575,28 +573,28 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                         hintText: 'Company detail',
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Color(0x00000000),
                             width: 1.0,
                           ),
@@ -624,7 +622,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                 : FocusScope.of(context).unfocus(),
                             child: Padding(
                               padding: MediaQuery.viewInsetsOf(context),
-                              child: Container(
+                              child: SizedBox(
                                 height: double.infinity,
                                 child: SelectLocationWidget(
                                   save: () async {},
@@ -645,9 +643,9 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                       width: double.infinity,
                       height: 40.0,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).secondaryText,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
@@ -655,7 +653,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                 color: Colors.white,
                               ),
                       elevation: 3.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),
@@ -668,7 +666,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -687,7 +685,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -901,7 +899,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                 ),
                               ),
                             ),
-                          ].divide(SizedBox(width: 10.0)),
+                          ].divide(const SizedBox(width: 10.0)),
                         ),
                       ),
                     ],
@@ -989,19 +987,19 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                 context: context,
                                 builder: (alertDialogContext) {
                                   return AlertDialog(
-                                    title: Text('Are you sure?'),
-                                    content: Text(
+                                    title: const Text('Are you sure?'),
+                                    content: const Text(
                                         'Are you sure you want to delete the company?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () => Navigator.pop(
                                             alertDialogContext, false),
-                                        child: Text('Cancel'),
+                                        child: const Text('Cancel'),
                                       ),
                                       TextButton(
                                         onPressed: () => Navigator.pop(
                                             alertDialogContext, true),
-                                        child: Text('Confirm'),
+                                        child: const Text('Confirm'),
                                       ),
                                     ],
                                   );
@@ -1028,9 +1026,9 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.3,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).error,
                           textStyle:
@@ -1039,7 +1037,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -1057,19 +1055,14 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                               'TelegramUrl': _model.telegramLinkController.text,
                               'Detail': _model.textController5.text,
                               'Latitude': functions
-                                  .splitLatLng(_model.getLocation == null
-                                      ? widget.location
-                                      : _model.getLocation)
+                                  .splitLatLng(_model.getLocation ?? widget.location)
                                   ?.first,
                               'Longitude': functions
-                                  .splitLatLng(_model.getLocation == null
-                                      ? widget.location
-                                      : _model.getLocation)
+                                  .splitLatLng(_model.getLocation ?? widget.location)
                                   ?.last,
                               'IsVertify': _model.haveDocument,
                               'Discount':
-                                  _model.discountController.text == null ||
-                                          _model.discountController.text == ''
+                                  _model.discountController.text == ''
                                       ? widget.discount
                                       : double.tryParse(
                                           _model.discountController.text),
@@ -1085,9 +1078,9 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.3,
                           height: 40.0,
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
@@ -1096,7 +1089,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),
@@ -1105,7 +1098,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                       ),
                     ],
                   ),
-                ].divide(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)),
               ),
             ),
           ),

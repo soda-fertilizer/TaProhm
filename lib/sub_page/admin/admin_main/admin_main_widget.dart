@@ -1,16 +1,14 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'admin_main_model.dart';
 export 'admin_main_model.dart';
 
 class AdminMainWidget extends StatefulWidget {
-  const AdminMainWidget({Key? key}) : super(key: key);
+  const AdminMainWidget({super.key});
 
   @override
   _AdminMainWidgetState createState() => _AdminMainWidgetState();
@@ -62,7 +60,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -72,7 +70,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'Admin Page',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -82,7 +80,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -95,7 +93,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
               color: FlutterFlowTheme.of(context).secondaryBackground,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -133,7 +131,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'AdminCreateUser',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -192,7 +190,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'ApproveCompany',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -251,7 +249,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'ApproveTransaction',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -310,7 +308,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'AdminMainReferral',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -369,7 +367,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'AdminAccount',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -428,7 +426,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'AdminBusinesses',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -487,7 +485,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'ApproveAccount',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -546,7 +544,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                 context.pushNamed(
                                   'AdminCreateEvent',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -585,7 +583,7 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                       ],
                     ),
                   ),
-                ].divide(SizedBox(height: 20.0)),
+                ].divide(const SizedBox(height: 20.0)),
               ),
             ),
           ),

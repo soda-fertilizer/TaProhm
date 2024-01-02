@@ -1,5 +1,4 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
@@ -7,22 +6,19 @@ import '/component/nav_padding/nav_padding_widget.dart';
 import '/component/update_alert/update_alert_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'dart:async';
 import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({Key? key}) : super(key: key);
+  const HomePageWidget({super.key});
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -56,9 +52,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
             context: context,
             isGlobal: true,
             avoidOverflow: false,
-            targetAnchor: AlignmentDirectional(0.0, 0.0)
+            targetAnchor: const AlignmentDirectional(0.0, 0.0)
                 .resolve(Directionality.of(context)),
-            followerAnchor: AlignmentDirectional(0.0, 0.0)
+            followerAnchor: const AlignmentDirectional(0.0, 0.0)
                 .resolve(Directionality.of(context)),
             builder: (dialogContext) {
               return Material(
@@ -67,7 +63,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   onTap: () => _model.unfocusNode.canRequestFocus
                       ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                       : FocusScope.of(context).unfocus(),
-                  child: UpdateAlertWidget(),
+                  child: const UpdateAlertWidget(),
                 ),
               );
             },
@@ -78,9 +74,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
             context: context,
             isGlobal: true,
             avoidOverflow: false,
-            targetAnchor: AlignmentDirectional(0.0, 0.0)
+            targetAnchor: const AlignmentDirectional(0.0, 0.0)
                 .resolve(Directionality.of(context)),
-            followerAnchor: AlignmentDirectional(0.0, 0.0)
+            followerAnchor: const AlignmentDirectional(0.0, 0.0)
                 .resolve(Directionality.of(context)),
             builder: (dialogContext) {
               return Material(
@@ -89,7 +85,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   onTap: () => _model.unfocusNode.canRequestFocus
                       ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                       : FocusScope.of(context).unfocus(),
-                  child: UpdateAlertWidget(),
+                  child: const UpdateAlertWidget(),
                 ),
               );
             },
@@ -107,7 +103,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
           context.pushNamed(
             'UnderMaintenance',
             extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
+              kTransitionInfoKey: const TransitionInfo(
                 hasTransition: true,
                 transitionType: PageTransitionType.fade,
                 duration: Duration(milliseconds: 0),
@@ -129,7 +125,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
       );
     });
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
     _model.tabBarController = TabController(
       vsync: this,
@@ -195,7 +191,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         color: FlutterFlowTheme.of(context).primary,
                       ),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -228,7 +224,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       context.pushNamed(
                                         'Notification',
                                         extra: <String, dynamic>{
-                                          kTransitionInfoKey: TransitionInfo(
+                                          kTransitionInfoKey: const TransitionInfo(
                                             hasTransition: true,
                                             transitionType:
                                                 PageTransitionType.fade,
@@ -256,7 +252,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     context.pushNamed(
                                       'SearchCompany',
                                       extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
+                                        kTransitionInfoKey: const TransitionInfo(
                                           hasTransition: true,
                                           transitionType:
                                               PageTransitionType.fade,
@@ -272,9 +268,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     size: 28.0,
                                   ),
                                 ),
-                              ].divide(SizedBox(width: 10.0)),
+                              ].divide(const SizedBox(width: 10.0)),
                             ),
-                          ].divide(SizedBox(width: 10.0)),
+                          ].divide(const SizedBox(width: 10.0)),
                         ),
                       ),
                     ),
@@ -322,7 +318,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             return Column(
                               children: [
                                 Align(
-                                  alignment: Alignment(0.0, 0),
+                                  alignment: const Alignment(0.0, 0),
                                   child: TabBar(
                                     labelColor: FlutterFlowTheme.of(context)
                                         .primaryText,
@@ -335,11 +331,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                           fontFamily: 'Readex Pro',
                                           fontSize: 14.0,
                                         ),
-                                    unselectedLabelStyle: TextStyle(),
+                                    unselectedLabelStyle: const TextStyle(),
                                     indicatorColor:
                                         FlutterFlowTheme.of(context).primary,
-                                    padding: EdgeInsets.all(4.0),
-                                    tabs: [
+                                    padding: const EdgeInsets.all(4.0),
+                                    tabs: const [
                                       Tab(
                                         text: 'By Grid',
                                       ),
@@ -357,14 +353,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                       KeepAliveWidgetWrapper(
                                         builder: (context) => Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 1.0, 0.0, 0.0),
                                           child: Container(
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0xFFD0D1D1),
                                             ),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 1.0, 0.0, 0.0),
                                               child: Builder(
                                                 builder: (context) {
@@ -395,7 +391,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               homePageVarIndex];
                                                       return Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     5.0,
@@ -431,11 +427,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                 Container(
                                                                   height: 72.0,
                                                                   decoration:
-                                                                      BoxDecoration(),
+                                                                      const BoxDecoration(),
                                                                   child:
                                                                       Padding(
                                                                     padding:
-                                                                        EdgeInsets.all(
+                                                                        const EdgeInsets.all(
                                                                             10.0),
                                                                     child:
                                                                         InkWell(
@@ -487,7 +483,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                           extra: <String,
                                                                               dynamic>{
                                                                             kTransitionInfoKey:
-                                                                                TransitionInfo(
+                                                                                const TransitionInfo(
                                                                               hasTransition: true,
                                                                               transitionType: PageTransitionType.fade,
                                                                               duration: Duration(milliseconds: 0),
@@ -507,8 +503,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                 BorderRadius.circular(100.0),
                                                                             child:
                                                                                 CachedNetworkImage(
-                                                                              fadeInDuration: Duration(milliseconds: 500),
-                                                                              fadeOutDuration: Duration(milliseconds: 500),
+                                                                              fadeInDuration: const Duration(milliseconds: 500),
+                                                                              fadeOutDuration: const Duration(milliseconds: 500),
                                                                               imageUrl: valueOrDefault<String>(
                                                                                 homePageVarItem.companyProfile,
                                                                                 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/s-m-e-locator-vgu6pa/assets/u2axwx4lw1p4/1.png',
@@ -521,9 +517,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                           Expanded(
                                                                             child:
                                                                                 Padding(
-                                                                              padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                                                              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                                                                               child: Container(
-                                                                                decoration: BoxDecoration(),
+                                                                                decoration: const BoxDecoration(),
                                                                                 child: SingleChildScrollView(
                                                                                   child: Column(
                                                                                     mainAxisSize: MainAxisSize.max,
@@ -553,10 +549,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                       .infinity,
                                                                   height: 215.0,
                                                                   decoration:
-                                                                      BoxDecoration(),
+                                                                      const BoxDecoration(),
                                                                   child:
                                                                       Padding(
-                                                                    padding: EdgeInsetsDirectional
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             10.0,
                                                                             0.0,
@@ -582,7 +578,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                               return Stack(
                                                                                 children: [
                                                                                   Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                                                                                     child: Container(
                                                                                       width: 150.0,
                                                                                       height: double.infinity,
@@ -598,7 +594,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                         onTap: () async {
                                                                                           await showModalBottomSheet(
                                                                                             isScrollControlled: true,
-                                                                                            backgroundColor: Color(0x77000000),
+                                                                                            backgroundColor: const Color(0x77000000),
                                                                                             useSafeArea: true,
                                                                                             context: context,
                                                                                             builder: (context) {
@@ -617,8 +613,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                         child: ClipRRect(
                                                                                           borderRadius: BorderRadius.circular(8.0),
                                                                                           child: CachedNetworkImage(
-                                                                                            fadeInDuration: Duration(milliseconds: 500),
-                                                                                            fadeOutDuration: Duration(milliseconds: 500),
+                                                                                            fadeInDuration: const Duration(milliseconds: 500),
+                                                                                            fadeOutDuration: const Duration(milliseconds: 500),
                                                                                             imageUrl: imagesItem,
                                                                                             width: 300.0,
                                                                                             height: 200.0,
@@ -634,14 +630,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                       height: 20.0,
                                                                                       decoration: BoxDecoration(
                                                                                         color: FlutterFlowTheme.of(context).error,
-                                                                                        borderRadius: BorderRadius.only(
+                                                                                        borderRadius: const BorderRadius.only(
                                                                                           bottomLeft: Radius.circular(0.0),
                                                                                           bottomRight: Radius.circular(0.0),
                                                                                           topLeft: Radius.circular(8.0),
                                                                                           topRight: Radius.circular(0.0),
                                                                                         ),
                                                                                       ),
-                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                       child: Text(
                                                                                         '- ${homePageVarItem.discount.toString()}%',
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -653,7 +649,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                     ),
                                                                                 ],
                                                                               );
-                                                                            }).divide(SizedBox(width: 10.0)),
+                                                                            }).divide(const SizedBox(width: 10.0)),
                                                                           ),
                                                                         );
                                                                       },
@@ -699,7 +695,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                 final byListItem =
                                                     byList[byListIndex];
                                                 return Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 1.0),
                                                   child: InkWell(
@@ -737,7 +733,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         extra: <String,
                                                             dynamic>{
                                                           kTransitionInfoKey:
-                                                              TransitionInfo(
+                                                              const TransitionInfo(
                                                             hasTransition: true,
                                                             transitionType:
                                                                 PageTransitionType
@@ -762,14 +758,14 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             color: FlutterFlowTheme
                                                                     .of(context)
                                                                 .alternate,
-                                                            offset: Offset(
+                                                            offset: const Offset(
                                                                 0.0, 1.0),
                                                           )
                                                         ],
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            EdgeInsetsDirectional
+                                                            const EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     16.0,
                                                                     0.0,
@@ -790,11 +786,11 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               child:
                                                                   CachedNetworkImage(
                                                                 fadeInDuration:
-                                                                    Duration(
+                                                                    const Duration(
                                                                         milliseconds:
                                                                             500),
                                                                 fadeOutDuration:
-                                                                    Duration(
+                                                                    const Duration(
                                                                         milliseconds:
                                                                             500),
                                                                 imageUrl: byListItem
@@ -808,9 +804,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                             Expanded(
                                                               child: Container(
                                                                 decoration:
-                                                                    BoxDecoration(),
+                                                                    const BoxDecoration(),
                                                                 child: Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           12.0,
                                                                           0.0,
@@ -831,7 +827,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                               .start,
                                                                       children: [
                                                                         Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               0.0,
                                                                               0.0,
@@ -874,16 +870,16 @@ class _HomePageWidgetState extends State<HomePageWidget>
                     wrapWithModel(
                       model: _model.navPaddingModel,
                       updateCallback: () => setState(() {}),
-                      child: NavPaddingWidget(),
+                      child: const NavPaddingWidget(),
                     ),
                   ],
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
+                  alignment: const AlignmentDirectional(0.0, 1.0),
                   child: wrapWithModel(
                     model: _model.navBarModel,
                     updateCallback: () => setState(() {}),
-                    child: NavBarWidget(
+                    child: const NavBarWidget(
                       selectPageIndex: 1,
                     ),
                   ),

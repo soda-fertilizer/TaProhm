@@ -1,17 +1,6 @@
-import '/backend/schema/structs/index.dart';
-import '/backend/supabase/supabase.dart';
-import '/component/show_k_h_q_r/show_k_h_q_r_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_data.dart';
-import '/flutter_flow/permissions_util.dart';
 import 'acount_payment_widget.dart' show AcountPaymentWidget;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class AcountPaymentModel extends FlutterFlowModel<AcountPaymentWidget> {
   ///  Local state fields for this page.
@@ -32,8 +21,10 @@ class AcountPaymentModel extends FlutterFlowModel<AcountPaymentWidget> {
 
   /// Initialization and disposal methods.
 
+  @override
   void initState(BuildContext context) {}
 
+  @override
   void dispose() {}
 
   /// Action blocks are added here.

@@ -4,11 +4,9 @@ import '/component/image_gallery/image_gallery_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'company_info_model.dart';
@@ -16,9 +14,9 @@ export 'company_info_model.dart';
 
 class CompanyInfoWidget extends StatefulWidget {
   const CompanyInfoWidget({
-    Key? key,
+    super.key,
     required this.companyID,
-  }) : super(key: key);
+  });
 
   final int? companyID;
 
@@ -101,7 +99,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -111,7 +109,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                 },
               ),
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Company info',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -121,14 +119,14 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       ),
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -140,7 +138,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       onTap: () async {
                         await showModalBottomSheet(
                           isScrollControlled: true,
-                          backgroundColor: Color(0x79000000),
+                          backgroundColor: const Color(0x79000000),
                           useSafeArea: true,
                           context: context,
                           builder: (context) {
@@ -153,7 +151,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                 padding: MediaQuery.viewInsetsOf(context),
                                 child: BigImageWidget(
                                   imgURL:
-                                      companyInfoCompaniesRow!.companyProfile,
+                                      companyInfoCompaniesRow.companyProfile,
                                 ),
                               ),
                             );
@@ -164,26 +162,26 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                         width: 100.0,
                         height: 100.0,
                         clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: CachedNetworkImage(
-                          fadeInDuration: Duration(milliseconds: 500),
-                          fadeOutDuration: Duration(milliseconds: 500),
+                          fadeInDuration: const Duration(milliseconds: 500),
+                          fadeOutDuration: const Duration(milliseconds: 500),
                           imageUrl: companyInfoCompaniesRow!.companyProfile,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                     Text(
-                      companyInfoCompaniesRow!.companyName,
+                      companyInfoCompaniesRow.companyName,
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                     Container(
                       width: double.infinity,
                       height: MediaQuery.sizeOf(context).height * 0.4,
-                      decoration: BoxDecoration(),
-                      alignment: AlignmentDirectional(0.0, -1.0),
+                      decoration: const BoxDecoration(),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -191,8 +189,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                             Builder(
                               builder: (context) {
                                 final images = companyInfoCompaniesRow
-                                        ?.companyImages
-                                        ?.toList() ??
+                                        .companyImages
+                                        .toList() ??
                                     [];
                                 return Wrap(
                                   spacing: 10.0,
@@ -227,7 +225,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                         onTap: () async {
                                           await showModalBottomSheet(
                                             isScrollControlled: true,
-                                            backgroundColor: Color(0x79000000),
+                                            backgroundColor: const Color(0x79000000),
                                             useSafeArea: true,
                                             context: context,
                                             builder: (context) {
@@ -245,8 +243,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                                           context),
                                                   child: ImageGalleryWidget(
                                                     images:
-                                                        companyInfoCompaniesRow!
-                                                            .companyImages,
+                                                        companyInfoCompaniesRow.companyImages,
                                                   ),
                                                 ),
                                               );
@@ -286,9 +283,9 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                       child: Container(
                         width: double.infinity,
                         height: 100.0,
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 10.0),
                           child: SingleChildScrollView(
                             child: Column(
@@ -296,7 +293,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  companyInfoCompaniesRow!.detail,
+                                  companyInfoCompaniesRow.detail,
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
@@ -306,7 +303,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                         ),
                       ),
                     ),
-                  ].divide(SizedBox(height: 15.0)),
+                  ].divide(const SizedBox(height: 15.0)),
                 ),
               ),
             ),

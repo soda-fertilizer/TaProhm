@@ -3,17 +3,15 @@ import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'event_model.dart';
 export 'event_model.dart';
 
 class EventWidget extends StatefulWidget {
-  const EventWidget({Key? key}) : super(key: key);
+  const EventWidget({super.key});
 
   @override
   _EventWidgetState createState() => _EventWidgetState();
@@ -68,7 +66,7 @@ class _EventWidgetState extends State<EventWidget> {
                   fontSize: 22.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -135,7 +133,7 @@ class _EventWidgetState extends State<EventWidget> {
                                       ),
                                     }.withoutNulls,
                                     extra: <String, dynamic>{
-                                      kTransitionInfoKey: TransitionInfo(
+                                      kTransitionInfoKey: const TransitionInfo(
                                         hasTransition: true,
                                         transitionType: PageTransitionType.fade,
                                         duration: Duration(milliseconds: 0),
@@ -152,7 +150,7 @@ class _EventWidgetState extends State<EventWidget> {
                                           .primaryBackground,
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           16.0, 10.0, 16.0, 10.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -168,9 +166,9 @@ class _EventWidgetState extends State<EventWidget> {
                                                   BorderRadius.circular(8.0),
                                               child: CachedNetworkImage(
                                                 fadeInDuration:
-                                                    Duration(milliseconds: 500),
+                                                    const Duration(milliseconds: 500),
                                                 fadeOutDuration:
-                                                    Duration(milliseconds: 500),
+                                                    const Duration(milliseconds: 500),
                                                 imageUrl:
                                                     listViewEventsRow.image!,
                                                 width: 100.0,
@@ -180,9 +178,9 @@ class _EventWidgetState extends State<EventWidget> {
                                             ),
                                           Expanded(
                                             child: Container(
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         16.0, 0.0, 0.0, 0.0),
                                                 child: SingleChildScrollView(
@@ -257,7 +255,7 @@ class _EventWidgetState extends State<EventWidget> {
                                                                 ),
                                                       ),
                                                     ].divide(
-                                                        SizedBox(height: 5.0)),
+                                                        const SizedBox(height: 5.0)),
                                                   ),
                                                 ),
                                               ),
@@ -278,16 +276,16 @@ class _EventWidgetState extends State<EventWidget> {
                   wrapWithModel(
                     model: _model.navPaddingModel,
                     updateCallback: () => setState(() {}),
-                    child: NavPaddingWidget(),
+                    child: const NavPaddingWidget(),
                   ),
                 ],
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 1.0),
+                alignment: const AlignmentDirectional(0.0, 1.0),
                 child: wrapWithModel(
                   model: _model.navBarModel,
                   updateCallback: () => setState(() {}),
-                  child: NavBarWidget(
+                  child: const NavBarWidget(
                     selectPageIndex: 4,
                   ),
                 ),

@@ -9,7 +9,7 @@ class SectorsTable extends SupabaseTable<SectorsRow> {
 }
 
 class SectorsRow extends SupabaseDataRow {
-  SectorsRow(Map<String, dynamic> data) : super(data);
+  SectorsRow(super.data);
 
   @override
   SupabaseTable get table => SectorsTable();

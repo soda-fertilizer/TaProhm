@@ -6,25 +6,22 @@ import '/component/nav_padding/nav_padding_widget.dart';
 import '/component/show_shop/show_shop_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'locator_model.dart';
 export 'locator_model.dart';
 
 class LocatorWidget extends StatefulWidget {
   const LocatorWidget({
-    Key? key,
+    super.key,
     this.moveLocation,
     bool? clickCompany,
-  })  : this.clickCompany = clickCompany ?? false,
-        super(key: key);
+  })  : clickCompany = clickCompany ?? false;
 
   final LatLng? moveLocation;
   final bool clickCompany;
@@ -65,7 +62,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                     : FocusScope.of(context).unfocus(),
                 child: Padding(
                   padding: MediaQuery.viewInsetsOf(context),
-                  child: Container(
+                  child: SizedBox(
                     height: 220.0,
                     child: ShowShopWidget(
                       locationPara: FFAppState().shopHolder,
@@ -90,9 +87,9 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                     : FocusScope.of(context).unfocus(),
                 child: Padding(
                   padding: MediaQuery.viewInsetsOf(context),
-                  child: Container(
+                  child: SizedBox(
                     height: MediaQuery.sizeOf(context).height * 0.7,
-                    child: LoginOnlyWidget(),
+                    child: const LoginOnlyWidget(),
                   ),
                 ),
               );
@@ -106,7 +103,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
       }
     });
 
-    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
@@ -198,7 +195,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                       fontSize: 22.0,
                     ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: false,
               elevation: 2.0,
             ),
@@ -211,16 +208,14 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                     children: [
                       Expanded(
                         child: Container(
-                          decoration: BoxDecoration(),
-                          child: Container(
+                          decoration: const BoxDecoration(),
+                          child: SizedBox(
                             width: double.infinity,
                             height: double.infinity,
                             child: custom_widgets.CustomMap(
                               width: double.infinity,
                               height: double.infinity,
-                              center: widget.moveLocation == null
-                                  ? currentUserLocationValue
-                                  : widget.moveLocation,
+                              center: widget.moveLocation ?? currentUserLocationValue,
                               cuLocation: locatorCompaniesRowList,
                               userCurrentLocation: currentUserLocationValue!,
                               showShop: () async {
@@ -241,7 +236,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: 220.0,
                                             child: ShowShopWidget(
                                               locationPara:
@@ -271,11 +266,11 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                                         child: Padding(
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
-                                          child: Container(
+                                          child: SizedBox(
                                             height: MediaQuery.sizeOf(context)
                                                     .height *
                                                 0.7,
-                                            child: LoginComponentWidget(),
+                                            child: const LoginComponentWidget(),
                                           ),
                                         ),
                                       );
@@ -290,21 +285,21 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 1.0),
+                        alignment: const AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
                           model: _model.navPaddingModel,
                           updateCallback: () => setState(() {}),
-                          child: NavPaddingWidget(),
+                          child: const NavPaddingWidget(),
                         ),
                       ),
                     ],
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0.0, 1.0),
+                    alignment: const AlignmentDirectional(0.0, 1.0),
                     child: wrapWithModel(
                       model: _model.navBarModel,
                       updateCallback: () => setState(() {}),
-                      child: NavBarWidget(
+                      child: const NavBarWidget(
                         selectPageIndex: 2,
                       ),
                     ),

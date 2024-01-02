@@ -1,16 +1,14 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'sub_admin_main_model.dart';
 export 'sub_admin_main_model.dart';
 
 class SubAdminMainWidget extends StatefulWidget {
-  const SubAdminMainWidget({Key? key}) : super(key: key);
+  const SubAdminMainWidget({super.key});
 
   @override
   _SubAdminMainWidgetState createState() => _SubAdminMainWidgetState();
@@ -62,7 +60,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -72,7 +70,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(-1.0, 0.0),
+            alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
               'SubAdmin Page',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -82,7 +80,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -95,7 +93,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
               color: FlutterFlowTheme.of(context).secondaryBackground,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -133,7 +131,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                 context.pushNamed(
                                   'AdminCreateUser',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -192,7 +190,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                 context.pushNamed(
                                   'SubAdminAccount',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -251,7 +249,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                 context.pushNamed(
                                   'SubAdminBusinesses',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -310,7 +308,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                 context.pushNamed(
                                   'AdminCreateEvent',
                                   extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
+                                    kTransitionInfoKey: const TransitionInfo(
                                       hasTransition: true,
                                       transitionType: PageTransitionType.fade,
                                       duration: Duration(milliseconds: 0),
@@ -349,7 +347,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                       ],
                     ),
                   ),
-                ].divide(SizedBox(height: 20.0)),
+                ].divide(const SizedBox(height: 20.0)),
               ),
             ),
           ),
