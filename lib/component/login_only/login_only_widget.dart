@@ -344,6 +344,13 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                 );
                                 shouldSetState = true;
                                 if ((_model.login?.succeeded ?? true)) {
+                                  await actions.onesignalLogin(
+                                    UsersGroup.loginCall
+                                        .token(
+                                          (_model.login?.jsonBody ?? ''),
+                                        )
+                                        .toString(),
+                                  );
                                   GoRouter.of(context).prepareAuthEvent();
                                   await authManager.signIn(
                                     authenticationToken: UsersGroup.loginCall
@@ -415,9 +422,6 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                       ),
                                     );
                                   });
-                                  await actions.onesignalLogin(
-                                    FFAppState().UserInfo.token,
-                                  );
                                   if (Navigator.of(context).canPop()) {
                                     context.pop();
                                   }
