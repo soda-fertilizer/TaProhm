@@ -33,6 +33,9 @@ class DepositModel extends FlutterFlowModel<DepositWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl2 = '';
 
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  TransactionsRow? requestWithdrawal;
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}

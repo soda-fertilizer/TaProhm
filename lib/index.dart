@@ -82,3 +82,7 @@ export '/sub_page/sub_admin/sub_admin_account/sub_admin_account_widget.dart'
     show SubAdminAccountWidget;
 export '/sub_page/sub_admin/sub_admin_sub_account/sub_admin_sub_account_widget.dart'
     show SubAdminSubAccountWidget;
+export '/sub_page/admin/sup_page/admin_event_details/admin_event_details_widget.dart'
+    show AdminEventDetailsWidget;
+export '/sub_page/admin/sup_page/edit_event/edit_event_widget.dart'
+    show EditEventWidget;

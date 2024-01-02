@@ -485,8 +485,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       (_model.login?.jsonBody ??
                                                           ''),
                                                     )
-                                                    .toString()
-                                                    ?.toString(),
+                                                    .toString(),
                                               );
                                               await actions.onesignalLogin(
                                                 UsersGroup.loginCall

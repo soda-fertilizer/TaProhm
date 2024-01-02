@@ -5,7 +5,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +21,8 @@ class AdminCreateEventWidget extends StatefulWidget {
   _AdminCreateEventWidgetState createState() => _AdminCreateEventWidgetState();
 }
 
-class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget> {
+class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
+    with TickerProviderStateMixin {
   late AdminCreateEventModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -29,6 +32,18 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget> {
     super.initState();
     _model = createModel(context, () => AdminCreateEventModel());
 
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.eventDate = getCurrentTimestamp;
+      });
+    });
+
+    _model.tabBarController = TabController(
+      vsync: this,
+      length: 2,
+      initialIndex: 0,
+    )..addListener(() => setState(() {}));
     _model.titleController ??= TextEditingController();
     _model.titleFocusNode ??= FocusNode();
 
@@ -94,354 +109,776 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 0.8,
-                    child: TextFormField(
-                      controller: _model.titleController,
-                      focusNode: _model.titleFocusNode,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        labelText: 'Title',
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      validator:
-                          _model.titleControllerValidator.asValidator(context),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment(0.0, 0),
+                child: TabBar(
+                  labelColor: FlutterFlowTheme.of(context).primaryText,
+                  unselectedLabelColor:
+                      FlutterFlowTheme.of(context).secondaryText,
+                  labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                  unselectedLabelStyle: TextStyle(),
+                  indicatorColor: FlutterFlowTheme.of(context).primary,
+                  padding: EdgeInsets.all(4.0),
+                  tabs: [
+                    Tab(
+                      text: 'Create',
                     ),
-                  ),
+                    Tab(
+                      text: 'History',
+                    ),
+                  ],
+                  controller: _model.tabBarController,
                 ),
-                Container(
-                  width: MediaQuery.sizeOf(context).width * 0.8,
-                  height: MediaQuery.sizeOf(context).height * 0.2,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      width: 1.0,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
-                    child: Container(
-                      width: double.infinity,
-                      child: TextFormField(
-                        controller: _model.detailsController,
-                        focusNode: _model.detailsFocusNode,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelText: 'Details',
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          focusedErrorBorder: InputBorder.none,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                        maxLines: null,
-                        validator: _model.detailsControllerValidator
-                            .asValidator(context),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 39.0,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFE9ECEE),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Add image',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                setState(() {
-                                  _model.uploadImage = null;
-                                });
-                              },
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/icons8-remove-48.png',
-                                  width: 30.0,
-                                  height: 24.0,
-                                  fit: BoxFit.cover,
+              ),
+              Expanded(
+                child: TabBarView(
+                  controller: _model.tabBarController,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                8.0, 0.0, 8.0, 0.0),
+                            child: Container(
+                              width: MediaQuery.sizeOf(context).width * 0.8,
+                              child: TextFormField(
+                                controller: _model.titleController,
+                                focusNode: _model.titleFocusNode,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  labelText: 'Title',
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                validator: _model.titleControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * 0.8,
+                            height: MediaQuery.sizeOf(context).height * 0.2,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                              border: Border.all(
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                width: 1.0,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 0.0, 8.0, 0.0),
+                              child: Container(
+                                width: double.infinity,
+                                child: TextFormField(
+                                  controller: _model.detailsController,
+                                  focusNode: _model.detailsFocusNode,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    labelText: 'Details',
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium,
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    errorBorder: InputBorder.none,
+                                    focusedErrorBorder: InputBorder.none,
+                                  ),
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  maxLines: null,
+                                  validator: _model.detailsControllerValidator
+                                      .asValidator(context),
                                 ),
                               ),
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                // Upload1
-                                final selectedMedia = await selectMedia(
-                                  storageFolderPath: 'Users',
-                                  maxWidth: 1080.00,
-                                  maxHeight: 1080.00,
-                                  mediaSource: MediaSource.photoGallery,
-                                  multiImage: false,
-                                );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
-                                  setState(
-                                      () => _model.isDataUploading1 = true);
-                                  var selectedUploadedFiles =
-                                      <FFUploadedFile>[];
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              final _datePickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: getCurrentTimestamp,
+                                firstDate: getCurrentTimestamp,
+                                lastDate: DateTime(2050),
+                                builder: (context, child) {
+                                  return wrapInMaterialDatePickerTheme(
+                                    context,
+                                    child!,
+                                    headerBackgroundColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    headerForegroundColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    headerTextStyle:
+                                        FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              fontSize: 32.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                    pickerBackgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                    pickerForegroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                    selectedDateTimeBackgroundColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    selectedDateTimeForegroundColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    actionButtonForegroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                    iconSize: 24.0,
+                                  );
+                                },
+                              );
 
-                                  var downloadUrls = <String>[];
-                                  try {
-                                    showUploadMessage(
+                              TimeOfDay? _datePickedTime;
+                              if (_datePickedDate != null) {
+                                _datePickedTime = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(
+                                      getCurrentTimestamp),
+                                  builder: (context, child) {
+                                    return wrapInMaterialTimePickerTheme(
                                       context,
-                                      'Uploading file...',
-                                      showLoading: true,
+                                      child!,
+                                      headerBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      headerForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      headerTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                fontSize: 32.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                      pickerBackgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      pickerForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      selectedDateTimeBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      selectedDateTimeForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      actionButtonForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      iconSize: 24.0,
                                     );
-                                    selectedUploadedFiles = selectedMedia
-                                        .map((m) => FFUploadedFile(
-                                              name:
-                                                  m.storagePath.split('/').last,
-                                              bytes: m.bytes,
-                                              height: m.dimensions?.height,
-                                              width: m.dimensions?.width,
-                                              blurHash: m.blurHash,
-                                            ))
-                                        .toList();
+                                  },
+                                );
+                              }
 
-                                    downloadUrls =
-                                        await uploadSupabaseStorageFiles(
-                                      bucketName: 'images',
-                                      selectedFiles: selectedMedia,
-                                    );
-                                  } finally {
-                                    ScaffoldMessenger.of(context)
-                                        .hideCurrentSnackBar();
-                                    _model.isDataUploading1 = false;
-                                  }
-                                  if (selectedUploadedFiles.length ==
-                                          selectedMedia.length &&
-                                      downloadUrls.length ==
-                                          selectedMedia.length) {
-                                    setState(() {
-                                      _model.uploadedLocalFile1 =
-                                          selectedUploadedFiles.first;
-                                      _model.uploadedFileUrl1 =
-                                          downloadUrls.first;
-                                    });
-                                    showUploadMessage(context, 'Success!');
-                                  } else {
-                                    setState(() {});
-                                    showUploadMessage(
-                                        context, 'Failed to upload data');
-                                    return;
-                                  }
-                                }
-
-                                setState(() {
-                                  _model.uploadImage = _model.uploadedFileUrl1;
+                              if (_datePickedDate != null &&
+                                  _datePickedTime != null) {
+                                safeSetState(() {
+                                  _model.datePicked = DateTime(
+                                    _datePickedDate.year,
+                                    _datePickedDate.month,
+                                    _datePickedDate.day,
+                                    _datePickedTime!.hour,
+                                    _datePickedTime.minute,
+                                  );
                                 });
-                              },
+                              }
+                              setState(() {
+                                _model.eventDate = _model.datePicked == null
+                                    ? getCurrentTimestamp
+                                    : _model.datePicked;
+                              });
+                            },
+                            text: dateTimeFormat(
+                                'dd/MM/yyyy hh:mm a', _model.eventDate),
+                            options: FFButtonOptions(
+                              width: MediaQuery.sizeOf(context).width * 0.8,
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                  ),
+                              elevation: 1.0,
+                              borderSide: BorderSide(
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 39.0,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFE9ECEE),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Add image',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 10.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          setState(() {
+                                            _model.selectImage = null;
+                                          });
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/icons8-remove-48.png',
+                                            width: 30.0,
+                                            height: 24.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          // Upload1
+                                          final selectedMedia =
+                                              await selectMedia(
+                                            storageFolderPath: 'Events',
+                                            maxWidth: 1080.00,
+                                            maxHeight: 1080.00,
+                                            mediaSource:
+                                                MediaSource.photoGallery,
+                                            multiImage: false,
+                                          );
+                                          if (selectedMedia != null &&
+                                              selectedMedia.every((m) =>
+                                                  validateFileFormat(
+                                                      m.storagePath,
+                                                      context))) {
+                                            setState(() =>
+                                                _model.isDataUploading1 = true);
+                                            var selectedUploadedFiles =
+                                                <FFUploadedFile>[];
+
+                                            var downloadUrls = <String>[];
+                                            try {
+                                              showUploadMessage(
+                                                context,
+                                                'Uploading file...',
+                                                showLoading: true,
+                                              );
+                                              selectedUploadedFiles =
+                                                  selectedMedia
+                                                      .map(
+                                                          (m) => FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                      .toList();
+
+                                              downloadUrls =
+                                                  await uploadSupabaseStorageFiles(
+                                                bucketName: 'images',
+                                                selectedFiles: selectedMedia,
+                                              );
+                                            } finally {
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                              _model.isDataUploading1 = false;
+                                            }
+                                            if (selectedUploadedFiles.length ==
+                                                    selectedMedia.length &&
+                                                downloadUrls.length ==
+                                                    selectedMedia.length) {
+                                              setState(() {
+                                                _model.uploadedLocalFile1 =
+                                                    selectedUploadedFiles.first;
+                                                _model.uploadedFileUrl1 =
+                                                    downloadUrls.first;
+                                              });
+                                              showUploadMessage(
+                                                  context, 'Success!');
+                                            } else {
+                                              setState(() {});
+                                              showUploadMessage(context,
+                                                  'Failed to upload data');
+                                              return;
+                                            }
+                                          }
+
+                                          setState(() {
+                                            _model.selectImage =
+                                                _model.uploadedFileUrl1;
+                                          });
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/icons8-image-48.png',
+                                            width: 30.0,
+                                            height: 24.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          final selectedMedia =
+                                              await selectMedia(
+                                            storageFolderPath: 'Events',
+                                            maxWidth: 1080.00,
+                                            maxHeight: 1080.00,
+                                            multiImage: false,
+                                          );
+                                          if (selectedMedia != null &&
+                                              selectedMedia.every((m) =>
+                                                  validateFileFormat(
+                                                      m.storagePath,
+                                                      context))) {
+                                            setState(() =>
+                                                _model.isDataUploading2 = true);
+                                            var selectedUploadedFiles =
+                                                <FFUploadedFile>[];
+
+                                            var downloadUrls = <String>[];
+                                            try {
+                                              showUploadMessage(
+                                                context,
+                                                'Uploading file...',
+                                                showLoading: true,
+                                              );
+                                              selectedUploadedFiles =
+                                                  selectedMedia
+                                                      .map(
+                                                          (m) => FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                      .toList();
+
+                                              downloadUrls =
+                                                  await uploadSupabaseStorageFiles(
+                                                bucketName: 'images',
+                                                selectedFiles: selectedMedia,
+                                              );
+                                            } finally {
+                                              ScaffoldMessenger.of(context)
+                                                  .hideCurrentSnackBar();
+                                              _model.isDataUploading2 = false;
+                                            }
+                                            if (selectedUploadedFiles.length ==
+                                                    selectedMedia.length &&
+                                                downloadUrls.length ==
+                                                    selectedMedia.length) {
+                                              setState(() {
+                                                _model.uploadedLocalFile2 =
+                                                    selectedUploadedFiles.first;
+                                                _model.uploadedFileUrl2 =
+                                                    downloadUrls.first;
+                                              });
+                                              showUploadMessage(
+                                                  context, 'Success!');
+                                            } else {
+                                              setState(() {});
+                                              showUploadMessage(context,
+                                                  'Failed to upload data');
+                                              return;
+                                            }
+                                          }
+
+                                          setState(() {
+                                            _model.selectImage =
+                                                _model.uploadedFileUrl2;
+                                          });
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/icons8-camera-48.png',
+                                            width: 30.0,
+                                            height: 24.0,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ].divide(SizedBox(width: 10.0)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (_model.selectImage != null &&
+                              _model.selectImage != '')
+                            Expanded(
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/icons8-image-48.png',
-                                  width: 30.0,
-                                  height: 24.0,
-                                  fit: BoxFit.cover,
+                                child: CachedNetworkImage(
+                                  fadeInDuration: Duration(milliseconds: 500),
+                                  fadeOutDuration: Duration(milliseconds: 500),
+                                  imageUrl: _model.selectImage!,
+                                  width: 300.0,
+                                  height: 200.0,
+                                  fit: BoxFit.contain,
                                 ),
                               ),
                             ),
-                            InkWell(
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 10.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                if ((_model.titleController.text != null &&
+                                        _model.titleController.text != '') &&
+                                    (_model.detailsController.text != null &&
+                                        _model.detailsController.text != '') &&
+                                    (_model.selectImage != null &&
+                                        _model.selectImage != '')) {
+                                  await EventsTable().insert({
+                                    'Title': _model.titleController.text,
+                                    'Details': _model.detailsController.text,
+                                    'EventDate': supaSerialize<DateTime>(
+                                        _model.eventDate),
+                                    'CreateBy': FFAppState().UserInfo.userID,
+                                    'image': _model.selectImage,
+                                  });
+                                  context.safePop();
+                                  return;
+                                } else {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text('Some field are emty.'),
+                                        content: Text(
+                                            'Please make sure you field title, details and image.'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text('Ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                  return;
+                                }
+                              },
+                              text: 'Create',
+                              options: FFButtonOptions(
+                                width: MediaQuery.sizeOf(context).width * 0.4,
+                                height: 40.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 0.0, 24.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      color: Colors.white,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                        ].divide(SizedBox(height: 15.0)),
+                      ),
+                    ),
+                    FutureBuilder<List<EventsRow>>(
+                      future: EventsTable().queryRows(
+                        queryFn: (q) => q
+                            .eq(
+                              'CreateBy',
+                              FFAppState().UserInfo.userID,
+                            )
+                            .order('ID'),
+                        limit: 50,
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        List<EventsRow> listViewEventsRowList = snapshot.data!;
+                        return ListView.builder(
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.vertical,
+                          itemCount: listViewEventsRowList.length,
+                          itemBuilder: (context, listViewIndex) {
+                            final listViewEventsRow =
+                                listViewEventsRowList[listViewIndex];
+                            return InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                final selectedMedia = await selectMedia(
-                                  storageFolderPath: 'Users',
-                                  maxWidth: 1080.00,
-                                  maxHeight: 1080.00,
-                                  multiImage: false,
+                                context.pushNamed(
+                                  'AdminEventDetails',
+                                  queryParameters: {
+                                    'id': serializeParam(
+                                      listViewEventsRow.id,
+                                      ParamType.int,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 0),
+                                    ),
+                                  },
                                 );
-                                if (selectedMedia != null &&
-                                    selectedMedia.every((m) =>
-                                        validateFileFormat(
-                                            m.storagePath, context))) {
-                                  setState(
-                                      () => _model.isDataUploading2 = true);
-                                  var selectedUploadedFiles =
-                                      <FFUploadedFile>[];
-
-                                  var downloadUrls = <String>[];
-                                  try {
-                                    showUploadMessage(
-                                      context,
-                                      'Uploading file...',
-                                      showLoading: true,
-                                    );
-                                    selectedUploadedFiles = selectedMedia
-                                        .map((m) => FFUploadedFile(
-                                              name:
-                                                  m.storagePath.split('/').last,
-                                              bytes: m.bytes,
-                                              height: m.dimensions?.height,
-                                              width: m.dimensions?.width,
-                                              blurHash: m.blurHash,
-                                            ))
-                                        .toList();
-
-                                    downloadUrls =
-                                        await uploadSupabaseStorageFiles(
-                                      bucketName: 'images',
-                                      selectedFiles: selectedMedia,
-                                    );
-                                  } finally {
-                                    ScaffoldMessenger.of(context)
-                                        .hideCurrentSnackBar();
-                                    _model.isDataUploading2 = false;
-                                  }
-                                  if (selectedUploadedFiles.length ==
-                                          selectedMedia.length &&
-                                      downloadUrls.length ==
-                                          selectedMedia.length) {
-                                    setState(() {
-                                      _model.uploadedLocalFile2 =
-                                          selectedUploadedFiles.first;
-                                      _model.uploadedFileUrl2 =
-                                          downloadUrls.first;
-                                    });
-                                    showUploadMessage(context, 'Success!');
-                                  } else {
-                                    setState(() {});
-                                    showUploadMessage(
-                                        context, 'Failed to upload data');
-                                    return;
-                                  }
-                                }
-
-                                setState(() {
-                                  _model.uploadImage = _model.uploadedFileUrl2;
-                                });
                               },
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  'assets/images/icons8-camera-48.png',
-                                  width: 30.0,
-                                  height: 24.0,
-                                  fit: BoxFit.cover,
+                              child: Material(
+                                color: Colors.transparent,
+                                elevation: 1.0,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 10.0, 16.0, 10.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        if (listViewEventsRow.image != null &&
+                                            listViewEventsRow.image != '')
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: CachedNetworkImage(
+                                              fadeInDuration:
+                                                  Duration(milliseconds: 500),
+                                              fadeOutDuration:
+                                                  Duration(milliseconds: 500),
+                                              imageUrl:
+                                                  listViewEventsRow.image!,
+                                              width: 100.0,
+                                              height: 100.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 0.0, 0.0),
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      valueOrDefault<String>(
+                                                        listViewEventsRow.title,
+                                                        'Null',
+                                                      ).maybeHandleOverflow(
+                                                        maxChars: 35,
+                                                        replacement: '…',
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
+                                                              ),
+                                                    ),
+                                                    Text(
+                                                      dateTimeFormat(
+                                                          'MMM,dd,yyyy  hh:mm a',
+                                                          listViewEventsRow
+                                                              .eventDate),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                fontSize: 12.0,
+                                                              ),
+                                                    ),
+                                                    Text(
+                                                      valueOrDefault<String>(
+                                                        listViewEventsRow
+                                                            .details,
+                                                        'Null',
+                                                      ).maybeHandleOverflow(
+                                                        maxChars: 65,
+                                                        replacement: '…',
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                fontSize: 12.0,
+                                                              ),
+                                                    ),
+                                                  ].divide(
+                                                      SizedBox(height: 5.0)),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ].divide(SizedBox(width: 10.0)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                if (_model.uploadImage != null && _model.uploadImage != '')
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: CachedNetworkImage(
-                      fadeInDuration: Duration(milliseconds: 500),
-                      fadeOutDuration: Duration(milliseconds: 500),
-                      imageUrl: _model.uploadImage!,
-                      width: double.infinity,
-                      height: 200.0,
-                      fit: BoxFit.contain,
+                            );
+                          },
+                        );
+                      },
                     ),
-                  ),
-                FFButtonWidget(
-                  onPressed: () async {
-                    await EventsTable().insert({
-                      'Title': _model.titleController.text,
-                      'Details': _model.detailsController.text,
-                      'Image': _model.uploadImage,
-                    });
-                    context.safePop();
-                  },
-                  text: 'Create',
-                  options: FFButtonOptions(
-                    width: MediaQuery.sizeOf(context).width * 0.4,
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Readex Pro',
-                          color: Colors.white,
-                        ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+                  ],
                 ),
-              ].divide(SizedBox(height: 15.0)),
-            ),
+              ),
+            ],
           ),
         ),
       ),

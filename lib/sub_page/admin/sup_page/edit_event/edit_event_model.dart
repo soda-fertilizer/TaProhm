@@ -4,8 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'admin_create_event_widget.dart' show AdminCreateEventWidget;
-import 'package:cached_network_image/cached_network_image.dart';
+import 'edit_event_widget.dart' show EditEventWidget;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -13,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AdminCreateEventModel extends FlutterFlowModel<AdminCreateEventWidget> {
+class EditEventModel extends FlutterFlowModel<EditEventWidget> {
   ///  Local state fields for this page.
 
   DateTime? eventDate;
@@ -23,11 +22,6 @@ class AdminCreateEventModel extends FlutterFlowModel<AdminCreateEventWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
-
   // State field(s) for Title widget.
   FocusNode? titleFocusNode;
   TextEditingController? titleController;
@@ -53,7 +47,6 @@ class AdminCreateEventModel extends FlutterFlowModel<AdminCreateEventWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    tabBarController?.dispose();
     titleFocusNode?.dispose();
     titleController?.dispose();
 

@@ -4,6 +4,7 @@ import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -87,7 +88,12 @@ class _EventWidgetState extends State<EventWidget> {
                       ),
                       child: FutureBuilder<List<EventsRow>>(
                         future: EventsTable().queryRows(
-                          queryFn: (q) => q.order('id'),
+                          queryFn: (q) => q
+                              .gt(
+                                'EventDate',
+                                supaSerialize<DateTime>(getCurrentTimestamp),
+                              )
+                              .order('ID'),
                           limit: 50,
                         ),
                         builder: (context, snapshot) {
@@ -153,15 +159,20 @@ class _EventWidgetState extends State<EventWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           if (listViewEventsRow.image != null &&
                                               listViewEventsRow.image != '')
                                             ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                listViewEventsRow.image!,
+                                              child: CachedNetworkImage(
+                                                fadeInDuration:
+                                                    Duration(milliseconds: 500),
+                                                fadeOutDuration:
+                                                    Duration(milliseconds: 500),
+                                                imageUrl:
+                                                    listViewEventsRow.image!,
                                                 width: 100.0,
                                                 height: 100.0,
                                                 fit: BoxFit.cover,
@@ -173,7 +184,7 @@ class _EventWidgetState extends State<EventWidget> {
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        16.0, 16.0, 0.0, 0.0),
+                                                        16.0, 0.0, 0.0, 0.0),
                                                 child: SingleChildScrollView(
                                                   child: Column(
                                                     mainAxisSize:
@@ -188,7 +199,7 @@ class _EventWidgetState extends State<EventWidget> {
                                                               .title,
                                                           'Null',
                                                         ).maybeHandleOverflow(
-                                                          maxChars: 20,
+                                                          maxChars: 30,
                                                           replacement: '…',
                                                         ),
                                                         style:
@@ -205,9 +216,9 @@ class _EventWidgetState extends State<EventWidget> {
                                                       ),
                                                       Text(
                                                         dateTimeFormat(
-                                                            'dd,MMM,yyyy - hh:mm a',
+                                                            'MMM,dd,yyyy  hh:mm a',
                                                             listViewEventsRow
-                                                                .createdDate),
+                                                                .eventDate),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

@@ -146,13 +146,22 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
-                    await TransactionsTable().insert({
+                    _model.requestDeposit = await TransactionsTable().insert({
                       'Amount': double.tryParse(_model.amountController.text),
                       'IsApprove': false,
                       'UserPhoneNumber': FFAppState().UserInfo.phoneNumber,
                       'TypeID': 1,
+                      'Detail': 'Pending',
+                    });
+                    // Log
+                    await LogsTable().insert({
+                      'Details':
+                          'Request Withdrawal by name: ${FFAppState().UserInfo.fullName}, By phone number: ${FFAppState().UserInfo.phoneNumber}, Transaction ID: ${_model.requestDeposit?.transactionID?.toString()}',
+                      'Title': 'Request Withdrawal',
                     });
                     context.safePop();
+
+                    setState(() {});
                   },
                   text: 'Confirm',
                   options: FFButtonOptions(

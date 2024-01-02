@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -126,159 +127,305 @@ class _TransactionWidgetState extends State<TransactionWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextFormField(
-                      controller: _model.amountController ??=
-                          TextEditingController(
-                        text: transactionTransactionsRow?.amount?.toString(),
-                      ),
-                      focusNode: _model.amountFocusNode,
-                      readOnly: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        labelText: 'Amont',
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      validator:
-                          _model.amountControllerValidator.asValidator(context),
-                    ),
-                    TextFormField(
-                      controller: _model.textController2,
-                      focusNode: _model.textFieldFocusNode,
-                      readOnly: true,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        labelText: transactionTransactionsRow?.typeID == 1
-                            ? 'Withdrawal'
-                            : 'Deposit',
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      validator:
-                          _model.textController2Validator.asValidator(context),
-                    ),
-                    if (transactionTransactionsRow?.image != null &&
-                        transactionTransactionsRow?.image != '')
-                      Flexible(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Image.network(
-                            transactionTransactionsRow!.image!,
-                            width: double.infinity,
-                            height: MediaQuery.sizeOf(context).height * 0.4,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    FFButtonWidget(
-                      onPressed: () async {
-                        await TransactionsTable().update(
-                          data: {
-                            'IsApprove': true,
-                          },
-                          matchingRows: (rows) => rows.eq(
-                            'TransactionID',
-                            widget.transactionID,
-                          ),
-                        );
-                        await EdgeFunctionGroup.updateBalanceCall.call(
-                          money: transactionTransactionsRow?.amount,
-                          action: transactionTransactionsRow?.typeID == 2
-                              ? 'plus'
-                              : 'minus',
-                          phoneNumber:
-                              transactionTransactionsRow?.userPhoneNumber,
-                        );
-                        context.safePop();
-                      },
-                      text: 'Confirm',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ].divide(SizedBox(height: 15.0)),
+              child: FutureBuilder<List<UsersRow>>(
+                future: UsersTable().querySingleRow(
+                  queryFn: (q) => q.eq(
+                    'PhoneNumber',
+                    transactionTransactionsRow?.userPhoneNumber,
+                  ),
                 ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50.0,
+                        height: 50.0,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  List<UsersRow> containerUsersRowList = snapshot.data!;
+                  final containerUsersRow = containerUsersRowList.isNotEmpty
+                      ? containerUsersRowList.first
+                      : null;
+                  return Container(
+                    decoration: BoxDecoration(),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (transactionTransactionsRow?.typeID == 1)
+                            Text(
+                              'User Balance: ${containerUsersRow?.balance?.toString()}',
+                              style: FlutterFlowTheme.of(context).bodyLarge,
+                            ),
+                          TextFormField(
+                            controller: _model.amountController ??=
+                                TextEditingController(
+                              text: transactionTransactionsRow?.amount
+                                  ?.toString(),
+                            ),
+                            focusNode: _model.amountFocusNode,
+                            readOnly: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelText: 'Amont',
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              hintStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            validator: _model.amountControllerValidator
+                                .asValidator(context),
+                          ),
+                          TextFormField(
+                            controller: _model.textController2,
+                            focusNode: _model.textFieldFocusNode,
+                            readOnly: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              isDense: true,
+                              labelText: transactionTransactionsRow?.typeID == 1
+                                  ? 'Withdrawal'
+                                  : 'Deposit',
+                              hintStyle:
+                                  FlutterFlowTheme.of(context).labelMedium,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: FlutterFlowTheme.of(context).error,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            validator: _model.textController2Validator
+                                .asValidator(context),
+                          ),
+                          if (transactionTransactionsRow?.image != null &&
+                              transactionTransactionsRow?.image != '')
+                            Flexible(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  transactionTransactionsRow!.image!,
+                                  width: double.infinity,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 0.4,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  await TransactionsTable().delete(
+                                    matchingRows: (rows) => rows.eq(
+                                      'TransactionID',
+                                      widget.transactionID,
+                                    ),
+                                  );
+                                  // Log
+                                  unawaited(
+                                    () async {
+                                      await LogsTable().insert({
+                                        'Details':
+                                            'Deleted Transaction ID: ${transactionTransactionsRow?.transactionID?.toString()}',
+                                        'Title':
+                                            'Approved ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'}',
+                                      });
+                                    }(),
+                                  );
+                                  context.safePop();
+                                },
+                                text: 'Delete',
+                                options: FFButtonOptions(
+                                  width: MediaQuery.sizeOf(context).width * 0.4,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).error,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  if (transactionTransactionsRow?.typeID == 1) {
+                                    if (transactionTransactionsRow!.amount >
+                                        containerUsersRow!.balance) {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title:
+                                                Text('Insufficient Balance!'),
+                                            content: Text(
+                                                'User don\'t have enough money to Withdrawal.'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      return;
+                                    } else {
+                                      await TransactionsTable().update(
+                                        data: {
+                                          'IsApprove': true,
+                                          'Detail': 'Approved',
+                                        },
+                                        matchingRows: (rows) => rows.eq(
+                                          'TransactionID',
+                                          widget.transactionID,
+                                        ),
+                                      );
+                                      unawaited(
+                                        () async {
+                                          await EdgeFunctionGroup
+                                              .updateBalanceCall
+                                              .call(
+                                            money: transactionTransactionsRow
+                                                ?.amount,
+                                            action: transactionTransactionsRow
+                                                        ?.typeID ==
+                                                    2
+                                                ? 'plus'
+                                                : 'minus',
+                                            phoneNumber:
+                                                transactionTransactionsRow
+                                                    ?.userPhoneNumber,
+                                          );
+                                        }(),
+                                      );
+                                      // Log
+                                      unawaited(
+                                        () async {
+                                          await LogsTable().insert({
+                                            'Details':
+                                                'Approved Transaction ID: ${transactionTransactionsRow?.transactionID?.toString()}',
+                                            'Title':
+                                                'Approved ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'}',
+                                          });
+                                        }(),
+                                      );
+                                      context.safePop();
+                                      return;
+                                    }
+                                  } else {
+                                    return;
+                                  }
+                                },
+                                text: 'Confirm',
+                                options: FFButtonOptions(
+                                  width: MediaQuery.sizeOf(context).width * 0.4,
+                                  height: 40.0,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ].divide(SizedBox(height: 15.0)),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),

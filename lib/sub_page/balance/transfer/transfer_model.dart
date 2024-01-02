@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/flutter_flow/permissions_util.dart';
 import 'transfer_widget.dart' show TransferWidget;
 import 'package:flutter/material.dart';
@@ -28,8 +29,12 @@ class TransferModel extends FlutterFlowModel<TransferWidget> {
   var scanner = '';
   // Stores action output result for [Backend Call - API (one user name)] action in Button widget.
   ApiCallResponse? responseUserName;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  TransactionsRow? ownTransfer;
   // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
   ApiCallResponse? apiResult37s;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  TransactionsRow? userTranfer;
   // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
   ApiCallResponse? apiResult23456;
 

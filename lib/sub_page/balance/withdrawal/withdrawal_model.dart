@@ -17,6 +17,8 @@ class WithdrawalModel extends FlutterFlowModel<WithdrawalWidget> {
   FocusNode? amountFocusNode;
   TextEditingController? amountController;
   String? Function(BuildContext, String?)? amountControllerValidator;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  TransactionsRow? requestDeposit;
 
   /// Initialization and disposal methods.
 

@@ -65,3 +65,19 @@ double? areSimilarLocation(
   final lngDiff = (longitude! - targetLongitude!).abs();
   return latDiff + lngDiff;
 }
+
+int? calculateDateDifference(
+  String dateString1,
+  String dateString2,
+) {
+  try {
+    DateTime date1 = DateTime.parse(dateString1);
+    DateTime date2 = DateTime.parse(dateString2);
+
+    Duration difference = date1.difference(date2);
+
+    return difference.inDays;
+  } catch (e) {
+    return null;
+  }
+}

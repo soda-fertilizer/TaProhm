@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,7 +57,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
     return FutureBuilder<List<EventsRow>>(
       future: EventsTable().querySingleRow(
         queryFn: (q) => q.eq(
-          'id',
+          'ID',
           widget.id,
         ),
       ),
@@ -128,18 +129,14 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 22.0, 0.0, 10.0),
+                        padding: EdgeInsets.all(22.0),
                         child: Text(
                           valueOrDefault<String>(
                             eventDetailsEventsRow?.title,
                             'Null',
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Readex Pro',
-                                    fontSize: 16.0,
-                                  ),
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).titleLarge,
                         ),
                       ),
                     ),
@@ -147,10 +144,12 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         eventDetailsEventsRow?.image != '')
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          eventDetailsEventsRow!.image!,
+                        child: CachedNetworkImage(
+                          fadeInDuration: Duration(milliseconds: 500),
+                          fadeOutDuration: Duration(milliseconds: 500),
+                          imageUrl: eventDetailsEventsRow!.image!,
                           width: double.infinity,
-                          height: 300.0,
+                          height: 200.0,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -164,47 +163,6 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                     ),
-                    if (FFAppState().UserInfo.isAdmin)
-                      Align(
-                        alignment: AlignmentDirectional(0.0, 1.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 20.0),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              await EventsTable().delete(
-                                matchingRows: (rows) => rows.eq(
-                                  'id',
-                                  widget.id,
-                                ),
-                              );
-                              context.safePop();
-                            },
-                            text: 'Delete',
-                            options: FFButtonOptions(
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).error,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                  ),
-                              elevation: 3.0,
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                        ),
-                      ),
                   ].divide(SizedBox(height: 16.0)),
                 ),
               ),

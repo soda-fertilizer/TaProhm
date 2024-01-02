@@ -178,7 +178,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/transfer',
           builder: (context, params) => TransferWidget(
             qrCode: params.getParam('qrCode', ParamType.String),
-            amount: params.getParam('amount', ParamType.String),
+            amount: params.getParam('amount', ParamType.double),
           ),
         ),
         FFRoute(
@@ -419,6 +419,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SubAdminSubAccountWidget(
             phoneNumber: params.getParam('phoneNumber', ParamType.String),
             tabIndex: params.getParam('tabIndex', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'AdminEventDetails',
+          path: '/adminEventDetails',
+          builder: (context, params) => AdminEventDetailsWidget(
+            id: params.getParam('id', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'EditEvent',
+          path: '/editEvent',
+          builder: (context, params) => EditEventWidget(
+            id: params.getParam('id', ParamType.int),
+            evenDate: params.getParam('evenDate', ParamType.DateTime),
+            image: params.getParam('image', ParamType.String),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

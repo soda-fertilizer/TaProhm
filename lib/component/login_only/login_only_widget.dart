@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -356,8 +357,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                         .userID(
                                           (_model.login?.jsonBody ?? ''),
                                         )
-                                        .toString()
-                                        ?.toString(),
+                                        .toString(),
                                   );
                                   setState(() {
                                     FFAppState().IsLogged = true;
@@ -417,6 +417,9 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                       ),
                                     );
                                   });
+                                  await actions.onesignalLogin(
+                                    FFAppState().UserInfo.token,
+                                  );
                                   if (Navigator.of(context).canPop()) {
                                     context.pop();
                                   }

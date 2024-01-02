@@ -667,7 +667,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                           .end,
                                                                   children: [
                                                                     Text(
-                                                                      'Date: ${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                      '${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
                                                                                 transationsItem,
                                                                                 r'''$.createddate''',
                                                                               ).toString()))}'
@@ -700,10 +700,10 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                                   r'''$.type''',
                                                                                 ))) {
                                                                           return Text(
-                                                                            '-\$${getJsonField(
+                                                                            '-${getJsonField(
                                                                               transationsItem,
                                                                               r'''$.amount''',
-                                                                            ).toString()}',
+                                                                            ).toString()} USD',
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   color: FlutterFlowTheme.of(context).error,
@@ -711,10 +711,10 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                           );
                                                                         } else {
                                                                           return Text(
-                                                                            '+\$${getJsonField(
+                                                                            '+${getJsonField(
                                                                               transationsItem,
                                                                               r'''$.amount''',
-                                                                            ).toString()}',
+                                                                            ).toString()} USD',
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   color: FlutterFlowTheme.of(context).success,
@@ -827,7 +827,46 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                         ),
                                                                   ),
                                                                   Text(
-                                                                    'Date: ${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                    getJsonField(
+                                                                      pandingsItem,
+                                                                      r'''$.detail''',
+                                                                    )
+                                                                        .toString()
+                                                                        .maybeHandleOverflow(
+                                                                          maxChars:
+                                                                              50,
+                                                                          replacement:
+                                                                              '…',
+                                                                        ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyLarge
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryText,
+                                                                          fontSize:
+                                                                              12.0,
+                                                                        ),
+                                                                  ),
+                                                                ].divide(SizedBox(
+                                                                    height:
+                                                                        10.0)),
+                                                              ),
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceEvenly,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Text(
+                                                                    '${dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
                                                                               pandingsItem,
                                                                               r'''$.createddate''',
                                                                             ).toString()))}'
@@ -841,52 +880,44 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                             context)
                                                                         .labelSmall,
                                                                   ),
-                                                                ].divide(SizedBox(
-                                                                    height:
-                                                                        10.0)),
-                                                              ),
-                                                              Builder(
-                                                                builder:
-                                                                    (context) {
-                                                                  if (_model
-                                                                          .inputMoney ==
-                                                                      getJsonField(
-                                                                        pandingsItem,
-                                                                        r'''$.type''',
-                                                                      )) {
-                                                                    return Text(
-                                                                      '+\$${getJsonField(
-                                                                        pandingsItem,
-                                                                        r'''$.amount''',
-                                                                      ).toString()}',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Readex Pro',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).success,
-                                                                          ),
-                                                                    );
-                                                                  } else {
-                                                                    return Text(
-                                                                      '-\$${getJsonField(
-                                                                        pandingsItem,
-                                                                        r'''$.amount''',
-                                                                      ).toString()}',
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Readex Pro',
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).error,
-                                                                          ),
-                                                                    );
-                                                                  }
-                                                                },
+                                                                  Builder(
+                                                                    builder:
+                                                                        (context) {
+                                                                      if (_model
+                                                                              .inputMoney ==
+                                                                          getJsonField(
+                                                                            pandingsItem,
+                                                                            r'''$.type''',
+                                                                          )) {
+                                                                        return Text(
+                                                                          '+${getJsonField(
+                                                                            pandingsItem,
+                                                                            r'''$.amount''',
+                                                                          ).toString()} USD',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                color: FlutterFlowTheme.of(context).success,
+                                                                              ),
+                                                                        );
+                                                                      } else {
+                                                                        return Text(
+                                                                          '-${getJsonField(
+                                                                            pandingsItem,
+                                                                            r'''$.amount''',
+                                                                          ).toString()} USD',
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                color: FlutterFlowTheme.of(context).error,
+                                                                              ),
+                                                                        );
+                                                                      }
+                                                                    },
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ],
                                                           ),

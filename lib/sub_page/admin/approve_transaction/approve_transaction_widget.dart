@@ -265,59 +265,110 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(12.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      4.0),
-                                                          child: Text(
-                                                            getJsonField(
-                                                              depositItem,
-                                                              r'''$.username''',
-                                                            ).toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyLarge,
+                                                  child: Container(
+                                                    decoration: BoxDecoration(),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  12.0,
+                                                                  10.0,
+                                                                  0.0,
+                                                                  10.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        4.0),
+                                                            child: Text(
+                                                              getJsonField(
+                                                                depositItem,
+                                                                r'''$.username''',
+                                                              )
+                                                                  .toString()
+                                                                  .maybeHandleOverflow(
+                                                                      maxChars:
+                                                                          29),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyLarge,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ],
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        4.0),
+                                                            child: Text(
+                                                              'ID: ${getJsonField(
+                                                                depositItem,
+                                                                r'''$.phonenumber''',
+                                                              ).toString()}'
+                                                                  .maybeHandleOverflow(
+                                                                      maxChars:
+                                                                          29),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyLarge
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
+                                                                    fontSize:
+                                                                        14.0,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  '\$${getJsonField(
-                                                    depositItem,
-                                                    r'''$.amount''',
-                                                  ).toString()}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondary,
-                                                      ),
+                                                Align(
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                          0.0, 1.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 10.0),
+                                                    child: Text(
+                                                      '${getJsonField(
+                                                        depositItem,
+                                                        r'''$.amount''',
+                                                      ).toString()} USD',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                              ),
+                                                    ),
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -472,10 +523,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   ),
                                                 ),
                                                 Text(
-                                                  '\$${getJsonField(
+                                                  '${getJsonField(
                                                     withdrawalItem,
                                                     r'''$.amount''',
-                                                  ).toString()}',
+                                                  ).toString()} USD',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -873,7 +924,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                               historyItem,
                                                                               r'''$.type''',
                                                                             )) ||
-                                                                        (_model.transfer ==
+                                                                        ('Withdrawal' ==
                                                                             getJsonField(
                                                                               historyItem,
                                                                               r'''$.type''',
@@ -884,10 +935,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                               r'''$.type''',
                                                                             ))) {
                                                                       return Text(
-                                                                        '-\$${getJsonField(
+                                                                        '-${getJsonField(
                                                                           historyItem,
                                                                           r'''$.amount''',
-                                                                        ).toString()}',
+                                                                        ).toString()} USD',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
@@ -898,10 +949,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                       );
                                                                     } else {
                                                                       return Text(
-                                                                        '+\$${getJsonField(
+                                                                        '+${getJsonField(
                                                                           historyItem,
                                                                           r'''$.amount''',
-                                                                        ).toString()}',
+                                                                        ).toString()} USD',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(

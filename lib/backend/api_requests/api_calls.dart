@@ -468,11 +468,19 @@ class ListTransactionsCall {
         r'''$[:]''',
         true,
       ) as List?;
-  List? userID(dynamic response) => getJsonField(
+  List<int>? userID(dynamic response) => (getJsonField(
         response,
         r'''$[:].userid''',
         true,
-      ) as List?;
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  String? phoneNumber(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].phonenumber''',
+      ));
 }
 
 class ListHistoryTransactionsCall {
