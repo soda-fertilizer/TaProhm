@@ -979,6 +979,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   await authManager.signOut();
                                   GoRouter.of(context).clearRedirectLocation();
 
+                                  await actions.onesignalLogout();
                                   setState(() {
                                     FFAppState().deleteUserInfo();
                                     FFAppState().UserInfo = UserInfoStruct
