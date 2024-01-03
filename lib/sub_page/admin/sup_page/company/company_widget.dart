@@ -723,6 +723,18 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                         );
                                       }(),
                                     );
+                                    unawaited(
+                                      () async {
+                                        await EdgeFunctionGroup
+                                            .pushNotifcationSingleUserCall
+                                            .call(
+                                          token: containerUsersRow?.token,
+                                          title: 'Approved',
+                                          contents:
+                                              'Your request for company ${companyCompaniesRow.companyName} is Approved.',
+                                        );
+                                      }(),
+                                    );
                                     context.safePop();
                                   },
                                   text: 'Confirm',

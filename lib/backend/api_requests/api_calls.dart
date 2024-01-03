@@ -755,6 +755,10 @@ class EdgeFunctionGroup {
   static UpdateBalanceCall updateBalanceCall = UpdateBalanceCall();
   static ReferralCall referralCall = ReferralCall();
   static GetUserReferralCall getUserReferralCall = GetUserReferralCall();
+  static PushNotifcationSingleUserCall pushNotifcationSingleUserCall =
+      PushNotifcationSingleUserCall();
+  static PushNotifcationMultipleUserCall pushNotifcationMultipleUserCall =
+      PushNotifcationMultipleUserCall();
 }
 
 class UpdateBalanceCall {
@@ -932,6 +936,74 @@ class GetUserReferralCall {
         r'''$[:].IsMember''',
         true,
       ) as List?;
+}
+
+class PushNotifcationSingleUserCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? title = '',
+    String? contents = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "token": "$token",
+  "title": "$title",
+  "contents": "$contents"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Push Notifcation Single User',
+      apiUrl: '${EdgeFunctionGroup.baseUrl}/PushNotifcation',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PushNotifcationMultipleUserCall {
+  Future<ApiCallResponse> call({
+    List<String>? tokenList,
+    String? title = '',
+    String? contents = '',
+  }) async {
+    final token = _serializeList(tokenList);
+
+    final ffApiRequestBody = '''
+{
+  "token": $token,
+  "title": "$title",
+  "contents": "$contents"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Push Notifcation Multiple User',
+      apiUrl: '${EdgeFunctionGroup.baseUrl}/PushNotifcation',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End Edge Function Group Code

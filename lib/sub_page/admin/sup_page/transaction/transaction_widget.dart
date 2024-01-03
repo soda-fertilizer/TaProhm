@@ -388,10 +388,95 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                           });
                                         }(),
                                       );
+                                      unawaited(
+                                        () async {
+                                          await EdgeFunctionGroup
+                                              .pushNotifcationSingleUserCall
+                                              .call(
+                                            token: containerUsersRow.token,
+                                            title: 'Approved',
+                                            contents:
+                                                'Your request for ${transactionTransactionsRow.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
+                                          );
+                                        }(),
+                                      );
+                                      unawaited(
+                                        () async {
+                                          await NotificationTable().insert({
+                                            'UserToken':
+                                                containerUsersRow.token,
+                                            'Title': 'Approved',
+                                            'Contents':
+                                                'Your request for ${transactionTransactionsRow.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
+                                          });
+                                        }(),
+                                      );
                                       context.safePop();
                                       return;
                                     }
                                   } else {
+                                    await TransactionsTable().update(
+                                      data: {
+                                        'IsApprove': true,
+                                        'Detail': 'Approved',
+                                      },
+                                      matchingRows: (rows) => rows.eq(
+                                        'TransactionID',
+                                        widget.transactionID,
+                                      ),
+                                    );
+                                    unawaited(
+                                      () async {
+                                        await EdgeFunctionGroup
+                                            .updateBalanceCall
+                                            .call(
+                                          money: transactionTransactionsRow
+                                              ?.amount,
+                                          action: transactionTransactionsRow
+                                                      ?.typeID ==
+                                                  2
+                                              ? 'plus'
+                                              : 'minus',
+                                          phoneNumber:
+                                              transactionTransactionsRow
+                                                  ?.userPhoneNumber,
+                                        );
+                                      }(),
+                                    );
+                                    // Log
+                                    unawaited(
+                                      () async {
+                                        await LogsTable().insert({
+                                          'Details':
+                                              'Approved Transaction ID: ${transactionTransactionsRow?.transactionID.toString()}',
+                                          'Title':
+                                              'Approved ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'}',
+                                        });
+                                      }(),
+                                    );
+                                    unawaited(
+                                      () async {
+                                        await EdgeFunctionGroup
+                                            .pushNotifcationSingleUserCall
+                                            .call(
+                                          token: containerUsersRow?.token,
+                                          title: 'Approved',
+                                          contents:
+                                              'Your request for ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
+                                        );
+                                      }(),
+                                    );
+                                    unawaited(
+                                      () async {
+                                        await NotificationTable().insert({
+                                          'UserToken': containerUsersRow?.token,
+                                          'Title': 'Approved',
+                                          'Contents':
+                                              'Your request for ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
+                                        });
+                                      }(),
+                                    );
+                                    context.safePop();
                                     return;
                                   }
                                 },
