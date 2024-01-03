@@ -735,6 +735,16 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                         );
                                       }(),
                                     );
+                                    unawaited(
+                                      () async {
+                                        await NotificationTable().insert({
+                                          'UserToken': containerUsersRow?.token,
+                                          'Title': 'Approved',
+                                          'Contents':
+                                              'Your request for company ${companyCompaniesRow.companyName} is Approved.',
+                                        });
+                                      }(),
+                                    );
                                     context.safePop();
                                   },
                                   text: 'Confirm',
