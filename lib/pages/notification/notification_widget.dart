@@ -58,7 +58,9 @@ class _NotificationWidgetState extends State<NotificationWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            'Notification',
+            FFLocalizations.of(context).getText(
+              'ht2siunj' /* Notification */,
+            ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -106,7 +108,6 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                             snapshot.data!;
                         return ListView.builder(
                           padding: EdgeInsets.zero,
-                          shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemCount: listViewNotificationRowList.length,
                           itemBuilder: (context, listViewIndex) {
@@ -215,10 +216,13 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                                                         4.0),
                                                             child: Text(
                                                               dateTimeFormat(
-                                                                      'd/M/y',
-                                                                      listViewNotificationRow
-                                                                          .createdDate)
-                                                                  .maybeHandleOverflow(
+                                                                'd/M/y',
+                                                                listViewNotificationRow
+                                                                    .createdDate,
+                                                                locale: FFLocalizations.of(
+                                                                        context)
+                                                                    .languageCode,
+                                                              ).maybeHandleOverflow(
                                                                 maxChars: 10,
                                                                 replacement:
                                                                     '…',

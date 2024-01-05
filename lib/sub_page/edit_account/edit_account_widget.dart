@@ -130,7 +130,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  'Edit Account',
+                  FFLocalizations.of(context).getText(
+                    'frg6czrm' /* Edit Account */,
+                  ),
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),
@@ -169,7 +171,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                           try {
                             showUploadMessage(
                               context,
-                              'Uploading file...',
+                              FFLocalizations.of(context).getText(
+                                'co02njst' /* Uploading */,
+                              ),
                               showLoading: true,
                             );
                             selectedUploadedFiles = selectedMedia
@@ -198,15 +202,21 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                   selectedUploadedFiles.first;
                               _model.uploadedFileUrl = downloadUrls.first;
                             });
-                            showUploadMessage(context, 'Success!');
+                            showUploadMessage(
+                                context,
+                                FFLocalizations.of(context).getText(
+                                  'dg5pg16f' /* Success */,
+                                ));
                           } else {
                             setState(() {});
-                            showUploadMessage(context, 'Failed to upload data');
+                            showUploadMessage(
+                                context,
+                                FFLocalizations.of(context).getText(
+                                  'z7emxvk1' /* Failed to upload data */,
+                                ));
                             return;
                           }
                         }
-
-                        setState(() {});
                       },
                       child: Container(
                         width: 120.0,
@@ -234,7 +244,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: 'User name',
+                        labelText: FFLocalizations.of(context).getText(
+                          'qpbvt7xy' /* User name */,
+                        ),
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -280,7 +292,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: 'Referral',
+                        labelText: FFLocalizations.of(context).getText(
+                          'yugis9fs' /* Referral */,
+                        ),
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -326,7 +340,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: 'Invite ID',
+                        labelText: FFLocalizations.of(context).getText(
+                          '4ddztnnb' /* Invite ID */,
+                        ),
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -421,7 +437,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                   fontFamily: 'Readex Pro',
                                   fontSize: 14.0,
                                 ),
-                            hintText: 'Please select sector',
+                            hintText: FFLocalizations.of(context).getText(
+                              'nalqvp4a' /* Please select sector */,
+                            ),
                             icon: Icon(
                               Icons.keyboard_arrow_down_rounded,
                               color: FlutterFlowTheme.of(context).secondaryText,
@@ -563,7 +581,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                 return;
                               }
                             },
-                            text: 'Delete',
+                            text: FFLocalizations.of(context).getText(
+                              '11qe1b8g' /* Delete */,
+                            ),
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.3,
                               height: 40.0,
@@ -619,7 +639,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
 
                             setState(() {});
                           },
-                          text: 'Update',
+                          text: FFLocalizations.of(context).getText(
+                            '3iaywr7m' /* Update */,
+                          ),
                           options: FFButtonOptions(
                             width: MediaQuery.sizeOf(context).width * 0.3,
                             height: 40.0,

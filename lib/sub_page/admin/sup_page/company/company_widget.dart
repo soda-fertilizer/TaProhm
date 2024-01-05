@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -141,7 +142,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  'Company',
+                  FFLocalizations.of(context).getText(
+                    'uakhq5nn' /* Company */,
+                  ),
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -216,7 +219,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: 'Amount',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'yeadjesh' /* Amount */,
+                                ),
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -269,7 +274,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: 'Company name',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'z77trhgi' /* Company name */,
+                                ),
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -317,7 +324,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: 'Phone number',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'fnbhb690' /* Phone number */,
+                                ),
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -366,7 +375,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: 'Telegram link',
+                                labelText: FFLocalizations.of(context).getText(
+                                  'cy85xuwm' /* Telegram link */,
+                                ),
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -429,7 +440,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                 decoration: InputDecoration(
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelMedium,
-                                  hintText: 'Company detail',
+                                  hintText: FFLocalizations.of(context).getText(
+                                    'r9xogwup' /* Company detail */,
+                                  ),
                                   hintStyle:
                                       FlutterFlowTheme.of(context).labelMedium,
                                   enabledBorder: OutlineInputBorder(
@@ -518,7 +531,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      'Add image',
+                                      FFLocalizations.of(context).getText(
+                                        'lrcqekz0' /* Add image */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -605,7 +620,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               child: Align(
                                 alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
-                                  'Payment image',
+                                  FFLocalizations.of(context).getText(
+                                    '3npe7pt5' /* Payment image */,
+                                  ),
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
@@ -667,7 +684,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       return;
                                     }
                                   },
-                                  text: 'Delete',
+                                  text: FFLocalizations.of(context).getText(
+                                    'ug8cg8tc' /* Delete */,
+                                  ),
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.4,
@@ -731,7 +750,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                           token: containerUsersRow?.token,
                                           title: 'Approved',
                                           contents:
-                                              'Your request for company ${companyCompaniesRow.companyName} is Approved.',
+                                              'Your request for company ${functions.charLimit(20, companyCompaniesRow.companyName)} is Approved.',
                                         );
                                       }(),
                                     );
@@ -747,7 +766,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     );
                                     context.safePop();
                                   },
-                                  text: 'Confirm',
+                                  text: FFLocalizations.of(context).getText(
+                                    'ihosdi5t' /* Confirm */,
+                                  ),
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.4,

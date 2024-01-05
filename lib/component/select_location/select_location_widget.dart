@@ -117,7 +117,9 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
                 await widget.save?.call();
                 Navigator.pop(context, _model.googleMapsCenter);
               },
-              text: 'Save',
+              text: FFLocalizations.of(context).getText(
+                'ro3wg36t' /* Save */,
+              ),
               options: FFButtonOptions(
                 width: double.infinity,
                 height: 50.0,

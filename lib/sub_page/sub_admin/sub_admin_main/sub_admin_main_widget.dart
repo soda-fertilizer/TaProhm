@@ -72,7 +72,9 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'SubAdmin Page',
+              FFLocalizations.of(context).getText(
+                'jqeju1r9' /* SubAdmin Page */,
+              ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -153,7 +155,11 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Create user\n',
+                                    FFLocalizations.of(context).getText(
+                                      'pf0ldg8y' /* Create user
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -212,7 +218,11 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'User Account\n',
+                                    FFLocalizations.of(context).getText(
+                                      'vgh6wywn' /* User Account
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -271,7 +281,11 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Businesses \n',
+                                    FFLocalizations.of(context).getText(
+                                      'srgil3zp' /* Businesses 
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -330,7 +344,11 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Create\nEvent',
+                                    FFLocalizations.of(context).getText(
+                                      'd4h7qshr' /* Create
+Event */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium

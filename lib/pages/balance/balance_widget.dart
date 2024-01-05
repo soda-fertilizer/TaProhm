@@ -3,7 +3,6 @@ import '/backend/supabase/supabase.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -83,7 +82,9 @@ class _BalanceWidgetState extends State<BalanceWidget>
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            'Balance',
+            FFLocalizations.of(context).getText(
+              '9ve7dwfu' /* Balance */,
+            ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -149,7 +150,11 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Text(
-                                      'Account\nsummary',
+                                      FFLocalizations.of(context).getText(
+                                        'cvfneuwy' /* Account
+summary */
+                                        ,
+                                      ),
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -171,7 +176,9 @@ class _BalanceWidgetState extends State<BalanceWidget>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Total in USD',
+                                  FFLocalizations.of(context).getText(
+                                    'x42vtsal' /* Total in USD */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -216,34 +223,22 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                         moneyUsersRowList.isNotEmpty
                                             ? moneyUsersRowList.first
                                             : null;
-                                    return InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await actions.printAction(
-                                          'Money: ${moneyUsersRow?.balance.toString()}',
-                                        );
-                                      },
-                                      child: Text(
-                                        '\$ ${formatNumber(
-                                          moneyUsersRow?.balance,
-                                          formatType: FormatType.custom,
-                                          format: '###,###.##',
-                                          locale: '',
-                                        )}',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w800,
-                                            ),
-                                      ),
+                                    return Text(
+                                      '\$ ${formatNumber(
+                                        moneyUsersRow?.balance,
+                                        formatType: FormatType.custom,
+                                        format: '###,###.##',
+                                        locale: '',
+                                      )}',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w800,
+                                          ),
                                     );
                                   },
                                 ),
@@ -325,7 +320,9 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                             ),
                                           ),
                                           Text(
-                                            'Deposit',
+                                            FFLocalizations.of(context).getText(
+                                              'i73a7ogs' /* Deposit */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -389,7 +386,9 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                             ),
                                           ),
                                           Text(
-                                            'Transfer',
+                                            FFLocalizations.of(context).getText(
+                                              'ls1vwwbe' /* Transfer */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -453,7 +452,9 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                             ),
                                           ),
                                           Text(
-                                            'Withdrawal',
+                                            FFLocalizations.of(context).getText(
+                                              'qyg1punk' /* Withdrawal */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -530,15 +531,24 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                         padding: const EdgeInsets.all(4.0),
-                                        tabs: const [
+                                        tabs: [
                                           Tab(
-                                            text: 'Transaction',
+                                            text: FFLocalizations.of(context)
+                                                .getText(
+                                              '1jptny9c' /* Transaction */,
+                                            ),
                                           ),
                                           Tab(
-                                            text: 'Pending',
+                                            text: FFLocalizations.of(context)
+                                                .getText(
+                                              'ozgzafzw' /* Pending */,
+                                            ),
                                           ),
                                         ],
                                         controller: _model.tabBarController,
+                                        onTap: (i) async {
+                                          [() async {}, () async {}][i]();
+                                        },
                                       ),
                                     ),
                                     Expanded(
@@ -665,10 +675,16 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                           .end,
                                                                   children: [
                                                                     Text(
-                                                                      dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
-                                                                                transationsItem,
-                                                                                r'''$.createddate''',
-                                                                              ).toString()))
+                                                                      dateTimeFormat(
+                                                                        'dd/MM/yyyy hh:mm a',
+                                                                        functions
+                                                                            .dataTimeConverter(getJsonField(
+                                                                          transationsItem,
+                                                                          r'''$.createddate''',
+                                                                        ).toString()),
+                                                                        locale:
+                                                                            FFLocalizations.of(context).languageCode,
+                                                                      )
                                                                           .maybeHandleOverflow(
                                                                         maxChars:
                                                                             50,
@@ -864,10 +880,18 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                         .end,
                                                                 children: [
                                                                   Text(
-                                                                    dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
-                                                                              pandingsItem,
-                                                                              r'''$.createddate''',
-                                                                            ).toString()))
+                                                                    dateTimeFormat(
+                                                                      'dd/MM/yyyy hh:mm a',
+                                                                      functions
+                                                                          .dataTimeConverter(
+                                                                              getJsonField(
+                                                                        pandingsItem,
+                                                                        r'''$.createddate''',
+                                                                      ).toString()),
+                                                                      locale: FFLocalizations.of(
+                                                                              context)
+                                                                          .languageCode,
+                                                                    )
                                                                         .maybeHandleOverflow(
                                                                       maxChars:
                                                                           50,

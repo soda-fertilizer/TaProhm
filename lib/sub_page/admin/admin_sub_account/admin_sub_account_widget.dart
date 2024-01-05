@@ -110,7 +110,9 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Account',
+              FFLocalizations.of(context).getText(
+                'xp8zcmwz' /* Account */,
+              ),
               style: FlutterFlowTheme.of(context).titleMedium,
             ),
           ),
@@ -190,15 +192,22 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       padding: const EdgeInsets.all(4.0),
-                      tabs: const [
+                      tabs: [
                         Tab(
-                          text: 'Member',
+                          text: FFLocalizations.of(context).getText(
+                            'ocvyde2n' /* Member */,
+                          ),
                         ),
                         Tab(
-                          text: 'Officer',
+                          text: FFLocalizations.of(context).getText(
+                            'ubtafa2x' /* Officer */,
+                          ),
                         ),
                       ],
                       controller: _model.tabBarController,
+                      onTap: (i) async {
+                        [() async {}, () async {}][i]();
+                      },
                     ),
                   ),
                   Expanded(

@@ -1,0 +1,3 @@
+NSLocationWhenInUseUsageDescription = "We need your location permission to show you this map";
+NSCameraUsageDescription = "In order to scan for barcodes and QR codes, this app requires permission to access the camera.";
+NSPhotoLibraryUsageDescription = "To save device to storage we need your permission.";

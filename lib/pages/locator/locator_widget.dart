@@ -188,7 +188,9 @@ class _LocatorWidgetState extends State<LocatorWidget> {
               backgroundColor: FlutterFlowTheme.of(context).primary,
               automaticallyImplyLeading: false,
               title: Text(
-                'Locator',
+                FFLocalizations.of(context).getText(
+                  'euw5yhp9' /* Locator */,
+                ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,

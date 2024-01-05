@@ -74,7 +74,9 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Invide Member',
+              FFLocalizations.of(context).getText(
+                'w918sxln' /* Invide Member */,
+              ),
               style: FlutterFlowTheme.of(context).titleMedium,
             ),
           ),

@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:aligned_dialog/aligned_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -48,44 +47,46 @@ class _HomePageWidgetState extends State<HomePageWidget>
           r'''$''',
         ).toString().toString(),
         () async {
-          await showAlignedDialog(
+          await showDialog(
             context: context,
-            isGlobal: true,
-            avoidOverflow: false,
-            targetAnchor: const AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            followerAnchor: const AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
             builder: (dialogContext) {
-              return Material(
-                color: Colors.transparent,
+              return Dialog(
+                insetPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                alignment: const AlignmentDirectional(0.0, 0.0)
+                    .resolve(Directionality.of(context)),
                 child: GestureDetector(
                   onTap: () => _model.unfocusNode.canRequestFocus
                       ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                       : FocusScope.of(context).unfocus(),
-                  child: const UpdateAlertWidget(),
+                  child: const SizedBox(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: UpdateAlertWidget(),
+                  ),
                 ),
               );
             },
           ).then((value) => setState(() {}));
         },
         () async {
-          await showAlignedDialog(
+          await showDialog(
             context: context,
-            isGlobal: true,
-            avoidOverflow: false,
-            targetAnchor: const AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
-            followerAnchor: const AlignmentDirectional(0.0, 0.0)
-                .resolve(Directionality.of(context)),
             builder: (dialogContext) {
-              return Material(
-                color: Colors.transparent,
+              return Dialog(
+                insetPadding: EdgeInsets.zero,
+                backgroundColor: Colors.transparent,
+                alignment: const AlignmentDirectional(0.0, 0.0)
+                    .resolve(Directionality.of(context)),
                 child: GestureDetector(
                   onTap: () => _model.unfocusNode.canRequestFocus
                       ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                       : FocusScope.of(context).unfocus(),
-                  child: const UpdateAlertWidget(),
+                  child: const SizedBox(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: UpdateAlertWidget(),
+                  ),
                 ),
               );
             },
@@ -198,7 +199,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Ta Prohm',
+                              FFLocalizations.of(context).getText(
+                                '3y8wtml7' /* Ta Prohm */,
+                              ),
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -335,15 +338,24 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     indicatorColor:
                                         FlutterFlowTheme.of(context).primary,
                                     padding: const EdgeInsets.all(4.0),
-                                    tabs: const [
+                                    tabs: [
                                       Tab(
-                                        text: 'By Grid',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'sakgh5qq' /* By Grid */,
+                                        ),
                                       ),
                                       Tab(
-                                        text: 'By List',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'ndwztd2w' /* By List */,
+                                        ),
                                       ),
                                     ],
                                     controller: _model.tabBarController,
+                                    onTap: (i) async {
+                                      [() async {}, () async {}][i]();
+                                    },
                                   ),
                                 ),
                                 Expanded(

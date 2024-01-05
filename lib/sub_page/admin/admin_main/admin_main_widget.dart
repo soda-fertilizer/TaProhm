@@ -72,7 +72,9 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Admin Page',
+              FFLocalizations.of(context).getText(
+                't0qgiqcq' /* Admin Page */,
+              ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -153,7 +155,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Create user\n',
+                                    FFLocalizations.of(context).getText(
+                                      '4nsorbi4' /* Create user
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -212,7 +218,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Listing\n',
+                                    FFLocalizations.of(context).getText(
+                                      '7pjwxghu' /* Listing
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -271,7 +281,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Transaction\n',
+                                    FFLocalizations.of(context).getText(
+                                      'eagthoaw' /* Transaction
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -330,7 +344,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Referral\n',
+                                    FFLocalizations.of(context).getText(
+                                      'nimx3ee2' /* Referral
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -389,7 +407,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'User Account\n',
+                                    FFLocalizations.of(context).getText(
+                                      'jsujip4v' /* User Account
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -448,7 +470,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Businesses \n',
+                                    FFLocalizations.of(context).getText(
+                                      'bg9gjm1q' /* Businesses 
+ */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -507,7 +533,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Approve\nAccount',
+                                    FFLocalizations.of(context).getText(
+                                      'a1d13nbv' /* Approve
+Account */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
@@ -566,7 +596,11 @@ class _AdminMainWidgetState extends State<AdminMainWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Create\nEvent',
+                                    FFLocalizations.of(context).getText(
+                                      'ngxtwqjf' /* Create
+Event */
+                                      ,
+                                    ),
                                     textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium

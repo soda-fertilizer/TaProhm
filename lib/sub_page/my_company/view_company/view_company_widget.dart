@@ -136,7 +136,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  'Company',
+                  FFLocalizations.of(context).getText(
+                    'xi4etzwi' /* Company */,
+                  ),
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -183,7 +185,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: 'Company name',
+                          labelText: FFLocalizations.of(context).getText(
+                            'bwfm0gx0' /* Company name */,
+                          ),
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -228,7 +232,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: 'Phone number',
+                          labelText: FFLocalizations.of(context).getText(
+                            'wzzpl0ha' /* Phone number */,
+                          ),
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -273,7 +279,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: 'Telegram link',
+                          labelText: FFLocalizations.of(context).getText(
+                            '1m9h2z4c' /* Telegram link */,
+                          ),
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -331,7 +339,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                           decoration: InputDecoration(
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
-                            hintText: 'Company detail',
+                            hintText: FFLocalizations.of(context).getText(
+                              'jflxb6zj' /* Company detail */,
+                            ),
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -416,7 +426,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'Add image',
+                                FFLocalizations.of(context).getText(
+                                  'i0pnhsd9' /* Add image */,
+                                ),
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
@@ -472,7 +484,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                         try {
                                           showUploadMessage(
                                             context,
-                                            'Uploading file...',
+                                            FFLocalizations.of(context).getText(
+                                              'co02njst' /* Uploading */,
+                                            ),
                                             showLoading: true,
                                           );
                                           selectedUploadedFiles = selectedMedia
@@ -499,11 +513,19 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                                 selectedUploadedFiles;
                                           });
                                           showUploadMessage(
-                                              context, 'Success!');
+                                              context,
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'dg5pg16f' /* Success */,
+                                              ));
                                         } else {
                                           setState(() {});
                                           showUploadMessage(
-                                              context, 'Failed to upload data');
+                                              context,
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'z7emxvk1' /* Failed to upload data */,
+                                              ));
                                           return;
                                         }
                                       }
@@ -541,7 +563,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                         try {
                                           showUploadMessage(
                                             context,
-                                            'Uploading file...',
+                                            FFLocalizations.of(context).getText(
+                                              'co02njst' /* Uploading */,
+                                            ),
                                             showLoading: true,
                                           );
                                           selectedUploadedFiles = selectedMedia
@@ -568,11 +592,19 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                                 selectedUploadedFiles.first;
                                           });
                                           showUploadMessage(
-                                              context, 'Success!');
+                                              context,
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'dg5pg16f' /* Success */,
+                                              ));
                                         } else {
                                           setState(() {});
                                           showUploadMessage(
-                                              context, 'Failed to upload data');
+                                              context,
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                'z7emxvk1' /* Failed to upload data */,
+                                              ));
                                           return;
                                         }
                                       }
@@ -666,7 +698,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                         child: Align(
                           alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Text(
-                            'Payment image',
+                            FFLocalizations.of(context).getText(
+                              'dpaxp38l' /* Payment image */,
+                            ),
                             style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
                         ),
@@ -723,7 +757,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                                 return;
                               }
                             },
-                            text: 'Delete',
+                            text: FFLocalizations.of(context).getText(
+                              'fv3x4cgz' /* Delete */,
+                            ),
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,
@@ -765,7 +801,9 @@ class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {
                               );
                               context.safePop();
                             },
-                            text: 'Update',
+                            text: FFLocalizations.of(context).getText(
+                              '3sw6qsbz' /* Update */,
+                            ),
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,

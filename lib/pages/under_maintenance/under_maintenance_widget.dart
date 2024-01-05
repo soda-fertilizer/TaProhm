@@ -71,7 +71,9 @@ class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                   child: Text(
-                    'We are Under Maintenance',
+                    FFLocalizations.of(context).getText(
+                      '37vpdj49' /* We are Under Maintenance */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           fontSize: 16.0,
@@ -79,7 +81,9 @@ class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {
                   ),
                 ),
                 Text(
-                  'Will be Back Soon!',
+                  FFLocalizations.of(context).getText(
+                    'p79harf1' /* Will be Back Soon! */,
+                  ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Readex Pro',
                         fontSize: 12.0,

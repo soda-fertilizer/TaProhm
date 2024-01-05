@@ -178,15 +178,22 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                           elevation: 0.0,
                           labelPadding: const EdgeInsetsDirectional.fromSTEB(
                               32.0, 0.0, 32.0, 0.0),
-                          tabs: const [
+                          tabs: [
                             Tab(
-                              text: 'Sign In',
+                              text: FFLocalizations.of(context).getText(
+                                'lh5hvcir' /* Sign In */,
+                              ),
                             ),
                             Tab(
-                              text: 'Sign Up',
+                              text: FFLocalizations.of(context).getText(
+                                'gtd92c92' /* Sign Up */,
+                              ),
                             ),
                           ],
                           controller: _model.tabBarController,
+                          onTap: (i) async {
+                            [() async {}, () async {}][i]();
+                          },
                         ),
                       ),
                       Expanded(
@@ -216,7 +223,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                     Text(
-                                      'Welcome Back',
+                                      FFLocalizations.of(context).getText(
+                                        'fyroydin' /* Welcome Back */,
+                                      ),
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
                                           .headlineMedium,
@@ -225,7 +234,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 4.0, 0.0, 24.0),
                                       child: Text(
-                                        'Fill out the information below in order to access your account.',
+                                        FFLocalizations.of(context).getText(
+                                          'd9ouesba' /* Fill out the information below... */,
+                                        ),
                                         textAlign: TextAlign.start,
                                         style: FlutterFlowTheme.of(context)
                                             .labelMedium,
@@ -243,7 +254,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             TextCapitalization.none,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'Phone number',
+                                          labelText: FFLocalizations.of(context)
+                                              .getText(
+                                            '6zxlh0p7' /* Phone number */,
+                                          ),
                                           labelStyle: FlutterFlowTheme.of(
                                                   context)
                                               .labelMedium
@@ -326,7 +340,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         obscureText:
                                             !_model.loginPasswordVisibility,
                                         decoration: InputDecoration(
-                                          labelText: 'Password',
+                                          labelText: FFLocalizations.of(context)
+                                              .getText(
+                                            'ooyl8orz' /* Password */,
+                                          ),
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium,
@@ -577,7 +594,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               setState(() {});
                                             }
                                           },
-                                          text: 'Sign in',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            '95l0eikw' /* Sign in */,
+                                          ),
                                           options: FFButtonOptions(
                                             width: 230.0,
                                             height: 52.0,
@@ -620,7 +640,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 20.0, 0.0, 20.0),
                                     child: Text(
-                                      'Create Account',
+                                      FFLocalizations.of(context).getText(
+                                        'g1yku3fl' /* Create Account */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .titleLarge,
                                     ),
@@ -730,7 +752,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               isDense: true,
-                                              labelText: 'Full name',
+                                              labelText:
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                '8kp10tav' /* Full name */,
+                                              ),
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium,
@@ -802,7 +828,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               isDense: true,
-                                              labelText: 'Phone number',
+                                              labelText:
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                '8bjt1g2f' /* Phone number */,
+                                              ),
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium,
@@ -882,7 +912,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 .signUpPasswordVisibility,
                                             decoration: InputDecoration(
                                               isDense: true,
-                                              labelText: 'Password',
+                                              labelText:
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                'mllvo7vc' /* Password */,
+                                              ),
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMedium,
@@ -1133,7 +1167,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
 
                                           if (shouldSetState) setState(() {});
                                         },
-                                        text: 'Sign Up',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'dxm9rmaj' /* Sign Up */,
+                                        ),
                                         options: FFButtonOptions(
                                           width: 230.0,
                                           height: 52.0,
@@ -1228,7 +1265,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               return;
                                             }
                                           },
-                                          text: 'Next',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'jic6y1og' /* Next */,
+                                          ),
                                           options: FFButtonOptions(
                                             width: 230.0,
                                             height: 52.0,

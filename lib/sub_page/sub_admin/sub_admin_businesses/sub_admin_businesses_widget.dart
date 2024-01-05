@@ -102,7 +102,9 @@ class _SubAdminBusinessesWidgetState extends State<SubAdminBusinessesWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  'Businesses',
+                  FFLocalizations.of(context).getText(
+                    'k7a5r60z' /* Businesses */,
+                  ),
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),

@@ -111,7 +111,9 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  'Company info',
+                  FFLocalizations.of(context).getText(
+                    'xwixso2c' /* Company info */,
+                  ),
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,

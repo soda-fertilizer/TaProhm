@@ -41,12 +41,6 @@ class _TransferWidgetState extends State<TransferWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(cameraPermission);
-      if (await getPermissionStatus(cameraPermission)) {
-        return;
-      }
-
-      await requestPermission(cameraPermission);
-      return;
     });
 
     _model.phoneNumberController ??= TextEditingController(text: widget.qrCode);
@@ -132,7 +126,9 @@ class _TransferWidgetState extends State<TransferWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  'Transfer',
+                  FFLocalizations.of(context).getText(
+                    '8mtno5w8' /* Transfer */,
+                  ),
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -170,7 +166,9 @@ class _TransferWidgetState extends State<TransferWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
-                            labelText: 'ID',
+                            labelText: FFLocalizations.of(context).getText(
+                              'yljbwcis' /* ID */,
+                            ),
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -214,7 +212,9 @@ class _TransferWidgetState extends State<TransferWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
-                            labelText: 'Amount',
+                            labelText: FFLocalizations.of(context).getText(
+                              'dd4jhrey' /* Amount */,
+                            ),
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -265,7 +265,9 @@ class _TransferWidgetState extends State<TransferWidget> {
                           _model.scanner =
                               await FlutterBarcodeScanner.scanBarcode(
                             '#C62828', // scanning line color
-                            'Cancel', // cancel button text
+                            FFLocalizations.of(context).getText(
+                              'e63wrn2c' /* Cancel */,
+                            ), // cancel button text
                             true, // whether to show the flash icon
                             ScanMode.QR,
                           );
@@ -296,7 +298,9 @@ class _TransferWidgetState extends State<TransferWidget> {
 
                           setState(() {});
                         },
-                        text: 'Qr code',
+                        text: FFLocalizations.of(context).getText(
+                          'a8vwev3m' /* Qr code */,
+                        ),
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 40.0,
@@ -480,7 +484,9 @@ class _TransferWidgetState extends State<TransferWidget> {
 
                           if (shouldSetState) setState(() {});
                         },
-                        text: 'Confirm',
+                        text: FFLocalizations.of(context).getText(
+                          'vt8ma50s' /* Confirm */,
+                        ),
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 40.0,

@@ -81,3 +81,14 @@ int? calculateDateDifference(
     return null;
   }
 }
+
+String? charLimit(
+  int? numLimit,
+  String? stringValue,
+) {
+  if (stringValue!.length > numLimit!) {
+    return "${stringValue.substring(0, numLimit)}...";
+  } else {
+    return stringValue;
+  }
+}

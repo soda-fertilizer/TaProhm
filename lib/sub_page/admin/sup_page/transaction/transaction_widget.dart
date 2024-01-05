@@ -116,7 +116,9 @@ class _TransactionWidgetState extends State<TransactionWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  'Transaction',
+                  FFLocalizations.of(context).getText(
+                    'er1b6n35' /* Transaction */,
+                  ),
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),
@@ -177,7 +179,9 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: 'Amont',
+                              labelText: FFLocalizations.of(context).getText(
+                                '56pt0emp' /* Amont */,
+                              ),
                               labelStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
                               hintStyle:
@@ -301,7 +305,9 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                   );
                                   context.safePop();
                                 },
-                                text: 'Delete',
+                                text: FFLocalizations.of(context).getText(
+                                  'fo7dz9xp' /* Delete */,
+                                ),
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 0.4,
                                   height: 40.0,
@@ -480,7 +486,9 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                     return;
                                   }
                                 },
-                                text: 'Confirm',
+                                text: FFLocalizations.of(context).getText(
+                                  'apvf3o4b' /* Confirm */,
+                                ),
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 0.4,
                                   height: 40.0,

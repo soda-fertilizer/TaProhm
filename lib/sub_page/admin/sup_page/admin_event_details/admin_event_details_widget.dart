@@ -110,7 +110,9 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                 },
               ),
               title: Text(
-                'Event detail',
+                FFLocalizations.of(context).getText(
+                  '3dcg5qgr' /* Event detail */,
+                ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,
@@ -185,7 +187,9 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                 );
                                 context.safePop();
                               },
-                              text: 'Delete',
+                              text: FFLocalizations.of(context).getText(
+                                'o33xwsl2' /* Delete */,
+                              ),
                               options: FFButtonOptions(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 height: 40.0,
@@ -238,7 +242,9 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                   },
                                 );
                               },
-                              text: 'Edit',
+                              text: FFLocalizations.of(context).getText(
+                                '5fyymatq' /* Edit */,
+                              ),
                               options: FFButtonOptions(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 height: 40.0,

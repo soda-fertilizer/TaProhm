@@ -13,7 +13,7 @@ export '/sub_page/my_company/pin_location/pin_location_widget.dart'
 export '/pages/profile/profile_widget.dart' show ProfileWidget;
 export '/sub_page/balance/withdrawal/withdrawal_widget.dart'
     show WithdrawalWidget;
-export '/pages/referral/referral_widget.dart' show ReferralWidget;
+export '/sub_page/referral/referral_widget.dart' show ReferralWidget;
 export '/sub_page/login_page/login_page_widget.dart' show LoginPageWidget;
 export '/sub_page/admin/admin_main/admin_main_widget.dart' show AdminMainWidget;
 export '/sub_page/admin/approve_company/approve_company_widget.dart'
@@ -25,7 +25,7 @@ export '/sub_page/admin/approve_account/approve_account_widget.dart'
 export '/sub_page/balance/transfer/transfer_widget.dart' show TransferWidget;
 export '/sub_page/admin/admin_main_referral/admin_main_referral_widget.dart'
     show AdminMainReferralWidget;
-export '/pages/referral_sub_page/referral_sub_page_widget.dart'
+export '/sub_page/referral_sub_page/referral_sub_page_widget.dart'
     show ReferralSubPageWidget;
 export '/sub_page/admin/sup_page/account/account_widget.dart'
     show AccountWidget;
@@ -39,7 +39,7 @@ export '/sub_page/my_company/view_company/view_company_widget.dart'
     show ViewCompanyWidget;
 export '/sub_page/balance/deposit/deposit_widget.dart' show DepositWidget;
 export '/sub_page/company_info/company_info_widget.dart' show CompanyInfoWidget;
-export '/pages/single_company_map/single_company_map_widget.dart'
+export '/sub_page/single_company_map/single_company_map_widget.dart'
     show SingleCompanyMapWidget;
 export '/sub_page/my_company/edit_company/edit_company_widget.dart'
     show EditCompanyWidget;

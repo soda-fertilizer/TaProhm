@@ -75,7 +75,9 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Request Company',
+              FFLocalizations.of(context).getText(
+                'j0pz6l2d' /* Request Company */,
+              ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,

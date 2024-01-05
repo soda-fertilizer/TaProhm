@@ -1,9 +1,12 @@
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:async';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -94,7 +97,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
             },
           ),
           title: Text(
-            'Create Event',
+            FFLocalizations.of(context).getText(
+              '93g2cdif' /* Create Event */,
+            ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -119,15 +124,22 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                   unselectedLabelStyle: const TextStyle(),
                   indicatorColor: FlutterFlowTheme.of(context).primary,
                   padding: const EdgeInsets.all(4.0),
-                  tabs: const [
+                  tabs: [
                     Tab(
-                      text: 'Create',
+                      text: FFLocalizations.of(context).getText(
+                        'tnosu7na' /* Create */,
+                      ),
                     ),
                     Tab(
-                      text: 'History',
+                      text: FFLocalizations.of(context).getText(
+                        '7zpvz662' /* History */,
+                      ),
                     ),
                   ],
                   controller: _model.tabBarController,
+                  onTap: (i) async {
+                    [() async {}, () async {}][i]();
+                  },
                 ),
               ),
               Expanded(
@@ -151,7 +163,10 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   isDense: true,
-                                  labelText: 'Title',
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
+                                    'k3que5uq' /* Title */,
+                                  ),
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelMedium,
                                   hintStyle:
@@ -214,7 +229,10 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                   focusNode: _model.detailsFocusNode,
                                   obscureText: false,
                                   decoration: InputDecoration(
-                                    labelText: 'Details',
+                                    labelText:
+                                        FFLocalizations.of(context).getText(
+                                      '67yiekd3' /* Details */,
+                                    ),
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
                                     hintStyle: FlutterFlowTheme.of(context)
@@ -332,7 +350,10 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                               });
                             },
                             text: dateTimeFormat(
-                                'dd/MM/yyyy hh:mm a', _model.eventDate),
+                              'dd/MM/yyyy hh:mm a',
+                              _model.eventDate,
+                              locale: FFLocalizations.of(context).languageCode,
+                            ),
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.8,
                               height: 40.0,
@@ -372,7 +393,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Text(
-                                    'Add image',
+                                    FFLocalizations.of(context).getText(
+                                      'yzflqu96' /* Add image */,
+                                    ),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
                                   ),
@@ -434,7 +457,10 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                             try {
                                               showUploadMessage(
                                                 context,
-                                                'Uploading file...',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'co02njst' /* Uploading */,
+                                                ),
                                                 showLoading: true,
                                               );
                                               selectedUploadedFiles =
@@ -478,11 +504,19 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                     downloadUrls.first;
                                               });
                                               showUploadMessage(
-                                                  context, 'Success!');
+                                                  context,
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'dg5pg16f' /* Success */,
+                                                  ));
                                             } else {
                                               setState(() {});
-                                              showUploadMessage(context,
-                                                  'Failed to upload data');
+                                              showUploadMessage(
+                                                  context,
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'z7emxvk1' /* Failed to upload data */,
+                                                  ));
                                               return;
                                             }
                                           }
@@ -530,7 +564,10 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                             try {
                                               showUploadMessage(
                                                 context,
-                                                'Uploading file...',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'co02njst' /* Uploading */,
+                                                ),
                                                 showLoading: true,
                                               );
                                               selectedUploadedFiles =
@@ -574,11 +611,19 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                     downloadUrls.first;
                                               });
                                               showUploadMessage(
-                                                  context, 'Success!');
+                                                  context,
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'dg5pg16f' /* Success */,
+                                                  ));
                                             } else {
                                               setState(() {});
-                                              showUploadMessage(context,
-                                                  'Failed to upload data');
+                                              showUploadMessage(
+                                                  context,
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'z7emxvk1' /* Failed to upload data */,
+                                                  ));
                                               return;
                                             }
                                           }
@@ -637,6 +682,18 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                     'CreateBy': FFAppState().UserInfo.userID,
                                     'image': _model.selectImage,
                                   });
+                                  unawaited(
+                                    () async {
+                                      await EdgeFunctionGroup
+                                          .broadcastPushNotifcationCall
+                                          .call(
+                                        title: functions.charLimit(
+                                            17, _model.titleController.text),
+                                        contents: functions.charLimit(
+                                            57, _model.detailsController.text),
+                                      );
+                                    }(),
+                                  );
                                   context.safePop();
                                   return;
                                 } else {
@@ -660,7 +717,9 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                   return;
                                 }
                               },
-                              text: 'Create',
+                              text: FFLocalizations.of(context).getText(
+                                '3kx20znm' /* Create */,
+                              ),
                               options: FFButtonOptions(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 height: 40.0,
@@ -814,9 +873,14 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                     ),
                                                     Text(
                                                       dateTimeFormat(
-                                                          'MMM,dd,yyyy  hh:mm a',
-                                                          listViewEventsRow
-                                                              .eventDate),
+                                                        'MMM,dd,yyyy  hh:mm a',
+                                                        listViewEventsRow
+                                                            .eventDate,
+                                                        locale:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .languageCode,
+                                                      ),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)

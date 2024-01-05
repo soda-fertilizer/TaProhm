@@ -131,7 +131,9 @@ class _DepositWidgetState extends State<DepositWidget> {
                 autofocus: true,
                 obscureText: false,
                 decoration: InputDecoration(
-                  hintText: '\$0',
+                  hintText: FFLocalizations.of(context).getText(
+                    'mereea6f' /* $0 */,
+                  ),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).alternate,
@@ -229,12 +231,16 @@ class _DepositWidgetState extends State<DepositWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'ABA Pay',
+                                          FFLocalizations.of(context).getText(
+                                            'gnirtgn3' /* ABA Pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          'Click to pay',
+                                          FFLocalizations.of(context).getText(
+                                            '6ybsmz43' /* Click to pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -305,12 +311,16 @@ class _DepositWidgetState extends State<DepositWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Acleda Pay',
+                                            FFLocalizations.of(context).getText(
+                                              '2vlpw7iu' /* Acleda Pay */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
                                           Text(
-                                            'Click to pay',
+                                            FFLocalizations.of(context).getText(
+                                              'a15lhrhj' /* Click to pay */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .labelSmall,
                                           ),
@@ -381,12 +391,16 @@ class _DepositWidgetState extends State<DepositWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Wing Pay',
+                                            FFLocalizations.of(context).getText(
+                                              'wz4zgxa1' /* Wing Pay */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
                                           Text(
-                                            'Click to pay',
+                                            FFLocalizations.of(context).getText(
+                                              'cj7hdbji' /* Click to pay */,
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .labelSmall,
                                           ),
@@ -424,7 +438,9 @@ class _DepositWidgetState extends State<DepositWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      'Add image',
+                      FFLocalizations.of(context).getText(
+                        '7zv5ov1e' /* Add image */,
+                      ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
@@ -478,7 +494,9 @@ class _DepositWidgetState extends State<DepositWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  'Uploading file...',
+                                  FFLocalizations.of(context).getText(
+                                    'co02njst' /* Uploading */,
+                                  ),
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -508,11 +526,18 @@ class _DepositWidgetState extends State<DepositWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl1 = downloadUrls.first;
                                 });
-                                showUploadMessage(context, 'Success!');
+                                showUploadMessage(
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'dg5pg16f' /* Success */,
+                                    ));
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context, 'Failed to upload data');
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'z7emxvk1' /* Failed to upload data */,
+                                    ));
                                 return;
                               }
                             }
@@ -553,7 +578,9 @@ class _DepositWidgetState extends State<DepositWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  'Uploading file...',
+                                  FFLocalizations.of(context).getText(
+                                    'co02njst' /* Uploading */,
+                                  ),
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -583,11 +610,18 @@ class _DepositWidgetState extends State<DepositWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl2 = downloadUrls.first;
                                 });
-                                showUploadMessage(context, 'Success!');
+                                showUploadMessage(
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'dg5pg16f' /* Success */,
+                                    ));
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context, 'Failed to upload data');
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'z7emxvk1' /* Failed to upload data */,
+                                    ));
                                 return;
                               }
                             }
@@ -650,7 +684,9 @@ class _DepositWidgetState extends State<DepositWidget> {
 
                   setState(() {});
                 },
-                text: 'Confirm',
+                text: FFLocalizations.of(context).getText(
+                  'lcvwhf3r' /* Confirm */,
+                ),
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,

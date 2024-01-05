@@ -72,7 +72,9 @@ class _AboutWidgetState extends State<AboutWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'About',
+              FFLocalizations.of(context).getText(
+                'ra14fpuc' /* About */,
+              ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,

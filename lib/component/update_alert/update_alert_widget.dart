@@ -57,13 +57,17 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
             ),
           ),
           Text(
-            'Update',
+            FFLocalizations.of(context).getText(
+              'cd50pemm' /* Update */,
+            ),
             style: FlutterFlowTheme.of(context).titleLarge,
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
             child: Text(
-              '    We would like to inform you that a new version of our app is available for download. To enjoy the latest benefits of our app, please update it as soon as possible. ',
+              FFLocalizations.of(context).getText(
+                't3u3rksv' /*     We would like to inform yo... */,
+              ),
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),
           ),
@@ -82,7 +86,9 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'LATER',
+                    FFLocalizations.of(context).getText(
+                      'irdmhhi0' /* LATER */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: FlutterFlowTheme.of(context).primary,
@@ -98,11 +104,17 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                     if (isAndroid) {
                       await launchURL(
                           'https://play.google.com/store/apps/details?id=com.soda.taprohm');
+                    } else {
+                      await launchURL(
+                          'https://play.google.com/store/apps/details?id=com.soda.taprohm');
                     }
+
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'UPDATE NOW',
+                    FFLocalizations.of(context).getText(
+                      'gvey98wv' /* UPDATE NOW */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: FlutterFlowTheme.of(context).primary,

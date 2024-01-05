@@ -81,7 +81,9 @@ class _GraphTreeWidgetState extends State<GraphTreeWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              'Graph tree',
+              FFLocalizations.of(context).getText(
+                'm2sgzev1' /* Graph tree */,
+              ),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,

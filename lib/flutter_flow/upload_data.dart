@@ -87,7 +87,9 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                 child: ListTile(
                   title: Text(
-                    'Choose Source',
+                    FFLocalizations.of(context).getText(
+                      'hzp3ot9v' /* Choose Source */,
+                    ),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       pickerFontFamily,
@@ -104,27 +106,39 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
             ],
             if (allowPhoto && allowVideo) ...[
               createUploadMediaListTile(
-                'Gallery (Photo)',
+                FFLocalizations.of(context).getText(
+                  'zyezx11b' /* Gallery (Photo) */,
+                ),
                 MediaSource.photoGallery,
               ),
               const Divider(),
               createUploadMediaListTile(
-                'Gallery (Video)',
+                FFLocalizations.of(context).getText(
+                  '934ayfdd' /* Gallery (Video) */,
+                ),
                 MediaSource.videoGallery,
               ),
             ] else if (allowPhoto)
               createUploadMediaListTile(
-                'Gallery',
+                FFLocalizations.of(context).getText(
+                  'jf718a9r' /* Gallery */,
+                ),
                 MediaSource.photoGallery,
               )
             else
               createUploadMediaListTile(
-                'Gallery',
+                FFLocalizations.of(context).getText(
+                  'jf718a9r' /* Gallery */,
+                ),
                 MediaSource.videoGallery,
               ),
             if (!kIsWeb) ...[
               const Divider(),
-              createUploadMediaListTile('Camera', MediaSource.camera),
+              createUploadMediaListTile(
+                  FFLocalizations.of(context).getText(
+                    'xc2486kd' /* Camera */,
+                  ),
+                  MediaSource.camera),
               const Divider(),
             ],
             const SizedBox(height: 10),
@@ -230,7 +244,9 @@ bool validateFileFormat(String filePath, BuildContext context) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(
-      content: Text('Invalid file format: ${mime(filePath)}'),
+      content: Text(FFLocalizations.of(context).getText(
+        'e90agh5n' /* Invalid file format */,
+      )),
     ));
   return false;
 }

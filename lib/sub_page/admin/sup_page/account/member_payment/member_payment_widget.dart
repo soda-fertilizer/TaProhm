@@ -201,12 +201,16 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'ABA Pay',
+                                          FFLocalizations.of(context).getText(
+                                            '9w3jd1ir' /* ABA Pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          'Click to pay',
+                                          FFLocalizations.of(context).getText(
+                                            'jj8jfug1' /* Click to pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -276,12 +280,16 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Acleda Pay',
+                                          FFLocalizations.of(context).getText(
+                                            'wmioflxu' /* Acleda Pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          'Click to pay',
+                                          FFLocalizations.of(context).getText(
+                                            'dgy18yeo' /* Click to pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -351,12 +359,16 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Wing Pay',
+                                          FFLocalizations.of(context).getText(
+                                            'jj8to276' /* Wing Pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          'Click to pay',
+                                          FFLocalizations.of(context).getText(
+                                            '6ks686mw' /* Click to pay */,
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -394,7 +406,9 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      'Add image',
+                      FFLocalizations.of(context).getText(
+                        'k7p3p2kj' /* Add image */,
+                      ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
@@ -448,7 +462,9 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  'Uploading file...',
+                                  FFLocalizations.of(context).getText(
+                                    'co02njst' /* Uploading */,
+                                  ),
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -478,11 +494,18 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl1 = downloadUrls.first;
                                 });
-                                showUploadMessage(context, 'Success!');
+                                showUploadMessage(
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'dg5pg16f' /* Success */,
+                                    ));
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context, 'Failed to upload data');
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'z7emxvk1' /* Failed to upload data */,
+                                    ));
                                 return;
                               }
                             }
@@ -525,7 +548,9 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  'Uploading file...',
+                                  FFLocalizations.of(context).getText(
+                                    'co02njst' /* Uploading */,
+                                  ),
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -555,11 +580,18 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl2 = downloadUrls.first;
                                 });
-                                showUploadMessage(context, 'Success!');
+                                showUploadMessage(
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'dg5pg16f' /* Success */,
+                                    ));
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context, 'Failed to upload data');
+                                    context,
+                                    FFLocalizations.of(context).getText(
+                                      'z7emxvk1' /* Failed to upload data */,
+                                    ));
                                 return;
                               }
                             }
@@ -648,7 +680,9 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
 
                   setState(() {});
                 },
-                text: 'Active',
+                text: FFLocalizations.of(context).getText(
+                  'aw6r2wpd' /* Active */,
+                ),
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,

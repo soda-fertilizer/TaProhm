@@ -100,7 +100,9 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
         backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         title: Text(
-          'Payment',
+          FFLocalizations.of(context).getText(
+            '02ut29dq' /* Payment */,
+          ),
           style: FlutterFlowTheme.of(context).headlineMedium.override(
                 fontFamily: 'Outfit',
                 color: Colors.white,
@@ -129,15 +131,22 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       padding: const EdgeInsets.all(4.0),
-                      tabs: const [
+                      tabs: [
                         Tab(
-                          text: 'Bank',
+                          text: FFLocalizations.of(context).getText(
+                            'g3h7bdbd' /* Bank */,
+                          ),
                         ),
                         Tab(
-                          text: 'Wallet',
+                          text: FFLocalizations.of(context).getText(
+                            'z1wet92u' /* Wallet */,
+                          ),
                         ),
                       ],
                       controller: _model.tabBarController,
+                      onTap: (i) async {
+                        [() async {}, () async {}][i]();
+                      },
                     ),
                   ),
                   Expanded(
@@ -200,7 +209,9 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                               ),
                             ),
                             Text(
-                              '\$ 1',
+                              FFLocalizations.of(context).getText(
+                                'k5z0nntl' /* $ 1 */,
+                              ),
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context).displayMedium,
                             ),
@@ -270,13 +281,21 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          'ABA Pay',
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'ka5xd0to' /* ABA Pay */,
+                                                          ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium,
                                                         ),
                                                         Text(
-                                                          'Click to pay',
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .getText(
+                                                            'u9pzkftc' /* Click to pay */,
+                                                          ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .labelSmall,
@@ -360,13 +379,21 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Acleda Pay',
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              '4hvtkd31' /* Acleda Pay */,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium,
                                                           ),
                                                           Text(
-                                                            'Click to pay',
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'm4lmw7sp' /* Click to pay */,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelSmall,
@@ -450,13 +477,21 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Wing Pay',
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'o4mrxtc6' /* Wing Pay */,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium,
                                                           ),
                                                           Text(
-                                                            'Click to pay',
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'fhyuqoz4' /* Click to pay */,
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelSmall,
@@ -497,7 +532,9 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      'Add image',
+                                      FFLocalizations.of(context).getText(
+                                        '9w6yb318' /* Add image */,
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -559,7 +596,10 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                               try {
                                                 showUploadMessage(
                                                   context,
-                                                  'Uploading file...',
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'co02njst' /* Uploading */,
+                                                  ),
                                                   showLoading: true,
                                                 );
                                                 selectedUploadedFiles =
@@ -605,11 +645,19 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                       downloadUrls.first;
                                                 });
                                                 showUploadMessage(
-                                                    context, 'Success!');
+                                                    context,
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'dg5pg16f' /* Success */,
+                                                    ));
                                               } else {
                                                 setState(() {});
-                                                showUploadMessage(context,
-                                                    'Failed to upload data');
+                                                showUploadMessage(
+                                                    context,
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'z7emxvk1' /* Failed to upload data */,
+                                                    ));
                                                 return;
                                               }
                                             }
@@ -658,7 +706,10 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                               try {
                                                 showUploadMessage(
                                                   context,
-                                                  'Uploading file...',
+                                                  FFLocalizations.of(context)
+                                                      .getText(
+                                                    'co02njst' /* Uploading */,
+                                                  ),
                                                   showLoading: true,
                                                 );
                                                 selectedUploadedFiles =
@@ -704,11 +755,19 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                       downloadUrls.first;
                                                 });
                                                 showUploadMessage(
-                                                    context, 'Success!');
+                                                    context,
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'dg5pg16f' /* Success */,
+                                                    ));
                                               } else {
                                                 setState(() {});
-                                                showUploadMessage(context,
-                                                    'Failed to upload data');
+                                                showUploadMessage(
+                                                    context,
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                      'z7emxvk1' /* Failed to upload data */,
+                                                    ));
                                                 return;
                                               }
                                             }
@@ -786,7 +845,9 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
 
                                   setState(() {});
                                 },
-                                text: 'Active',
+                                text: FFLocalizations.of(context).getText(
+                                  'fs1dhh38' /* Active */,
+                                ),
                                 options: FFButtonOptions(
                                   width: 230.0,
                                   height: 50.0,
@@ -849,7 +910,9 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 20.0),
                                       child: Text(
-                                        '\$ 1',
+                                        FFLocalizations.of(context).getText(
+                                          '81vcxb4a' /* $ 1 */,
+                                        ),
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .displayMedium,
@@ -970,7 +1033,10 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
 
                                           if (shouldSetState) setState(() {});
                                         },
-                                        text: 'Active',
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '7oinzncl' /* Active */,
+                                        ),
                                         options: FFButtonOptions(
                                           width: 230.0,
                                           height: 50.0,
