@@ -122,9 +122,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
               ),
             ),
             Text(
-              FFLocalizations.of(context).getText(
-                'qt1xq4h1' /* $ 1 */,
-              ),
+              '\$ 1',
               style: FlutterFlowTheme.of(context).displayLarge,
             ),
             Container(
@@ -184,16 +182,12 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'n2ukvk3c' /* ABA Pay */,
-                                          ),
+                                          'ABA Pay',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            '73i0nhbw' /* Click to pay */,
-                                          ),
+                                          'Click to pay',
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -264,16 +258,12 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              's41u015y' /* Acleda Pay */,
-                                            ),
+                                            'Acleda Pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              '8ccd5n3c' /* Click to pay */,
-                                            ),
+                                            'Click to pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .labelSmall,
                                           ),
@@ -344,16 +334,12 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              'kzkj3wsu' /* Wing Pay */,
-                                            ),
+                                            'Wing Pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              '2u6n3dzc' /* Click to pay */,
-                                            ),
+                                            'Click to pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .labelSmall,
                                           ),
@@ -391,9 +377,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      FFLocalizations.of(context).getText(
-                        'q9s7na7x' /* Add image */,
-                      ),
+                      'Add image',
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
@@ -416,7 +400,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
-                              'assets/images/icons8-remove-48.png',
+                              'assets/images/icons8-delete-48.png',
                               width: 30.0,
                               height: 24.0,
                               fit: BoxFit.cover,
@@ -447,9 +431,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  FFLocalizations.of(context).getText(
-                                    'co02njst' /* Uploading */,
-                                  ),
+                                  'Uploading file...',
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -479,18 +461,11 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl1 = downloadUrls.first;
                                 });
-                                showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'dg5pg16f' /* Success */,
-                                    ));
+                                showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'z7emxvk1' /* Failed to upload data */,
-                                    ));
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }
@@ -531,9 +506,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  FFLocalizations.of(context).getText(
-                                    'co02njst' /* Uploading */,
-                                  ),
+                                  'Uploading file...',
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -563,18 +536,11 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl2 = downloadUrls.first;
                                 });
-                                showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'dg5pg16f' /* Success */,
-                                    ));
+                                showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'z7emxvk1' /* Failed to upload data */,
-                                    ));
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }
@@ -658,9 +624,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                   );
                   context.safePop();
                 },
-                text: FFLocalizations.of(context).getText(
-                  'bq8t1ezq' /* Active */,
-                ),
+                text: 'Active',
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,

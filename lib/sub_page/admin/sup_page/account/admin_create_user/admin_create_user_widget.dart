@@ -125,9 +125,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                'q1cq2rgu' /* Create user */,
-              ),
+              'Create user',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -153,16 +151,12 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                   unselectedLabelStyle: const TextStyle(),
                   indicatorColor: FlutterFlowTheme.of(context).primary,
                   padding: const EdgeInsets.all(4.0),
-                  tabs: [
+                  tabs: const [
                     Tab(
-                      text: FFLocalizations.of(context).getText(
-                        'v5rorgp3' /* Member */,
-                      ),
+                      text: 'Member',
                     ),
                     Tab(
-                      text: FFLocalizations.of(context).getText(
-                        '6g5wfv4v' /* Officer */,
-                      ),
+                      text: 'Officer',
                     ),
                   ],
                   controller: _model.tabBarController,
@@ -211,9 +205,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     try {
                                       showUploadMessage(
                                         context,
-                                        FFLocalizations.of(context).getText(
-                                          'co02njst' /* Uploading */,
-                                        ),
+                                        'Uploading file...',
                                         showLoading: true,
                                       );
                                       selectedUploadedFiles = selectedMedia
@@ -248,18 +240,11 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         _model.uploadedFileUrl1 =
                                             downloadUrls.first;
                                       });
-                                      showUploadMessage(
-                                          context,
-                                          FFLocalizations.of(context).getText(
-                                            'dg5pg16f' /* Success */,
-                                          ));
+                                      showUploadMessage(context, 'Success!');
                                     } else {
                                       setState(() {});
                                       showUploadMessage(
-                                          context,
-                                          FFLocalizations.of(context).getText(
-                                            'z7emxvk1' /* Failed to upload data */,
-                                          ));
+                                          context, 'Failed to upload data');
                                       return;
                                     }
                                   }
@@ -291,10 +276,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        'mdzgrw19' /* Full Name */,
-                                      ),
+                                      labelText: 'Full Name',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintStyle: FlutterFlowTheme.of(context)
@@ -357,10 +339,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         !_model.normalPasswordVisibility,
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        'qpnn8ior' /* Password */,
-                                      ),
+                                      labelText: 'Password',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintStyle: FlutterFlowTheme.of(context)
@@ -443,10 +422,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        'jilzubeg' /* Phone */,
-                                      ),
+                                      labelText: 'Phone',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintStyle: FlutterFlowTheme.of(context)
@@ -511,10 +487,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        'n9e0yp33' /* Referral ID */,
-                                      ),
+                                      labelText: 'Referral ID',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintStyle: FlutterFlowTheme.of(context)
@@ -579,10 +552,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        '8erfwafq' /* Invite ID */,
-                                      ),
+                                      labelText: 'Invite ID',
                                       labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium,
                                       hintStyle: FlutterFlowTheme.of(context)
@@ -701,10 +671,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           fontFamily: 'Readex Pro',
                                           fontSize: 14.0,
                                         ),
-                                    hintText:
-                                        FFLocalizations.of(context).getText(
-                                      '37hi9qsb' /* Please select sector */,
-                                    ),
+                                    hintText: 'Please select sector',
                                     icon: Icon(
                                       Icons.keyboard_arrow_down_rounded,
                                       color: FlutterFlowTheme.of(context)
@@ -951,9 +918,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
 
                                       if (shouldSetState) setState(() {});
                                     },
-                                    text: FFLocalizations.of(context).getText(
-                                      'arobyggq' /* Next */,
-                                    ),
+                                    text: 'Next',
                                     options: FFButtonOptions(
                                       width: 230.0,
                                       height: 52.0,
@@ -1020,9 +985,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   try {
                                     showUploadMessage(
                                       context,
-                                      FFLocalizations.of(context).getText(
-                                        'co02njst' /* Uploading */,
-                                      ),
+                                      'Uploading file...',
                                       showLoading: true,
                                     );
                                     selectedUploadedFiles = selectedMedia
@@ -1056,18 +1019,11 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       _model.uploadedFileUrl2 =
                                           downloadUrls.first;
                                     });
-                                    showUploadMessage(
-                                        context,
-                                        FFLocalizations.of(context).getText(
-                                          'dg5pg16f' /* Success */,
-                                        ));
+                                    showUploadMessage(context, 'Success!');
                                   } else {
                                     setState(() {});
                                     showUploadMessage(
-                                        context,
-                                        FFLocalizations.of(context).getText(
-                                          'z7emxvk1' /* Failed to upload data */,
-                                        ));
+                                        context, 'Failed to upload data');
                                     return;
                                   }
                                 }
@@ -1107,10 +1063,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    labelText:
-                                        FFLocalizations.of(context).getText(
-                                      'x40ncbiz' /* Full Name */,
-                                    ),
+                                    labelText: 'Full Name',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
                                     hintStyle: FlutterFlowTheme.of(context)
@@ -1168,10 +1121,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   obscureText: !_model.memberPasswordVisibility,
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    labelText:
-                                        FFLocalizations.of(context).getText(
-                                      '2tn24s7u' /* Password */,
-                                    ),
+                                    labelText: 'Password',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
                                     hintStyle: FlutterFlowTheme.of(context)
@@ -1246,10 +1196,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    labelText:
-                                        FFLocalizations.of(context).getText(
-                                      'db4uoalk' /* Referral ID */,
-                                    ),
+                                    labelText: 'Referral ID',
                                     labelStyle: FlutterFlowTheme.of(context)
                                         .labelMedium,
                                     hintStyle: FlutterFlowTheme.of(context)
@@ -1363,9 +1310,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         fontFamily: 'Readex Pro',
                                         fontSize: 14.0,
                                       ),
-                                  hintText: FFLocalizations.of(context).getText(
-                                    'dosjyfku' /* Please select sector */,
-                                  ),
+                                  hintText: 'Please select sector',
                                   icon: Icon(
                                     Icons.keyboard_arrow_down_rounded,
                                     color: FlutterFlowTheme.of(context)
@@ -1500,9 +1445,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
 
                                     if (shouldSetState) setState(() {});
                                   },
-                                  text: FFLocalizations.of(context).getText(
-                                    'mdujnrb2' /* Create */,
-                                  ),
+                                  text: 'Create',
                                   options: FFButtonOptions(
                                     width: 230.0,
                                     height: 52.0,

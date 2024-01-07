@@ -96,9 +96,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                         ),
                       ),
                       Text(
-                        FFLocalizations.of(context).getText(
-                          'jiepopy9' /* Deposit */,
-                        ),
+                        'Deposit',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
@@ -154,9 +152,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                         ),
                       ),
                       Text(
-                        FFLocalizations.of(context).getText(
-                          '6o6pa2q1' /* Transfer */,
-                        ),
+                        'Transfer',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
@@ -212,9 +208,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                         ),
                       ),
                       Text(
-                        FFLocalizations.of(context).getText(
-                          'hhntb0te' /* Withdrawal */,
-                        ),
+                        'Withdrawal',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',

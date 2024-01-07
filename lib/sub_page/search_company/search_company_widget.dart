@@ -78,9 +78,7 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                '2ol2x29z' /* Search */,
-              ),
+              'Search',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -130,9 +128,7 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     isDense: true,
-                    labelText: FFLocalizations.of(context).getText(
-                      'nwnpscay' /* Search.. */,
-                    ),
+                    labelText: 'Search..',
                     labelStyle: FlutterFlowTheme.of(context).labelMedium,
                     alignLabelWithHint: false,
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,

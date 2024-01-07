@@ -126,9 +126,7 @@ class _TransferWidgetState extends State<TransferWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    '8mtno5w8' /* Transfer */,
-                  ),
+                  'Transfer',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -166,9 +164,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
-                            labelText: FFLocalizations.of(context).getText(
-                              'yljbwcis' /* ID */,
-                            ),
+                            labelText: 'ID',
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -212,9 +208,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
-                            labelText: FFLocalizations.of(context).getText(
-                              'dd4jhrey' /* Amount */,
-                            ),
+                            labelText: 'Amount',
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -265,9 +259,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                           _model.scanner =
                               await FlutterBarcodeScanner.scanBarcode(
                             '#C62828', // scanning line color
-                            FFLocalizations.of(context).getText(
-                              'e63wrn2c' /* Cancel */,
-                            ), // cancel button text
+                            'Cancel', // cancel button text
                             true, // whether to show the flash icon
                             ScanMode.QR,
                           );
@@ -298,9 +290,7 @@ class _TransferWidgetState extends State<TransferWidget> {
 
                           setState(() {});
                         },
-                        text: FFLocalizations.of(context).getText(
-                          'a8vwev3m' /* Qr code */,
-                        ),
+                        text: 'Qr code',
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 40.0,
@@ -370,21 +360,6 @@ class _TransferWidgetState extends State<TransferWidget> {
                                   }(),
                                 );
                                 shouldSetState = true;
-                                // Insert other history
-                                _model.userTranfer =
-                                    await TransactionsTable().insert({
-                                  'TypeID': 7,
-                                  'Amount': double.tryParse(
-                                      _model.amountController.text),
-                                  'IsApprove': true,
-                                  'UserPhoneNumber':
-                                      _model.phoneNumberController.text,
-                                  'TransferToUserPhoneNumber':
-                                      FFAppState().UserInfo.phoneNumber,
-                                  'Detail':
-                                      'From: ${FFAppState().UserInfo.fullName}',
-                                });
-                                shouldSetState = true;
                                 // Minus money other balance
                                 unawaited(
                                   () async {
@@ -400,6 +375,21 @@ class _TransferWidgetState extends State<TransferWidget> {
                                     );
                                   }(),
                                 );
+                                shouldSetState = true;
+                                // Insert other history
+                                _model.userTranfer =
+                                    await TransactionsTable().insert({
+                                  'TypeID': 7,
+                                  'Amount': double.tryParse(
+                                      _model.amountController.text),
+                                  'IsApprove': true,
+                                  'UserPhoneNumber':
+                                      _model.phoneNumberController.text,
+                                  'TransferToUserPhoneNumber':
+                                      FFAppState().UserInfo.phoneNumber,
+                                  'Detail':
+                                      'From: ${FFAppState().UserInfo.fullName}',
+                                });
                                 shouldSetState = true;
                                 // Log
                                 unawaited(
@@ -484,9 +474,7 @@ class _TransferWidgetState extends State<TransferWidget> {
 
                           if (shouldSetState) setState(() {});
                         },
-                        text: FFLocalizations.of(context).getText(
-                          'vt8ma50s' /* Confirm */,
-                        ),
+                        text: 'Confirm',
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.4,
                           height: 40.0,

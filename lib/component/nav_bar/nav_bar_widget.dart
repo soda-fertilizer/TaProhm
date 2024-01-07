@@ -90,9 +90,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     size: 24.0,
                   ),
                   Text(
-                    FFLocalizations.of(context).getText(
-                      '7d6g3aa1' /* Home */,
-                    ),
+                    'Home',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: widget.selectPageIndex == 1
@@ -141,9 +139,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     size: 24.0,
                   ),
                   Text(
-                    FFLocalizations.of(context).getText(
-                      'zkq5m13a' /* Locator */,
-                    ),
+                    'Locator',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: widget.selectPageIndex == 2
@@ -210,9 +206,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       size: 24.0,
                     ),
                     Text(
-                      FFLocalizations.of(context).getText(
-                        'myfodagc' /* Alert */,
-                      ),
+                      'Alert',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             color: widget.selectPageIndex == 3
@@ -262,9 +256,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       size: 24.0,
                     ),
                     Text(
-                      FFLocalizations.of(context).getText(
-                        'agnmv6fb' /* Balance */,
-                      ),
+                      'Balance',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             color: widget.selectPageIndex == 3
@@ -313,9 +305,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     size: 24.0,
                   ),
                   Text(
-                    FFLocalizations.of(context).getText(
-                      'fwkjed5b' /* Event */,
-                    ),
+                    'Event',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: widget.selectPageIndex == 4
@@ -381,9 +371,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     size: 24.0,
                   ),
                   Text(
-                    FFLocalizations.of(context).getText(
-                      'n21gyhvu' /* Profile */,
-                    ),
+                    'Profile',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: widget.selectPageIndex == 5

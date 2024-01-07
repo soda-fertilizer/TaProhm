@@ -57,17 +57,13 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
             ),
           ),
           Text(
-            FFLocalizations.of(context).getText(
-              'cd50pemm' /* Update */,
-            ),
+            'Update',
             style: FlutterFlowTheme.of(context).titleLarge,
           ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                't3u3rksv' /*     We would like to inform yo... */,
-              ),
+              '    We would like to inform you that a new version of our app is available for download. To enjoy the latest benefits of our app, please update it as soon as possible. ',
               style: FlutterFlowTheme.of(context).bodyMedium,
             ),
           ),
@@ -86,9 +82,7 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    FFLocalizations.of(context).getText(
-                      'irdmhhi0' /* LATER */,
-                    ),
+                    'LATER',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: FlutterFlowTheme.of(context).primary,
@@ -112,9 +106,7 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    FFLocalizations.of(context).getText(
-                      'gvey98wv' /* UPDATE NOW */,
-                    ),
+                    'UPDATE NOW',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: FlutterFlowTheme.of(context).primary,

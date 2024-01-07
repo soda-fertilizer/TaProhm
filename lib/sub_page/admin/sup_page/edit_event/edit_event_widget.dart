@@ -95,9 +95,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
             },
           ),
           title: Text(
-            FFLocalizations.of(context).getText(
-              'o6nvgvt9' /* Edit Event */,
-            ),
+            'Edit Event',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -158,9 +156,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: FFLocalizations.of(context).getText(
-                                'bks6saae' /* Title */,
-                              ),
+                              labelText: 'Title',
                               labelStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
                               hintStyle:
@@ -224,9 +220,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                               focusNode: _model.detailsFocusNode,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelText: FFLocalizations.of(context).getText(
-                                  '1ts0y3wn' /* Details */,
-                                ),
+                                labelText: 'Details',
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -337,10 +331,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                           });
                         },
                         text: dateTimeFormat(
-                          'dd/MM/yyyy hh:mm a',
-                          _model.eventDate,
-                          locale: FFLocalizations.of(context).languageCode,
-                        ),
+                            'dd/MM/yyyy hh:mm a', _model.eventDate),
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.8,
                           height: 40.0,
@@ -377,9 +368,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'jxrax530' /* Add image */,
-                                ),
+                                'Add image',
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ),
@@ -436,9 +425,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         try {
                                           showUploadMessage(
                                             context,
-                                            FFLocalizations.of(context).getText(
-                                              'co02njst' /* Uploading */,
-                                            ),
+                                            'Uploading file...',
                                             showLoading: true,
                                           );
                                           selectedUploadedFiles = selectedMedia
@@ -475,19 +462,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                 downloadUrls.first;
                                           });
                                           showUploadMessage(
-                                              context,
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'dg5pg16f' /* Success */,
-                                              ));
+                                              context, 'Success!');
                                         } else {
                                           setState(() {});
                                           showUploadMessage(
-                                              context,
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'z7emxvk1' /* Failed to upload data */,
-                                              ));
+                                              context, 'Failed to upload data');
                                           return;
                                         }
                                       }
@@ -532,9 +511,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         try {
                                           showUploadMessage(
                                             context,
-                                            FFLocalizations.of(context).getText(
-                                              'co02njst' /* Uploading */,
-                                            ),
+                                            'Uploading file...',
                                             showLoading: true,
                                           );
                                           selectedUploadedFiles = selectedMedia
@@ -571,19 +548,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                 downloadUrls.first;
                                           });
                                           showUploadMessage(
-                                              context,
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'dg5pg16f' /* Success */,
-                                              ));
+                                              context, 'Success!');
                                         } else {
                                           setState(() {});
                                           showUploadMessage(
-                                              context,
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'z7emxvk1' /* Failed to upload data */,
-                                              ));
+                                              context, 'Failed to upload data');
                                           return;
                                         }
                                       }
@@ -640,9 +609,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                             );
                             context.safePop();
                           },
-                          text: FFLocalizations.of(context).getText(
-                            'po9eifih' /* Update */,
-                          ),
+                          text: 'Update',
                           options: FFButtonOptions(
                             width: MediaQuery.sizeOf(context).width * 0.4,
                             height: 40.0,

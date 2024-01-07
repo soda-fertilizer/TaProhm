@@ -126,9 +126,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    'bdosmdsx' /* Sub Referral */,
-                  ),
+                  'Sub Referral',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -268,16 +266,12 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                   indicatorColor:
                                       FlutterFlowTheme.of(context).primary,
                                   padding: const EdgeInsets.all(4.0),
-                                  tabs: [
+                                  tabs: const [
                                     Tab(
-                                      text: FFLocalizations.of(context).getText(
-                                        'htng1gzw' /* List view */,
-                                      ),
+                                      text: 'List view',
                                     ),
                                     Tab(
-                                      text: FFLocalizations.of(context).getText(
-                                        'b406unmb' /* Tree view */,
-                                      ),
+                                      text: 'Tree view',
                                     ),
                                   ],
                                   controller: _model.tabBarController,

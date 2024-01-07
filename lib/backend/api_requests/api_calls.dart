@@ -22,6 +22,7 @@ class UsersGroup {
   static LoginCall loginCall = LoginCall();
   static CheckReferralCall checkReferralCall = CheckReferralCall();
   static CheckPhoneNumberCall checkPhoneNumberCall = CheckPhoneNumberCall();
+  static SectorPhoneNumberCall sectorPhoneNumberCall = SectorPhoneNumberCall();
   static OneUserNameCall oneUserNameCall = OneUserNameCall();
 }
 
@@ -171,6 +172,38 @@ class CheckPhoneNumberCall {
   String? errorMessage(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.message''',
+      ));
+}
+
+class SectorPhoneNumberCall {
+  Future<ApiCallResponse> call({
+    int? sectorId,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'sector phone number',
+      apiUrl: '${UsersGroup.baseUrl}/sector_phone_number',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'sector_id': sectorId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? phoneNumber(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:]''',
       ));
 }
 
@@ -754,6 +787,7 @@ class EdgeFunctionGroup {
   };
   static UpdateBalanceCall updateBalanceCall = UpdateBalanceCall();
   static ReferralCall referralCall = ReferralCall();
+  static ReferralSecondCall referralSecondCall = ReferralSecondCall();
   static GetUserReferralCall getUserReferralCall = GetUserReferralCall();
   static PushNotifcationSingleUserCall pushNotifcationSingleUserCall =
       PushNotifcationSingleUserCall();
@@ -812,6 +846,43 @@ class ReferralCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Referral',
       apiUrl: '${EdgeFunctionGroup.baseUrl}/Referral',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ReferralSecondCall {
+  Future<ApiCallResponse> call({
+    String? phoneNumber = '',
+    double? money,
+    String? invitePhoneNumber = '',
+    String? sector = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "phone_number": "$phoneNumber",
+  "money": $money,
+  "association": "000001",
+  "admin": "admin",
+  "sector": "$sector",
+  "invite_phone_number": "$invitePhoneNumber"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Referral second',
+      apiUrl: '${EdgeFunctionGroup.baseUrl}/ReferralV2',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':

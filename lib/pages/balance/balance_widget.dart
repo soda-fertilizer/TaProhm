@@ -82,9 +82,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            FFLocalizations.of(context).getText(
-              '9ve7dwfu' /* Balance */,
-            ),
+            'Balance',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -150,11 +148,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                   child: Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'cvfneuwy' /* Account
-summary */
-                                        ,
-                                      ),
+                                      'Account\nsummary',
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -176,9 +170,7 @@ summary */
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  FFLocalizations.of(context).getText(
-                                    'x42vtsal' /* Total in USD */,
-                                  ),
+                                  'Total in USD',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -320,9 +312,7 @@ summary */
                                             ),
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              'i73a7ogs' /* Deposit */,
-                                            ),
+                                            'Deposit',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -386,9 +376,7 @@ summary */
                                             ),
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              'ls1vwwbe' /* Transfer */,
-                                            ),
+                                            'Transfer',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -452,9 +440,7 @@ summary */
                                             ),
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              'qyg1punk' /* Withdrawal */,
-                                            ),
+                                            'Withdrawal',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -531,18 +517,12 @@ summary */
                                             FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                         padding: const EdgeInsets.all(4.0),
-                                        tabs: [
+                                        tabs: const [
                                           Tab(
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              '1jptny9c' /* Transaction */,
-                                            ),
+                                            text: 'Transaction',
                                           ),
                                           Tab(
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              'ozgzafzw' /* Pending */,
-                                            ),
+                                            text: 'Pending',
                                           ),
                                         ],
                                         controller: _model.tabBarController,
@@ -675,16 +655,10 @@ summary */
                                                                           .end,
                                                                   children: [
                                                                     Text(
-                                                                      dateTimeFormat(
-                                                                        'dd/MM/yyyy hh:mm a',
-                                                                        functions
-                                                                            .dataTimeConverter(getJsonField(
-                                                                          transationsItem,
-                                                                          r'''$.createddate''',
-                                                                        ).toString()),
-                                                                        locale:
-                                                                            FFLocalizations.of(context).languageCode,
-                                                                      )
+                                                                      dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                                transationsItem,
+                                                                                r'''$.createddate''',
+                                                                              ).toString()))
                                                                           .maybeHandleOverflow(
                                                                         maxChars:
                                                                             50,
@@ -880,18 +854,10 @@ summary */
                                                                         .end,
                                                                 children: [
                                                                   Text(
-                                                                    dateTimeFormat(
-                                                                      'dd/MM/yyyy hh:mm a',
-                                                                      functions
-                                                                          .dataTimeConverter(
-                                                                              getJsonField(
-                                                                        pandingsItem,
-                                                                        r'''$.createddate''',
-                                                                      ).toString()),
-                                                                      locale: FFLocalizations.of(
-                                                                              context)
-                                                                          .languageCode,
-                                                                    )
+                                                                    dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                              pandingsItem,
+                                                                              r'''$.createddate''',
+                                                                            ).toString()))
                                                                         .maybeHandleOverflow(
                                                                       maxChars:
                                                                           50,

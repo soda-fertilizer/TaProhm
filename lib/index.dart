@@ -39,7 +39,7 @@ export '/sub_page/my_company/view_company/view_company_widget.dart'
     show ViewCompanyWidget;
 export '/sub_page/balance/deposit/deposit_widget.dart' show DepositWidget;
 export '/sub_page/company_info/company_info_widget.dart' show CompanyInfoWidget;
-export '/sub_page/single_company_map/single_company_map_widget.dart'
+export '/pages/single_company_map/single_company_map_widget.dart'
     show SingleCompanyMapWidget;
 export '/sub_page/my_company/edit_company/edit_company_widget.dart'
     show EditCompanyWidget;

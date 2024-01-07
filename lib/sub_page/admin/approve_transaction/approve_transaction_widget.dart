@@ -113,9 +113,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    '1acww5qn' /* Request Transaction */,
-                  ),
+                  'Request Transaction',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -145,21 +143,15 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       padding: const EdgeInsets.all(4.0),
-                      tabs: [
+                      tabs: const [
                         Tab(
-                          text: FFLocalizations.of(context).getText(
-                            'ua2fygfn' /* Deposit */,
-                          ),
+                          text: 'Deposit',
                         ),
                         Tab(
-                          text: FFLocalizations.of(context).getText(
-                            'ujotgyze' /* Withdrawal */,
-                          ),
+                          text: 'Withdrawal',
                         ),
                         Tab(
-                          text: FFLocalizations.of(context).getText(
-                            'ukh0gmx7' /* History */,
-                          ),
+                          text: 'History',
                         ),
                       ],
                       controller: _model.tabBarController,
@@ -573,9 +565,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        FFLocalizations.of(context).getText(
-                                          'qbbjih0a' /* from:  */,
-                                        ),
+                                        'from: ',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -604,11 +594,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                           });
                                         },
                                         text: dateTimeFormat(
-                                          'd/M/y',
-                                          _model.fromDate,
-                                          locale: FFLocalizations.of(context)
-                                              .languageCode,
-                                        ),
+                                            'd/M/y', _model.fromDate),
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
@@ -642,9 +628,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        FFLocalizations.of(context).getText(
-                                          'xmehv9vy' /* to:  */,
-                                        ),
+                                        'to: ',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -673,11 +657,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                           });
                                         },
                                         text: dateTimeFormat(
-                                          'd/M/y',
-                                          _model.toDate,
-                                          locale: FFLocalizations.of(context)
-                                              .languageCode,
-                                        ),
+                                            'd/M/y', _model.toDate),
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
@@ -922,17 +902,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                               children: [
                                                                 Text(
                                                                   dateTimeFormat(
-                                                                    'jm',
-                                                                    functions
-                                                                        .dataTimeConverter(
-                                                                            getJsonField(
-                                                                      historyItem,
-                                                                      r'''$.createddate''',
-                                                                    ).toString()),
-                                                                    locale: FFLocalizations.of(
-                                                                            context)
-                                                                        .languageCode,
-                                                                  ),
+                                                                      'jm',
+                                                                      functions
+                                                                          .dataTimeConverter(
+                                                                              getJsonField(
+                                                                        historyItem,
+                                                                        r'''$.createddate''',
+                                                                      ).toString())),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .labelSmall,

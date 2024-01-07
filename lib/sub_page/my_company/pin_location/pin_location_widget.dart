@@ -134,9 +134,7 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
                         });
                         context.safePop();
                       },
-                      text: FFLocalizations.of(context).getText(
-                        '1bvhhpgk' /* Save */,
-                      ),
+                      text: 'Save',
                       options: FFButtonOptions(
                         width: double.infinity,
                         height: 50.0,

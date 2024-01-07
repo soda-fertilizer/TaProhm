@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
@@ -142,9 +143,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    'uakhq5nn' /* Company */,
-                  ),
+                  'Company',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -158,7 +157,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: FutureBuilder<List<UsersRow>>(
+              child:
+                  // this is for get user detail
+                  FutureBuilder<List<UsersRow>>(
                 future: UsersTable().querySingleRow(
                   queryFn: (q) => q.eq(
                     'UserID',
@@ -219,9 +220,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: FFLocalizations.of(context).getText(
-                                  'yeadjesh' /* Amount */,
-                                ),
+                                labelText: 'Amount',
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -274,9 +273,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: FFLocalizations.of(context).getText(
-                                  'z77trhgi' /* Company name */,
-                                ),
+                                labelText: 'Company name',
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -324,9 +321,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: FFLocalizations.of(context).getText(
-                                  'fnbhb690' /* Phone number */,
-                                ),
+                                labelText: 'Phone number',
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -375,9 +370,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
-                                labelText: FFLocalizations.of(context).getText(
-                                  'cy85xuwm' /* Telegram link */,
-                                ),
+                                labelText: 'Telegram link',
                                 labelStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 hintStyle:
@@ -440,9 +433,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                 decoration: InputDecoration(
                                   labelStyle:
                                       FlutterFlowTheme.of(context).labelMedium,
-                                  hintText: FFLocalizations.of(context).getText(
-                                    'r9xogwup' /* Company detail */,
-                                  ),
+                                  hintText: 'Company detail',
                                   hintStyle:
                                       FlutterFlowTheme.of(context).labelMedium,
                                   enabledBorder: OutlineInputBorder(
@@ -531,9 +522,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'lrcqekz0' /* Add image */,
-                                      ),
+                                      'Add image',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium,
                                     ),
@@ -620,9 +609,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                               child: Align(
                                 alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '3npe7pt5' /* Payment image */,
-                                  ),
+                                  'Payment image',
                                   style:
                                       FlutterFlowTheme.of(context).bodyMedium,
                                 ),
@@ -684,9 +671,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       return;
                                     }
                                   },
-                                  text: FFLocalizations.of(context).getText(
-                                    'ug8cg8tc' /* Delete */,
-                                  ),
+                                  text: 'Delete',
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.4,
@@ -712,63 +697,89 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    await CompaniesTable().update(
-                                      data: {
-                                        'PhoneNumber': _model
-                                            .telegramNumberController.text,
-                                        'Detail': _model.textController5.text,
-                                        'CompanyName':
-                                            companyCompaniesRow.companyName,
-                                        'TelegramUrl': _model
-                                            .telegramUsernameController.text,
-                                        'IsApprove': true,
-                                        'Amount': double.tryParse(
-                                            _model.amountController.text),
-                                      },
-                                      matchingRows: (rows) => rows.eq(
-                                        'CompanyID',
-                                        widget.companyID,
-                                      ),
+                                    var shouldSetState = false;
+                                    _model.sectorPhoneNumber = await UsersGroup
+                                        .sectorPhoneNumberCall
+                                        .call(
+                                      sectorId: containerUsersRow?.sectorID,
                                     );
-                                    unawaited(
-                                      () async {
-                                        await EdgeFunctionGroup.referralCall
-                                            .call(
-                                          phoneNumber:
-                                              containerUsersRow?.phoneNumber,
-                                          money: 50.0,
-                                          invitePhoneNumber:
-                                              containerUsersRow?.invite,
-                                        );
-                                      }(),
-                                    );
-                                    unawaited(
-                                      () async {
-                                        await EdgeFunctionGroup
-                                            .pushNotifcationSingleUserCall
-                                            .call(
-                                          token: containerUsersRow?.token,
-                                          title: 'Approved',
-                                          contents:
-                                              'Your request for company ${functions.charLimit(20, companyCompaniesRow.companyName)} is Approved.',
-                                        );
-                                      }(),
-                                    );
-                                    unawaited(
-                                      () async {
-                                        await NotificationTable().insert({
-                                          'UserToken': containerUsersRow?.token,
-                                          'Title': 'Approved',
-                                          'Contents':
-                                              'Your request for company ${companyCompaniesRow.companyName} is Approved.',
-                                        });
-                                      }(),
-                                    );
-                                    context.safePop();
+                                    shouldSetState = true;
+                                    if ((_model.sectorPhoneNumber?.succeeded ??
+                                        true)) {
+                                      await CompaniesTable().update(
+                                        data: {
+                                          'PhoneNumber': _model
+                                              .telegramNumberController.text,
+                                          'Detail': _model.textController5.text,
+                                          'CompanyName':
+                                              companyCompaniesRow.companyName,
+                                          'TelegramUrl': _model
+                                              .telegramUsernameController.text,
+                                          'IsApprove': true,
+                                          'Amount': double.tryParse(
+                                              _model.amountController.text),
+                                        },
+                                        matchingRows: (rows) => rows.eq(
+                                          'CompanyID',
+                                          widget.companyID,
+                                        ),
+                                      );
+                                      unawaited(
+                                        () async {
+                                          await EdgeFunctionGroup
+                                              .referralSecondCall
+                                              .call(
+                                            phoneNumber:
+                                                containerUsersRow?.phoneNumber,
+                                            money: 50.0,
+                                            invitePhoneNumber:
+                                                containerUsersRow?.invite,
+                                            sector:
+                                                UsersGroup.sectorPhoneNumberCall
+                                                    .phoneNumber(
+                                                      (_model.sectorPhoneNumber
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    )
+                                                    .toString(),
+                                          );
+                                        }(),
+                                      );
+                                      unawaited(
+                                        () async {
+                                          await EdgeFunctionGroup
+                                              .pushNotifcationSingleUserCall
+                                              .call(
+                                            token: containerUsersRow?.token,
+                                            title: 'Approved',
+                                            contents:
+                                                'Your request for company ${functions.charLimit(20, companyCompaniesRow.companyName)} is Approved.',
+                                          );
+                                        }(),
+                                      );
+                                      unawaited(
+                                        () async {
+                                          await NotificationTable().insert({
+                                            'UserToken':
+                                                containerUsersRow?.token,
+                                            'Title': 'Approved',
+                                            'Contents':
+                                                'Your request for company ${companyCompaniesRow.companyName} is Approved.',
+                                          });
+                                        }(),
+                                      );
+                                      context.safePop();
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      await action_blocks.noInternet(context);
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+
+                                    if (shouldSetState) setState(() {});
                                   },
-                                  text: FFLocalizations.of(context).getText(
-                                    'ihosdi5t' /* Confirm */,
-                                  ),
+                                  text: 'Confirm',
                                   options: FFButtonOptions(
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.4,

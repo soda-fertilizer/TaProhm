@@ -106,9 +106,7 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    'amdq8blt' /* Withdrawal */,
-                  ),
+                  'Withdrawal',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
                         fontFamily: 'Outfit',
                         color: Colors.white,
@@ -142,9 +140,7 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: FFLocalizations.of(context).getText(
-                          'ayzqrzds' /* Amount */,
-                        ),
+                        labelText: 'Amount',
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -233,9 +229,7 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
 
                         if (shouldSetState) setState(() {});
                       },
-                      text: FFLocalizations.of(context).getText(
-                        'pe1ma1tv' /* Confirm */,
-                      ),
+                      text: 'Confirm',
                       options: FFButtonOptions(
                         height: 40.0,
                         padding: const EdgeInsetsDirectional.fromSTEB(

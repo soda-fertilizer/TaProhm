@@ -58,9 +58,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            FFLocalizations.of(context).getText(
-              'ht2siunj' /* Notification */,
-            ),
+            'Notification',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -216,13 +214,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                                                         4.0),
                                                             child: Text(
                                                               dateTimeFormat(
-                                                                'd/M/y',
-                                                                listViewNotificationRow
-                                                                    .createdDate,
-                                                                locale: FFLocalizations.of(
-                                                                        context)
-                                                                    .languageCode,
-                                                              ).maybeHandleOverflow(
+                                                                      'd/M/y',
+                                                                      listViewNotificationRow
+                                                                          .createdDate)
+                                                                  .maybeHandleOverflow(
                                                                 maxChars: 10,
                                                                 replacement:
                                                                     '…',

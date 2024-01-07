@@ -103,9 +103,7 @@ class _MyCompanyWidgetState extends State<MyCompanyWidget>
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                '6ya6f6na' /* My Company */,
-              ),
+              'My Company',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -131,16 +129,12 @@ class _MyCompanyWidgetState extends State<MyCompanyWidget>
                   unselectedLabelStyle: const TextStyle(),
                   indicatorColor: FlutterFlowTheme.of(context).primary,
                   padding: const EdgeInsets.all(4.0),
-                  tabs: [
+                  tabs: const [
                     Tab(
-                      text: FFLocalizations.of(context).getText(
-                        'xlsl31da' /* Company */,
-                      ),
+                      text: 'Company',
                     ),
                     Tab(
-                      text: FFLocalizations.of(context).getText(
-                        '1m15braj' /* Pending */,
-                      ),
+                      text: 'Pending',
                     ),
                   ],
                   controller: _model.tabBarController,

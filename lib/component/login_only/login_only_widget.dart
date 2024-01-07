@@ -157,9 +157,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                             ),
                           ),
                         Text(
-                          FFLocalizations.of(context).getText(
-                            'ndf0605s' /* Welcome Back */,
-                          ),
+                          'Welcome Back',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.of(context).headlineMedium,
                         ),
@@ -167,9 +165,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 4.0, 0.0, 24.0),
                           child: Text(
-                            FFLocalizations.of(context).getText(
-                              'd119hl4f' /* Fill out the information below... */,
-                            ),
+                            'Fill out the information below in order to access your account.',
                             textAlign: TextAlign.start,
                             style: FlutterFlowTheme.of(context).labelMedium,
                           ),
@@ -184,9 +180,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: FFLocalizations.of(context).getText(
-                                'z7z42suf' /* Phone number */,
-                              ),
+                              labelText: 'Phone number',
                               labelStyle: FlutterFlowTheme.of(context)
                                   .labelMedium
                                   .override(
@@ -248,9 +242,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                             obscureText: !_model.loginPasswordVisibility,
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: FFLocalizations.of(context).getText(
-                                'jwypsppr' /* Password */,
-                              ),
+                              labelText: 'Password',
                               labelStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
                               hintStyle:
@@ -445,9 +437,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
 
                                 if (shouldSetState) setState(() {});
                               },
-                              text: FFLocalizations.of(context).getText(
-                                'vtrsacju' /* Sign in */,
-                              ),
+                              text: 'Sign in',
                               options: FFButtonOptions(
                                 width: 200.0,
                                 height: 40.0,
@@ -487,9 +477,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                     'https://t.me/informal_economy');
                               },
                               child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'g5pv7u6m' /* Support */,
-                                ),
+                                'Support',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

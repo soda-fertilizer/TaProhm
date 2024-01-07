@@ -82,9 +82,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                '86bpqalh' /* Change password */,
-              ),
+              'Change password',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -137,9 +135,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   textCapitalization: TextCapitalization.none,
                   obscureText: false,
                   decoration: InputDecoration(
-                    labelText: FFLocalizations.of(context).getText(
-                      '90s5npdw' /* Old password */,
-                    ),
+                    labelText: 'Old password',
                     labelStyle: FlutterFlowTheme.of(context).labelMedium,
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
                     enabledBorder: OutlineInputBorder(
@@ -188,9 +184,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   textCapitalization: TextCapitalization.none,
                   obscureText: !_model.newPasswordVisibility,
                   decoration: InputDecoration(
-                    labelText: FFLocalizations.of(context).getText(
-                      'qa2pivga' /* New password */,
-                    ),
+                    labelText: 'New password',
                     labelStyle: FlutterFlowTheme.of(context).labelMedium,
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
                     enabledBorder: OutlineInputBorder(
@@ -249,9 +243,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: Text(
-                    FFLocalizations.of(context).getText(
-                      'qc0b52vm' /* Old password is not correct */,
-                    ),
+                    'Old password is not correct',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: FlutterFlowTheme.of(context).error,
@@ -264,6 +256,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
+                      var shouldSetState = false;
                       if ((_model.oldPasswordController.text == '') &&
                           (_model.newPasswordController.text == '') &&
                           !_model.isOldPasswordNotCorrect) {
@@ -283,11 +276,16 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             );
                           },
                         );
+                        if (shouldSetState) setState(() {});
                         return;
                       } else {
+                        _model.passHash = await actions.passwordHash(
+                          _model.newPasswordController.text,
+                        );
+                        shouldSetState = true;
                         await UsersTable().update(
                           data: {
-                            'Password': _model.hashedPassword,
+                            'Password': _model.passHash,
                           },
                           matchingRows: (rows) => rows.eq(
                             'PhoneNumber',
@@ -300,12 +298,13 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           );
                         });
                         context.safePop();
+                        if (shouldSetState) setState(() {});
                         return;
                       }
+
+                      if (shouldSetState) setState(() {});
                     },
-                    text: FFLocalizations.of(context).getText(
-                      '6v9gos3k' /* Save */,
-                    ),
+                    text: 'Save',
                     options: FFButtonOptions(
                       height: 40.0,
                       padding:

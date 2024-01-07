@@ -59,9 +59,7 @@ class _EventWidgetState extends State<EventWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            FFLocalizations.of(context).getText(
-              '79d0nwi7' /* Event */,
-            ),
+            'Event',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -161,21 +159,23 @@ class _EventWidgetState extends State<EventWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: CachedNetworkImage(
-                                              fadeInDuration:
-                                                  const Duration(milliseconds: 500),
-                                              fadeOutDuration:
-                                                  const Duration(milliseconds: 500),
-                                              imageUrl:
-                                                  listViewEventsRow.image!,
-                                              width: 100.0,
-                                              height: 100.0,
-                                              fit: BoxFit.cover,
+                                          if (listViewEventsRow.image != null &&
+                                              listViewEventsRow.image != '')
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: CachedNetworkImage(
+                                                fadeInDuration:
+                                                    const Duration(milliseconds: 500),
+                                                fadeOutDuration:
+                                                    const Duration(milliseconds: 500),
+                                                imageUrl:
+                                                    listViewEventsRow.image!,
+                                                width: 100.0,
+                                                height: 100.0,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                          ),
                                           Expanded(
                                             child: Container(
                                               decoration: const BoxDecoration(),
@@ -214,14 +214,9 @@ class _EventWidgetState extends State<EventWidget> {
                                                       ),
                                                       Text(
                                                         dateTimeFormat(
-                                                          'MMM,dd,yyyy  hh:mm a',
-                                                          listViewEventsRow
-                                                              .eventDate,
-                                                          locale:
-                                                              FFLocalizations.of(
-                                                                      context)
-                                                                  .languageCode,
-                                                        ),
+                                                            'MMM,dd,yyyy  hh:mm a',
+                                                            listViewEventsRow
+                                                                .eventDate),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

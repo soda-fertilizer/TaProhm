@@ -65,9 +65,7 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                FFLocalizations.of(context).getText(
-                  '122b6nd3' /* KHQR */,
-                ),
+                'KHQR',
                 style: FlutterFlowTheme.of(context).headlineSmall,
               ),
               ClipRRect(
@@ -92,9 +90,7 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
                       'KHQR.jpg',
                     );
                   },
-                  text: FFLocalizations.of(context).getText(
-                    'wcpgrzxg' /* Save */,
-                  ),
+                  text: 'Save',
                   options: FFButtonOptions(
                     height: 40.0,
                     padding:

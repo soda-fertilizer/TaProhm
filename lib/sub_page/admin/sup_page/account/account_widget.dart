@@ -137,9 +137,7 @@ class _AccountWidgetState extends State<AccountWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    'ilohosyq' /* Account */,
-                  ),
+                  'Account',
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),
@@ -180,9 +178,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                             try {
                               showUploadMessage(
                                 context,
-                                FFLocalizations.of(context).getText(
-                                  'co02njst' /* Uploading */,
-                                ),
+                                'Uploading file...',
                                 showLoading: true,
                               );
                               selectedUploadedFiles = selectedMedia
@@ -212,18 +208,11 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     selectedUploadedFiles.first;
                                 _model.uploadedFileUrl = downloadUrls.first;
                               });
-                              showUploadMessage(
-                                  context,
-                                  FFLocalizations.of(context).getText(
-                                    'dg5pg16f' /* Success */,
-                                  ));
+                              showUploadMessage(context, 'Success!');
                             } else {
                               setState(() {});
                               showUploadMessage(
-                                  context,
-                                  FFLocalizations.of(context).getText(
-                                    'z7emxvk1' /* Failed to upload data */,
-                                  ));
+                                  context, 'Failed to upload data');
                               return;
                             }
                           }
@@ -254,9 +243,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: FFLocalizations.of(context).getText(
-                            '7eahmtnv' /* User name */,
-                          ),
+                          labelText: 'User name',
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -304,9 +291,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: FFLocalizations.of(context).getText(
-                            'a63mf7hb' /* Phone number */,
-                          ),
+                          labelText: 'Phone number',
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -353,9 +338,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: FFLocalizations.of(context).getText(
-                            'voxinols' /* Referral */,
-                          ),
+                          labelText: 'Referral',
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -402,9 +385,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           isDense: true,
-                          labelText: FFLocalizations.of(context).getText(
-                            '75ut2m9n' /* Invite ID */,
-                          ),
+                          labelText: 'Invite ID',
                           labelStyle: FlutterFlowTheme.of(context).labelMedium,
                           hintStyle: FlutterFlowTheme.of(context).labelMedium,
                           enabledBorder: OutlineInputBorder(
@@ -497,9 +478,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   fontFamily: 'Readex Pro',
                                   fontSize: 14.0,
                                 ),
-                            hintText: FFLocalizations.of(context).getText(
-                              'emjfhixx' /* Please select sector */,
-                            ),
+                            hintText: 'Please select sector',
                             icon: Icon(
                               Icons.keyboard_arrow_down_rounded,
                               color: FlutterFlowTheme.of(context).secondaryText,
@@ -550,9 +529,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                               );
                               context.safePop();
                             },
-                            text: FFLocalizations.of(context).getText(
-                              'df9cutia' /* Detelete */,
-                            ),
+                            text: 'Detelete',
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,
@@ -617,9 +594,7 @@ class _AccountWidgetState extends State<AccountWidget> {
 
                               setState(() {});
                             },
-                            text: FFLocalizations.of(context).getText(
-                              'gcc3s53j' /* Approved */,
-                            ),
+                            text: 'Approved',
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               height: 40.0,

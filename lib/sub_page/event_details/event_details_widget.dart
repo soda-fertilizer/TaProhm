@@ -106,9 +106,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                 },
               ),
               title: Text(
-                FFLocalizations.of(context).getText(
-                  'jww1dhen' /* Event detail */,
-                ),
+                'Event detail',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,

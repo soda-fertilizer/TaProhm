@@ -202,16 +202,12 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'ulfbgr2m' /* ABA Pay */,
-                                          ),
+                                          'ABA Pay',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'hfawoa4r' /* Click to pay */,
-                                          ),
+                                          'Click to pay',
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -281,16 +277,12 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'ffeftof4' /* Acleda Pay */,
-                                          ),
+                                          'Acleda Pay',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'oezuc0xr' /* Click to pay */,
-                                          ),
+                                          'Click to pay',
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -360,16 +352,12 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            '7jvh1c95' /* Wing Pay */,
-                                          ),
+                                          'Wing Pay',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'xonlsspc' /* Click to pay */,
-                                          ),
+                                          'Click to pay',
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -407,9 +395,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      FFLocalizations.of(context).getText(
-                        'nlipl5qa' /* Add image */,
-                      ),
+                      'Add image',
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
@@ -463,9 +449,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  FFLocalizations.of(context).getText(
-                                    'co02njst' /* Uploading */,
-                                  ),
+                                  'Uploading file...',
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -495,18 +479,11 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl1 = downloadUrls.first;
                                 });
-                                showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'dg5pg16f' /* Success */,
-                                    ));
+                                showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'z7emxvk1' /* Failed to upload data */,
-                                    ));
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }
@@ -549,9 +526,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  FFLocalizations.of(context).getText(
-                                    'co02njst' /* Uploading */,
-                                  ),
+                                  'Uploading file...',
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -581,18 +556,11 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl2 = downloadUrls.first;
                                 });
-                                showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'dg5pg16f' /* Success */,
-                                    ));
+                                showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'z7emxvk1' /* Failed to upload data */,
-                                    ));
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }
@@ -654,9 +622,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                   );
                   context.safePop();
                 },
-                text: FFLocalizations.of(context).getText(
-                  'p5gj3sca' /* Active */,
-                ),
+                text: 'Active',
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,

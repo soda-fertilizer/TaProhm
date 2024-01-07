@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'company_widget.dart' show CompanyWidget;
 import 'package:flutter/material.dart';
@@ -32,6 +33,8 @@ class CompanyModel extends FlutterFlowModel<CompanyWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
+  // Stores action output result for [Backend Call - API (sector phone number)] action in Button widget.
+  ApiCallResponse? sectorPhoneNumber;
 
   /// Initialization and disposal methods.
 

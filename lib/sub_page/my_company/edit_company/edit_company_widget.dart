@@ -132,9 +132,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                'qgrzunuo' /* Edit Company */,
-              ),
+              'Edit Company',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,
@@ -329,9 +327,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       isDense: true,
-                      labelText: FFLocalizations.of(context).getText(
-                        'f8gcieb6' /* Company name */,
-                      ),
+                      labelText: 'Company name',
                       labelStyle: FlutterFlowTheme.of(context).labelMedium,
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
                       enabledBorder: OutlineInputBorder(
@@ -373,9 +369,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       isDense: true,
-                      labelText: FFLocalizations.of(context).getText(
-                        'es5445rx' /* Phone number */,
-                      ),
+                      labelText: 'Phone number',
                       labelStyle: FlutterFlowTheme.of(context).labelMedium,
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
                       enabledBorder: OutlineInputBorder(
@@ -420,9 +414,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       isDense: true,
-                      labelText: FFLocalizations.of(context).getText(
-                        '5znfg1mz' /* Telegram link */,
-                      ),
+                      labelText: 'Telegram link',
                       labelStyle: FlutterFlowTheme.of(context).labelMedium,
                       hintStyle: FlutterFlowTheme.of(context).labelMedium,
                       enabledBorder: OutlineInputBorder(
@@ -463,9 +455,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        FFLocalizations.of(context).getText(
-                          '0ps4a1bt' /* Discount (%):  */,
-                        ),
+                        'Discount (%): ',
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                       SizedBox(
@@ -476,9 +466,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
-                            labelText: FFLocalizations.of(context).getText(
-                              'wwsnbmtq' /* Discount */,
-                            ),
+                            labelText: 'Discount',
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
@@ -560,9 +548,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                           ),
                         ),
                         Text(
-                          FFLocalizations.of(context).getText(
-                            'z24pmy2q' /* I have document */,
-                          ),
+                          'I have document',
                           style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ],
@@ -584,9 +570,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintText: FFLocalizations.of(context).getText(
-                          'rx3gkfeo' /* Company detail */,
-                        ),
+                        hintText: 'Company detail',
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
@@ -694,9 +678,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                             );
                           },
                           child: Text(
-                            FFLocalizations.of(context).getText(
-                              'ch7watfl' /* Add image */,
-                            ),
+                            'Add image',
                             style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
                         ),
@@ -754,9 +736,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   try {
                                     showUploadMessage(
                                       context,
-                                      FFLocalizations.of(context).getText(
-                                        'co02njst' /* Uploading */,
-                                      ),
+                                      'Uploading file...',
                                       showLoading: true,
                                     );
                                     selectedUploadedFiles = selectedMedia
@@ -789,18 +769,11 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                           selectedUploadedFiles;
                                       _model.uploadedFileUrls2 = downloadUrls;
                                     });
-                                    showUploadMessage(
-                                        context,
-                                        FFLocalizations.of(context).getText(
-                                          'dg5pg16f' /* Success */,
-                                        ));
+                                    showUploadMessage(context, 'Success!');
                                   } else {
                                     setState(() {});
                                     showUploadMessage(
-                                        context,
-                                        FFLocalizations.of(context).getText(
-                                          'z7emxvk1' /* Failed to upload data */,
-                                        ));
+                                        context, 'Failed to upload data');
                                     return;
                                   }
                                 }
@@ -858,9 +831,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   try {
                                     showUploadMessage(
                                       context,
-                                      FFLocalizations.of(context).getText(
-                                        'co02njst' /* Uploading */,
-                                      ),
+                                      'Uploading file...',
                                       showLoading: true,
                                     );
                                     selectedUploadedFiles = selectedMedia
@@ -894,18 +865,11 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                       _model.uploadedFileUrl3 =
                                           downloadUrls.first;
                                     });
-                                    showUploadMessage(
-                                        context,
-                                        FFLocalizations.of(context).getText(
-                                          'dg5pg16f' /* Success */,
-                                        ));
+                                    showUploadMessage(context, 'Success!');
                                   } else {
                                     setState(() {});
                                     showUploadMessage(
-                                        context,
-                                        FFLocalizations.of(context).getText(
-                                          'z7emxvk1' /* Failed to upload data */,
-                                        ));
+                                        context, 'Failed to upload data');
                                     return;
                                   }
                                 }
@@ -1058,9 +1022,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                             return;
                           }
                         },
-                        text: FFLocalizations.of(context).getText(
-                          'hejcp29i' /* Delete */,
-                        ),
+                        text: 'Delete',
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.3,
                           height: 40.0,
@@ -1112,9 +1074,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                           );
                           context.safePop();
                         },
-                        text: FFLocalizations.of(context).getText(
-                          'j9pr3wc6' /* Update */,
-                        ),
+                        text: 'Update',
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.3,
                           height: 40.0,

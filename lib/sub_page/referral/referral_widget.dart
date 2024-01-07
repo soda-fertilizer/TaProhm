@@ -102,9 +102,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
               backgroundColor: FlutterFlowTheme.of(context).primary,
               automaticallyImplyLeading: false,
               title: Text(
-                FFLocalizations.of(context).getText(
-                  'ltcw1ynq' /* Referral */,
-                ),
+                'Referral',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,
@@ -215,16 +213,12 @@ class _ReferralWidgetState extends State<ReferralWidget>
                             indicatorColor:
                                 FlutterFlowTheme.of(context).primary,
                             padding: const EdgeInsets.all(4.0),
-                            tabs: [
+                            tabs: const [
                               Tab(
-                                text: FFLocalizations.of(context).getText(
-                                  'lcgbvl5i' /* List view */,
-                                ),
+                                text: 'List view',
                               ),
                               Tab(
-                                text: FFLocalizations.of(context).getText(
-                                  '81v5dslg' /* Tree view */,
-                                ),
+                                text: 'Tree view',
                               ),
                             ],
                             controller: _model.tabBarController,

@@ -111,9 +111,7 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                'is05gtny' /* Account */,
-              ),
+              'Account',
               style: FlutterFlowTheme.of(context).titleMedium,
             ),
           ),
@@ -134,10 +132,6 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                 queryFn: (q) => q
                     .eq(
                       'IsApprove',
-                      true,
-                    )
-                    .eq(
-                      'IsActive',
                       true,
                     )
                     .eq(
@@ -201,16 +195,12 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       padding: const EdgeInsets.all(4.0),
-                      tabs: [
+                      tabs: const [
                         Tab(
-                          text: FFLocalizations.of(context).getText(
-                            'c64ejoi6' /* Member */,
-                          ),
+                          text: 'Member',
                         ),
                         Tab(
-                          text: FFLocalizations.of(context).getText(
-                            '7niwdm5r' /* Officer */,
-                          ),
+                          text: 'Officer',
                         ),
                       ],
                       controller: _model.tabBarController,
@@ -322,7 +312,18 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                                           normalItem.fullName,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyLarge,
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: normalItem.isActive
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                              ),
                                                         ),
                                                       ),
                                                       Text(
@@ -475,7 +476,18 @@ class _SubAdminSubAccountWidgetState extends State<SubAdminSubAccountWidget>
                                                               .fullName,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyLarge,
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                color: tabBarVarItem.isActive
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .error,
+                                                              ),
                                                         ),
                                                       ),
                                                       Text(

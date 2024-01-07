@@ -10,7 +10,6 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'edit_account_model.dart';
@@ -37,11 +36,6 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EditAccountModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {});
-    });
 
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -130,9 +124,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
               title: Align(
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
-                  FFLocalizations.of(context).getText(
-                    'frg6czrm' /* Edit Account */,
-                  ),
+                  'Edit Account',
                   style: FlutterFlowTheme.of(context).titleMedium,
                 ),
               ),
@@ -171,9 +163,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                           try {
                             showUploadMessage(
                               context,
-                              FFLocalizations.of(context).getText(
-                                'co02njst' /* Uploading */,
-                              ),
+                              'Uploading file...',
                               showLoading: true,
                             );
                             selectedUploadedFiles = selectedMedia
@@ -202,18 +192,10 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                   selectedUploadedFiles.first;
                               _model.uploadedFileUrl = downloadUrls.first;
                             });
-                            showUploadMessage(
-                                context,
-                                FFLocalizations.of(context).getText(
-                                  'dg5pg16f' /* Success */,
-                                ));
+                            showUploadMessage(context, 'Success!');
                           } else {
                             setState(() {});
-                            showUploadMessage(
-                                context,
-                                FFLocalizations.of(context).getText(
-                                  'z7emxvk1' /* Failed to upload data */,
-                                ));
+                            showUploadMessage(context, 'Failed to upload data');
                             return;
                           }
                         }
@@ -244,9 +226,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: FFLocalizations.of(context).getText(
-                          'qpbvt7xy' /* User name */,
-                        ),
+                        labelText: 'User name',
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -292,9 +272,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: FFLocalizations.of(context).getText(
-                          'yugis9fs' /* Referral */,
-                        ),
+                        labelText: 'Referral',
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -340,9 +318,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         isDense: true,
-                        labelText: FFLocalizations.of(context).getText(
-                          '4ddztnnb' /* Invite ID */,
-                        ),
+                        labelText: 'Invite ID',
                         labelStyle: FlutterFlowTheme.of(context).labelMedium,
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
@@ -437,9 +413,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                   fontFamily: 'Readex Pro',
                                   fontSize: 14.0,
                                 ),
-                            hintText: FFLocalizations.of(context).getText(
-                              'nalqvp4a' /* Please select sector */,
-                            ),
+                            hintText: 'Please select sector',
                             icon: Icon(
                               Icons.keyboard_arrow_down_rounded,
                               color: FlutterFlowTheme.of(context).secondaryText,
@@ -476,9 +450,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        if (!FFAppState().UserInfo.isSubAdmin)
-                          FFButtonWidget(
-                            onPressed: () async {
+                        FFButtonWidget(
+                          onPressed: () async {
+                            if (editAccountUsersRow.isActive) {
                               var confirmDialogResponse =
                                   await showDialog<bool>(
                                         context: context,
@@ -486,7 +460,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                           return AlertDialog(
                                             title: const Text('Are you sure?'),
                                             content: const Text(
-                                                'Are you sure you want to delete the account?'),
+                                                'Are you sure you want to Inactive the account?'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
@@ -510,7 +484,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                   },
                                   matchingRows: (rows) => rows.eq(
                                     'UserID',
-                                    editAccountUsersRow?.userID,
+                                    editAccountUsersRow.userID,
                                   ),
                                 );
                                 await UsersTable().update(
@@ -519,49 +493,14 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                   },
                                   matchingRows: (rows) => rows.eq(
                                     'PhoneNumber',
-                                    editAccountUsersRow?.phoneNumber,
+                                    editAccountUsersRow.phoneNumber,
                                   ),
                                 );
-                                if (FFAppState().UserInfo.isAdmin) {
-                                  await CompaniesTable().update(
-                                    data: {
-                                      'IsActive': false,
-                                    },
-                                    matchingRows: (rows) => rows.eq(
-                                      'UserID',
-                                      editAccountUsersRow?.userID,
-                                    ),
-                                  );
-                                  await UsersTable().update(
-                                    data: {
-                                      'IsActive': false,
-                                    },
-                                    matchingRows: (rows) => rows.eq(
-                                      'PhoneNumber',
-                                      editAccountUsersRow?.phoneNumber,
-                                    ),
-                                  );
+                                if (FFAppState().UserInfo.isAdmin ||
+                                    FFAppState().UserInfo.isSubAdmin) {
                                   context.safePop();
                                   return;
                                 } else {
-                                  await CompaniesTable().update(
-                                    data: {
-                                      'IsActive': false,
-                                    },
-                                    matchingRows: (rows) => rows.eq(
-                                      'UserID',
-                                      editAccountUsersRow?.userID,
-                                    ),
-                                  );
-                                  await UsersTable().update(
-                                    data: {
-                                      'IsActive': false,
-                                    },
-                                    matchingRows: (rows) => rows.eq(
-                                      'PhoneNumber',
-                                      editAccountUsersRow?.phoneNumber,
-                                    ),
-                                  );
                                   FFAppState().update(() {
                                     FFAppState().deleteUserInfo();
                                     FFAppState().UserInfo = UserInfoStruct
@@ -580,40 +519,90 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               } else {
                                 return;
                               }
-                            },
-                            text: FFLocalizations.of(context).getText(
-                              '11qe1b8g' /* Delete */,
-                            ),
-                            options: FFButtonOptions(
-                              width: MediaQuery.sizeOf(context).width * 0.3,
-                              height: 40.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 0.0, 24.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).error,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .titleSmall
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
+                            } else {
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: const Text('Are you sure?'),
+                                            content: const Text(
+                                                'Are you sure you want to active the account?'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: const Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: const Text('Confirm'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                              if (confirmDialogResponse) {
+                                await CompaniesTable().update(
+                                  data: {
+                                    'IsActive': true,
+                                  },
+                                  matchingRows: (rows) => rows.eq(
+                                    'UserID',
+                                    editAccountUsersRow.userID,
                                   ),
-                              elevation: 3.0,
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(20.0),
+                                );
+                                await UsersTable().update(
+                                  data: {
+                                    'IsActive': true,
+                                  },
+                                  matchingRows: (rows) => rows.eq(
+                                    'PhoneNumber',
+                                    editAccountUsersRow.phoneNumber,
+                                  ),
+                                );
+                                context.safePop();
+                                return;
+                              } else {
+                                return;
+                              }
+                            }
+                          },
+                          text: editAccountUsersRow!.isActive
+                              ? 'Inactive'
+                              : 'Active',
+                          options: FFButtonOptions(
+                            width: MediaQuery.sizeOf(context).width * 0.4,
+                            height: 40.0,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).error,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                ),
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
                             ),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
+                        ),
                         FFButtonWidget(
                           onPressed: () async {
                             _model.updatedUser = await UsersTable().update(
                               data: {
-                                'SectorID': _model.sectorID ?? editAccountUsersRow?.sectorID,
+                                'SectorID': _model.sectorID ?? editAccountUsersRow.sectorID,
                                 'FullName': _model.textController1.text,
                                 'Profile': _model.uploadedFileUrl == ''
-                                    ? editAccountUsersRow?.profile
+                                    ? editAccountUsersRow.profile
                                     : _model.uploadedFileUrl,
                               },
                               matchingRows: (rows) => rows.eq(
@@ -630,7 +619,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                     ..sectorID = _model.sectorID
                                     ..profile =
                                         _model.uploadedFileUrl == ''
-                                            ? editAccountUsersRow?.profile
+                                            ? editAccountUsersRow.profile
                                             : _model.uploadedFileUrl,
                                 );
                               });
@@ -639,11 +628,9 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
 
                             setState(() {});
                           },
-                          text: FFLocalizations.of(context).getText(
-                            '3iaywr7m' /* Update */,
-                          ),
+                          text: 'Update',
                           options: FFButtonOptions(
-                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            width: MediaQuery.sizeOf(context).width * 0.4,
                             height: 40.0,
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),

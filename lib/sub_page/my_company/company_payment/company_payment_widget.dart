@@ -133,9 +133,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                 autofocus: true,
                 obscureText: false,
                 decoration: InputDecoration(
-                  hintText: FFLocalizations.of(context).getText(
-                    'ft3udpi8' /* $0 */,
-                  ),
+                  hintText: '\$0',
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).alternate,
@@ -233,16 +231,12 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'zcrlrqfd' /* ABA Pay */,
-                                          ),
+                                          'ABA Pay',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
                                         ),
                                         Text(
-                                          FFLocalizations.of(context).getText(
-                                            'wvr838lf' /* Click to pay */,
-                                          ),
+                                          'Click to pay',
                                           style: FlutterFlowTheme.of(context)
                                               .labelSmall,
                                         ),
@@ -313,16 +307,12 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              'wpx0vre3' /* Acleda Pay */,
-                                            ),
+                                            'Acleda Pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              'q302snd7' /* Click to pay */,
-                                            ),
+                                            'Click to pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .labelSmall,
                                           ),
@@ -393,16 +383,12 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              'i23zgbri' /* Wing Pay */,
-                                            ),
+                                            'Wing Pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium,
                                           ),
                                           Text(
-                                            FFLocalizations.of(context).getText(
-                                              '5e59iozl' /* Click to pay */,
-                                            ),
+                                            'Click to pay',
                                             style: FlutterFlowTheme.of(context)
                                                 .labelSmall,
                                           ),
@@ -440,9 +426,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Text(
-                      FFLocalizations.of(context).getText(
-                        'escsheo3' /* Add image */,
-                      ),
+                      'Add image',
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
@@ -465,7 +449,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.asset(
-                              'assets/images/icons8-remove-48.png',
+                              'assets/images/icons8-delete-48.png',
                               width: 30.0,
                               height: 24.0,
                               fit: BoxFit.cover,
@@ -496,9 +480,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  FFLocalizations.of(context).getText(
-                                    'co02njst' /* Uploading */,
-                                  ),
+                                  'Uploading file...',
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -528,18 +510,11 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl1 = downloadUrls.first;
                                 });
-                                showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'dg5pg16f' /* Success */,
-                                    ));
+                                showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'z7emxvk1' /* Failed to upload data */,
-                                    ));
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }
@@ -582,9 +557,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                               try {
                                 showUploadMessage(
                                   context,
-                                  FFLocalizations.of(context).getText(
-                                    'co02njst' /* Uploading */,
-                                  ),
+                                  'Uploading file...',
                                   showLoading: true,
                                 );
                                 selectedUploadedFiles = selectedMedia
@@ -614,18 +587,11 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl2 = downloadUrls.first;
                                 });
-                                showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'dg5pg16f' /* Success */,
-                                    ));
+                                showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context,
-                                    FFLocalizations.of(context).getText(
-                                      'z7emxvk1' /* Failed to upload data */,
-                                    ));
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }
@@ -751,9 +717,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                     return;
                   }
                 },
-                text: FFLocalizations.of(context).getText(
-                  'v1811cfd' /* Active */,
-                ),
+                text: 'Active',
                 options: FFButtonOptions(
                   width: 230.0,
                   height: 50.0,

@@ -15,22 +15,14 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 Future inAppUpdate(
-  String? serverAppVersion,
-  Future<dynamic> Function() androidAction,
-  Future<dynamic> Function() iosAction,
-) async {
+    String? serverAppVersion, Future<dynamic> Function() updateAction) async {
   // Add your function code here!
   String appVersion = FFAppConstants.AppVersion;
   List<int> v1 = appVersion.split('.').map((e) => int.parse(e)).toList();
   List<int> v2 = serverAppVersion!.split('.').map((e) => int.parse(e)).toList();
-
   for (var i = 0; i < v1.length; i++) {
     if (v2[i] > v1[i]) {
-      if (Platform.isAndroid) {
-        androidAction();
-      } else if (Platform.isIOS) {
-        iosAction();
-      }
+      updateAction();
     }
   }
 }

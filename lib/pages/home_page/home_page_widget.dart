@@ -60,31 +60,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                       ? FocusScope.of(context).requestFocus(_model.unfocusNode)
                       : FocusScope.of(context).unfocus(),
                   child: const SizedBox(
-                    height: double.infinity,
-                    width: double.infinity,
-                    child: UpdateAlertWidget(),
-                  ),
-                ),
-              );
-            },
-          ).then((value) => setState(() {}));
-        },
-        () async {
-          await showDialog(
-            context: context,
-            builder: (dialogContext) {
-              return Dialog(
-                insetPadding: EdgeInsets.zero,
-                backgroundColor: Colors.transparent,
-                alignment: const AlignmentDirectional(0.0, 0.0)
-                    .resolve(Directionality.of(context)),
-                child: GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: const SizedBox(
-                    height: double.infinity,
-                    width: double.infinity,
+                    height: 300.0,
+                    width: 300.0,
                     child: UpdateAlertWidget(),
                   ),
                 ),
@@ -199,9 +176,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              FFLocalizations.of(context).getText(
-                                '3y8wtml7' /* Ta Prohm */,
-                              ),
+                              'Ta Prohm',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
@@ -338,18 +313,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     indicatorColor:
                                         FlutterFlowTheme.of(context).primary,
                                     padding: const EdgeInsets.all(4.0),
-                                    tabs: [
+                                    tabs: const [
                                       Tab(
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'sakgh5qq' /* By Grid */,
-                                        ),
+                                        text: 'By Grid',
                                       ),
                                       Tab(
-                                        text:
-                                            FFLocalizations.of(context).getText(
-                                          'ndwztd2w' /* By List */,
-                                        ),
+                                        text: 'By List',
                                       ),
                                     ],
                                     controller: _model.tabBarController,
@@ -651,7 +620,12 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                       ),
                                                                                       alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                       child: Text(
-                                                                                        '- ${homePageVarItem.discount.toString()}%',
+                                                                                        '- ${formatNumber(
+                                                                                          homePageVarItem.discount,
+                                                                                          formatType: FormatType.custom,
+                                                                                          format: '',
+                                                                                          locale: '',
+                                                                                        )}% Off',
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               fontFamily: 'Readex Pro',
                                                                                               color: FlutterFlowTheme.of(context).primaryBackground,

@@ -74,9 +74,7 @@ class _AdminMainReferralWidgetState extends State<AdminMainReferralWidget> {
           title: Align(
             alignment: const AlignmentDirectional(-1.0, 0.0),
             child: Text(
-              FFLocalizations.of(context).getText(
-                '8waf4gfx' /* Sectors */,
-              ),
+              'Sectors',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
                     color: Colors.white,

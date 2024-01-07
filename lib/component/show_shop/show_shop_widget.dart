@@ -162,10 +162,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              'cv9vtflu' /* Phone:  */,
-                                            ),
+                                            text: 'Phone: ',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -205,10 +202,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              'olnou246' /* Telegram:  */,
-                                            ),
+                                            text: 'Telegram: ',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(

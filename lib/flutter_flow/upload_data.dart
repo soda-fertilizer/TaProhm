@@ -87,9 +87,7 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                 child: ListTile(
                   title: Text(
-                    FFLocalizations.of(context).getText(
-                      'hzp3ot9v' /* Choose Source */,
-                    ),
+                    'Choose Source',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       pickerFontFamily,
@@ -106,39 +104,27 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
             ],
             if (allowPhoto && allowVideo) ...[
               createUploadMediaListTile(
-                FFLocalizations.of(context).getText(
-                  'zyezx11b' /* Gallery (Photo) */,
-                ),
+                'Gallery (Photo)',
                 MediaSource.photoGallery,
               ),
               const Divider(),
               createUploadMediaListTile(
-                FFLocalizations.of(context).getText(
-                  '934ayfdd' /* Gallery (Video) */,
-                ),
+                'Gallery (Video)',
                 MediaSource.videoGallery,
               ),
             ] else if (allowPhoto)
               createUploadMediaListTile(
-                FFLocalizations.of(context).getText(
-                  'jf718a9r' /* Gallery */,
-                ),
+                'Gallery',
                 MediaSource.photoGallery,
               )
             else
               createUploadMediaListTile(
-                FFLocalizations.of(context).getText(
-                  'jf718a9r' /* Gallery */,
-                ),
+                'Gallery',
                 MediaSource.videoGallery,
               ),
             if (!kIsWeb) ...[
               const Divider(),
-              createUploadMediaListTile(
-                  FFLocalizations.of(context).getText(
-                    'xc2486kd' /* Camera */,
-                  ),
-                  MediaSource.camera),
+              createUploadMediaListTile('Camera', MediaSource.camera),
               const Divider(),
             ],
             const SizedBox(height: 10),
@@ -244,9 +230,7 @@ bool validateFileFormat(String filePath, BuildContext context) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(
-      content: Text(FFLocalizations.of(context).getText(
-        'e90agh5n' /* Invalid file format */,
-      )),
+      content: Text('Invalid file format: ${mime(filePath)}'),
     ));
   return false;
 }

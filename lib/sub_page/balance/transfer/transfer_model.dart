@@ -23,10 +23,10 @@ class TransferModel extends FlutterFlowModel<TransferWidget> {
   TransactionsRow? ownTransfer;
   // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
   ApiCallResponse? apiResult37s;
-  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
-  TransactionsRow? userTranfer;
   // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
   ApiCallResponse? apiResult23456;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  TransactionsRow? userTranfer;
 
   /// Initialization and disposal methods.
 
