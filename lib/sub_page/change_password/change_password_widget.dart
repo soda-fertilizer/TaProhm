@@ -1,4 +1,5 @@
-import '/backend/supabase/supabase.dart';
+import '/auth/custom_auth/auth_util.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -256,7 +257,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      var shouldSetState = false;
+                      Function() navigate = () {};
                       if ((_model.oldPasswordController.text == '') &&
                           (_model.newPasswordController.text == '') &&
                           !_model.isOldPasswordNotCorrect) {
@@ -276,33 +277,27 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             );
                           },
                         );
-                        if (shouldSetState) setState(() {});
                         return;
                       } else {
-                        _model.passHash = await actions.passwordHash(
-                          _model.newPasswordController.text,
-                        );
-                        shouldSetState = true;
-                        await UsersTable().update(
-                          data: {
-                            'Password': _model.passHash,
-                          },
-                          matchingRows: (rows) => rows.eq(
-                            'PhoneNumber',
-                            FFAppState().UserInfo.phoneNumber,
-                          ),
-                        );
+                        GoRouter.of(context).prepareAuthEvent();
+                        await authManager.signOut();
+                        GoRouter.of(context).clearRedirectLocation();
+
+                        navigate = () =>
+                            context.goNamedAuth('HomePage', context.mounted);
+                        await actions.onesignalLogout();
                         setState(() {
-                          FFAppState().updateUserInfoStruct(
-                            (e) => e..hashedPassword = _model.hashedPassword,
-                          );
+                          FFAppState().deleteUserInfo();
+                          FFAppState().UserInfo =
+                              UserInfoStruct.fromSerializableMap(
+                                  jsonDecode('{"IsTestAccount":"false"}'));
+
+                          FFAppState().IsLogged = false;
                         });
-                        context.safePop();
-                        if (shouldSetState) setState(() {});
                         return;
                       }
 
-                      if (shouldSetState) setState(() {});
+                      navigate();
                     },
                     text: 'Save',
                     options: FFButtonOptions(

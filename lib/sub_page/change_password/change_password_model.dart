@@ -21,8 +21,6 @@ class ChangePasswordModel extends FlutterFlowModel<ChangePasswordWidget> {
   TextEditingController? newPasswordController;
   late bool newPasswordVisibility;
   String? Function(BuildContext, String?)? newPasswordControllerValidator;
-  // Stores action output result for [Custom Action - passwordHash] action in Button widget.
-  String? passHash;
 
   /// Initialization and disposal methods.
 

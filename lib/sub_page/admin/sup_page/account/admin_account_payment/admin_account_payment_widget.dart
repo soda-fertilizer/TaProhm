@@ -774,6 +774,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                     'IsMember': widget.isMember,
                                     'Invite': widget.inviteID,
                                     'IsApprove': false,
+                                    'CreatedBy': FFAppState().UserInfo.userID,
                                   });
                                   // Log
                                   unawaited(
@@ -911,6 +912,8 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                               'UserReferral': widget.referral,
                                               'IsMember': widget.isMember,
                                               'Invite': widget.inviteID,
+                                              'CreatedBy':
+                                                  FFAppState().UserInfo.userID,
                                             });
                                             shouldSetState = true;
                                             // Transaction

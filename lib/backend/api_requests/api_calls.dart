@@ -24,6 +24,8 @@ class UsersGroup {
   static CheckPhoneNumberCall checkPhoneNumberCall = CheckPhoneNumberCall();
   static SectorPhoneNumberCall sectorPhoneNumberCall = SectorPhoneNumberCall();
   static OneUserNameCall oneUserNameCall = OneUserNameCall();
+  static CheckPasswordChangeCall checkPasswordChangeCall =
+      CheckPasswordChangeCall();
 }
 
 class LoginCall {
@@ -237,6 +239,35 @@ class OneUserNameCall {
         response,
         r'''$[:]''',
       ));
+}
+
+class CheckPasswordChangeCall {
+  Future<ApiCallResponse> call({
+    int? userId,
+    String? password = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'check password change',
+      apiUrl: '${UsersGroup.baseUrl}/check_password_change',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'user_id': userId,
+        'password': password,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 /// End Users Group Code

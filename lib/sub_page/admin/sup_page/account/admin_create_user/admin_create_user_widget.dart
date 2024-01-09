@@ -1384,6 +1384,8 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           'IsMember': true,
                                           'Invite': _model
                                               .memberReferrController.text,
+                                          'CreatedBy':
+                                              FFAppState().UserInfo.userID,
                                         });
                                         shouldSetState = true;
                                         unawaited(

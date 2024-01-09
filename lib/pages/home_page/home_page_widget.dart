@@ -1,4 +1,6 @@
+import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/image_gallery/image_gallery_widget.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
@@ -40,6 +42,24 @@ class _HomePageWidgetState extends State<HomePageWidget>
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
+      _model.passwordChange = await UsersGroup.checkPasswordChangeCall.call(
+        userId: FFAppState().UserInfo.userID,
+        password: FFAppState().UserInfo.hashedPassword,
+      );
+      if ((_model.passwordChange?.succeeded ?? true)) {
+        GoRouter.of(context).prepareAuthEvent();
+        await authManager.signOut();
+        GoRouter.of(context).clearRedirectLocation();
+
+        await actions.onesignalLogout();
+        setState(() {
+          FFAppState().deleteUserInfo();
+          FFAppState().UserInfo = UserInfoStruct.fromSerializableMap(
+              jsonDecode('{"IsTestAccount":"false"}'));
+
+          FFAppState().IsLogged = false;
+        });
+      }
       _model.appVersion = await CheckGroup.appVersionCall.call();
       await actions.inAppUpdate(
         getJsonField(
@@ -78,8 +98,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
           if (Navigator.of(context).canPop()) {
             context.pop();
           }
-          context.pushNamed(
+          context.pushNamedAuth(
             'UnderMaintenance',
+            context.mounted,
             extra: <String, dynamic>{
               kTransitionInfoKey: const TransitionInfo(
                 hasTransition: true,
