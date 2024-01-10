@@ -628,8 +628,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                                                   ),
                                                                                   if (homePageVarItem.discount != 0.0)
                                                                                     Container(
-                                                                                      width: 50.0,
-                                                                                      height: 20.0,
+                                                                                      width: 70.0,
+                                                                                      height: 30.0,
                                                                                       decoration: BoxDecoration(
                                                                                         color: FlutterFlowTheme.of(context).error,
                                                                                         borderRadius: const BorderRadius.only(

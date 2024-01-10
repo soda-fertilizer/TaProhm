@@ -45,78 +45,80 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
         color: FlutterFlowTheme.of(context).secondaryBackground,
         borderRadius: BorderRadius.circular(15.0),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-            child: Icon(
-              Icons.update,
-              color: FlutterFlowTheme.of(context).primary,
-              size: 50.0,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              child: Icon(
+                Icons.update,
+                color: FlutterFlowTheme.of(context).primary,
+                size: 50.0,
+              ),
             ),
-          ),
-          Text(
-            'Update',
-            style: FlutterFlowTheme.of(context).titleLarge,
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-            child: Text(
-              '    We would like to inform you that a new version of our app is available for download. To enjoy the latest benefits of our app, please update it as soon as possible. ',
-              style: FlutterFlowTheme.of(context).bodyMedium,
+            Text(
+              'Update',
+              style: FlutterFlowTheme.of(context).titleLarge,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'LATER',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          color: FlutterFlowTheme.of(context).primary,
-                        ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+              child: Text(
+                '    We would like to inform you that a new version of our app is available for download. To enjoy the latest benefits of our app, please update it as soon as possible. ',
+                style: FlutterFlowTheme.of(context).bodyMedium,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'LATER',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: FlutterFlowTheme.of(context).primary,
+                          ),
+                    ),
                   ),
-                ),
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    if (isAndroid) {
-                      await launchURL(
-                          'https://play.google.com/store/apps/details?id=com.soda.taprohm');
-                    } else {
-                      await launchURL(
-                          'https://play.google.com/store/apps/details?id=com.soda.taprohm');
-                    }
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      if (isAndroid) {
+                        await launchURL(
+                            'https://play.google.com/store/apps/details?id=com.soda.taprohm');
+                      } else {
+                        await launchURL(
+                            'https://play.google.com/store/apps/details?id=com.soda.taprohm');
+                      }
 
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'UPDATE NOW',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          color: FlutterFlowTheme.of(context).primary,
-                        ),
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'UPDATE NOW',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: FlutterFlowTheme.of(context).primary,
+                          ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ].divide(const SizedBox(height: 20.0)),
+          ].divide(const SizedBox(height: 20.0)),
+        ),
       ),
     );
   }
