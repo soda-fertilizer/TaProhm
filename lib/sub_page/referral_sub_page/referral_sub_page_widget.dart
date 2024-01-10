@@ -78,6 +78,10 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
               'IsApprove',
               true,
             )
+            .eq(
+              'IsMember',
+              true,
+            )
             .order('PhoneNumber', ascending: true),
       ),
       builder: (context, snapshot) {

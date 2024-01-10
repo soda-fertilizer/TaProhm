@@ -70,6 +70,10 @@ class _ReferralWidgetState extends State<ReferralWidget>
               'UserID',
               FFAppState().UserInfo.userID,
             )
+            .eq(
+              'IsMember',
+              true,
+            )
             .order('PhoneNumber', ascending: true),
       ),
       builder: (context, snapshot) {

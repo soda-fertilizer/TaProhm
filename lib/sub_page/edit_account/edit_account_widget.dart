@@ -571,8 +571,8 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                             }
                           },
                           text: editAccountUsersRow!.isActive
-                              ? 'Inactive'
-                              : 'Active',
+                              ? 'Active'
+                              : 'Inactive',
                           options: FFButtonOptions(
                             width: MediaQuery.sizeOf(context).width * 0.4,
                             height: 40.0,

@@ -353,86 +353,146 @@ class SearchCompanyCall {
     );
   }
 
-  List? companyID(dynamic response) => getJsonField(
+  List<int>? companyID(dynamic response) => (getJsonField(
         response,
         r'''$[:].CompanyID''',
         true,
-      ) as List?;
-  List? userID(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<int>? userID(dynamic response) => (getJsonField(
         response,
         r'''$[:].UserID''',
         true,
-      ) as List?;
-  List? companyName(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? companyName(dynamic response) => (getJsonField(
         response,
         r'''$[:].CompanyName''',
         true,
-      ) as List?;
-  List? companyProfile(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? companyProfile(dynamic response) => (getJsonField(
         response,
         r'''$[:].CompanyProfile''',
         true,
-      ) as List?;
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
   List? companyImages(dynamic response) => getJsonField(
         response,
         r'''$[:].CompanyImages''',
         true,
       ) as List?;
-  List? phoneNumber(dynamic response) => getJsonField(
+  List<String>? phoneNumber(dynamic response) => (getJsonField(
         response,
         r'''$[:].PhoneNumber''',
         true,
-      ) as List?;
-  List? telegramUrl(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? telegramUrl(dynamic response) => (getJsonField(
         response,
         r'''$[:].TelegramUrl''',
         true,
-      ) as List?;
-  List? detail(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? detail(dynamic response) => (getJsonField(
         response,
         r'''$[:].Detail''',
         true,
-      ) as List?;
-  List? latitude(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<double>? latitude(dynamic response) => (getJsonField(
         response,
         r'''$[:].Latitude''',
         true,
-      ) as List?;
-  List? longitude(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  List<double>? longitude(dynamic response) => (getJsonField(
         response,
         r'''$[:].Longitude''',
         true,
-      ) as List?;
-  List? paymentImage(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  List<String>? paymentImage(dynamic response) => (getJsonField(
         response,
         r'''$[:].PaymentImage''',
         true,
-      ) as List?;
-  List? isApprove(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<bool>? isApprove(dynamic response) => (getJsonField(
         response,
         r'''$[:].IsApprove''',
         true,
-      ) as List?;
-  List? isVertify(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<bool>(x))
+          .withoutNulls
+          .toList();
+  List<bool>? isVertify(dynamic response) => (getJsonField(
         response,
         r'''$[:].IsVertify''',
         true,
-      ) as List?;
-  List? isActive(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<bool>(x))
+          .withoutNulls
+          .toList();
+  List<bool>? isActive(dynamic response) => (getJsonField(
         response,
         r'''$[:].IsActive''',
         true,
-      ) as List?;
-  List? createdDate(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<bool>(x))
+          .withoutNulls
+          .toList();
+  List<String>? createdDate(dynamic response) => (getJsonField(
         response,
         r'''$[:].CreatedDate''',
         true,
-      ) as List?;
-  List? discount(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? discount(dynamic response) => (getJsonField(
         response,
         r'''$[:].Discount''',
         true,
-      ) as List?;
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
 }
 
 /// End Company Group Code

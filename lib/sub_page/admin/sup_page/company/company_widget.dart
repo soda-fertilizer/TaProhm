@@ -193,6 +193,77 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
+                            Material(
+                              color: Colors.transparent,
+                              elevation: 1.0,
+                              child: Container(
+                                width: double.infinity,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 20.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              const Duration(milliseconds: 500),
+                                          fadeOutDuration:
+                                              const Duration(milliseconds: 500),
+                                          imageUrl: containerUsersRow!.profile,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              valueOrDefault<String>(
+                                                containerUsersRow.fullName,
+                                                'null',
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                            Text(
+                                              'ID: ${containerUsersRow.phoneNumber}',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    fontSize: 12.0,
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -701,7 +772,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     _model.sectorPhoneNumber = await UsersGroup
                                         .sectorPhoneNumberCall
                                         .call(
-                                      sectorId: containerUsersRow?.sectorID,
+                                      sectorId: containerUsersRow.sectorID,
                                     );
                                     shouldSetState = true;
                                     if ((_model.sectorPhoneNumber?.succeeded ??
@@ -730,10 +801,10 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                               .referralSecondCall
                                               .call(
                                             phoneNumber:
-                                                containerUsersRow?.phoneNumber,
+                                                containerUsersRow.phoneNumber,
                                             money: 50.0,
                                             invitePhoneNumber:
-                                                containerUsersRow?.invite,
+                                                containerUsersRow.invite,
                                             sector:
                                                 UsersGroup.sectorPhoneNumberCall
                                                     .phoneNumber(
@@ -750,7 +821,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                           await EdgeFunctionGroup
                                               .pushNotifcationSingleUserCall
                                               .call(
-                                            token: containerUsersRow?.token,
+                                            token: containerUsersRow.token,
                                             title: 'Approved',
                                             contents:
                                                 'Your request for company ${functions.charLimit(20, companyCompaniesRow.companyName)} is Approved.',
@@ -761,7 +832,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                         () async {
                                           await NotificationTable().insert({
                                             'UserToken':
-                                                containerUsersRow?.token,
+                                                containerUsersRow.token,
                                             'Title': 'Approved',
                                             'Contents':
                                                 'Your request for company ${companyCompaniesRow.companyName} is Approved.',

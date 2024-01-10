@@ -4,11 +4,11 @@ export '/pages/locator/locator_widget.dart' show LocatorWidget;
 export '/pages/acount_payment/acount_payment_widget.dart'
     show AcountPaymentWidget;
 export '/pages/balance/balance_widget.dart' show BalanceWidget;
-export '/sub_page/my_company/my_company/my_company_widget.dart'
+export '/sub_page/company/my_company/my_company_widget.dart'
     show MyCompanyWidget;
-export '/sub_page/my_company/create_company/create_company_widget.dart'
+export '/sub_page/company/create_company/create_company_widget.dart'
     show CreateCompanyWidget;
-export '/sub_page/my_company/pin_location/pin_location_widget.dart'
+export '/sub_page/company/pin_location/pin_location_widget.dart'
     show PinLocationWidget;
 export '/pages/profile/profile_widget.dart' show ProfileWidget;
 export '/sub_page/balance/withdrawal/withdrawal_widget.dart'
@@ -33,15 +33,15 @@ export '/sub_page/admin/sup_page/company/company_widget.dart'
     show CompanyWidget;
 export '/sub_page/admin/sup_page/transaction/transaction_widget.dart'
     show TransactionWidget;
-export '/sub_page/my_company/company_payment/company_payment_widget.dart'
+export '/sub_page/company/company_payment/company_payment_widget.dart'
     show CompanyPaymentWidget;
-export '/sub_page/my_company/view_company/view_company_widget.dart'
+export '/sub_page/company/view_company/view_company_widget.dart'
     show ViewCompanyWidget;
 export '/sub_page/balance/deposit/deposit_widget.dart' show DepositWidget;
 export '/sub_page/company_info/company_info_widget.dart' show CompanyInfoWidget;
 export '/pages/single_company_map/single_company_map_widget.dart'
     show SingleCompanyMapWidget;
-export '/sub_page/my_company/edit_company/edit_company_widget.dart'
+export '/sub_page/company/edit_company/edit_company_widget.dart'
     show EditCompanyWidget;
 export '/sub_page/graph_tree/graph_tree_widget.dart' show GraphTreeWidget;
 export '/sub_page/change_password/change_password_widget.dart'

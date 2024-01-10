@@ -193,6 +193,24 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  setState(() {
+                                    FFAppState().updateShopHolderStruct(
+                                      (e) => e
+                                        ..id = getJsonField(
+                                          byListItem,
+                                          r'''$.CompanyID''',
+                                        )
+                                        ..latitude = getJsonField(
+                                          byListItem,
+                                          r'''$.Latitude''',
+                                        )
+                                        ..longitude = getJsonField(
+                                          byListItem,
+                                          r'''$.Longitude''',
+                                        ),
+                                    );
+                                  });
+
                                   context.pushNamed(
                                     'Locator',
                                     queryParameters: {

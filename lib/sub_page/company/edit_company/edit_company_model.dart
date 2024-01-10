@@ -52,7 +52,7 @@ class EditCompanyModel extends FlutterFlowModel<EditCompanyWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
-  // Stores action output result for [Bottom Sheet - selectLocation] action in Button widget.
+  // Stores action output result for [Bottom Sheet - selectLocation] action in PickLocation widget.
   LatLng? getLocation;
   bool isDataUploading2 = false;
   List<FFUploadedFile> uploadedLocalFiles2 = [];
