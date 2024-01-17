@@ -303,23 +303,23 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                             ],
                           ),
                         ),
-                        if (UsersGroup.loginCall
-                                .errorMessage(
+                        if (UsersGroup.loginCall.errorMessage(
                                   (_model.login?.jsonBody ?? ''),
-                                )
-                                .toString() !=
-                            'null')
+                                ) !=
+                                null &&
+                            UsersGroup.loginCall.errorMessage(
+                                  (_model.login?.jsonBody ?? ''),
+                                ) !=
+                                '')
                           Align(
                             alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 10.0),
                               child: Text(
-                                UsersGroup.loginCall
-                                    .errorMessage(
-                                      (_model.login?.jsonBody ?? ''),
-                                    )
-                                    .toString(),
+                                UsersGroup.loginCall.errorMessage(
+                                  (_model.login?.jsonBody ?? ''),
+                                )!,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -345,24 +345,21 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                 shouldSetState = true;
                                 if ((_model.login?.succeeded ?? true)) {
                                   await actions.onesignalLogin(
-                                    UsersGroup.loginCall
-                                        .token(
-                                          (_model.login?.jsonBody ?? ''),
-                                        )
-                                        .toString(),
+                                    UsersGroup.loginCall.token(
+                                      (_model.login?.jsonBody ?? ''),
+                                    )!,
                                   );
                                   GoRouter.of(context).prepareAuthEvent();
                                   await authManager.signIn(
-                                    authenticationToken: UsersGroup.loginCall
-                                        .token(
-                                          (_model.login?.jsonBody ?? ''),
-                                        )
-                                        .toString(),
+                                    authenticationToken:
+                                        UsersGroup.loginCall.token(
+                                      (_model.login?.jsonBody ?? ''),
+                                    ),
                                     authUid: UsersGroup.loginCall
                                         .userID(
                                           (_model.login?.jsonBody ?? ''),
                                         )
-                                        .toString(),
+                                        ?.toString(),
                                   );
                                   setState(() {
                                     FFAppState().IsLogged = true;
@@ -370,21 +367,16 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                       userID: UsersGroup.loginCall.userID(
                                         (_model.login?.jsonBody ?? ''),
                                       ),
-                                      fullName: UsersGroup.loginCall
-                                          .fullName(
-                                            (_model.login?.jsonBody ?? ''),
-                                          )
-                                          .toString(),
-                                      phoneNumber: UsersGroup.loginCall
-                                          .phoneNumber(
-                                            (_model.login?.jsonBody ?? ''),
-                                          )
-                                          .toString(),
-                                      token: UsersGroup.loginCall
-                                          .token(
-                                            (_model.login?.jsonBody ?? ''),
-                                          )
-                                          .toString(),
+                                      fullName: UsersGroup.loginCall.fullName(
+                                        (_model.login?.jsonBody ?? ''),
+                                      ),
+                                      phoneNumber:
+                                          UsersGroup.loginCall.phoneNumber(
+                                        (_model.login?.jsonBody ?? ''),
+                                      ),
+                                      token: UsersGroup.loginCall.token(
+                                        (_model.login?.jsonBody ?? ''),
+                                      ),
                                       sectorID: UsersGroup.loginCall.sectorID(
                                         (_model.login?.jsonBody ?? ''),
                                       ),
@@ -394,16 +386,14 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                       profile: UsersGroup.loginCall.profile(
                                         (_model.login?.jsonBody ?? ''),
                                       ),
-                                      userReferral: UsersGroup.loginCall
-                                          .userReferral(
-                                            (_model.login?.jsonBody ?? ''),
-                                          )
-                                          .toString(),
-                                      hashedPassword: UsersGroup.loginCall
-                                          .hashedPassword(
-                                            (_model.login?.jsonBody ?? ''),
-                                          )
-                                          .toString(),
+                                      userReferral:
+                                          UsersGroup.loginCall.userReferral(
+                                        (_model.login?.jsonBody ?? ''),
+                                      ),
+                                      hashedPassword:
+                                          UsersGroup.loginCall.hashedPassword(
+                                        (_model.login?.jsonBody ?? ''),
+                                      ),
                                       isMember: UsersGroup.loginCall.isMember(
                                         (_model.login?.jsonBody ?? ''),
                                       ),

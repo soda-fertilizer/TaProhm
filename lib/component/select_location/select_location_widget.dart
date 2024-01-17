@@ -10,12 +10,7 @@ import 'select_location_model.dart';
 export 'select_location_model.dart';
 
 class SelectLocationWidget extends StatefulWidget {
-  const SelectLocationWidget({
-    super.key,
-    this.save,
-  });
-
-  final Future<dynamic> Function()? save;
+  const SelectLocationWidget({super.key});
 
   @override
   _SelectLocationWidgetState createState() => _SelectLocationWidgetState();
@@ -114,7 +109,6 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
             ),
             FFButtonWidget(
               onPressed: () async {
-                await widget.save?.call();
                 Navigator.pop(context, _model.googleMapsCenter);
               },
               text: 'Save',

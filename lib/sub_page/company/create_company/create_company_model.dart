@@ -39,6 +39,8 @@ class CreateCompanyModel extends FlutterFlowModel<CreateCompanyWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController5;
   String? Function(BuildContext, String?)? textController5Validator;
+  // Stores action output result for [Bottom Sheet - selectLocation] action in Button widget.
+  LatLng? getLocation;
   bool isDataUploading2 = false;
   List<FFUploadedFile> uploadedLocalFiles2 = [];
   List<String> uploadedFileUrls2 = [];

@@ -805,14 +805,13 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             money: 50.0,
                                             invitePhoneNumber:
                                                 containerUsersRow.invite,
-                                            sector:
-                                                UsersGroup.sectorPhoneNumberCall
-                                                    .phoneNumber(
-                                                      (_model.sectorPhoneNumber
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                    )
-                                                    .toString(),
+                                            sector: UsersGroup
+                                                .sectorPhoneNumberCall
+                                                .phoneNumber(
+                                              (_model.sectorPhoneNumber
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            ),
                                           );
                                         }(),
                                       );

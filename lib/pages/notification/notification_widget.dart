@@ -279,16 +279,17 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                   ),
                 ],
               ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: wrapWithModel(
-                  model: _model.navBarModel,
-                  updateCallback: () => setState(() {}),
-                  child: const NavBarWidget(
-                    selectPageIndex: 3,
+              if (!FFAppState().UserInfo.isMember)
+                Align(
+                  alignment: const AlignmentDirectional(0.0, 1.0),
+                  child: wrapWithModel(
+                    model: _model.navBarModel,
+                    updateCallback: () => setState(() {}),
+                    child: const NavBarWidget(
+                      selectPageIndex: 3,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

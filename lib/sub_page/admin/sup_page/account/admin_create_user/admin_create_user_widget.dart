@@ -1048,7 +1048,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                               _model.isLodaingCompleted
                                   ? 'ID: ${GetMaxPhoneNumberCall.value(
                                       (_model.maxPhoneNumber?.jsonBody ?? ''),
-                                    ).toString()}'
+                                    )}'
                                   : 'ID: Loading...',
                               style: FlutterFlowTheme.of(context).bodyMedium,
                             ),

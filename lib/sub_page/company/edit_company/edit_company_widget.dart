@@ -5,8 +5,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/permissions_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -60,6 +62,8 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await requestPermission(cameraPermission);
+      await requestPermission(photoLibraryPermission);
       setState(() {
         _model.profile = widget.profile!;
         _model.selectImage = widget.images!.toList().cast<String>();
@@ -646,11 +650,9 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                           : FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: SizedBox(
+                                    child: const SizedBox(
                                       height: double.infinity,
-                                      child: SelectLocationWidget(
-                                        save: () async {},
-                                      ),
+                                      child: SelectLocationWidget(),
                                     ),
                                   ),
                                 );
@@ -729,7 +731,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
-                                        'assets/images/icons8-remove-48.png',
+                                        'assets/images/icons8-delete-48.png',
                                         width: 30.0,
                                         height: 24.0,
                                         fit: BoxFit.cover,
@@ -825,9 +827,9 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                         _model.uploadedFileUrls2 = [];
                                       });
 
-                                      await actions.printActionImage(
-                                        _model.selectImage.last,
-                                      );
+                                      setState(() {
+                                        _model.imageLoop = 0;
+                                      });
                                     },
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
@@ -912,14 +914,8 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                       }
 
                                       setState(() {
-                                        FFAppState()
-                                            .updateCreateCompanyHolderStruct(
-                                          (e) => e
-                                            ..updateImageDetails(
-                                              (e) => e
-                                                  .add(_model.uploadedFileUrl3),
-                                            ),
-                                        );
+                                        _model.addToSelectImage(
+                                            _model.uploadedFileUrl3);
                                       });
                                       setState(() {
                                         _model.isDataUploading3 = false;
@@ -959,62 +955,46 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                               children:
                                   List.generate(images.length, (imagesIndex) {
                                 final imagesItem = images[imagesIndex];
-                                return InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    setState(() {
-                                      _model.selectImageIndex = imagesIndex;
-                                    });
-                                    await actions.printAction(
-                                      _model.selectImageIndex?.toString(),
-                                    );
-                                  },
-                                  child: Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.42,
-                                    height: 150.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      border: Border.all(
-                                        color: imagesIndex ==
-                                                _model.selectImageIndex
-                                            ? FlutterFlowTheme.of(context)
-                                                .primary
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        width: 1.0,
-                                      ),
+                                return Container(
+                                  width:
+                                      MediaQuery.sizeOf(context).width * 0.42,
+                                  height: 150.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    border: Border.all(
+                                      color: imagesIndex ==
+                                              _model.selectImageIndex
+                                          ? FlutterFlowTheme.of(context).primary
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                      width: 1.0,
                                     ),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        setState(() {
-                                          _model.selectImageIndex = imagesIndex;
-                                        });
-                                      },
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(0.0),
-                                        child: OctoImage(
-                                          placeholderBuilder:
-                                              OctoPlaceholder.blurHash(
-                                            FFAppConstants.BlurHash,
-                                          ),
-                                          image: CachedNetworkImageProvider(
-                                            imagesItem,
-                                          ),
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.42,
-                                          height: 150.0,
-                                          fit: BoxFit.contain,
+                                  ),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      setState(() {
+                                        _model.selectImageIndex = imagesIndex;
+                                      });
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(0.0),
+                                      child: OctoImage(
+                                        placeholderBuilder:
+                                            OctoPlaceholder.blurHash(
+                                          FFAppConstants.BlurHash,
                                         ),
+                                        image: CachedNetworkImageProvider(
+                                          imagesItem,
+                                        ),
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.42,
+                                        height: 150.0,
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   ),
@@ -1066,6 +1046,16 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                       'CompanyID',
                                       widget.companyID,
                                     ),
+                                  );
+                                  // Log
+                                  unawaited(
+                                    () async {
+                                      await LogsTable().insert({
+                                        'Details':
+                                            'Company: {ID: ${widget.companyID?.toString()}, Name: ${widget.name}} delete by: { ID: ${FFAppState().UserInfo.userID.toString()}, FullName: ${FFAppState().UserInfo.fullName}}',
+                                        'Title': 'Delete Company',
+                                      });
+                                    }(),
                                   );
                                   context.safePop();
                                   return;

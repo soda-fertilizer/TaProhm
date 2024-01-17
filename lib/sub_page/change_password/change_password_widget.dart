@@ -1,9 +1,11 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -257,7 +259,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      Function() navigate = () {};
+                      var shouldSetState = false;
                       if ((_model.oldPasswordController.text == '') &&
                           (_model.newPasswordController.text == '') &&
                           !_model.isOldPasswordNotCorrect) {
@@ -277,15 +279,31 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             );
                           },
                         );
+                        if (shouldSetState) setState(() {});
                         return;
                       } else {
+                        _model.hashed = await actions.passwordHash(
+                          _model.newPasswordController.text,
+                        );
+                        shouldSetState = true;
+                        await UsersTable().update(
+                          data: {
+                            'Password': _model.hashed,
+                          },
+                          matchingRows: (rows) => rows.eq(
+                            'UserID',
+                            FFAppState().UserInfo.userID,
+                          ),
+                        );
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();
 
-                        navigate = () =>
-                            context.goNamedAuth('HomePage', context.mounted);
-                        await actions.onesignalLogout();
+                        unawaited(
+                          () async {
+                            await actions.onesignalLogout();
+                          }(),
+                        );
                         setState(() {
                           FFAppState().deleteUserInfo();
                           FFAppState().UserInfo =
@@ -294,10 +312,26 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
 
                           FFAppState().IsLogged = false;
                         });
+                        if (Navigator.of(context).canPop()) {
+                          context.pop();
+                        }
+                        context.pushNamedAuth(
+                          'HomePage',
+                          context.mounted,
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: const TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
+
+                        if (shouldSetState) setState(() {});
                         return;
                       }
 
-                      navigate();
+                      if (shouldSetState) setState(() {});
                     },
                     text: 'Save',
                     options: FFButtonOptions(

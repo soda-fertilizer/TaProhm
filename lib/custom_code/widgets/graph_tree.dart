@@ -22,14 +22,14 @@ class GraphTree extends StatefulWidget {
     this.height,
     this.listOfUsers,
     this.headOfUser,
-    this.onNodeClick,
+    required this.onNodeClick,
   }) : super(key: key);
 
   final double? width;
   final double? height;
   final List<UsersRow>? listOfUsers;
   final UsersRow? headOfUser;
-  final Future<dynamic> Function()? onNodeClick;
+  final Future<dynamic> Function() onNodeClick;
 
   @override
   _GraphTreeState createState() => _GraphTreeState();

@@ -338,10 +338,8 @@ class _TransferWidgetState extends State<TransferWidget> {
                                       _model.phoneNumberController.text,
                                   'Detail':
                                       'To: ${UsersGroup.oneUserNameCall.name(
-                                            (_model.responseUserName
-                                                    ?.jsonBody ??
-                                                ''),
-                                          ).toString()}',
+                                    (_model.responseUserName?.jsonBody ?? ''),
+                                  )}',
                                 });
                                 shouldSetState = true;
                                 // Minus money own balance
@@ -397,10 +395,9 @@ class _TransferWidgetState extends State<TransferWidget> {
                                     await LogsTable().insert({
                                       'Details':
                                           'Transfer from: ${FFAppState().UserInfo.fullName}  ID: ${FFAppState().UserInfo.phoneNumber}, To: ${UsersGroup.oneUserNameCall.name(
-                                                (_model.responseUserName
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ).toString()} ID: ${_model.phoneNumberController.text}, Transfer ID: ${_model.ownTransfer?.transactionID.toString()} Receive ID: ${_model.userTranfer?.transactionID.toString()}',
+                                        (_model.responseUserName?.jsonBody ??
+                                            ''),
+                                      )} ID: ${_model.phoneNumberController.text}, Transfer ID: ${_model.ownTransfer?.transactionID.toString()} Receive ID: ${_model.userTranfer?.transactionID.toString()}',
                                       'Title': 'Tranfer Money',
                                     });
                                   }(),

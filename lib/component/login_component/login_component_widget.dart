@@ -413,12 +413,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ],
                                       ),
                                     ),
-                                    if (UsersGroup.loginCall
-                                                .errorMessage(
-                                                  (_model.login?.jsonBody ??
-                                                      ''),
-                                                )
-                                                .toString() !=
+                                    if (UsersGroup.loginCall.errorMessage(
+                                              (_model.login?.jsonBody ?? ''),
+                                            ) !=
+                                            null &&
+                                        UsersGroup.loginCall.errorMessage(
+                                              (_model.login?.jsonBody ?? ''),
+                                            ) !=
                                             '')
                                       Align(
                                         alignment:
@@ -428,12 +429,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 10.0),
                                           child: Text(
-                                            UsersGroup.loginCall
-                                                .errorMessage(
-                                                  (_model.login?.jsonBody ??
-                                                      ''),
-                                                )
-                                                .toString(),
+                                            UsersGroup.loginCall.errorMessage(
+                                              (_model.login?.jsonBody ?? ''),
+                                            )!,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -467,27 +465,23 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
                                               await authManager.signIn(
-                                                authenticationToken: UsersGroup
-                                                    .loginCall
-                                                    .token(
-                                                      (_model.login?.jsonBody ??
-                                                          ''),
-                                                    )
-                                                    .toString(),
+                                                authenticationToken:
+                                                    UsersGroup.loginCall.token(
+                                                  (_model.login?.jsonBody ??
+                                                      ''),
+                                                ),
                                                 authUid: UsersGroup.loginCall
                                                     .userID(
                                                       (_model.login?.jsonBody ??
                                                           ''),
                                                     )
-                                                    .toString(),
+                                                    ?.toString(),
                                               );
                                               await actions.onesignalLogin(
-                                                UsersGroup.loginCall
-                                                    .token(
-                                                      (_model.login?.jsonBody ??
-                                                          ''),
-                                                    )
-                                                    .toString(),
+                                                UsersGroup.loginCall.token(
+                                                  (_model.login?.jsonBody ??
+                                                      ''),
+                                                )!,
                                               );
                                               setState(() {
                                                 FFAppState().IsLogged = true;
@@ -500,26 +494,20 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   ),
                                                   fullName: UsersGroup.loginCall
                                                       .fullName(
-                                                        (_model.login
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                      )
-                                                      .toString(),
-                                                  phoneNumber:
-                                                      UsersGroup.loginCall
-                                                          .phoneNumber(
-                                                            (_model.login
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )
-                                                          .toString(),
+                                                    (_model.login?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                  phoneNumber: UsersGroup
+                                                      .loginCall
+                                                      .phoneNumber(
+                                                    (_model.login?.jsonBody ??
+                                                        ''),
+                                                  ),
                                                   token: UsersGroup.loginCall
                                                       .token(
-                                                        (_model.login
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                      )
-                                                      .toString(),
+                                                    (_model.login?.jsonBody ??
+                                                        ''),
+                                                  ),
                                                   sectorID: UsersGroup.loginCall
                                                       .sectorID(
                                                     (_model.login?.jsonBody ??
@@ -535,22 +523,18 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     (_model.login?.jsonBody ??
                                                         ''),
                                                   ),
-                                                  userReferral:
-                                                      UsersGroup.loginCall
-                                                          .userReferral(
-                                                            (_model.login
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )
-                                                          .toString(),
-                                                  hashedPassword:
-                                                      UsersGroup.loginCall
-                                                          .hashedPassword(
-                                                            (_model.login
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )
-                                                          .toString(),
+                                                  userReferral: UsersGroup
+                                                      .loginCall
+                                                      .userReferral(
+                                                    (_model.login?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                  hashedPassword: UsersGroup
+                                                      .loginCall
+                                                      .hashedPassword(
+                                                    (_model.login?.jsonBody ??
+                                                        ''),
+                                                  ),
                                                   isMember: UsersGroup.loginCall
                                                       .isMember(
                                                     (_model.login?.jsonBody ??
@@ -967,11 +951,17 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       ),
                                       if (UsersGroup.checkPhoneNumberCall
                                                   .errorMessage(
-                                                    (_model.apiResultwsd
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  )
-                                                  .toString() !=
+                                                (_model.apiResultwsd
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ) !=
+                                              null &&
+                                          UsersGroup.checkPhoneNumberCall
+                                                  .errorMessage(
+                                                (_model.apiResultwsd
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ) !=
                                               '')
                                         Align(
                                           alignment:
@@ -983,11 +973,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             child: Text(
                                               UsersGroup.checkPhoneNumberCall
                                                   .errorMessage(
-                                                    (_model.apiResultwsd
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  )
-                                                  .toString(),
+                                                (_model.apiResultwsd
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              )!,
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium

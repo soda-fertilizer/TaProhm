@@ -1,4 +1,5 @@
 import '/backend/supabase/supabase.dart';
+import '/component/select_location/select_location_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,12 +17,7 @@ import 'create_company_model.dart';
 export 'create_company_model.dart';
 
 class CreateCompanyWidget extends StatefulWidget {
-  const CreateCompanyWidget({
-    super.key,
-    this.pickedLatLng,
-  });
-
-  final LatLng? pickedLatLng;
+  const CreateCompanyWidget({super.key});
 
   @override
   _CreateCompanyWidgetState createState() => _CreateCompanyWidgetState();
@@ -42,14 +38,6 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(cameraPermission);
       await requestPermission(photoLibraryPermission);
-      if ((await getPermissionStatus(cameraPermission)) &&
-          (await getPermissionStatus(photoLibraryPermission))) {
-        return;
-      }
-
-      await requestPermission(cameraPermission);
-      await requestPermission(photoLibraryPermission);
-      return;
     });
 
     _model.companyNameController ??=
@@ -524,20 +512,34 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed(
-                        'PinLocation',
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.fade,
-                            duration: Duration(milliseconds: 0),
-                          ),
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () => _model.unfocusNode.canRequestFocus
+                                ? FocusScope.of(context)
+                                    .requestFocus(_model.unfocusNode)
+                                : FocusScope.of(context).unfocus(),
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: const SizedBox(
+                                height: double.infinity,
+                                child: SelectLocationWidget(),
+                              ),
+                            ),
+                          );
                         },
-                      );
+                      ).then((value) =>
+                          safeSetState(() => _model.getLocation = value));
+
+                      setState(() {});
                     },
-                    text: FFAppState().CreateCompanyHolder.location == null
+                    text: _model.getLocation == null
                         ? 'Pin location'
-                        : FFAppState().CreateCompanyHolder.location!.toString(),
+                        : _model.getLocation!.toString(),
                     options: FFButtonOptions(
                       width: double.infinity,
                       height: 40.0,
@@ -607,7 +609,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.asset(
-                                  'assets/images/icons8-remove-48.png',
+                                  'assets/images/icons8-delete-48.png',
                                   width: 30.0,
                                   height: 24.0,
                                   fit: BoxFit.cover,
@@ -884,72 +886,35 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                     onPressed: () async {
                       currentUserLocationValue = await getCurrentUserLocation(
                           defaultLocation: const LatLng(0.0, 0.0));
-                      if (FFAppState().CreateCompanyHolder.location == null) {
-                        setState(() {
-                          FFAppState().updateCreateCompanyHolderStruct(
-                            (e) => e
-                              ..name = _model.companyNameController.text
-                              ..phoneNumber = _model.phoneNumberController.text
-                              ..telegramLink =
-                                  _model.telegramLinkController.text
-                              ..details = _model.textController5.text
-                              ..discount =
-                                  int.tryParse(_model.discountController.text)
-                              ..location = currentUserLocationValue
-                              ..profile = valueOrDefault<String>(
-                                _model.uploadedFileUrl1,
-                                'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                              ),
-                          );
-                        });
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
-                        }
-                        context.pushNamed(
-                          'CompanyPayment',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
+                      setState(() {
+                        FFAppState().updateCreateCompanyHolderStruct(
+                          (e) => e
+                            ..name = _model.companyNameController.text
+                            ..phoneNumber = _model.phoneNumberController.text
+                            ..telegramLink = _model.telegramLinkController.text
+                            ..details = _model.textController5.text
+                            ..discount =
+                                int.tryParse(_model.discountController.text)
+                            ..location = _model.getLocation ?? currentUserLocationValue
+                            ..profile = valueOrDefault<String>(
+                              _model.uploadedFileUrl1,
+                              'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
                             ),
-                          },
                         );
-
-                        return;
-                      } else {
-                        setState(() {
-                          FFAppState().updateCreateCompanyHolderStruct(
-                            (e) => e
-                              ..name = _model.companyNameController.text
-                              ..phoneNumber = _model.phoneNumberController.text
-                              ..telegramLink =
-                                  _model.telegramLinkController.text
-                              ..details = _model.textController5.text
-                              ..discount =
-                                  int.tryParse(_model.discountController.text)
-                              ..profile = valueOrDefault<String>(
-                                _model.uploadedFileUrl1,
-                                'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                              ),
-                          );
-                        });
-                        if (Navigator.of(context).canPop()) {
-                          context.pop();
-                        }
-                        context.pushNamed(
-                          'CompanyPayment',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 0),
-                            ),
-                          },
-                        );
-
-                        return;
+                      });
+                      if (Navigator.of(context).canPop()) {
+                        context.pop();
                       }
+                      context.pushNamed(
+                        'CompanyPayment',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: const TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                          ),
+                        },
+                      );
                     },
                     text: 'Next',
                     options: FFButtonOptions(

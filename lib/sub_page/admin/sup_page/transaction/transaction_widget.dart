@@ -352,7 +352,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                       await TransactionsTable().update(
                                         data: {
                                           'IsApprove': true,
-                                          'Detail': 'Approved',
+                                          'Detail': 'Approve',
                                         },
                                         matchingRows: (rows) => rows.eq(
                                           'TransactionID',
@@ -418,7 +418,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                     await TransactionsTable().update(
                                       data: {
                                         'IsApprove': true,
-                                        'Detail': 'Approved',
+                                        'Detail': 'Approve',
                                       },
                                       matchingRows: (rows) => rows.eq(
                                         'TransactionID',

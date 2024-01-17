@@ -115,9 +115,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'CreateCompany',
           path: '/createCompany',
-          builder: (context, params) => CreateCompanyWidget(
-            pickedLatLng: params.getParam('pickedLatLng', ParamType.LatLng),
-          ),
+          builder: (context, params) => const CreateCompanyWidget(),
         ),
         FFRoute(
           name: 'PinLocation',
