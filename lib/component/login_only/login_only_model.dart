@@ -17,6 +17,8 @@ class LoginOnlyModel extends FlutterFlowModel<LoginOnlyWidget> {
   String? Function(BuildContext, String?)? loginPasswordControllerValidator;
   // Stores action output result for [Backend Call - API (Login)] action in Button widget.
   ApiCallResponse? login;
+  // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
+  String? fcmToken;
 
   /// Initialization and disposal methods.
 

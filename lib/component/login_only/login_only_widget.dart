@@ -1,10 +1,12 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -344,17 +346,27 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                 );
                                 shouldSetState = true;
                                 if ((_model.login?.succeeded ?? true)) {
-                                  await actions.onesignalLogin(
-                                    UsersGroup.loginCall.token(
-                                      (_model.login?.jsonBody ?? ''),
-                                    )!,
+                                  _model.fcmToken =
+                                      await actions.initFirebaseMessage();
+                                  shouldSetState = true;
+                                  unawaited(
+                                    () async {
+                                      await UsersTable().update(
+                                        data: {
+                                          'Token': _model.fcmToken,
+                                        },
+                                        matchingRows: (rows) => rows.eq(
+                                          'UserID',
+                                          UsersGroup.loginCall.userID(
+                                            (_model.login?.jsonBody ?? ''),
+                                          ),
+                                        ),
+                                      );
+                                    }(),
                                   );
                                   GoRouter.of(context).prepareAuthEvent();
                                   await authManager.signIn(
-                                    authenticationToken:
-                                        UsersGroup.loginCall.token(
-                                      (_model.login?.jsonBody ?? ''),
-                                    ),
+                                    authenticationToken: _model.fcmToken,
                                     authUid: UsersGroup.loginCall
                                         .userID(
                                           (_model.login?.jsonBody ?? ''),
@@ -374,9 +386,7 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                           UsersGroup.loginCall.phoneNumber(
                                         (_model.login?.jsonBody ?? ''),
                                       ),
-                                      token: UsersGroup.loginCall.token(
-                                        (_model.login?.jsonBody ?? ''),
-                                      ),
+                                      token: _model.fcmToken,
                                       sectorID: UsersGroup.loginCall.sectorID(
                                         (_model.login?.jsonBody ?? ''),
                                       ),
