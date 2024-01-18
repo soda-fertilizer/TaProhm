@@ -30,6 +30,8 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   ApiCallResponse? check;
   bool requestCompleted = false;
   String? requestLastUniqueKey;
+  // Stores action output result for [Custom Action - initFirebaseMessage] action in Text widget.
+  String? jwt;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>

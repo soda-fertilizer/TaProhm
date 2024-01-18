@@ -14,6 +14,10 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-Future initFirebaseMessage(String id) async {
+Future<String?> initFirebaseMessage() async {
   // Add your function code here!
+
+  await FirebaseMessaging.instance.getAPNSToken();
+  final String? token = await FirebaseMessaging.instance.getToken();
+  return token!;
 }
