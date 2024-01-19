@@ -383,6 +383,86 @@ class FFAppState extends ChangeNotifier {
     secureStorage.setString('ff_UserInfo', _UserInfo.serialize());
   }
 
+  List<LocationButtonStruct> _ProvinceButton = [
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"រាជនីភ្នំពេញ","location":"11.543806398027,104.822496883571"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកំពត","location":"10.5945236,104.1614987"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកណ្តាល","location":"11.4565296,104.9047875"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តពោធិ៍សាត់","location":"12.4859817,103.9122534"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តរតនគិរី","location":"13.6887625,107.001551"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តបាត់ដំបង","location":"13.097243,103.1609987"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកំពង់ចាម","location":"12.0583955,105.2460407"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តសៀមរាប","location":"13.4032174,103.8346537"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកំពង់ឆ្នាំង","location":"12.2530842,104.6684802"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តស្ទឹងត្រែង","location":"13.5164491,105.9635813"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកែប","location":"10.5366344,104.3047087"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តស្វាយរៀង","location":"11.0879008,105.7910697"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តតាកែវ","location":"10.9852956,104.7809697"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តត្បូងឃ្មុំ","location":"11.9149092,105.6547726"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកំពង់ស្ពឺ","location":"11.4333537,104.2730332"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តបន្ទាយមានជ័យ","location":"13.5858712,102.960583"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកំពង់ធំ","location":"12.6472479,104.9227638"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តឧត្ដរមានជ័យ","location":"14.2443481,103.5721055"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តព្រះវិហារ","location":"13.755592,104.9718959"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តប៉ៃលិន","location":"12.8510294,102.608646"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តមណ្ឌលគិរី","location":"12.4687725,107.1901973"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តក្រចេះ","location":"12.4944187,106.0247805"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តកោះកុង","location":"11.6836627,103.3696454"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តព្រះសីហនុ","location":"10.6265384,103.5116496"}')),
+    LocationButtonStruct.fromSerializableMap(jsonDecode(
+        '{"province":"ខេត្តព្រៃវែង","location":"11.4849954,105.3220705"}'))
+  ];
+  List<LocationButtonStruct> get ProvinceButton => _ProvinceButton;
+  set ProvinceButton(List<LocationButtonStruct> value) {
+    _ProvinceButton = value;
+  }
+
+  void addToProvinceButton(LocationButtonStruct value) {
+    _ProvinceButton.add(value);
+  }
+
+  void removeFromProvinceButton(LocationButtonStruct value) {
+    _ProvinceButton.remove(value);
+  }
+
+  void removeAtIndexFromProvinceButton(int index) {
+    _ProvinceButton.removeAt(index);
+  }
+
+  void updateProvinceButtonAtIndex(
+    int index,
+    LocationButtonStruct Function(LocationButtonStruct) updateFn,
+  ) {
+    _ProvinceButton[index] = updateFn(_ProvinceButton[index]);
+  }
+
+  void insertAtIndexInProvinceButton(int index, LocationButtonStruct value) {
+    _ProvinceButton.insert(index, value);
+  }
+
   final _companyManager = FutureRequestManager<List<CompaniesRow>>();
   Future<List<CompaniesRow>> company({
     String? uniqueQueryKey,

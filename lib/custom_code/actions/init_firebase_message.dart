@@ -18,6 +18,7 @@ Future<String?> initFirebaseMessage() async {
   // Add your function code here!
 
   await FirebaseMessaging.instance.getAPNSToken();
+  await FirebaseMessaging.instance.subscribeToTopic('total-users');
   final String? token = await FirebaseMessaging.instance.getToken();
   return token!;
 }

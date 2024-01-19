@@ -349,24 +349,31 @@ class _LoginOnlyWidgetState extends State<LoginOnlyWidget>
                                   _model.fcmToken =
                                       await actions.initFirebaseMessage();
                                   shouldSetState = true;
-                                  unawaited(
-                                    () async {
-                                      await UsersTable().update(
-                                        data: {
-                                          'Token': _model.fcmToken,
-                                        },
-                                        matchingRows: (rows) => rows.eq(
-                                          'UserID',
-                                          UsersGroup.loginCall.userID(
-                                            (_model.login?.jsonBody ?? ''),
+                                  if (_model.fcmToken != null &&
+                                      _model.fcmToken != '') {
+                                    unawaited(
+                                      () async {
+                                        await UsersTable().update(
+                                          data: {
+                                            'Token': _model.fcmToken,
+                                          },
+                                          matchingRows: (rows) => rows.eq(
+                                            'UserID',
+                                            UsersGroup.loginCall.userID(
+                                              (_model.login?.jsonBody ?? ''),
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    }(),
-                                  );
+                                        );
+                                      }(),
+                                    );
+                                  }
                                   GoRouter.of(context).prepareAuthEvent();
                                   await authManager.signIn(
-                                    authenticationToken: _model.fcmToken,
+                                    authenticationToken: UsersGroup.loginCall
+                                        .userID(
+                                          (_model.login?.jsonBody ?? ''),
+                                        )
+                                        ?.toString(),
                                     authUid: UsersGroup.loginCall
                                         .userID(
                                           (_model.login?.jsonBody ?? ''),
