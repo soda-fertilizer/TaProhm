@@ -463,6 +463,12 @@ class FFAppState extends ChangeNotifier {
     _ProvinceButton.insert(index, value);
   }
 
+  String _refreshFCMToken = '';
+  String get refreshFCMToken => _refreshFCMToken;
+  set refreshFCMToken(String value) {
+    _refreshFCMToken = value;
+  }
+
   final _companyManager = FutureRequestManager<List<CompaniesRow>>();
   Future<List<CompaniesRow>> company({
     String? uniqueQueryKey,

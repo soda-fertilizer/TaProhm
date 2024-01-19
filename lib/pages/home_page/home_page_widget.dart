@@ -9,6 +9,7 @@ import '/component/update_alert/update_alert_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -44,6 +45,28 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       }
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
+      await actions.firebaseMessageRefresh(
+        () async {
+          unawaited(
+            () async {
+              await UsersTable().update(
+                data: {
+                  'Token': FFAppState().refreshFCMToken,
+                },
+                matchingRows: (rows) => rows.eq(
+                  'UserID',
+                  FFAppState().UserInfo.userID,
+                ),
+              );
+            }(),
+          );
+          setState(() {
+            FFAppState().updateUserInfoStruct(
+              (e) => e..token = FFAppState().refreshFCMToken,
+            );
+          });
+        },
+      );
       setState(() {
         _model.selectLocation = currentUserLocationValue;
       });

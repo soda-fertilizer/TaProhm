@@ -12,3 +12,4 @@ export 'supa_realtime.dart' show supaRealtime;
 export 'android_in_app_update.dart' show androidInAppUpdate;
 export 'in_app_update.dart' show inAppUpdate;
 export 'init_firebase_message.dart' show initFirebaseMessage;
+export 'firebase_message_refresh.dart' show firebaseMessageRefresh;
