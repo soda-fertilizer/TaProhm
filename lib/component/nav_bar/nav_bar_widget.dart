@@ -269,55 +269,56 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 ),
               ),
             ),
-          Container(
-            width: 50.0,
-            height: double.infinity,
-            decoration: const BoxDecoration(),
-            child: InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () async {
-                if (Navigator.of(context).canPop()) {
-                  context.pop();
-                }
-                context.pushNamed(
-                  'Event',
-                  extra: <String, dynamic>{
-                    kTransitionInfoKey: const TransitionInfo(
-                      hasTransition: true,
-                      transitionType: PageTransitionType.fade,
-                      duration: Duration(milliseconds: 0),
+          if (FFAppState().IsLogged)
+            Container(
+              width: 50.0,
+              height: double.infinity,
+              decoration: const BoxDecoration(),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  if (Navigator.of(context).canPop()) {
+                    context.pop();
+                  }
+                  context.pushNamed(
+                    'Member',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: const TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 0),
+                      ),
+                    },
+                  );
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.people_alt_sharp,
+                      color: widget.selectPageIndex == 4
+                          ? FlutterFlowTheme.of(context).primary
+                          : FlutterFlowTheme.of(context).secondaryText,
+                      size: 24.0,
                     ),
-                  },
-                );
-              },
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    Icons.calendar_month,
-                    color: widget.selectPageIndex == 4
-                        ? FlutterFlowTheme.of(context).primary
-                        : FlutterFlowTheme.of(context).secondaryText,
-                    size: 24.0,
-                  ),
-                  Text(
-                    'Event',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Readex Pro',
-                          color: widget.selectPageIndex == 4
-                              ? FlutterFlowTheme.of(context).primary
-                              : FlutterFlowTheme.of(context).secondaryText,
-                          fontSize: 8.0,
-                        ),
-                  ),
-                ],
+                    Text(
+                      'Member',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            color: widget.selectPageIndex == 4
+                                ? FlutterFlowTheme.of(context).primary
+                                : FlutterFlowTheme.of(context).secondaryText,
+                            fontSize: 8.0,
+                          ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
           Container(
             width: 50.0,
             height: double.infinity,

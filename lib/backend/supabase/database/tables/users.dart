@@ -23,8 +23,8 @@ class UsersRow extends SupabaseDataRow {
   String get password => getField<String>('Password')!;
   set password(String value) => setField<String>('Password', value);
 
-  String get token => getField<String>('Token')!;
-  set token(String value) => setField<String>('Token', value);
+  String? get token => getField<String>('Token');
+  set token(String? value) => setField<String>('Token', value);
 
   bool get isApprove => getField<bool>('IsApprove')!;
   set isApprove(bool value) => setField<bool>('IsApprove', value);

@@ -26,6 +26,7 @@ class UsersGroup {
   static OneUserNameCall oneUserNameCall = OneUserNameCall();
   static CheckPasswordChangeCall checkPasswordChangeCall =
       CheckPasswordChangeCall();
+  static UserAndCompanyCall userAndCompanyCall = UserAndCompanyCall();
 }
 
 class LoginCall {
@@ -270,6 +271,75 @@ class CheckPasswordChangeCall {
   }
 }
 
+class UserAndCompanyCall {
+  Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'user and company',
+      apiUrl: '${UsersGroup.baseUrl}/user_and_company',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? fullName(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].fullname''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? phoneNumber(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].phonenumber''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? userID(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].userid''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? image(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].image''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? companyCount(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].companycount''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+}
+
 /// End Users Group Code
 
 /// Start Company Group Code
@@ -286,6 +356,12 @@ class CompanyGroup {
   };
   static CompanyLocationCall companyLocationCall = CompanyLocationCall();
   static SearchCompanyCall searchCompanyCall = SearchCompanyCall();
+  static CheckRatingCall checkRatingCall = CheckRatingCall();
+  static CompanyRatingCall companyRatingCall = CompanyRatingCall();
+  static CompayRatingByUserCall compayRatingByUserCall =
+      CompayRatingByUserCall();
+  static CompayRatingByCompanyCall compayRatingByCompanyCall =
+      CompayRatingByCompanyCall();
 }
 
 class CompanyLocationCall {
@@ -491,6 +567,208 @@ class SearchCompanyCall {
       ) as List?)
           ?.withoutNulls
           .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+}
+
+class CheckRatingCall {
+  Future<ApiCallResponse> call({
+    int? userId,
+    int? companyId,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'check rating',
+      apiUrl: '${CompanyGroup.baseUrl}/check_rating',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'user_id': userId,
+        'company_id': companyId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  dynamic id(dynamic response) => getJsonField(
+        response,
+        r'''$''',
+      );
+}
+
+class CompanyRatingCall {
+  Future<ApiCallResponse> call({
+    int? id,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'company rating',
+      apiUrl: '${CompanyGroup.baseUrl}/company_rating',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? comapnyID(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].companyid''',
+      ));
+  int? rating(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].rating''',
+      ));
+  int? ratingCount(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].ratingcount''',
+      ));
+}
+
+class CompayRatingByUserCall {
+  Future<ApiCallResponse> call({
+    int? id,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'compay rating by user',
+      apiUrl: '${CompanyGroup.baseUrl}/compay_rating_by_user',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? companyName(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].companyname''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? companyProfile(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].companyprofile''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? rating(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].rating''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<int>? rateID(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].rateid''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+}
+
+class CompayRatingByCompanyCall {
+  Future<ApiCallResponse> call({
+    int? id,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'compay rating by company',
+      apiUrl: '${CompanyGroup.baseUrl}/compay_rating_by_company',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'id': id,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<int>? rating(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].rating''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<int>? rateID(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].rateid''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? userName(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].username''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? userProfile(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].userprofile''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
 }
@@ -886,6 +1164,8 @@ class EdgeFunctionGroup {
       PushNotifcationMultipleUserCall();
   static BroadcastPushNotifcationCall broadcastPushNotifcationCall =
       BroadcastPushNotifcationCall();
+  static IncreaseCompanyViewCountCall increaseCompanyViewCountCall =
+      IncreaseCompanyViewCountCall();
 }
 
 class UpdateBalanceCall {
@@ -1183,6 +1463,35 @@ class BroadcastPushNotifcationCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Broadcast Push Notifcation',
       apiUrl: '${EdgeFunctionGroup.baseUrl}/BroadcastPushNotifcation',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class IncreaseCompanyViewCountCall {
+  Future<ApiCallResponse> call({
+    int? companyId,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "company_id": $companyId
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Increase Company ViewCount',
+      apiUrl: '${EdgeFunctionGroup.baseUrl}/IncreaseCompanyViewCount',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':

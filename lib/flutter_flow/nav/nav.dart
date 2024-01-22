@@ -425,6 +425,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             evenDate: params.getParam('evenDate', ParamType.DateTime),
             image: params.getParam('image', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'Member',
+          path: '/member',
+          builder: (context, params) => const MemberWidget(),
+        ),
+        FFRoute(
+          name: 'Review',
+          path: '/review',
+          builder: (context, params) => ReviewWidget(
+            companyID: params.getParam('companyID', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'MemberDetail',
+          path: '/memberDetail',
+          builder: (context, params) => MemberDetailWidget(
+            id: params.getParam('id', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'ViewReview',
+          path: '/viewReview',
+          builder: (context, params) => ViewReviewWidget(
+            id: params.getParam('id', ParamType.int),
+          ),
+        ),
+        FFRoute(
+          name: 'ReviewList',
+          path: '/reviewList',
+          builder: (context, params) => ReviewListWidget(
+            companyID: params.getParam('companyID', ParamType.int),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

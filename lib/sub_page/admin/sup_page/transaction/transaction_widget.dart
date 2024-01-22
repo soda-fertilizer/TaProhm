@@ -390,24 +390,11 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                       );
                                       unawaited(
                                         () async {
-                                          await EdgeFunctionGroup
-                                              .pushNotifcationSingleUserCall
-                                              .call(
-                                            token: containerUsersRow.token,
-                                            title: 'Approved',
-                                            contents:
-                                                'Your request for ${transactionTransactionsRow.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
-                                          );
-                                        }(),
-                                      );
-                                      unawaited(
-                                        () async {
                                           await NotificationTable().insert({
-                                            'UserToken':
-                                                containerUsersRow.token,
                                             'Title': 'Approved',
                                             'Contents':
                                                 'Your request for ${transactionTransactionsRow.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
+                                            'UserID': containerUsersRow.userID,
                                           });
                                         }(),
                                       );
@@ -456,23 +443,11 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                     );
                                     unawaited(
                                       () async {
-                                        await EdgeFunctionGroup
-                                            .pushNotifcationSingleUserCall
-                                            .call(
-                                          token: containerUsersRow?.token,
-                                          title: 'Approved',
-                                          contents:
-                                              'Your request for ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
-                                        );
-                                      }(),
-                                    );
-                                    unawaited(
-                                      () async {
                                         await NotificationTable().insert({
-                                          'UserToken': containerUsersRow?.token,
                                           'Title': 'Approved',
                                           'Contents':
                                               'Your request for ${transactionTransactionsRow?.typeID == 1 ? 'Withdrawal' : 'Deposit'} is Approved.',
+                                          'UserID': containerUsersRow?.userID,
                                         });
                                       }(),
                                     );

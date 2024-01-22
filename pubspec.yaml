@@ -55,6 +55,7 @@ dependencies:
   flutter_cache_manager: 3.3.1
   flutter_native_splash: 2.3.1
   flutter_plugin_android_lifecycle: 2.0.17
+  flutter_rating_bar: 4.0.1
   flutter_secure_storage: 8.0.0
   font_awesome_flutter: 10.6.0
   from_css_color: 2.0.0

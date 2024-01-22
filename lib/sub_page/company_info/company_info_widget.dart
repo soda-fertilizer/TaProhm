@@ -4,6 +4,7 @@ import '/component/image_gallery/image_gallery_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -300,6 +301,51 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               ],
                             ),
                           ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          context.pushNamed(
+                            'Review',
+                            queryParameters: {
+                              'companyID': serializeParam(
+                                widget.companyID,
+                                ParamType.int,
+                              ),
+                            }.withoutNulls,
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: const TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
+                        },
+                        text: 'Add your review',
+                        options: FFButtonOptions(
+                          width: double.infinity,
+                          height: 40.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
                     ),

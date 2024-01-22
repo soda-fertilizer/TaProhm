@@ -259,6 +259,8 @@ dynamic deserializeParam<T>(
             return TransactionsRow(data);
           case CompaniesRow:
             return CompaniesRow(data);
+          case BroadcastNotificationRow:
+            return BroadcastNotificationRow(data);
           case ProductsRow:
             return ProductsRow(data);
           case AllowToReferralsRow:
@@ -271,6 +273,8 @@ dynamic deserializeParam<T>(
             return TransactionTypesRow(data);
           case UsersRow:
             return UsersRow(data);
+          case CompaniesRatingRow:
+            return CompaniesRatingRow(data);
           case EventsRow:
             return EventsRow(data);
           default:

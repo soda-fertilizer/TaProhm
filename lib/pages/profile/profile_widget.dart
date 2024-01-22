@@ -1,13 +1,16 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/schema/structs/index.dart';
+import '/backend/supabase/supabase.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/component/show_qr_code/show_qr_code_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:octo_image/octo_image.dart';
@@ -31,6 +34,32 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ProfileModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await actions.firebaseMessageRefresh(
+        () async {
+          unawaited(
+            () async {
+              await UsersTable().update(
+                data: {
+                  'Token': FFAppState().refreshFCMToken,
+                },
+                matchingRows: (rows) => rows.eq(
+                  'UserID',
+                  FFAppState().UserInfo.userID,
+                ),
+              );
+            }(),
+          );
+          setState(() {
+            FFAppState().updateUserInfoStruct(
+              (e) => e..token = FFAppState().refreshFCMToken,
+            );
+          });
+        },
+      );
+    });
   }
 
   @override

@@ -12,13 +12,17 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future firebaseMessageRefresh(Future<dynamic> Function() refresh) async {
   // Add your function code here!
-  await FirebaseMessaging.instance.getAPNSToken();
-  await FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
-    FFAppState().refreshFCMToken = fcmToken;
-    refresh();
-  });
+  if (isAndroid || isiOS) {
+    await FirebaseMessaging.instance.getAPNSToken();
+    await FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
+      FFAppState().refreshFCMToken = fcmToken;
+      refresh();
+    });
+  }
 }

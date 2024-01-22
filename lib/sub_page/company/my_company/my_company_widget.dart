@@ -31,7 +31,7 @@ class _MyCompanyWidgetState extends State<MyCompanyWidget>
 
     _model.tabBarController = TabController(
       vsync: this,
-      length: 2,
+      length: 3,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
   }
@@ -152,21 +152,28 @@ class _MyCompanyWidgetState extends State<MyCompanyWidget>
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
-                      labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).titleMedium.override(
+                                fontFamily: 'Readex Pro',
+                                fontSize: 14.0,
+                              ),
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       padding: const EdgeInsets.all(4.0),
                       tabs: const [
                         Tab(
-                          text: 'Company',
+                          text: 'Companies',
                         ),
                         Tab(
                           text: 'Pending',
                         ),
+                        Tab(
+                          text: 'Rating',
+                        ),
                       ],
                       controller: _model.tabBarController,
                       onTap: (i) async {
-                        [() async {}, () async {}][i]();
+                        [() async {}, () async {}, () async {}][i]();
                       },
                     ),
                   ),
@@ -459,6 +466,139 @@ class _MyCompanyWidgetState extends State<MyCompanyWidget>
                                             size: 24.0,
                                           ),
                                         ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                        Builder(
+                          builder: (context) {
+                            final myCompanyVar = myCompanyCompaniesRowList
+                                .where((e) => e.isApprove == true)
+                                .toList();
+                            return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              scrollDirection: Axis.vertical,
+                              itemCount: myCompanyVar.length,
+                              itemBuilder: (context, myCompanyVarIndex) {
+                                final myCompanyVarItem =
+                                    myCompanyVar[myCompanyVarIndex];
+                                return Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 1.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'ReviewList',
+                                        queryParameters: {
+                                          'companyID': serializeParam(
+                                            myCompanyVarItem.companyID,
+                                            ParamType.int,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration: Duration(milliseconds: 0),
+                                          ),
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 100.0,
+                                      height: 72.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 0.0,
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            offset: const Offset(0.0, 1.0),
+                                          )
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(2.0),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(44.0),
+                                                child: OctoImage(
+                                                  placeholderBuilder:
+                                                      OctoPlaceholder.blurHash(
+                                                    FFAppConstants.BlurHash,
+                                                  ),
+                                                  image: NetworkImage(
+                                                    myCompanyVarItem
+                                                        .companyProfile,
+                                                  ),
+                                                  width: 44.0,
+                                                  height: 44.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 0.0, 0.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  4.0),
+                                                      child: Text(
+                                                        myCompanyVarItem
+                                                            .companyName,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyLarge,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.chevron_right_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 24.0,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

@@ -1052,7 +1052,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     .toString(),
                                               );
                                               await actions.onesignalLogin(
-                                                _model.createdUser!.token,
+                                                _model.createdUser!.token!,
                                               );
                                               setState(() {
                                                 FFAppState()

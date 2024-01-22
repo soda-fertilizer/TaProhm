@@ -12,13 +12,17 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<String?> initFirebaseMessage() async {
   // Add your function code here!
-
-  await FirebaseMessaging.instance.getAPNSToken();
-  await FirebaseMessaging.instance.subscribeToTopic('total-users');
-  final String? token = await FirebaseMessaging.instance.getToken();
-  return token!;
+  if (isAndroid || isiOS) {
+    await FirebaseMessaging.instance.getAPNSToken();
+    await FirebaseMessaging.instance.subscribeToTopic('total-users');
+    final String? token = await FirebaseMessaging.instance.getToken();
+    return token!;
+  }
+  return 'null';
 }

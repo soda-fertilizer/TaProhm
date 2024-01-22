@@ -65,4 +65,7 @@ class CompaniesRow extends SupabaseDataRow {
 
   double get amount => getField<double>('Amount')!;
   set amount(double value) => setField<double>('Amount', value);
+
+  int? get viewCounts => getField<int>('ViewCounts');
+  set viewCounts(int? value) => setField<int>('ViewCounts', value);
 }

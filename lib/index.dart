@@ -86,3 +86,9 @@ export '/sub_page/admin/sup_page/admin_event_details/admin_event_details_widget.
     show AdminEventDetailsWidget;
 export '/sub_page/admin/sup_page/edit_event/edit_event_widget.dart'
     show EditEventWidget;
+export '/pages/member/member_widget.dart' show MemberWidget;
+export '/sub_page/review/review_widget.dart' show ReviewWidget;
+export '/sub_page/member_detail/member_detail_widget.dart'
+    show MemberDetailWidget;
+export '/sub_page/view_review/view_review_widget.dart' show ViewReviewWidget;
+export '/sub_page/review_list/review_list_widget.dart' show ReviewListWidget;

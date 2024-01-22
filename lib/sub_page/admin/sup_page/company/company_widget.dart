@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -817,24 +816,11 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       );
                                       unawaited(
                                         () async {
-                                          await EdgeFunctionGroup
-                                              .pushNotifcationSingleUserCall
-                                              .call(
-                                            token: containerUsersRow.token,
-                                            title: 'Approved',
-                                            contents:
-                                                'Your request for company ${functions.charLimit(20, companyCompaniesRow.companyName)} is Approved.',
-                                          );
-                                        }(),
-                                      );
-                                      unawaited(
-                                        () async {
                                           await NotificationTable().insert({
-                                            'UserToken':
-                                                containerUsersRow.token,
                                             'Title': 'Approved',
                                             'Contents':
                                                 'Your request for company ${companyCompaniesRow.companyName} is Approved.',
+                                            'UserID': widget.userID,
                                           });
                                         }(),
                                       );

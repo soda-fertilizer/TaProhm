@@ -92,3 +92,7 @@ String? charLimit(
     return stringValue;
   }
 }
+
+double? jsonToDouble(dynamic number) {
+  return double.tryParse(number.toString());
+}

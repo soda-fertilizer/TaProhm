@@ -81,10 +81,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                       future: NotificationTable().queryRows(
                         queryFn: (q) => q
                             .eq(
-                              'UserToken',
-                              FFAppState().UserInfo.token,
+                              'UserID',
+                              FFAppState().UserInfo.userID,
                             )
-                            .order('NotificationID'),
+                            .order('id'),
                         limit: 50,
                       ),
                       builder: (context, snapshot) {
