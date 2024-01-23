@@ -66,6 +66,10 @@ double? areSimilarLocation(
   return latDiff + lngDiff;
 }
 
+int? jsonToInt(dynamic number) {
+  return int.tryParse(number.toString());
+}
+
 int? calculateDateDifference(
   String dateString1,
   String dateString2,

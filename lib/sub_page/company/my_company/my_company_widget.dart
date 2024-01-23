@@ -499,9 +499,8 @@ class _MyCompanyWidgetState extends State<MyCompanyWidget>
                                         'ReviewList',
                                         queryParameters: {
                                           'companyID': serializeParam(
-                                            myCompanyVarItem.companyID
-                                                .toDouble(),
-                                            ParamType.double,
+                                            myCompanyVarItem.companyID,
+                                            ParamType.int,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{
