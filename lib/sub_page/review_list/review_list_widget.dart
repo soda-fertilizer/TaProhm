@@ -16,7 +16,7 @@ class ReviewListWidget extends StatefulWidget {
     required this.companyID,
   });
 
-  final int? companyID;
+  final double? companyID;
 
   @override
   _ReviewListWidgetState createState() => _ReviewListWidgetState();
@@ -93,7 +93,7 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
           top: true,
           child: FutureBuilder<ApiCallResponse>(
             future: CompanyGroup.compayRatingByCompanyCall.call(
-              id: widget.companyID,
+              id: widget.companyID?.round(),
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.

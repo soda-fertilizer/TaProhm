@@ -456,7 +456,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ReviewList',
           path: '/reviewList',
           builder: (context, params) => ReviewListWidget(
-            companyID: params.getParam('companyID', ParamType.int),
+            companyID: params.getParam('companyID', ParamType.double),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
