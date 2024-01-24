@@ -100,3 +100,7 @@ String? charLimit(
 double? jsonToDouble(dynamic number) {
   return double.tryParse(number.toString());
 }
+
+int? stringToint(String? number) {
+  return int.tryParse(number!);
+}
