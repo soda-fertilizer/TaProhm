@@ -3,6 +3,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -231,10 +232,12 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
                                                 color: Color(0xFFFFD700),
                                               ),
                                               direction: Axis.horizontal,
-                                              rating: getJsonField(
-                                                datasItem,
-                                                r'''$.rating''',
-                                              ),
+                                              rating: functions
+                                                  .jsonToInt(getJsonField(
+                                                    datasItem,
+                                                    r'''$.rating''',
+                                                  ))!
+                                                  .toDouble(),
                                               unratedColor: const Color(0x65FFD700),
                                               itemCount: 5,
                                               itemSize: 20.0,
