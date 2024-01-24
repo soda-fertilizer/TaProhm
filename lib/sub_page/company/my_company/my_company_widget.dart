@@ -498,13 +498,9 @@ class _MyCompanyWidgetState extends State<MyCompanyWidget>
                                       context.pushNamed(
                                         'ReviewList',
                                         queryParameters: {
-                                          'companyID': serializeParam(
-                                            valueOrDefault<String>(
-                                              myCompanyVarItem.companyID
-                                                  .toString(),
-                                              '0',
-                                            ),
-                                            ParamType.String,
+                                          'company': serializeParam(
+                                            myCompanyVarItem,
+                                            ParamType.SupabaseRow,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{

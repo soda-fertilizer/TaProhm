@@ -274,11 +274,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       provinces[provincesIndex];
                                   return FFButtonWidget(
                                     onPressed: () async {
+                                      currentUserLocationValue =
+                                          await getCurrentUserLocation(
+                                              defaultLocation:
+                                                  const LatLng(0.0, 0.0));
                                       setState(() {
                                         _model.selectLocation =
                                             provincesItem.location;
                                         _model.buttonClickindex =
                                             provincesIndex;
+                                        _model.selectLat = functions
+                                            .splitLatLng(
+                                                currentUserLocationValue)!
+                                            .first;
+                                        _model.selectLon = functions
+                                            .splitLatLng(
+                                                currentUserLocationValue)!
+                                            .first;
                                       });
                                     },
                                     text: provincesItem.province,
@@ -289,22 +301,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       iconPadding:
                                           const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: provincesIndex ==
-                                              _model.buttonClickindex
-                                          ? FlutterFlowTheme.of(context).primary
-                                          : FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
+                                                .primaryText,
                                             fontSize: 12.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
-                                        color: Colors.transparent,
+                                      borderSide: BorderSide(
+                                        color: provincesIndex ==
+                                                _model.buttonClickindex
+                                            ? FlutterFlowTheme.of(context)
+                                                .primary
+                                            : FlutterFlowTheme.of(context)
+                                                .secondaryText,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(24.0),
@@ -363,15 +377,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           .sortedList((e) =>
                                               functions.areSimilarLocation(
                                                   e.latitude,
-                                                  functions
-                                                      .splitLatLng(
-                                                          _model.selectLocation)
-                                                      ?.first,
+                                                  _model.selectLat,
                                                   e.longitude,
-                                                  functions
-                                                      .splitLatLng(
-                                                          _model.selectLocation)
-                                                      ?.last)!)
+                                                  _model.selectLon)!)
                                           .toList();
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
@@ -675,9 +683,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                         },
                                                                       ),
                                                                     ),
-                                                                  ].divide(const SizedBox(
-                                                                      height:
-                                                                          5.0)),
+                                                                  ],
                                                                 ),
                                                               ),
                                                             ),

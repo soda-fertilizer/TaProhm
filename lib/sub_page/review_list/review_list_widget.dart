@@ -1,8 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,10 +14,10 @@ export 'review_list_model.dart';
 class ReviewListWidget extends StatefulWidget {
   const ReviewListWidget({
     super.key,
-    required this.companyID,
+    required this.company,
   });
 
-  final String? companyID;
+  final CompaniesRow? company;
 
   @override
   _ReviewListWidgetState createState() => _ReviewListWidgetState();
@@ -56,7 +56,7 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
 
     return FutureBuilder<ApiCallResponse>(
       future: CompanyGroup.compayRatingByCompanyCall.call(
-        id: functions.stringToint(widget.companyID),
+        id: widget.company?.companyID,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
