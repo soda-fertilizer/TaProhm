@@ -15,7 +15,7 @@ class BigImageWidget extends StatefulWidget {
   final String? imgURL;
 
   @override
-  _BigImageWidgetState createState() => _BigImageWidgetState();
+  State<BigImageWidget> createState() => _BigImageWidgetState();
 }
 
 class _BigImageWidgetState extends State<BigImageWidget> {

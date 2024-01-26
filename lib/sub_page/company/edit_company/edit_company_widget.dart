@@ -47,7 +47,7 @@ class EditCompanyWidget extends StatefulWidget {
   final int? userID;
 
   @override
-  _EditCompanyWidgetState createState() => _EditCompanyWidgetState();
+  State<EditCompanyWidget> createState() => _EditCompanyWidgetState();
 }
 
 class _EditCompanyWidgetState extends State<EditCompanyWidget> {

@@ -14,7 +14,7 @@ class ApproveCompanyWidget extends StatefulWidget {
   const ApproveCompanyWidget({super.key});
 
   @override
-  _ApproveCompanyWidgetState createState() => _ApproveCompanyWidgetState();
+  State<ApproveCompanyWidget> createState() => _ApproveCompanyWidgetState();
 }
 
 class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {

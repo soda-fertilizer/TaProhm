@@ -17,7 +17,7 @@ class AcountPaymentWidget extends StatefulWidget {
   const AcountPaymentWidget({super.key});
 
   @override
-  _AcountPaymentWidgetState createState() => _AcountPaymentWidgetState();
+  State<AcountPaymentWidget> createState() => _AcountPaymentWidgetState();
 }
 
 class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {

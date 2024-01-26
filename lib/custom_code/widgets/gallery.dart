@@ -17,18 +17,20 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class Gallery extends StatefulWidget {
   const Gallery({
-    Key? key,
+    super.key,
     this.width,
     this.height,
     required this.imageList,
-  }) : super(key: key);
+    this.imageViewIndex,
+  });
 
   final double? width;
   final double? height;
   final List<String> imageList;
+  final int? imageViewIndex;
 
   @override
-  _GalleryState createState() => _GalleryState();
+  State<Gallery> createState() => _GalleryState();
 }
 
 class _GalleryState extends State<Gallery> {

@@ -37,7 +37,7 @@ class AdminAccountPaymentWidget extends StatefulWidget {
   final String? inviteID;
 
   @override
-  _AdminAccountPaymentWidgetState createState() =>
+  State<AdminAccountPaymentWidget> createState() =>
       _AdminAccountPaymentWidgetState();
 }
 

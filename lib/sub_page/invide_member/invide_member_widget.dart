@@ -13,7 +13,7 @@ class InvideMemberWidget extends StatefulWidget {
   const InvideMemberWidget({super.key});
 
   @override
-  _InvideMemberWidgetState createState() => _InvideMemberWidgetState();
+  State<InvideMemberWidget> createState() => _InvideMemberWidgetState();
 }
 
 class _InvideMemberWidgetState extends State<InvideMemberWidget>

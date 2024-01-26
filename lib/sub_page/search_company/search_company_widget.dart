@@ -14,7 +14,7 @@ class SearchCompanyWidget extends StatefulWidget {
   const SearchCompanyWidget({super.key});
 
   @override
-  _SearchCompanyWidgetState createState() => _SearchCompanyWidgetState();
+  State<SearchCompanyWidget> createState() => _SearchCompanyWidgetState();
 }
 
 class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {

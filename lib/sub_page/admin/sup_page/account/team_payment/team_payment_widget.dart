@@ -36,7 +36,7 @@ class TeamPaymentWidget extends StatefulWidget {
   final bool? isNew;
 
   @override
-  _TeamPaymentWidgetState createState() => _TeamPaymentWidgetState();
+  State<TeamPaymentWidget> createState() => _TeamPaymentWidgetState();
 }
 
 class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {

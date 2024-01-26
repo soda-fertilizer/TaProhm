@@ -19,7 +19,7 @@ class AdminCreateEventWidget extends StatefulWidget {
   const AdminCreateEventWidget({super.key});
 
   @override
-  _AdminCreateEventWidgetState createState() => _AdminCreateEventWidgetState();
+  State<AdminCreateEventWidget> createState() => _AdminCreateEventWidgetState();
 }
 
 class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>

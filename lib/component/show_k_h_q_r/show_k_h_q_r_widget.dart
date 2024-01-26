@@ -15,7 +15,7 @@ class ShowKHQRWidget extends StatefulWidget {
   const ShowKHQRWidget({super.key});
 
   @override
-  _ShowKHQRWidgetState createState() => _ShowKHQRWidgetState();
+  State<ShowKHQRWidget> createState() => _ShowKHQRWidgetState();
 }
 
 class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {

@@ -15,7 +15,7 @@ class ImageGalleryWidget extends StatefulWidget {
   final List<String>? images;
 
   @override
-  _ImageGalleryWidgetState createState() => _ImageGalleryWidgetState();
+  State<ImageGalleryWidget> createState() => _ImageGalleryWidgetState();
 }
 
 class _ImageGalleryWidgetState extends State<ImageGalleryWidget> {

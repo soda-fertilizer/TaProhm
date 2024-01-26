@@ -13,7 +13,7 @@ class NotificationWidget extends StatefulWidget {
   const NotificationWidget({super.key});
 
   @override
-  _NotificationWidgetState createState() => _NotificationWidgetState();
+  State<NotificationWidget> createState() => _NotificationWidgetState();
 }
 
 class _NotificationWidgetState extends State<NotificationWidget> {
@@ -62,7 +62,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
-                  fontSize: 22.0,
+                  fontSize: 20.0,
                 ),
           ),
           actions: const [],

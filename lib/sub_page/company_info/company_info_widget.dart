@@ -22,7 +22,7 @@ class CompanyInfoWidget extends StatefulWidget {
   final int? companyID;
 
   @override
-  _CompanyInfoWidgetState createState() => _CompanyInfoWidgetState();
+  State<CompanyInfoWidget> createState() => _CompanyInfoWidgetState();
 }
 
 class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
@@ -326,7 +326,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                             },
                           );
                         },
-                        text: 'Add your review',
+                        text: 'Rate this shop',
                         options: FFButtonOptions(
                           width: double.infinity,
                           height: 40.0,

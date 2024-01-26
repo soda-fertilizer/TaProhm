@@ -18,7 +18,7 @@ class CompanyPaymentWidget extends StatefulWidget {
   const CompanyPaymentWidget({super.key});
 
   @override
-  _CompanyPaymentWidgetState createState() => _CompanyPaymentWidgetState();
+  State<CompanyPaymentWidget> createState() => _CompanyPaymentWidgetState();
 }
 
 class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {

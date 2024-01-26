@@ -11,7 +11,7 @@ class AboutWidget extends StatefulWidget {
   const AboutWidget({super.key});
 
   @override
-  _AboutWidgetState createState() => _AboutWidgetState();
+  State<AboutWidget> createState() => _AboutWidgetState();
 }
 
 class _AboutWidgetState extends State<AboutWidget> {

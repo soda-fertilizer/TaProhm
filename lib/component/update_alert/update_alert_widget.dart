@@ -9,7 +9,7 @@ class UpdateAlertWidget extends StatefulWidget {
   const UpdateAlertWidget({super.key});
 
   @override
-  _UpdateAlertWidgetState createState() => _UpdateAlertWidgetState();
+  State<UpdateAlertWidget> createState() => _UpdateAlertWidgetState();
 }
 
 class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {

@@ -14,7 +14,7 @@ class ReferralWidget extends StatefulWidget {
   const ReferralWidget({super.key});
 
   @override
-  _ReferralWidgetState createState() => _ReferralWidgetState();
+  State<ReferralWidget> createState() => _ReferralWidgetState();
 }
 
 class _ReferralWidgetState extends State<ReferralWidget>

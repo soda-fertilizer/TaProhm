@@ -14,7 +14,7 @@ class PinLocationWidget extends StatefulWidget {
   const PinLocationWidget({super.key});
 
   @override
-  _PinLocationWidgetState createState() => _PinLocationWidgetState();
+  State<PinLocationWidget> createState() => _PinLocationWidgetState();
 }
 
 class _PinLocationWidgetState extends State<PinLocationWidget> {

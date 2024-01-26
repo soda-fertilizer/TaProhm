@@ -12,7 +12,7 @@ class AdminMainReferralWidget extends StatefulWidget {
   const AdminMainReferralWidget({super.key});
 
   @override
-  _AdminMainReferralWidgetState createState() =>
+  State<AdminMainReferralWidget> createState() =>
       _AdminMainReferralWidgetState();
 }
 

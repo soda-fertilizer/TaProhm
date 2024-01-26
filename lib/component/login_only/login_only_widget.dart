@@ -19,7 +19,7 @@ class LoginOnlyWidget extends StatefulWidget {
   const LoginOnlyWidget({super.key});
 
   @override
-  _LoginOnlyWidgetState createState() => _LoginOnlyWidgetState();
+  State<LoginOnlyWidget> createState() => _LoginOnlyWidgetState();
 }
 
 class _LoginOnlyWidgetState extends State<LoginOnlyWidget>

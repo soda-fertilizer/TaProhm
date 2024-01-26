@@ -14,7 +14,7 @@ class AdminBusinessesWidget extends StatefulWidget {
   const AdminBusinessesWidget({super.key});
 
   @override
-  _AdminBusinessesWidgetState createState() => _AdminBusinessesWidgetState();
+  State<AdminBusinessesWidget> createState() => _AdminBusinessesWidgetState();
 }
 
 class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {

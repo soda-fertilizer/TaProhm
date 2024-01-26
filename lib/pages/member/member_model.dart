@@ -11,6 +11,8 @@ class MemberModel extends FlutterFlowModel<MemberWidget> {
 
   int? selectIndex;
 
+  bool isSearch = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -15,13 +15,13 @@ class ReferralSubPageWidget extends StatefulWidget {
     super.key,
     this.userPhoneNumber,
     int? tabIndex,
-  })  : tabIndex = tabIndex ?? 0;
+  }) : tabIndex = tabIndex ?? 0;
 
   final String? userPhoneNumber;
   final int tabIndex;
 
   @override
-  _ReferralSubPageWidgetState createState() => _ReferralSubPageWidgetState();
+  State<ReferralSubPageWidget> createState() => _ReferralSubPageWidgetState();
 }
 
 class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>

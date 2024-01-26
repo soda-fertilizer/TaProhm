@@ -15,7 +15,7 @@ class ApproveTransactionWidget extends StatefulWidget {
   const ApproveTransactionWidget({super.key});
 
   @override
-  _ApproveTransactionWidgetState createState() =>
+  State<ApproveTransactionWidget> createState() =>
       _ApproveTransactionWidgetState();
 }
 

@@ -10,7 +10,7 @@ class UnderMaintenanceWidget extends StatefulWidget {
   const UnderMaintenanceWidget({super.key});
 
   @override
-  _UnderMaintenanceWidgetState createState() => _UnderMaintenanceWidgetState();
+  State<UnderMaintenanceWidget> createState() => _UnderMaintenanceWidgetState();
 }
 
 class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {

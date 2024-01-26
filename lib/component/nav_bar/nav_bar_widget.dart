@@ -14,7 +14,7 @@ class NavBarWidget extends StatefulWidget {
   final int? selectPageIndex;
 
   @override
-  _NavBarWidgetState createState() => _NavBarWidgetState();
+  State<NavBarWidget> createState() => _NavBarWidgetState();
 }
 
 class _NavBarWidgetState extends State<NavBarWidget> {

@@ -11,7 +11,7 @@ class SubAdminMainWidget extends StatefulWidget {
   const SubAdminMainWidget({super.key});
 
   @override
-  _SubAdminMainWidgetState createState() => _SubAdminMainWidgetState();
+  State<SubAdminMainWidget> createState() => _SubAdminMainWidgetState();
 }
 
 class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {

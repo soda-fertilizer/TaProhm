@@ -20,7 +20,7 @@ class CreateCompanyWidget extends StatefulWidget {
   const CreateCompanyWidget({super.key});
 
   @override
-  _CreateCompanyWidgetState createState() => _CreateCompanyWidgetState();
+  State<CreateCompanyWidget> createState() => _CreateCompanyWidgetState();
 }
 
 class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {

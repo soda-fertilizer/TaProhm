@@ -21,13 +21,13 @@ class LocatorWidget extends StatefulWidget {
     super.key,
     this.moveLocation,
     bool? clickCompany,
-  })  : clickCompany = clickCompany ?? false;
+  }) : clickCompany = clickCompany ?? false;
 
   final LatLng? moveLocation;
   final bool clickCompany;
 
   @override
-  _LocatorWidgetState createState() => _LocatorWidgetState();
+  State<LocatorWidget> createState() => _LocatorWidgetState();
 }
 
 class _LocatorWidgetState extends State<LocatorWidget> {
@@ -192,7 +192,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Outfit',
                       color: Colors.white,
-                      fontSize: 22.0,
+                      fontSize: 20.0,
                     ),
               ),
               actions: const [],

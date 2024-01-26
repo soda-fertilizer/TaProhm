@@ -20,7 +20,7 @@ class GraphTreeWidget extends StatefulWidget {
   final UsersRow? headOfUser;
 
   @override
-  _GraphTreeWidgetState createState() => _GraphTreeWidgetState();
+  State<GraphTreeWidget> createState() => _GraphTreeWidgetState();
 }
 
 class _GraphTreeWidgetState extends State<GraphTreeWidget> {

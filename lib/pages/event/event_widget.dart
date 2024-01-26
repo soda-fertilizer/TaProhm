@@ -14,7 +14,7 @@ class EventWidget extends StatefulWidget {
   const EventWidget({super.key});
 
   @override
-  _EventWidgetState createState() => _EventWidgetState();
+  State<EventWidget> createState() => _EventWidgetState();
 }
 
 class _EventWidgetState extends State<EventWidget> {
@@ -63,7 +63,7 @@ class _EventWidgetState extends State<EventWidget> {
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
-                  fontSize: 22.0,
+                  fontSize: 20.0,
                 ),
           ),
           actions: const [],

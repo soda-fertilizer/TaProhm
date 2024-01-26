@@ -8,7 +8,7 @@ class NavPaddingWidget extends StatefulWidget {
   const NavPaddingWidget({super.key});
 
   @override
-  _NavPaddingWidgetState createState() => _NavPaddingWidgetState();
+  State<NavPaddingWidget> createState() => _NavPaddingWidgetState();
 }
 
 class _NavPaddingWidgetState extends State<NavPaddingWidget> {

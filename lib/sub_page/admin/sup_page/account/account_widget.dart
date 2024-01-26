@@ -26,7 +26,7 @@ class AccountWidget extends StatefulWidget {
   final int? sectorID;
 
   @override
-  _AccountWidgetState createState() => _AccountWidgetState();
+  State<AccountWidget> createState() => _AccountWidgetState();
 }
 
 class _AccountWidgetState extends State<AccountWidget> {

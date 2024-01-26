@@ -20,7 +20,7 @@ class AdminEventDetailsWidget extends StatefulWidget {
   final int? id;
 
   @override
-  _AdminEventDetailsWidgetState createState() =>
+  State<AdminEventDetailsWidget> createState() =>
       _AdminEventDetailsWidgetState();
 }
 

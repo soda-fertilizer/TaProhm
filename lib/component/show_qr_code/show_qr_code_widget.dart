@@ -16,7 +16,7 @@ class ShowQrCodeWidget extends StatefulWidget {
   final double? size;
 
   @override
-  _ShowQrCodeWidgetState createState() => _ShowQrCodeWidgetState();
+  State<ShowQrCodeWidget> createState() => _ShowQrCodeWidgetState();
 }
 
 class _ShowQrCodeWidgetState extends State<ShowQrCodeWidget> {

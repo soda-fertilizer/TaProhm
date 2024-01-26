@@ -25,7 +25,7 @@ class TransferWidget extends StatefulWidget {
   final double? amount;
 
   @override
-  _TransferWidgetState createState() => _TransferWidgetState();
+  State<TransferWidget> createState() => _TransferWidgetState();
 }
 
 class _TransferWidgetState extends State<TransferWidget> {

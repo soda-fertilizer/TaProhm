@@ -13,7 +13,7 @@ class WithdrawalWidget extends StatefulWidget {
   const WithdrawalWidget({super.key});
 
   @override
-  _WithdrawalWidgetState createState() => _WithdrawalWidgetState();
+  State<WithdrawalWidget> createState() => _WithdrawalWidgetState();
 }
 
 class _WithdrawalWidgetState extends State<WithdrawalWidget> {

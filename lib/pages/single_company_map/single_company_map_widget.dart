@@ -28,7 +28,7 @@ class SingleCompanyMapWidget extends StatefulWidget {
   final double? companyLongitude;
 
   @override
-  _SingleCompanyMapWidgetState createState() => _SingleCompanyMapWidgetState();
+  State<SingleCompanyMapWidget> createState() => _SingleCompanyMapWidgetState();
 }
 
 class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {

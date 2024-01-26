@@ -16,7 +16,7 @@ class DepositWidget extends StatefulWidget {
   const DepositWidget({super.key});
 
   @override
-  _DepositWidgetState createState() => _DepositWidgetState();
+  State<DepositWidget> createState() => _DepositWidgetState();
 }
 
 class _DepositWidgetState extends State<DepositWidget> {

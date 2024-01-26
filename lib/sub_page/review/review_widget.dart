@@ -21,7 +21,7 @@ class ReviewWidget extends StatefulWidget {
   final int? companyID;
 
   @override
-  _ReviewWidgetState createState() => _ReviewWidgetState();
+  State<ReviewWidget> createState() => _ReviewWidgetState();
 }
 
 class _ReviewWidgetState extends State<ReviewWidget> {

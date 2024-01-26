@@ -459,6 +459,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             company:
                 params.getParam<CompaniesRow>('company', ParamType.SupabaseRow),
           ),
+        ),
+        FFRoute(
+          name: 'SearchMember',
+          path: '/searchMember',
+          builder: (context, params) => const SearchMemberWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

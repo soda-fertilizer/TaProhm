@@ -24,7 +24,7 @@ class EditAccountWidget extends StatefulWidget {
   final int? userID;
 
   @override
-  _EditAccountWidgetState createState() => _EditAccountWidgetState();
+  State<EditAccountWidget> createState() => _EditAccountWidgetState();
 }
 
 class _EditAccountWidgetState extends State<EditAccountWidget> {

@@ -24,7 +24,7 @@ class EditEventWidget extends StatefulWidget {
   final String? image;
 
   @override
-  _EditEventWidgetState createState() => _EditEventWidgetState();
+  State<EditEventWidget> createState() => _EditEventWidgetState();
 }
 
 class _EditEventWidgetState extends State<EditEventWidget> {

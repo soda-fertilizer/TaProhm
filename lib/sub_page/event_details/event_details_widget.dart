@@ -18,7 +18,7 @@ class EventDetailsWidget extends StatefulWidget {
   final int? id;
 
   @override
-  _EventDetailsWidgetState createState() => _EventDetailsWidgetState();
+  State<EventDetailsWidget> createState() => _EventDetailsWidgetState();
 }
 
 class _EventDetailsWidgetState extends State<EventDetailsWidget> {

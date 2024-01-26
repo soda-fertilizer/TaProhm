@@ -35,7 +35,7 @@ class MemberPaymentWidget extends StatefulWidget {
   final String? phoneNumber;
 
   @override
-  _MemberPaymentWidgetState createState() => _MemberPaymentWidgetState();
+  State<MemberPaymentWidget> createState() => _MemberPaymentWidgetState();
 }
 
 class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {

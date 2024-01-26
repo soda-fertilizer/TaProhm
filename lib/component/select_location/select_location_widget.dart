@@ -13,7 +13,7 @@ class SelectLocationWidget extends StatefulWidget {
   const SelectLocationWidget({super.key});
 
   @override
-  _SelectLocationWidgetState createState() => _SelectLocationWidgetState();
+  State<SelectLocationWidget> createState() => _SelectLocationWidgetState();
 }
 
 class _SelectLocationWidgetState extends State<SelectLocationWidget> {

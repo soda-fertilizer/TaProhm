@@ -21,7 +21,7 @@ class SubAdminSubAccountWidget extends StatefulWidget {
   final int? tabIndex;
 
   @override
-  _SubAdminSubAccountWidgetState createState() =>
+  State<SubAdminSubAccountWidget> createState() =>
       _SubAdminSubAccountWidgetState();
 }
 

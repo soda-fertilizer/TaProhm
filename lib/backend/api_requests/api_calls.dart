@@ -27,6 +27,8 @@ class UsersGroup {
   static CheckPasswordChangeCall checkPasswordChangeCall =
       CheckPasswordChangeCall();
   static UserAndCompanyCall userAndCompanyCall = UserAndCompanyCall();
+  static SearchUserAndCompanyCall searchUserAndCompanyCall =
+      SearchUserAndCompanyCall();
 }
 
 class LoginCall {
@@ -336,6 +338,97 @@ class UserAndCompanyCall {
       ) as List?)
           ?.withoutNulls
           .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? joinDate(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].joindate''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class SearchUserAndCompanyCall {
+  Future<ApiCallResponse> call({
+    String? pFullname = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'search user and company',
+      apiUrl: '${UsersGroup.baseUrl}/search_user_and_company',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'p_fullname': pFullname,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? fullName(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].fullname''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? phoneNumber(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].phonenumber''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? userID(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].userid''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? image(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].image''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? companyCount(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].companycount''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? joinDate(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].joindate''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
 }

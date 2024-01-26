@@ -18,7 +18,7 @@ class ViewReviewWidget extends StatefulWidget {
   final int? id;
 
   @override
-  _ViewReviewWidgetState createState() => _ViewReviewWidgetState();
+  State<ViewReviewWidget> createState() => _ViewReviewWidgetState();
 }
 
 class _ViewReviewWidgetState extends State<ViewReviewWidget> {

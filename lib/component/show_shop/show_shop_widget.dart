@@ -21,7 +21,7 @@ class ShowShopWidget extends StatefulWidget {
   final CustomMapLocationStruct? locationPara;
 
   @override
-  _ShowShopWidgetState createState() => _ShowShopWidgetState();
+  State<ShowShopWidget> createState() => _ShowShopWidgetState();
 }
 
 class _ShowShopWidgetState extends State<ShowShopWidget> {

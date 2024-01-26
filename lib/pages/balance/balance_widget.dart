@@ -16,7 +16,7 @@ class BalanceWidget extends StatefulWidget {
   const BalanceWidget({super.key});
 
   @override
-  _BalanceWidgetState createState() => _BalanceWidgetState();
+  State<BalanceWidget> createState() => _BalanceWidgetState();
 }
 
 class _BalanceWidgetState extends State<BalanceWidget>
@@ -86,7 +86,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
-                  fontSize: 22.0,
+                  fontSize: 20.0,
                 ),
           ),
           actions: const [],

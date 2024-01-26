@@ -20,7 +20,7 @@ class AdminCreateUserWidget extends StatefulWidget {
   const AdminCreateUserWidget({super.key});
 
   @override
-  _AdminCreateUserWidgetState createState() => _AdminCreateUserWidgetState();
+  State<AdminCreateUserWidget> createState() => _AdminCreateUserWidgetState();
 }
 
 class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>

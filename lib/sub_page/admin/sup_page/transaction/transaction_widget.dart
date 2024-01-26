@@ -20,7 +20,7 @@ class TransactionWidget extends StatefulWidget {
   final int? transactionID;
 
   @override
-  _TransactionWidgetState createState() => _TransactionWidgetState();
+  State<TransactionWidget> createState() => _TransactionWidgetState();
 }
 
 class _TransactionWidgetState extends State<TransactionWidget> {

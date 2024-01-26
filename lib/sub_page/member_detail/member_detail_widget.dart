@@ -3,11 +3,13 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'member_detail_model.dart';
 export 'member_detail_model.dart';
 
@@ -20,7 +22,7 @@ class MemberDetailWidget extends StatefulWidget {
   final int? id;
 
   @override
-  _MemberDetailWidgetState createState() => _MemberDetailWidgetState();
+  State<MemberDetailWidget> createState() => _MemberDetailWidgetState();
 }
 
 class _MemberDetailWidgetState extends State<MemberDetailWidget>
@@ -358,55 +360,140 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                       ),
                                                     ),
                                                     Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    12.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child:
-                                                            SingleChildScrollView(
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                listViewCompaniesRow
-                                                                    .companyName,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodySmall,
-                                                              ),
-                                                              Text(
-                                                                'Tel: ${listViewCompaniesRow.phoneNumber}',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelSmall,
-                                                              ),
-                                                              Text(
-                                                                'Telegram: ${listViewCompaniesRow.telegramUrl}',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelSmall
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .normal,
+                                                      child: Container(
+                                                        decoration:
+                                                            const BoxDecoration(),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      12.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  listViewCompaniesRow
+                                                                      .companyName,
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall,
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Tel: ',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .labelSmall,
                                                                     ),
-                                                              ),
-                                                            ].divide(const SizedBox(
-                                                                height: 5.0)),
+                                                                    InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        await launchUrl(
+                                                                            Uri(
+                                                                          scheme:
+                                                                              'tel',
+                                                                          path:
+                                                                              listViewCompaniesRow.phoneNumber,
+                                                                        ));
+                                                                      },
+                                                                      child:
+                                                                          Text(
+                                                                        listViewCompaniesRow.phoneNumber,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .labelSmall
+                                                                            .override(
+                                                                              fontFamily: 'Readex Pro',
+                                                                              color: const Color(0xFF1900FF),
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Telegram: ',
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .labelSmall
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            fontWeight:
+                                                                                FontWeight.normal,
+                                                                          ),
+                                                                    ),
+                                                                    InkWell(
+                                                                      splashColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      focusColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      hoverColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      highlightColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      onTap:
+                                                                          () async {
+                                                                        await actions
+                                                                            .openUrl(
+                                                                          listViewCompaniesRow
+                                                                              .telegramUrl,
+                                                                        );
+                                                                      },
+                                                                      child:
+                                                                          Text(
+                                                                        listViewCompaniesRow.telegramUrl,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .labelSmall
+                                                                            .override(
+                                                                              fontFamily: 'Readex Pro',
+                                                                              color: const Color(0xFF1900FF),
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ].divide(const SizedBox(
+                                                                  height: 5.0)),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),

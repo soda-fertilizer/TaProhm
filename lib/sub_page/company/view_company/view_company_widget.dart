@@ -24,7 +24,7 @@ class ViewCompanyWidget extends StatefulWidget {
   final int? companyID;
 
   @override
-  _ViewCompanyWidgetState createState() => _ViewCompanyWidgetState();
+  State<ViewCompanyWidget> createState() => _ViewCompanyWidgetState();
 }
 
 class _ViewCompanyWidgetState extends State<ViewCompanyWidget> {

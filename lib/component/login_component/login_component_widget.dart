@@ -20,7 +20,7 @@ class LoginComponentWidget extends StatefulWidget {
   const LoginComponentWidget({super.key});
 
   @override
-  _LoginComponentWidgetState createState() => _LoginComponentWidgetState();
+  State<LoginComponentWidget> createState() => _LoginComponentWidgetState();
 }
 
 class _LoginComponentWidgetState extends State<LoginComponentWidget>

@@ -25,7 +25,7 @@ class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
 
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
@@ -78,6 +78,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             context: context,
             builder: (dialogContext) {
               return Dialog(
+                elevation: 0,
                 insetPadding: EdgeInsets.zero,
                 backgroundColor: Colors.transparent,
                 alignment: const AlignmentDirectional(0.0, 0.0)
@@ -125,6 +126,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         },
       );
     });
+
+    getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
+        .then((loc) => setState(() => currentUserLocationValue = loc));
   }
 
   @override
@@ -146,6 +150,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     }
 
     context.watch<FFAppState>();
+    if (currentUserLocationValue == null) {
+      return Container(
+        color: FlutterFlowTheme.of(context).primaryBackground,
+        child: Center(
+          child: SizedBox(
+            width: 50.0,
+            height: 50.0,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                FlutterFlowTheme.of(context).primary,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Builder(
       builder: (context) => GestureDetector(
@@ -177,12 +197,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             Text(
                               'Ta Prohm',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                                  .headlineMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    fontFamily: 'Outfit',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
-                                    fontSize: 22.0,
+                                    fontSize: 20.0,
                                   ),
                             ),
                             Row(
@@ -253,7 +273,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: 50.0,
+                      height: 55.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
@@ -274,23 +294,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       provinces[provincesIndex];
                                   return FFButtonWidget(
                                     onPressed: () async {
-                                      currentUserLocationValue =
-                                          await getCurrentUserLocation(
-                                              defaultLocation:
-                                                  const LatLng(0.0, 0.0));
                                       setState(() {
-                                        _model.selectLocation =
-                                            provincesItem.location;
                                         _model.buttonClickindex =
                                             provincesIndex;
-                                        _model.selectLat = functions
-                                            .splitLatLng(
-                                                currentUserLocationValue)!
-                                            .first;
-                                        _model.selectLon = functions
-                                            .splitLatLng(
-                                                currentUserLocationValue)!
-                                            .first;
+                                        _model.selectLocation =
+                                            provincesItem.location;
                                       });
                                     },
                                     text: provincesItem.province,
@@ -301,8 +309,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       iconPadding:
                                           const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
+                                      color: provincesIndex ==
+                                              _model.buttonClickindex
+                                          ? FlutterFlowTheme.of(context)
+                                              .secondary
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryBackground,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
@@ -313,12 +325,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           ),
                                       elevation: 3.0,
                                       borderSide: BorderSide(
-                                        color: provincesIndex ==
-                                                _model.buttonClickindex
-                                            ? FlutterFlowTheme.of(context)
-                                                .primary
-                                            : FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondary,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(24.0),
@@ -372,15 +380,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   0.0, 1.0, 0.0, 0.0),
                               child: Builder(
                                 builder: (context) {
-                                  final homePageVar =
-                                      companyContainerCompaniesRowList
-                                          .sortedList((e) =>
-                                              functions.areSimilarLocation(
-                                                  e.latitude,
-                                                  _model.selectLat,
-                                                  e.longitude,
-                                                  _model.selectLon)!)
-                                          .toList();
+                                  final homePageVar = companyContainerCompaniesRowList
+                                      .sortedList((e) =>
+                                          functions.areSimilarLocation(
+                                              e.latitude,
+                                              functions
+                                                  .splitLatLng(_model.selectLocation ?? currentUserLocationValue)
+                                                  ?.first,
+                                              e.longitude,
+                                              functions
+                                                  .splitLatLng(_model.selectLocation ?? currentUserLocationValue)
+                                                  ?.last)!)
+                                      .toList();
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
@@ -519,7 +530,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                     .companyProfile,
                                                                 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/s-m-e-locator-vgu6pa/assets/u2axwx4lw1p4/1.png',
                                                               ),
-                                                              width: 40.0,
+                                                              width: 46.0,
                                                               height: 40.0,
                                                               fit: BoxFit
                                                                   .contain,
@@ -602,15 +613,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                             child:
                                                                                 Row(
                                                                               mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 Row(
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
+                                                                                    Text(
+                                                                                      'Rate: ',
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: 'Readex Pro',
+                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                            fontSize: 12.0,
+                                                                                          ),
+                                                                                    ),
                                                                                     RatingBarIndicator(
                                                                                       itemBuilder: (context, index) => const Icon(
                                                                                         Icons.star_rounded,
-                                                                                        color: Color(0xFFFFD700),
+                                                                                        color: Color(0xFFC3A304),
                                                                                       ),
                                                                                       direction: Axis.horizontal,
                                                                                       rating: valueOrDefault<double>(
@@ -621,21 +640,22 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                             ?.toDouble(),
                                                                                         5.0,
                                                                                       ),
-                                                                                      unratedColor: const Color(0x65FFD700),
+                                                                                      unratedColor: const Color(0x67C3A304),
                                                                                       itemCount: 5,
                                                                                       itemSize: 15.0,
                                                                                     ),
-                                                                                    Text(
-                                                                                      '(${valueOrDefault<String>(
-                                                                                        CompanyGroup.companyRatingCall
-                                                                                            .ratingCount(
-                                                                                              containerCompanyRatingResponse.jsonBody,
-                                                                                            )
-                                                                                            ?.toString(),
-                                                                                        '0',
-                                                                                      )})',
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                    ),
+                                                                                    if (false)
+                                                                                      Text(
+                                                                                        '(${valueOrDefault<String>(
+                                                                                          CompanyGroup.companyRatingCall
+                                                                                              .ratingCount(
+                                                                                                containerCompanyRatingResponse.jsonBody,
+                                                                                              )
+                                                                                              ?.toString(),
+                                                                                          '0',
+                                                                                        )})',
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                      ),
                                                                                   ],
                                                                                 ),
                                                                                 Container(
@@ -677,7 +697,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                     ),
                                                                                   ),
                                                                                 ),
-                                                                              ],
+                                                                              ].divide(const SizedBox(width: 15.0)),
                                                                             ),
                                                                           );
                                                                         },

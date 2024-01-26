@@ -11,7 +11,7 @@ class AdminMainWidget extends StatefulWidget {
   const AdminMainWidget({super.key});
 
   @override
-  _AdminMainWidgetState createState() => _AdminMainWidgetState();
+  State<AdminMainWidget> createState() => _AdminMainWidgetState();
 }
 
 class _AdminMainWidgetState extends State<AdminMainWidget> {

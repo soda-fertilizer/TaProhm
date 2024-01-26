@@ -12,7 +12,7 @@ class ApproveAccountWidget extends StatefulWidget {
   const ApproveAccountWidget({super.key});
 
   @override
-  _ApproveAccountWidgetState createState() => _ApproveAccountWidgetState();
+  State<ApproveAccountWidget> createState() => _ApproveAccountWidgetState();
 }
 
 class _ApproveAccountWidgetState extends State<ApproveAccountWidget> {

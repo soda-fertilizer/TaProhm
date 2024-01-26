@@ -22,9 +22,9 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   int? buttonClickindex;
 
-  double selectLat = 0;
+  double selectLat = 0.0;
 
-  double selectLon = 0;
+  double selectLon = 0.0;
 
   ///  State fields for stateful widgets in this page.
 

@@ -14,7 +14,7 @@ class AdminAccountWidget extends StatefulWidget {
   const AdminAccountWidget({super.key});
 
   @override
-  _AdminAccountWidgetState createState() => _AdminAccountWidgetState();
+  State<AdminAccountWidget> createState() => _AdminAccountWidgetState();
 }
 
 class _AdminAccountWidgetState extends State<AdminAccountWidget>
