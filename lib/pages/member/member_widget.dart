@@ -313,7 +313,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                         fontFamily:
                                                                             'Readex Pro',
                                                                         fontSize:
-                                                                            12.0,
+                                                                            10.0,
                                                                       ),
                                                                 ),
                                                                 Text(
@@ -323,7 +323,13 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                       ).toString()))}',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodySmall,
+                                                                      .bodySmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        fontSize:
+                                                                            10.0,
+                                                                      ),
                                                                 ),
                                                               ],
                                                             ),
@@ -336,7 +342,13 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                   'Tel: ',
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodySmall,
+                                                                      .bodySmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        fontSize:
+                                                                            10.0,
+                                                                      ),
                                                                 ),
                                                                 InkWell(
                                                                   splashColor:
@@ -375,6 +387,8 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                               'Readex Pro',
                                                                           color:
                                                                               const Color(0xFF1900FF),
+                                                                          fontSize:
+                                                                              10.0,
                                                                         ),
                                                                   ),
                                                                 ),
@@ -397,7 +411,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                         fontFamily:
                                                                             'Readex Pro',
                                                                         fontSize:
-                                                                            12.0,
+                                                                            10.0,
                                                                       ),
                                                                 ),
                                                                 Text(
@@ -414,7 +428,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .error,
                                                                         fontSize:
-                                                                            12.0,
+                                                                            10.0,
                                                                       ),
                                                                 ),
                                                               ],

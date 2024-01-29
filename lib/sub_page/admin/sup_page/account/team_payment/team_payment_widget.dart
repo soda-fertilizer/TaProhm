@@ -616,6 +616,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                     'UserReferral': widget.referral,
                     'IsMember': false,
                     'Invite': widget.invite,
+                    'CreatedBy': FFAppState().UserInfo.userID,
                   });
                   unawaited(
                     () async {}(),

@@ -614,6 +614,7 @@ class _MemberPaymentWidgetState extends State<MemberPaymentWidget> {
                     'FullName': widget.name,
                     'UserReferral': widget.referral,
                     'IsMember': true,
+                    'CreatedBy': FFAppState().UserInfo.userID,
                   });
                   if (widget.isNewMember!) {
                     unawaited(

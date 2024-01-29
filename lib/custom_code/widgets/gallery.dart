@@ -34,6 +34,14 @@ class Gallery extends StatefulWidget {
 }
 
 class _GalleryState extends State<Gallery> {
+  int currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = widget.imageViewIndex ?? 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
@@ -41,7 +49,12 @@ class _GalleryState extends State<Gallery> {
         height: widget.height,
         viewportFraction: 1.0,
         enlargeCenterPage: false,
-        // autoPlay: false,
+        initialPage: currentIndex,
+        onPageChanged: (index, reason) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
       ),
       items: widget.imageList
           .map((item) => Center(

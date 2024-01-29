@@ -1040,6 +1040,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 'FullName': _model
                                                     .signUpFullNameController
                                                     .text,
+                                                'CreatedBy': FFAppState()
+                                                    .UserInfo
+                                                    .userID,
                                               });
                                               shouldSetState = true;
                                               GoRouter.of(context)

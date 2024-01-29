@@ -94,3 +94,5 @@ export '/sub_page/view_review/view_review_widget.dart' show ViewReviewWidget;
 export '/sub_page/review_list/review_list_widget.dart' show ReviewListWidget;
 export '/sub_page/search_member/search_member_widget.dart'
     show SearchMemberWidget;
+export '/sub_page/create_user_for_officer/create_user_for_officer_widget.dart'
+    show CreateUserForOfficerWidget;

@@ -599,6 +599,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                     'FullName': FFAppState().CreatAccountHolder.fullName,
                     'Profile': FFAppState().CreatAccountHolder.profile,
                     'Balance': 0.0,
+                    'CreatedBy': FFAppState().UserInfo.userID,
                   });
                   setState(() {
                     FFAppState().deleteCreatAccountHolder();

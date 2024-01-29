@@ -697,6 +697,267 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                 width: MediaQuery.sizeOf(context).width * 0.8,
                                 decoration: const BoxDecoration(),
                               ),
+                              if (false)
+                                Align(
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 16.0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        var shouldSetState = false;
+                                        if ((_model.normalFullNameController.text != '') &&
+                                            (_model
+                                                        .normalPasswordController
+                                                        .text !=
+                                                    '') &&
+                                            (_model.normalPhoneNumberController
+                                                        .text !=
+                                                    '') &&
+                                            (_model.normalReferralController
+                                                        .text !=
+                                                    '') &&
+                                            (_model.normalInviteController
+                                                        .text !=
+                                                    '')) {
+                                          _model.checkphonenumber =
+                                              await UsersGroup
+                                                  .checkPhoneNumberCall
+                                                  .call(
+                                            phoneNumber: _model
+                                                .normalPhoneNumberController
+                                                .text,
+                                          );
+                                          shouldSetState = true;
+                                          if ((_model.checkphonenumber
+                                                  ?.succeeded ??
+                                              true)) {
+                                            _model.checkreferral =
+                                                await UsersGroup
+                                                    .checkReferralCall
+                                                    .call(
+                                              phoneNumber: _model
+                                                  .normalReferralController
+                                                  .text,
+                                            );
+                                            shouldSetState = true;
+                                            if ((_model
+                                                    .checkreferral?.succeeded ??
+                                                true)) {
+                                              _model.checkinvide =
+                                                  await UsersGroup
+                                                      .checkReferralCall
+                                                      .call(
+                                                phoneNumber: _model
+                                                    .normalInviteController
+                                                    .text,
+                                              );
+                                              shouldSetState = true;
+                                              if ((_model
+                                                      .checkinvide?.succeeded ??
+                                                  true)) {
+                                                if (Navigator.of(context)
+                                                    .canPop()) {
+                                                  context.pop();
+                                                }
+                                                context.pushNamed(
+                                                  'AdminAccountPayment',
+                                                  queryParameters: {
+                                                    'name': serializeParam(
+                                                      _model
+                                                          .normalFullNameController
+                                                          .text,
+                                                      ParamType.String,
+                                                    ),
+                                                    'referral': serializeParam(
+                                                      _model
+                                                          .normalReferralController
+                                                          .text,
+                                                      ParamType.String,
+                                                    ),
+                                                    'password': serializeParam(
+                                                      _model
+                                                          .normalPasswordController
+                                                          .text,
+                                                      ParamType.String,
+                                                    ),
+                                                    'sectorID': serializeParam(
+                                                      _model.selectSectorID,
+                                                      ParamType.int,
+                                                    ),
+                                                    'isMember': serializeParam(
+                                                      false,
+                                                      ParamType.bool,
+                                                    ),
+                                                    'profile': serializeParam(
+                                                      _model.uploadedFileUrl1 ==
+                                                                  ''
+                                                          ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
+                                                          : _model
+                                                              .uploadedFileUrl1,
+                                                      ParamType.String,
+                                                    ),
+                                                    'phoneNumber':
+                                                        serializeParam(
+                                                      _model
+                                                          .normalPhoneNumberController
+                                                          .text,
+                                                      ParamType.String,
+                                                    ),
+                                                    'inviteID': serializeParam(
+                                                      _model
+                                                          .normalInviteController
+                                                          .text,
+                                                      ParamType.String,
+                                                    ),
+                                                  }.withoutNulls,
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        const TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 0),
+                                                    ),
+                                                  },
+                                                );
+
+                                                if (shouldSetState) {
+                                                  setState(() {});
+                                                }
+                                                return;
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: const Text(
+                                                          'Invide ID Unregisted!'),
+                                                      content: const Text(
+                                                          'You can\'t use this Invide ID try another.'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: const Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                if (shouldSetState) {
+                                                  setState(() {});
+                                                }
+                                                return;
+                                              }
+                                            } else {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Referral ID Unregisted!'),
+                                                    content: const Text(
+                                                        'You can\'t use this Referral ID try another.'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext),
+                                                        child: const Text('Ok'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                              if (shouldSetState) {
+                                                setState(() {});
+                                              }
+                                              return;
+                                            }
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Phone number ready exist!'),
+                                                  content: const Text(
+                                                      'Please try another.'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: const Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            if (shouldSetState) {
+                                              setState(() {});
+                                            }
+                                            return;
+                                          }
+                                        } else {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (alertDialogContext) {
+                                              return AlertDialog(
+                                                title:
+                                                    const Text('Some fild is emty!'),
+                                                content: const Text(
+                                                    'Please complete all the fild!'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            alertDialogContext),
+                                                    child: const Text('Ok'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          if (shouldSetState) setState(() {});
+                                          return;
+                                        }
+
+                                        if (shouldSetState) setState(() {});
+                                      },
+                                      text: 'Next',
+                                      options: FFButtonOptions(
+                                        width: 230.0,
+                                        height: 52.0,
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 0.0),
+                                        iconPadding:
+                                            const EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color: Colors.white,
+                                            ),
+                                        elevation: 3.0,
+                                        borderSide: const BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1.0,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
@@ -718,7 +979,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           (_model.normalInviteController
                                                       .text !=
                                                   '')) {
-                                        _model.checkphonenumber =
+                                        _model.checkphonenumberNew =
                                             await UsersGroup
                                                 .checkPhoneNumberCall
                                                 .call(
@@ -726,20 +987,20 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               .normalPhoneNumberController.text,
                                         );
                                         shouldSetState = true;
-                                        if ((_model
-                                                .checkphonenumber?.succeeded ??
+                                        if ((_model.checkphonenumberNew
+                                                ?.succeeded ??
                                             true)) {
-                                          _model.checkreferral =
+                                          _model.checkreferralNew =
                                               await UsersGroup.checkReferralCall
                                                   .call(
                                             phoneNumber: _model
                                                 .normalReferralController.text,
                                           );
                                           shouldSetState = true;
-                                          if ((_model
-                                                  .checkreferral?.succeeded ??
+                                          if ((_model.checkreferralNew
+                                                  ?.succeeded ??
                                               true)) {
-                                            _model.checkinvide =
+                                            _model.checkinvideNew =
                                                 await UsersGroup
                                                     .checkReferralCall
                                                     .call(
@@ -747,75 +1008,38 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                   .normalInviteController.text,
                                             );
                                             shouldSetState = true;
-                                            if ((_model
-                                                    .checkinvide?.succeeded ??
+                                            if ((_model.checkinvideNew
+                                                    ?.succeeded ??
                                                 true)) {
-                                              if (Navigator.of(context)
-                                                  .canPop()) {
-                                                context.pop();
-                                              }
-                                              context.pushNamed(
-                                                'AdminAccountPayment',
-                                                queryParameters: {
-                                                  'name': serializeParam(
-                                                    _model
-                                                        .normalFullNameController
-                                                        .text,
-                                                    ParamType.String,
-                                                  ),
-                                                  'referral': serializeParam(
-                                                    _model
-                                                        .normalReferralController
-                                                        .text,
-                                                    ParamType.String,
-                                                  ),
-                                                  'password': serializeParam(
-                                                    _model
-                                                        .normalPasswordController
-                                                        .text,
-                                                    ParamType.String,
-                                                  ),
-                                                  'sectorID': serializeParam(
+                                              await UsersTable().insert({
+                                                'PhoneNumber': _model
+                                                    .normalPhoneNumberController
+                                                    .text,
+                                                'Password': _model
+                                                    .normalPasswordController
+                                                    .text,
+                                                'Balance': 0.0,
+                                                'SectorID':
                                                     _model.selectSectorID,
-                                                    ParamType.int,
-                                                  ),
-                                                  'isMember': serializeParam(
-                                                    false,
-                                                    ParamType.bool,
-                                                  ),
-                                                  'profile': serializeParam(
-                                                    _model.uploadedFileUrl1 ==
-                                                                ''
-                                                        ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
-                                                        : _model
-                                                            .uploadedFileUrl1,
-                                                    ParamType.String,
-                                                  ),
-                                                  'phoneNumber': serializeParam(
-                                                    _model
-                                                        .normalPhoneNumberController
-                                                        .text,
-                                                    ParamType.String,
-                                                  ),
-                                                  'inviteID': serializeParam(
-                                                    _model
-                                                        .normalInviteController
-                                                        .text,
-                                                    ParamType.String,
-                                                  ),
-                                                }.withoutNulls,
-                                                extra: <String, dynamic>{
-                                                  kTransitionInfoKey:
-                                                      const TransitionInfo(
-                                                    hasTransition: true,
-                                                    transitionType:
-                                                        PageTransitionType.fade,
-                                                    duration: Duration(
-                                                        milliseconds: 0),
-                                                  ),
-                                                },
-                                              );
-
+                                                'Profile': _model.uploadedFileUrl1 ==
+                                                            ''
+                                                    ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
+                                                    : _model.uploadedFileUrl1,
+                                                'FullName': _model
+                                                    .normalFullNameController
+                                                    .text,
+                                                'UserReferral': _model
+                                                    .normalReferralController
+                                                    .text,
+                                                'IsMember': false,
+                                                'Invite': _model
+                                                    .normalInviteController
+                                                    .text,
+                                                'CreatedBy': FFAppState()
+                                                    .UserInfo
+                                                    .userID,
+                                              });
+                                              context.safePop();
                                               if (shouldSetState) {
                                                 setState(() {});
                                               }
@@ -918,7 +1142,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
 
                                       if (shouldSetState) setState(() {});
                                     },
-                                    text: 'Next',
+                                    text: 'Create',
                                     options: FFButtonOptions(
                                       width: 230.0,
                                       height: 52.0,

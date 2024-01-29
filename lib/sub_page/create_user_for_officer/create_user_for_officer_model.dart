@@ -1,11 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'admin_create_user_widget.dart' show AdminCreateUserWidget;
+import 'create_user_for_officer_widget.dart' show CreateUserForOfficerWidget;
 import 'package:flutter/material.dart';
 
-class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
+class CreateUserForOfficerModel
+    extends FlutterFlowModel<CreateUserForOfficerWidget> {
   ///  Local state fields for this page.
 
   int selectSectorID = 1;
@@ -25,17 +25,12 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (Get max phone number)] action in AdminCreateUser widget.
+  // Stores action output result for [Backend Call - API (Get max phone number)] action in CreateUserForOfficer widget.
   ApiCallResponse? maxPhoneNumber;
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
-
-  bool isDataUploading1 = false;
-  FFUploadedFile uploadedLocalFile1 =
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl1 = '';
+  String uploadedFileUrl = '';
 
   // State field(s) for NormalFullName widget.
   FocusNode? normalFullNameFocusNode;
@@ -73,44 +68,17 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   ApiCallResponse? checkreferralNew;
   // Stores action output result for [Backend Call - API (Check referral)] action in Button widget.
   ApiCallResponse? checkinvideNew;
-  bool isDataUploading2 = false;
-  FFUploadedFile uploadedLocalFile2 =
-      FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl2 = '';
-
-  // State field(s) for MemberFullName widget.
-  FocusNode? memberFullNameFocusNode;
-  TextEditingController? memberFullNameController;
-  String? Function(BuildContext, String?)? memberFullNameControllerValidator;
-  // State field(s) for MemberPassword widget.
-  FocusNode? memberPasswordFocusNode;
-  TextEditingController? memberPasswordController;
-  late bool memberPasswordVisibility;
-  String? Function(BuildContext, String?)? memberPasswordControllerValidator;
-  // State field(s) for MemberReferr widget.
-  FocusNode? memberReferrFocusNode;
-  TextEditingController? memberReferrController;
-  String? Function(BuildContext, String?)? memberReferrControllerValidator;
-  // State field(s) for MemberSector widget.
-  String? memberSectorValue;
-  FormFieldController<String>? memberSectorValueController;
-  // Stores action output result for [Backend Call - API (Check referral)] action in Button widget.
-  ApiCallResponse? apiResultbep;
-  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
-  UsersRow? createUser;
 
   /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
     normalPasswordVisibility = false;
-    memberPasswordVisibility = false;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    tabBarController?.dispose();
     normalFullNameFocusNode?.dispose();
     normalFullNameController?.dispose();
 
@@ -125,15 +93,6 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
 
     normalInviteFocusNode?.dispose();
     normalInviteController?.dispose();
-
-    memberFullNameFocusNode?.dispose();
-    memberFullNameController?.dispose();
-
-    memberPasswordFocusNode?.dispose();
-    memberPasswordController?.dispose();
-
-    memberReferrFocusNode?.dispose();
-    memberReferrController?.dispose();
   }
 
   /// Action blocks are added here.

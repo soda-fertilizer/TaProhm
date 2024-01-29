@@ -464,6 +464,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SearchMember',
           path: '/searchMember',
           builder: (context, params) => const SearchMemberWidget(),
+        ),
+        FFRoute(
+          name: 'CreateUserForOfficer',
+          path: '/createUserForOfficer',
+          builder: (context, params) => const CreateUserForOfficerWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

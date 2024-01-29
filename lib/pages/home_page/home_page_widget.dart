@@ -638,7 +638,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                               containerCompanyRatingResponse.jsonBody,
                                                                                             )
                                                                                             ?.toDouble(),
-                                                                                        5.0,
+                                                                                        0.0,
                                                                                       ),
                                                                                       unratedColor: const Color(0x67C3A304),
                                                                                       itemCount: 5,
@@ -794,6 +794,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                                   padding: MediaQuery.viewInsetsOf(context),
                                                                                   child: ImageGalleryWidget(
                                                                                     images: homePageVarItem.companyImages,
+                                                                                    index: imagesIndex,
                                                                                   ),
                                                                                 ),
                                                                               );

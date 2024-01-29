@@ -10,9 +10,11 @@ class ImageGalleryWidget extends StatefulWidget {
   const ImageGalleryWidget({
     super.key,
     required this.images,
+    this.index,
   });
 
   final List<String>? images;
+  final int? index;
 
   @override
   State<ImageGalleryWidget> createState() => _ImageGalleryWidgetState();
@@ -58,6 +60,7 @@ class _ImageGalleryWidgetState extends State<ImageGalleryWidget> {
             width: double.infinity,
             height: double.infinity,
             imageList: widget.images!,
+            imageViewIndex: widget.index,
           ),
         ),
       ),
