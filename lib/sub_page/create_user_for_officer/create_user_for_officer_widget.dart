@@ -16,7 +16,12 @@ import 'create_user_for_officer_model.dart';
 export 'create_user_for_officer_model.dart';
 
 class CreateUserForOfficerWidget extends StatefulWidget {
-  const CreateUserForOfficerWidget({super.key});
+  const CreateUserForOfficerWidget({
+    super.key,
+    this.selectedID,
+  });
+
+  final String? selectedID;
 
   @override
   State<CreateUserForOfficerWidget> createState() =>
@@ -57,10 +62,12 @@ class _CreateUserForOfficerWidgetState
     _model.normalPhoneNumberController ??= TextEditingController();
     _model.normalPhoneNumberFocusNode ??= FocusNode();
 
-    _model.normalReferralController ??= TextEditingController();
+    _model.normalReferralController ??=
+        TextEditingController(text: widget.selectedID);
     _model.normalReferralFocusNode ??= FocusNode();
 
-    _model.normalInviteController ??= TextEditingController();
+    _model.normalInviteController ??=
+        TextEditingController(text: widget.selectedID);
     _model.normalInviteFocusNode ??= FocusNode();
   }
 

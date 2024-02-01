@@ -17,7 +17,12 @@ import 'admin_create_user_model.dart';
 export 'admin_create_user_model.dart';
 
 class AdminCreateUserWidget extends StatefulWidget {
-  const AdminCreateUserWidget({super.key});
+  const AdminCreateUserWidget({
+    super.key,
+    this.selectID,
+  });
+
+  final String? selectID;
 
   @override
   State<AdminCreateUserWidget> createState() => _AdminCreateUserWidgetState();
@@ -62,10 +67,12 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
     _model.normalPhoneNumberController ??= TextEditingController();
     _model.normalPhoneNumberFocusNode ??= FocusNode();
 
-    _model.normalReferralController ??= TextEditingController();
+    _model.normalReferralController ??=
+        TextEditingController(text: widget.selectID);
     _model.normalReferralFocusNode ??= FocusNode();
 
-    _model.normalInviteController ??= TextEditingController();
+    _model.normalInviteController ??=
+        TextEditingController(text: widget.selectID);
     _model.normalInviteFocusNode ??= FocusNode();
 
     _model.memberFullNameController ??= TextEditingController();
@@ -74,7 +81,8 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
     _model.memberPasswordController ??= TextEditingController();
     _model.memberPasswordFocusNode ??= FocusNode();
 
-    _model.memberReferrController ??= TextEditingController();
+    _model.memberReferrController ??=
+        TextEditingController(text: widget.selectID);
     _model.memberReferrFocusNode ??= FocusNode();
   }
 

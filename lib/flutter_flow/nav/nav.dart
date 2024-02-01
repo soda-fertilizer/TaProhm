@@ -284,7 +284,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'AdminCreateUser',
           path: '/adminCreateUser',
-          builder: (context, params) => const AdminCreateUserWidget(),
+          builder: (context, params) => AdminCreateUserWidget(
+            selectID: params.getParam('selectID', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'AdminAccount',
@@ -468,7 +470,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'CreateUserForOfficer',
           path: '/createUserForOfficer',
-          builder: (context, params) => const CreateUserForOfficerWidget(),
+          builder: (context, params) => CreateUserForOfficerWidget(
+            selectedID: params.getParam('selectedID', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

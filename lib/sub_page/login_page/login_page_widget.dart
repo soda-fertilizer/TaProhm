@@ -1,8 +1,7 @@
-import '/component/login_only/login_only_widget.dart';
+import '/component/login_component/login_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'login_page_model.dart';
@@ -24,13 +23,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LoginPageModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.sectorID = FFAppState().CreatAccountHolder.sectorID;
-      });
-    });
   }
 
   @override
@@ -63,11 +55,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 160.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
             child: wrapWithModel(
-              model: _model.loginOnlyModel,
+              model: _model.loginComponentModel,
               updateCallback: () => setState(() {}),
-              child: const LoginOnlyWidget(),
+              child: const LoginComponentWidget(),
             ),
           ),
         ),

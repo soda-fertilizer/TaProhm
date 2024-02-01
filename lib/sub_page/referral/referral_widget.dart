@@ -136,6 +136,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
                             20.0, 0.0, 20.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
                               width: 80.0,
@@ -151,45 +152,106 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Flexible(
-                                    child: Container(
-                                      decoration: const BoxDecoration(),
-                                      child: Text(
-                                        FFAppState()
-                                            .UserInfo
-                                            .fullName
-                                            .maybeHandleOverflow(
-                                              maxChars: 30,
-                                              replacement: '…',
-                                            ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              fontSize: 14.0,
-                                            ),
-                                      ),
+                            Expanded(
+                              child: Container(
+                                decoration: const BoxDecoration(),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          FFAppState()
+                                              .UserInfo
+                                              .fullName
+                                              .maybeHandleOverflow(
+                                                maxChars: 30,
+                                                replacement: '…',
+                                              ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                fontSize: 14.0,
+                                              ),
+                                        ),
+                                        Text(
+                                          'ID: ${FFAppState().UserInfo.phoneNumber}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 12.0,
+                                              ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Text(
-                                    'ID: ${FFAppState().UserInfo.phoneNumber}',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 12.0,
-                                        ),
-                                  ),
-                                ],
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                if (FFAppState().UserInfo.isAdmin ||
+                                    FFAppState().UserInfo.isSubAdmin) {
+                                  if (Navigator.of(context).canPop()) {
+                                    context.pop();
+                                  }
+                                  context.pushNamed(
+                                    'AdminCreateUser',
+                                    queryParameters: {
+                                      'selectID': serializeParam(
+                                        FFAppState().UserInfo.phoneNumber,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
+                                    },
+                                  );
+                                } else {
+                                  if (Navigator.of(context).canPop()) {
+                                    context.pop();
+                                  }
+                                  context.pushNamed(
+                                    'CreateUserForOfficer',
+                                    queryParameters: {
+                                      'selectedID': serializeParam(
+                                        FFAppState().UserInfo.phoneNumber,
+                                        ParamType.String,
+                                      ),
+                                    }.withoutNulls,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
+                                    },
+                                  );
+                                }
+                              },
+                              child: Icon(
+                                Icons.add_circle_outline,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
                               ),
                             ),
                           ],

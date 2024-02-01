@@ -1,6 +1,5 @@
 import '/backend/supabase/supabase.dart';
 import '/component/login_component/login_component_widget.dart';
-import '/component/login_only/login_only_widget.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/component/show_shop/show_shop_widget.dart';
@@ -75,26 +74,16 @@ class _LocatorWidgetState extends State<LocatorWidget> {
 
           return;
         } else {
-          showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            enableDrag: false,
-            context: context,
-            builder: (context) {
-              return GestureDetector(
-                onTap: () => _model.unfocusNode.canRequestFocus
-                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                    : FocusScope.of(context).unfocus(),
-                child: Padding(
-                  padding: MediaQuery.viewInsetsOf(context),
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.7,
-                    child: const LoginOnlyWidget(),
-                  ),
-                ),
-              );
+          context.pushNamed(
+            'LoginPage',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 0),
+              ),
             },
-          ).then((value) => safeSetState(() {}));
+          );
 
           return;
         }

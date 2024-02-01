@@ -71,6 +71,6 @@ class UsersRow extends SupabaseDataRow {
   bool get isSubAdmin => getField<bool>('IsSubAdmin')!;
   set isSubAdmin(bool value) => setField<bool>('IsSubAdmin', value);
 
-  int get createdBy => getField<int>('CreatedBy')!;
-  set createdBy(int value) => setField<int>('CreatedBy', value);
+  int? get createdBy => getField<int>('CreatedBy');
+  set createdBy(int? value) => setField<int>('CreatedBy', value);
 }

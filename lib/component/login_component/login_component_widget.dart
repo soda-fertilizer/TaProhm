@@ -2,12 +2,16 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
+import '/component/sinup_alert/sinup_alert_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
+import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -99,17 +103,14 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
     _model.loginPasswordController ??= TextEditingController();
     _model.loginPasswordFocusNode ??= FocusNode();
 
-    _model.signUpFullNameController ??=
-        TextEditingController(text: FFAppState().CreatAccountHolder.fullName);
-    _model.signUpFullNameFocusNode ??= FocusNode();
+    _model.singUpFullNameController ??= TextEditingController();
+    _model.singUpFullNameFocusNode ??= FocusNode();
 
-    _model.signUpTelegramNumberController ??= TextEditingController(
-        text: FFAppState().CreatAccountHolder.phoneNumber);
-    _model.signUpTelegramNumberFocusNode ??= FocusNode();
+    _model.signUPPasswordController ??= TextEditingController();
+    _model.signUPPasswordFocusNode ??= FocusNode();
 
-    _model.signUpPasswordController ??=
-        TextEditingController(text: FFAppState().CreatAccountHolder.password);
-    _model.signUpPasswordFocusNode ??= FocusNode();
+    _model.signUpPhoneNumberController ??= TextEditingController();
+    _model.signUpPhoneNumberFocusNode ??= FocusNode();
   }
 
   @override
@@ -246,6 +247,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             TextCapitalization.none,
                                         obscureText: false,
                                         decoration: InputDecoration(
+                                          isDense: true,
                                           labelText: 'Phone number',
                                           labelStyle: FlutterFlowTheme.of(
                                                   context)
@@ -329,6 +331,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         obscureText:
                                             !_model.loginPasswordVisibility,
                                         decoration: InputDecoration(
+                                          isDense: true,
                                           labelText: 'Password',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
@@ -413,14 +416,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ],
                                       ),
                                     ),
-                                    if (UsersGroup.loginCall.errorMessage(
-                                              (_model.login?.jsonBody ?? ''),
-                                            ) !=
-                                            null &&
-                                        UsersGroup.loginCall.errorMessage(
-                                              (_model.login?.jsonBody ?? ''),
-                                            ) !=
-                                            '')
+                                    if (valueOrDefault<String>(
+                                          UsersGroup.loginCall.errorMessage(
+                                            (_model.login2?.jsonBody ?? ''),
+                                          ),
+                                          'null',
+                                        ) !=
+                                        'null')
                                       Align(
                                         alignment:
                                             const AlignmentDirectional(0.0, 0.0),
@@ -429,9 +431,12 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 10.0),
                                           child: Text(
-                                            UsersGroup.loginCall.errorMessage(
-                                              (_model.login?.jsonBody ?? ''),
-                                            )!,
+                                            valueOrDefault<String>(
+                                              UsersGroup.loginCall.errorMessage(
+                                                (_model.login2?.jsonBody ?? ''),
+                                              ),
+                                              'null',
+                                            ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -451,7 +456,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             var shouldSetState = false;
-                                            _model.login =
+                                            _model.login2 =
                                                 await UsersGroup.loginCall.call(
                                               phoneNumber: _model
                                                   .loginPhoneNumberController
@@ -460,28 +465,52 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   .loginPasswordController.text,
                                             );
                                             shouldSetState = true;
-                                            if ((_model.login?.succeeded ??
+                                            if ((_model.login2?.succeeded ??
                                                 true)) {
+                                              _model.fcmToken = await actions
+                                                  .initFirebaseMessage();
+                                              shouldSetState = true;
+                                              if (_model.fcmToken != null &&
+                                                  _model.fcmToken != '') {
+                                                unawaited(
+                                                  () async {
+                                                    await UsersTable().update(
+                                                      data: {
+                                                        'Token':
+                                                            _model.fcmToken,
+                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'UserID',
+                                                        UsersGroup.loginCall
+                                                            .userID(
+                                                          (_model.login2
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }(),
+                                                );
+                                              }
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
                                               await authManager.signIn(
                                                 authenticationToken:
-                                                    UsersGroup.loginCall.token(
-                                                  (_model.login?.jsonBody ??
-                                                      ''),
-                                                ),
+                                                    UsersGroup.loginCall
+                                                        .userID(
+                                                          (_model.login2
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        )
+                                                        ?.toString(),
                                                 authUid: UsersGroup.loginCall
                                                     .userID(
-                                                      (_model.login?.jsonBody ??
+                                                      (_model.login2
+                                                              ?.jsonBody ??
                                                           ''),
                                                     )
                                                     ?.toString(),
-                                              );
-                                              await actions.onesignalLogin(
-                                                UsersGroup.loginCall.token(
-                                                  (_model.login?.jsonBody ??
-                                                      ''),
-                                                )!,
                                               );
                                               setState(() {
                                                 FFAppState().IsLogged = true;
@@ -489,55 +518,74 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     UserInfoStruct(
                                                   userID: UsersGroup.loginCall
                                                       .userID(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   fullName: UsersGroup.loginCall
                                                       .fullName(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   phoneNumber: UsersGroup
                                                       .loginCall
                                                       .phoneNumber(
-                                                    (_model.login?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  token: UsersGroup.loginCall
-                                                      .token(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   sectorID: UsersGroup.loginCall
                                                       .sectorID(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   isAdmin: UsersGroup.loginCall
                                                       .isAdmin(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   profile: UsersGroup.loginCall
                                                       .profile(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   userReferral: UsersGroup
                                                       .loginCall
                                                       .userReferral(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   hashedPassword: UsersGroup
                                                       .loginCall
                                                       .hashedPassword(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                   isMember: UsersGroup.loginCall
                                                       .isMember(
-                                                    (_model.login?.jsonBody ??
+                                                    (_model.login2?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                  isTestAccount: UsersGroup
+                                                      .loginCall
+                                                      .isTestAccount(
+                                                    (_model.login2?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                  invite: UsersGroup.loginCall
+                                                      .invite(
+                                                        (_model.login2
+                                                                ?.jsonBody ??
+                                                            ''),
+                                                      )
+                                                      .toString(),
+                                                  isSubAdmin: UsersGroup
+                                                      .loginCall
+                                                      .isSubAdmin(
+                                                    (_model.login2?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                  token: UsersGroup.loginCall
+                                                      .token(
+                                                    (_model.login2?.jsonBody ??
                                                         ''),
                                                   ),
                                                 );
@@ -567,7 +615,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           text: 'Sign in',
                                           options: FFButtonOptions(
                                             width: 230.0,
-                                            height: 52.0,
+                                            height: 40.0,
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
@@ -594,621 +642,778 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                     ),
+                                    Align(
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 10.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await launchURL(
+                                                'https://t.me/informal_economy');
+                                          },
+                                          child: Text(
+                                            'Support',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: const Color(0xFF1C81E0),
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ).animateOnPageLoad(animationsMap[
                                     'columnOnPageLoadAnimation']!),
                               ),
                             ),
-                            SingleChildScrollView(
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 20.0, 0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 20.0, 0.0, 20.0),
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await actions.printAction(
+                                        _model.selectReferralAndInvite,
+                                      );
+                                    },
                                     child: Text(
                                       'Create Account',
                                       style: FlutterFlowTheme.of(context)
-                                          .titleLarge,
+                                          .bodyLarge,
                                     ),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          final selectedMedia =
-                                              await selectMediaWithSourceBottomSheet(
-                                            context: context,
-                                            storageFolderPath: 'Users',
-                                            maxWidth: 1080.00,
-                                            maxHeight: 1080.00,
-                                            allowPhoto: true,
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      final selectedMedia =
+                                          await selectMediaWithSourceBottomSheet(
+                                        context: context,
+                                        storageFolderPath: 'Users',
+                                        maxWidth: 1080.00,
+                                        maxHeight: 1080.00,
+                                        allowPhoto: true,
+                                      );
+                                      if (selectedMedia != null &&
+                                          selectedMedia.every((m) =>
+                                              validateFileFormat(
+                                                  m.storagePath, context))) {
+                                        setState(() =>
+                                            _model.isDataUploading = true);
+                                        var selectedUploadedFiles =
+                                            <FFUploadedFile>[];
+
+                                        var downloadUrls = <String>[];
+                                        try {
+                                          showUploadMessage(
+                                            context,
+                                            'Uploading file...',
+                                            showLoading: true,
                                           );
-                                          if (selectedMedia != null &&
-                                              selectedMedia.every((m) =>
-                                                  validateFileFormat(
-                                                      m.storagePath,
-                                                      context))) {
-                                            setState(() =>
-                                                _model.isDataUploading = true);
-                                            var selectedUploadedFiles =
-                                                <FFUploadedFile>[];
+                                          selectedUploadedFiles = selectedMedia
+                                              .map((m) => FFUploadedFile(
+                                                    name: m.storagePath
+                                                        .split('/')
+                                                        .last,
+                                                    bytes: m.bytes,
+                                                    height:
+                                                        m.dimensions?.height,
+                                                    width: m.dimensions?.width,
+                                                    blurHash: m.blurHash,
+                                                  ))
+                                              .toList();
 
-                                            var downloadUrls = <String>[];
-                                            try {
-                                              selectedUploadedFiles =
-                                                  selectedMedia
-                                                      .map(
-                                                          (m) => FFUploadedFile(
-                                                                name: m
-                                                                    .storagePath
-                                                                    .split('/')
-                                                                    .last,
-                                                                bytes: m.bytes,
-                                                                height: m
-                                                                    .dimensions
-                                                                    ?.height,
-                                                                width: m
-                                                                    .dimensions
-                                                                    ?.width,
-                                                                blurHash:
-                                                                    m.blurHash,
-                                                              ))
-                                                      .toList();
-
-                                              downloadUrls =
-                                                  await uploadSupabaseStorageFiles(
-                                                bucketName: 'images',
-                                                selectedFiles: selectedMedia,
-                                              );
-                                            } finally {
-                                              _model.isDataUploading = false;
-                                            }
-                                            if (selectedUploadedFiles.length ==
-                                                    selectedMedia.length &&
-                                                downloadUrls.length ==
-                                                    selectedMedia.length) {
-                                              setState(() {
-                                                _model.uploadedLocalFile =
-                                                    selectedUploadedFiles.first;
-                                                _model.uploadedFileUrl =
-                                                    downloadUrls.first;
-                                              });
-                                            } else {
-                                              setState(() {});
-                                              return;
-                                            }
-                                          }
+                                          downloadUrls =
+                                              await uploadSupabaseStorageFiles(
+                                            bucketName: 'images',
+                                            selectedFiles: selectedMedia,
+                                          );
+                                        } finally {
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
+                                          _model.isDataUploading = false;
+                                        }
+                                        if (selectedUploadedFiles.length ==
+                                                selectedMedia.length &&
+                                            downloadUrls.length ==
+                                                selectedMedia.length) {
+                                          setState(() {
+                                            _model.uploadedLocalFile =
+                                                selectedUploadedFiles.first;
+                                            _model.uploadedFileUrl =
+                                                downloadUrls.first;
+                                          });
+                                          showUploadMessage(
+                                              context, 'Success!');
+                                        } else {
+                                          setState(() {});
+                                          showUploadMessage(
+                                              context, 'Failed to upload data');
+                                          return;
+                                        }
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 100.0,
+                                      height: 100.0,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Image.network(
+                                        valueOrDefault<String>(
+                                          _model.uploadedFileUrl,
+                                          'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.8,
+                                      child: TextFormField(
+                                        controller:
+                                            _model.singUpFullNameController,
+                                        focusNode:
+                                            _model.singUpFullNameFocusNode,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          labelText: 'Full Name',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                        validator: _model
+                                            .singUpFullNameControllerValidator
+                                            .asValidator(context),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.8,
+                                      child: TextFormField(
+                                        controller:
+                                            _model.signUPPasswordController,
+                                        focusNode:
+                                            _model.signUPPasswordFocusNode,
+                                        textCapitalization:
+                                            TextCapitalization.none,
+                                        obscureText:
+                                            !_model.signUPPasswordVisibility,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          labelText: 'Password',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          suffixIcon: InkWell(
+                                            onTap: () => setState(
+                                              () => _model
+                                                      .signUPPasswordVisibility =
+                                                  !_model
+                                                      .signUPPasswordVisibility,
+                                            ),
+                                            focusNode:
+                                                FocusNode(skipTraversal: true),
+                                            child: Icon(
+                                              _model.signUPPasswordVisibility
+                                                  ? Icons.visibility_outlined
+                                                  : Icons
+                                                      .visibility_off_outlined,
+                                              color: const Color(0xFF757575),
+                                              size: 24.0,
+                                            ),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                        validator: _model
+                                            .signUPPasswordControllerValidator
+                                            .asValidator(context),
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp('^[^\\s]*\$'))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        8.0, 0.0, 8.0, 0.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.8,
+                                      child: TextFormField(
+                                        controller:
+                                            _model.signUpPhoneNumberController,
+                                        focusNode:
+                                            _model.signUpPhoneNumberFocusNode,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          labelText: 'Phone',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                        validator: _model
+                                            .signUpPhoneNumberControllerValidator
+                                            .asValidator(context),
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp('^[^\\s]*\$'))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  FutureBuilder<List<UsersRow>>(
+                                    future: UsersTable().queryRows(
+                                      queryFn: (q) => q.eq(
+                                        'UserReferral',
+                                        '000002',
+                                      ),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<UsersRow>
+                                          singUpProvinceUsersRowList =
+                                          snapshot.data!;
+                                      return FlutterFlowDropDown<String>(
+                                        controller: _model
+                                                .singUpProvinceValueController ??=
+                                            FormFieldController<String>(
+                                          _model.singUpProvinceValue ??=
+                                              'ភ្នំពេញ',
+                                        ),
+                                        options: singUpProvinceUsersRowList
+                                            .map((e) => e.fullName)
+                                            .toList(),
+                                        onChanged: (val) async {
+                                          setState(() =>
+                                              _model.singUpProvinceValue = val);
+                                          setState(() {
+                                            _model.selectReferralAndInvite =
+                                                singUpProvinceUsersRowList
+                                                    .where((e) =>
+                                                        _model
+                                                            .singUpProvinceValue ==
+                                                        e.fullName)
+                                                    .toList()
+                                                    .first
+                                                    .phoneNumber;
+                                            _model.selectedProvince =
+                                                singUpProvinceUsersRowList
+                                                    .where((e) =>
+                                                        _model
+                                                            .singUpProvinceValue ==
+                                                        e.fullName)
+                                                    .toList()
+                                                    .first
+                                                    .phoneNumber;
+                                          });
                                         },
-                                        child: Container(
-                                          width: 100.0,
-                                          height: 100.0,
-                                          clipBehavior: Clip.antiAlias,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Image.network(
-                                            valueOrDefault<String>(
-                                              _model.uploadedFileUrl,
-                                              'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.8,
+                                        height: 40.0,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 14.0,
                                             ),
-                                            fit: BoxFit.cover,
-                                          ),
+                                        hintText: 'Please select province',
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down_rounded,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        elevation: 0.0,
+                                        borderColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                        borderWidth: 1.0,
+                                        borderRadius: 30.0,
+                                        margin: const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 4.0, 16.0, 4.0),
+                                        hidesUnderline: true,
+                                        isSearchable: false,
+                                        isMultiSelect: false,
+                                      );
+                                    },
+                                  ),
+                                  if (_model.selectedProvince != '')
+                                    FutureBuilder<List<UsersRow>>(
+                                      future: UsersTable().queryRows(
+                                        queryFn: (q) => q.eq(
+                                          'UserReferral',
+                                          _model.selectedProvince,
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 8.0, 0.0),
-                                        child: SizedBox(
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50.0,
+                                              height: 50.0,
+                                              child: CircularProgressIndicator(
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<UsersRow>
+                                            singUpDistrictUsersRowList =
+                                            snapshot.data!;
+                                        return FlutterFlowDropDown<String>(
+                                          controller: _model
+                                                  .singUpDistrictValueController ??=
+                                              FormFieldController<String>(null),
+                                          options: singUpDistrictUsersRowList
+                                              .map((e) => e.fullName)
+                                              .toList(),
+                                          onChanged: (val) async {
+                                            setState(() => _model
+                                                .singUpDistrictValue = val);
+                                            setState(() {
+                                              _model.selectReferralAndInvite =
+                                                  singUpDistrictUsersRowList
+                                                      .where((e) =>
+                                                          _model
+                                                              .singUpDistrictValue ==
+                                                          e.fullName)
+                                                      .toList()
+                                                      .first
+                                                      .phoneNumber;
+                                            });
+                                          },
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.8,
-                                          child: TextFormField(
-                                            controller:
-                                                _model.signUpFullNameController,
-                                            focusNode:
-                                                _model.signUpFullNameFocusNode,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              labelText: 'Full name',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                            validator: _model
-                                                .signUpFullNameControllerValidator
-                                                .asValidator(context),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 8.0, 0.0),
-                                        child: SizedBox(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.8,
-                                          child: TextFormField(
-                                            controller: _model
-                                                .signUpTelegramNumberController,
-                                            focusNode: _model
-                                                .signUpTelegramNumberFocusNode,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              labelText: 'Phone number',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                            keyboardType: TextInputType.number,
-                                            validator: _model
-                                                .signUpTelegramNumberControllerValidator
-                                                .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('^[^\\s]*\$'))
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 8.0, 0.0),
-                                        child: SizedBox(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.8,
-                                          child: TextFormField(
-                                            controller:
-                                                _model.signUpPasswordController,
-                                            focusNode:
-                                                _model.signUpPasswordFocusNode,
-                                            textCapitalization:
-                                                TextCapitalization.none,
-                                            obscureText: !_model
-                                                .signUpPasswordVisibility,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              labelText: 'Password',
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium,
-                                              enabledBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              errorBorder: OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 2.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20.0),
-                                              ),
-                                              suffixIcon: InkWell(
-                                                onTap: () => setState(
-                                                  () => _model
-                                                          .signUpPasswordVisibility =
-                                                      !_model
-                                                          .signUpPasswordVisibility,
-                                                ),
-                                                focusNode: FocusNode(
-                                                    skipTraversal: true),
-                                                child: Icon(
-                                                  _model.signUpPasswordVisibility
-                                                      ? Icons
-                                                          .visibility_outlined
-                                                      : Icons
-                                                          .visibility_off_outlined,
-                                                  color: const Color(0xFF757575),
-                                                  size: 24.0,
-                                                ),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
-                                            validator: _model
-                                                .signUpPasswordControllerValidator
-                                                .asValidator(context),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp('^[^\\s]*\$'))
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      if (UsersGroup.checkPhoneNumberCall
-                                                  .errorMessage(
-                                                (_model.apiResultwsd
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ) !=
-                                              null &&
-                                          UsersGroup.checkPhoneNumberCall
-                                                  .errorMessage(
-                                                (_model.apiResultwsd
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ) !=
-                                              '')
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 10.0),
-                                            child: Text(
-                                              UsersGroup.checkPhoneNumberCall
-                                                  .errorMessage(
-                                                (_model.apiResultwsd
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              )!,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
+                                          height: 40.0,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
                                                   .bodyMedium
                                                   .override(
                                                     fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .error,
+                                                    fontSize: 14.0,
                                                   ),
-                                            ),
+                                          hintText: 'Please select district',
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
                                           ),
-                                        ),
-                                    ].divide(const SizedBox(height: 10.0)),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          elevation: 0.0,
+                                          borderColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryText,
+                                          borderWidth: 1.0,
+                                          borderRadius: 30.0,
+                                          margin:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 4.0, 16.0, 4.0),
+                                          hidesUnderline: true,
+                                          isSearchable: false,
+                                          isMultiSelect: false,
+                                        );
+                                      },
+                                    ),
+                                  Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.8,
+                                    decoration: const BoxDecoration(),
                                   ),
                                   Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 16.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          var shouldSetState = false;
-                                          if ((_model
-                                                          .signUpFullNameController
-                                                          .text !=
-                                                      '') &&
-                                              (_model.signUpTelegramNumberController
-                                                          .text !=
-                                                      '') &&
-                                              (_model.signUpPasswordController
-                                                          .text !=
-                                                      '')) {
-                                            _model.apiResultwsd =
-                                                await UsersGroup
-                                                    .checkPhoneNumberCall
-                                                    .call(
-                                              phoneNumber: _model
-                                                  .signUpTelegramNumberController
-                                                  .text,
-                                            );
-                                            shouldSetState = true;
-                                            if ((_model
-                                                    .apiResultwsd?.succeeded ??
-                                                true)) {
-                                              _model.createdUser =
-                                                  await UsersTable().insert({
-                                                'PhoneNumber': _model
-                                                    .signUpTelegramNumberController
-                                                    .text,
-                                                'Password': _model
-                                                    .signUpPasswordController
-                                                    .text,
-                                                'IsApprove': true,
-                                                'IsActive': true,
-                                                'Balance': 0.0,
-                                                'SectorID': 1,
-                                                'Profile': _model.uploadedFileUrl ==
-                                                            ''
-                                                    ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
-                                                    : _model.uploadedFileUrl,
-                                                'FullName': _model
-                                                    .signUpFullNameController
-                                                    .text,
-                                                'CreatedBy': FFAppState()
-                                                    .UserInfo
-                                                    .userID,
-                                              });
-                                              shouldSetState = true;
-                                              GoRouter.of(context)
-                                                  .prepareAuthEvent();
-                                              await authManager.signIn(
-                                                authenticationToken:
-                                                    _model.createdUser?.token,
-                                                authUid: _model
-                                                    .createdUser?.userID
-                                                    .toString(),
-                                              );
-                                              await actions.onesignalLogin(
-                                                _model.createdUser!.token!,
-                                              );
-                                              setState(() {
-                                                FFAppState()
-                                                    .updateUserInfoStruct(
-                                                  (e) => e
-                                                    ..userID = _model
-                                                        .createdUser?.userID
-                                                    ..fullName = _model
-                                                        .createdUser?.fullName
-                                                    ..phoneNumber = _model
-                                                        .createdUser
-                                                        ?.phoneNumber
-                                                    ..token = _model
-                                                        .createdUser?.token
-                                                    ..sectorID = _model
-                                                        .createdUser?.sectorID
-                                                    ..isAdmin = _model
-                                                        .createdUser?.isAdmin
-                                                    ..profile = _model
-                                                        .createdUser?.profile
-                                                    ..userReferral = _model
-                                                        .createdUser
-                                                        ?.userReferral
-                                                    ..hashedPassword = _model
-                                                        .createdUser?.password
-                                                    ..isMember = _model
-                                                        .createdUser?.isMember,
-                                                );
-                                                FFAppState().IsLogged = true;
-                                              });
-
-                                              context.pushNamedAuth(
-                                                  'HomePage', context.mounted);
-
-                                              if (shouldSetState) {
-                                                setState(() {});
-                                              }
-                                              return;
-                                            } else {
-                                              if (shouldSetState) {
-                                                setState(() {});
-                                              }
-                                              return;
-                                            }
-                                          } else {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      'Some fild is emty!'),
-                                                  content: const Text(
-                                                      'Please complete all the fild!'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: const Text('Ok'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                            if (shouldSetState) {
-                                              setState(() {});
-                                            }
-                                            return;
-                                          }
-
-                                          if (shouldSetState) setState(() {});
+                                          0.0, 0.0, 0.0, 10.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          await launchURL(
+                                              'https://t.me/informal_economy');
                                         },
-                                        text: 'Sign Up',
-                                        options: FFButtonOptions(
-                                          width: 230.0,
-                                          height: 52.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(40.0),
+                                        child: Text(
+                                          'Support',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color: const Color(0xFF1C81E0),
+                                              ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  if (false)
-                                    Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Padding(
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: Builder(
+                                      builder: (context) => Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 16.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            if ((_model.signUpFullNameController.text != '') &&
-                                                (_model.signUpTelegramNumberController
+                                            var shouldSetState = false;
+                                            if ((_model.singUpFullNameController.text != '') &&
+                                                (_model.signUPPasswordController
                                                             .text !=
                                                         '') &&
-                                                (_model.signUpPasswordController
+                                                (_model.signUpPhoneNumberController
                                                             .text !=
                                                         '')) {
-                                              setState(() {
-                                                FFAppState()
-                                                    .updateCreatAccountHolderStruct(
-                                                  (e) => e
-                                                    ..fullName = _model
-                                                        .signUpFullNameController
-                                                        .text
-                                                    ..phoneNumber = _model
-                                                        .signUpTelegramNumberController
-                                                        .text
-                                                    ..password = _model
-                                                        .signUpPasswordController
-                                                        .text
-                                                    ..sectorID =
-                                                        _model.selectSectorID
-                                                    ..profile =
-                                                        valueOrDefault<String>(
-                                                      _model.uploadedFileUrl,
-                                                      'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                                                    ),
+                                              if (_model.singUpDistrictValue !=
+                                                      null &&
+                                                  _model.singUpDistrictValue !=
+                                                      '') {
+                                                _model.checkPhoneNumber =
+                                                    await UsersGroup
+                                                        .checkPhoneNumberCall
+                                                        .call(
+                                                  phoneNumber: _model
+                                                      .signUpPhoneNumberController
+                                                      .text,
                                                 );
-                                              });
+                                                shouldSetState = true;
+                                                if ((_model.checkPhoneNumber
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  _model.createdUser =
+                                                      await UsersTable()
+                                                          .insert({
+                                                    'PhoneNumber': _model
+                                                        .signUpPhoneNumberController
+                                                        .text,
+                                                    'Password': _model
+                                                        .signUPPasswordController
+                                                        .text,
+                                                    'Balance': 0.0,
+                                                    'SectorID':
+                                                        _model.selectSectorID,
+                                                    'Profile': _model.uploadedFileUrl !=
+                                                                ''
+                                                        ? _model.uploadedFileUrl
+                                                        : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                                    'FullName': _model
+                                                        .singUpFullNameController
+                                                        .text,
+                                                    'UserReferral': _model
+                                                        .selectReferralAndInvite,
+                                                    'IsMember': false,
+                                                    'Invite': _model
+                                                        .selectReferralAndInvite,
+                                                  });
+                                                  shouldSetState = true;
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (dialogContext) {
+                                                      return Dialog(
+                                                        elevation: 0,
+                                                        insetPadding:
+                                                            EdgeInsets.zero,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        child: SizedBox(
+                                                          height: 200.0,
+                                                          width: 300.0,
+                                                          child:
+                                                              SinupAlertWidget(
+                                                            phoneNumber: _model
+                                                                .signUpPhoneNumberController
+                                                                .text,
+                                                            password: _model
+                                                                .signUPPasswordController
+                                                                .text,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  ).then((value) =>
+                                                      setState(() {}));
 
-                                              context
-                                                  .pushNamed('AcountPayment');
+                                                  if (Navigator.of(context)
+                                                      .canPop()) {
+                                                    context.pop();
+                                                  }
+                                                  context.pushNamed(
+                                                    'LoginPage',
+                                                    extra: <String, dynamic>{
+                                                      kTransitionInfoKey:
+                                                          const TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .fade,
+                                                        duration: Duration(
+                                                            milliseconds: 0),
+                                                      ),
+                                                    },
+                                                  );
 
-                                              return;
+                                                  if (shouldSetState) {
+                                                    setState(() {});
+                                                  }
+                                                  return;
+                                                } else {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: const Text(
+                                                            'You can\'t use this phone number!'),
+                                                        content: const Text(
+                                                            'Please try another phone number.'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: const Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                  if (shouldSetState) {
+                                                    setState(() {});
+                                                  }
+                                                  return;
+                                                }
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: const Text(
+                                                          'District is not selected'),
+                                                      content: const Text(
+                                                          'Please select district!'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: const Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                                if (shouldSetState) {
+                                                  setState(() {});
+                                                }
+                                                return;
+                                              }
                                             } else {
                                               await showDialog(
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
                                                     title: const Text(
-                                                        'Some fild is emty!'),
+                                                        'Some field are emty.'),
                                                     content: const Text(
-                                                        'Please complete all the fild!'),
+                                                        'Please make sure you input all your infomation!'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1220,13 +1425,16 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   );
                                                 },
                                               );
-                                              return;
+                                            }
+
+                                            if (shouldSetState) {
+                                              setState(() {});
                                             }
                                           },
-                                          text: 'Next',
+                                          text: 'Sign Up',
                                           options: FFButtonOptions(
                                             width: 230.0,
-                                            height: 52.0,
+                                            height: 40.0,
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
@@ -1253,6 +1461,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                     ),
+                                  ),
                                 ].divide(const SizedBox(height: 10.0)),
                               ),
                             ),

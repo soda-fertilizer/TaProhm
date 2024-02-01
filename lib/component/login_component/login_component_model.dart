@@ -1,13 +1,18 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'login_component_widget.dart' show LoginComponentWidget;
 import 'package:flutter/material.dart';
 
 class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   ///  Local state fields for this component.
 
-  int? selectSectorID;
+  int selectSectorID = 1;
+
+  String selectReferralAndInvite = '000038';
+
+  String selectedProvince = '000038';
 
   ///  State fields for stateful widgets in this component.
 
@@ -26,28 +31,35 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   late bool loginPasswordVisibility;
   String? Function(BuildContext, String?)? loginPasswordControllerValidator;
   // Stores action output result for [Backend Call - API (Login)] action in Button widget.
-  ApiCallResponse? login;
+  ApiCallResponse? login2;
+  // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
+  String? fcmToken;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
-  // State field(s) for SignUpFullName widget.
-  FocusNode? signUpFullNameFocusNode;
-  TextEditingController? signUpFullNameController;
-  String? Function(BuildContext, String?)? signUpFullNameControllerValidator;
-  // State field(s) for SignUpTelegramNumber widget.
-  FocusNode? signUpTelegramNumberFocusNode;
-  TextEditingController? signUpTelegramNumberController;
-  String? Function(BuildContext, String?)?
-      signUpTelegramNumberControllerValidator;
-  // State field(s) for SignUpPassword widget.
-  FocusNode? signUpPasswordFocusNode;
-  TextEditingController? signUpPasswordController;
-  late bool signUpPasswordVisibility;
-  String? Function(BuildContext, String?)? signUpPasswordControllerValidator;
+  // State field(s) for SingUpFullName widget.
+  FocusNode? singUpFullNameFocusNode;
+  TextEditingController? singUpFullNameController;
+  String? Function(BuildContext, String?)? singUpFullNameControllerValidator;
+  // State field(s) for SignUPPassword widget.
+  FocusNode? signUPPasswordFocusNode;
+  TextEditingController? signUPPasswordController;
+  late bool signUPPasswordVisibility;
+  String? Function(BuildContext, String?)? signUPPasswordControllerValidator;
+  // State field(s) for SignUpPhoneNumber widget.
+  FocusNode? signUpPhoneNumberFocusNode;
+  TextEditingController? signUpPhoneNumberController;
+  String? Function(BuildContext, String?)? signUpPhoneNumberControllerValidator;
+  // State field(s) for SingUpProvince widget.
+  String? singUpProvinceValue;
+  FormFieldController<String>? singUpProvinceValueController;
+  // State field(s) for SingUpDistrict widget.
+  String? singUpDistrictValue;
+  FormFieldController<String>? singUpDistrictValueController;
   // Stores action output result for [Backend Call - API (Check phone number)] action in Button widget.
-  ApiCallResponse? apiResultwsd;
+  ApiCallResponse? checkPhoneNumber;
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   UsersRow? createdUser;
 
@@ -56,7 +68,7 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   @override
   void initState(BuildContext context) {
     loginPasswordVisibility = false;
-    signUpPasswordVisibility = false;
+    signUPPasswordVisibility = false;
   }
 
   @override
@@ -68,14 +80,14 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
     loginPasswordFocusNode?.dispose();
     loginPasswordController?.dispose();
 
-    signUpFullNameFocusNode?.dispose();
-    signUpFullNameController?.dispose();
+    singUpFullNameFocusNode?.dispose();
+    singUpFullNameController?.dispose();
 
-    signUpTelegramNumberFocusNode?.dispose();
-    signUpTelegramNumberController?.dispose();
+    signUPPasswordFocusNode?.dispose();
+    signUPPasswordController?.dispose();
 
-    signUpPasswordFocusNode?.dispose();
-    signUpPasswordController?.dispose();
+    signUpPhoneNumberFocusNode?.dispose();
+    signUpPhoneNumberController?.dispose();
   }
 
   /// Action blocks are added here.
