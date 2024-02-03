@@ -34,8 +34,6 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   ApiCallResponse? login2;
   // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
   String? fcmToken;
-  // Stores action output result for [Custom Action - initFirebaseMessage] action in Text widget.
-  String? token2;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -64,6 +62,8 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   ApiCallResponse? checkPhoneNumber;
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   UsersRow? createdUser;
+  // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
+  String? token;
 
   /// Initialization and disposal methods.
 

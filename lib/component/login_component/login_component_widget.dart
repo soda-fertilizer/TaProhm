@@ -2,7 +2,6 @@ import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
-import '/component/sinup_alert/sinup_alert_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -723,25 +722,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      _model.token2 =
-                                          await actions.initFirebaseMessage();
-                                      await actions.printAction(
-                                        _model.token2,
-                                      );
-
-                                      setState(() {});
-                                    },
-                                    child: Text(
-                                      'Create Account',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge,
-                                    ),
+                                  Text(
+                                    'Create Account',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyLarge,
                                   ),
                                   InkWell(
                                     splashColor: Colors.transparent,
@@ -1294,166 +1278,171 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                   ),
                                   Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: Builder(
-                                      builder: (context) => Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 16.0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            var shouldSetState = false;
-                                            if (functions.returnLength(_model
-                                                    .signUpPhoneNumberController
-                                                    .text) >
-                                                6) {
-                                              if ((_model.singUpFullNameController.text != '') &&
-                                                  (_model.signUPPasswordController
-                                                              .text !=
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 16.0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          var shouldSetState = false;
+                                          if (functions.returnLength(_model
+                                                  .signUpPhoneNumberController
+                                                  .text) >
+                                              6) {
+                                            if ((_model.singUpFullNameController.text != '') &&
+                                                (_model.signUPPasswordController
+                                                            .text !=
+                                                        '') &&
+                                                (_model.signUpPhoneNumberController
+                                                            .text !=
+                                                        '')) {
+                                              if ((_model.singUpDistrictValue !=
+                                                          null &&
+                                                      _model.singUpDistrictValue !=
                                                           '') &&
-                                                  (_model.signUpPhoneNumberController
-                                                              .text !=
+                                                  (_model.singUpProvinceValue !=
+                                                          null &&
+                                                      _model.singUpProvinceValue !=
                                                           '')) {
-                                                if ((_model.singUpDistrictValue !=
-                                                            null &&
-                                                        _model.singUpDistrictValue !=
-                                                            '') &&
-                                                    (_model.singUpProvinceValue !=
-                                                            null &&
-                                                        _model.singUpProvinceValue !=
-                                                            '')) {
-                                                  _model.checkPhoneNumber =
-                                                      await UsersGroup
-                                                          .checkPhoneNumberCall
-                                                          .call(
-                                                    phoneNumber: _model
+                                                _model.checkPhoneNumber =
+                                                    await UsersGroup
+                                                        .checkPhoneNumberCall
+                                                        .call(
+                                                  phoneNumber: _model
+                                                      .signUpPhoneNumberController
+                                                      .text,
+                                                );
+                                                shouldSetState = true;
+                                                if ((_model.checkPhoneNumber
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  _model.createdUser =
+                                                      await UsersTable()
+                                                          .insert({
+                                                    'PhoneNumber': _model
                                                         .signUpPhoneNumberController
                                                         .text,
-                                                  );
+                                                    'Password': _model
+                                                        .signUPPasswordController
+                                                        .text,
+                                                    'Balance': 0.0,
+                                                    'SectorID':
+                                                        _model.selectSectorID,
+                                                    'Profile': _model.uploadedFileUrl !=
+                                                                ''
+                                                        ? _model.uploadedFileUrl
+                                                        : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                                    'FullName': _model
+                                                        .singUpFullNameController
+                                                        .text,
+                                                    'UserReferral': _model
+                                                        .selectReferralAndInvite,
+                                                    'IsMember': false,
+                                                    'Invite': _model
+                                                        .selectReferralAndInvite,
+                                                  });
                                                   shouldSetState = true;
-                                                  if ((_model.checkPhoneNumber
-                                                          ?.succeeded ??
-                                                      true)) {
-                                                    _model.createdUser =
-                                                        await UsersTable()
-                                                            .insert({
-                                                      'PhoneNumber': _model
-                                                          .signUpPhoneNumberController
-                                                          .text,
-                                                      'Password': _model
-                                                          .signUPPasswordController
-                                                          .text,
-                                                      'Balance': 0.0,
-                                                      'SectorID':
-                                                          _model.selectSectorID,
-                                                      'Profile': _model.uploadedFileUrl !=
-                                                                  ''
-                                                          ? _model
-                                                              .uploadedFileUrl
-                                                          : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                                                      'FullName': _model
-                                                          .singUpFullNameController
-                                                          .text,
-                                                      'UserReferral': _model
-                                                          .selectReferralAndInvite,
-                                                      'IsMember': false,
-                                                      'Invite': _model
-                                                          .selectReferralAndInvite,
-                                                    });
-                                                    shouldSetState = true;
-                                                    // Notification
-                                                    await BroadcastNotificationTable()
-                                                        .insert({
-                                                      'Title':
-                                                          'Welcome ${_model.singUpFullNameController.text}',
-                                                      'Contents':
-                                                          'Welcome to our new member  ${_model.singUpFullNameController.text}',
-                                                      'Image': _model.uploadedFileUrl !=
-                                                                  ''
-                                                          ? _model
-                                                              .uploadedFileUrl
-                                                          : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                                                    });
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder: (dialogContext) {
-                                                        return Dialog(
-                                                          elevation: 0,
-                                                          insetPadding:
-                                                              EdgeInsets.zero,
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          alignment: const AlignmentDirectional(
-                                                                  0.0, 0.0)
-                                                              .resolve(
-                                                                  Directionality.of(
-                                                                      context)),
-                                                          child: SizedBox(
-                                                            height: 200.0,
-                                                            width: 300.0,
-                                                            child:
-                                                                SinupAlertWidget(
-                                                              phoneNumber: _model
-                                                                  .signUpPhoneNumberController
-                                                                  .text,
-                                                              password: _model
-                                                                  .signUPPasswordController
-                                                                  .text,
-                                                            ),
-                                                          ),
-                                                        );
+                                                  // Notification
+                                                  await BroadcastNotificationTable()
+                                                      .insert({
+                                                    'Title':
+                                                        'Welcome ${_model.singUpFullNameController.text}',
+                                                    'Contents':
+                                                        'Welcome to our new member  ${_model.singUpFullNameController.text}',
+                                                    'Image': _model.uploadedFileUrl !=
+                                                                ''
+                                                        ? _model.uploadedFileUrl
+                                                        : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                                  });
+                                                  GoRouter.of(context)
+                                                      .prepareAuthEvent();
+                                                  await authManager.signIn(
+                                                    authenticationToken: _model
+                                                        .createdUser?.userID
+                                                        .toString(),
+                                                    authUid: _model
+                                                        .createdUser?.userID
+                                                        .toString(),
+                                                  );
+                                                  _model.token = await actions
+                                                      .initFirebaseMessage();
+                                                  shouldSetState = true;
+                                                  if (_model.token != 'null') {
+                                                    await UsersTable().update(
+                                                      data: {
+                                                        'Token': _model.token,
                                                       },
-                                                    ).then((value) =>
-                                                        setState(() {}));
-
-                                                    if (Navigator.of(context)
-                                                        .canPop()) {
-                                                      context.pop();
-                                                    }
-                                                    context.pushNamed(
-                                                      'LoginPage',
-                                                      extra: <String, dynamic>{
-                                                        kTransitionInfoKey:
-                                                            const TransitionInfo(
-                                                          hasTransition: true,
-                                                          transitionType:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                          duration: Duration(
-                                                              milliseconds: 0),
-                                                        ),
-                                                      },
+                                                      matchingRows: (rows) =>
+                                                          rows.eq(
+                                                        'UserID',
+                                                        _model.createdUser
+                                                            ?.userID,
+                                                      ),
                                                     );
-
-                                                    if (shouldSetState) {
-                                                      setState(() {});
-                                                    }
-                                                    return;
-                                                  } else {
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder:
-                                                          (alertDialogContext) {
-                                                        return AlertDialog(
-                                                          title: const Text(
-                                                              'You can\'t use this phone number!'),
-                                                          content: const Text(
-                                                              'Please try another phone number.'),
-                                                          actions: [
-                                                            TextButton(
-                                                              onPressed: () =>
-                                                                  Navigator.pop(
-                                                                      alertDialogContext),
-                                                              child: const Text('Ok'),
-                                                            ),
-                                                          ],
-                                                        );
-                                                      },
-                                                    );
-                                                    if (shouldSetState) {
-                                                      setState(() {});
-                                                    }
-                                                    return;
                                                   }
+                                                  setState(() {
+                                                    FFAppState().UserInfo =
+                                                        UserInfoStruct(
+                                                      userID: _model
+                                                          .createdUser?.userID,
+                                                      fullName: _model
+                                                          .createdUser
+                                                          ?.fullName,
+                                                      phoneNumber: _model
+                                                          .createdUser
+                                                          ?.phoneNumber,
+                                                      token: _model.token,
+                                                      sectorID: _model
+                                                          .createdUser
+                                                          ?.sectorID,
+                                                      isAdmin: _model
+                                                          .createdUser?.isAdmin,
+                                                      profile: _model
+                                                          .createdUser?.profile,
+                                                      userReferral: _model
+                                                          .createdUser
+                                                          ?.userReferral,
+                                                      hashedPassword: _model
+                                                          .createdUser
+                                                          ?.password,
+                                                      isMember: _model
+                                                          .createdUser
+                                                          ?.isMember,
+                                                      isTestAccount: _model
+                                                          .createdUser
+                                                          ?.isTestAccount,
+                                                      invite: _model
+                                                          .createdUser?.invite,
+                                                      isSubAdmin: _model
+                                                          .createdUser
+                                                          ?.isSubAdmin,
+                                                    );
+                                                    FFAppState().IsLogged =
+                                                        true;
+                                                  });
+                                                  if (Navigator.of(context)
+                                                      .canPop()) {
+                                                    context.pop();
+                                                  }
+                                                  context.pushNamedAuth(
+                                                    'LoginPage',
+                                                    context.mounted,
+                                                    extra: <String, dynamic>{
+                                                      kTransitionInfoKey:
+                                                          const TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .fade,
+                                                        duration: Duration(
+                                                            milliseconds: 0),
+                                                      ),
+                                                    },
+                                                  );
+
+                                                  if (shouldSetState) {
+                                                    setState(() {});
+                                                  }
+                                                  return;
                                                 } else {
                                                   await showDialog(
                                                     context: context,
@@ -1461,9 +1450,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                         (alertDialogContext) {
                                                       return AlertDialog(
                                                         title: const Text(
-                                                            'District or Province is not selected'),
+                                                            'You can\'t use this phone number!'),
                                                         content: const Text(
-                                                            'Please select district or province!'),
+                                                            'Please try another phone number.'),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () =>
@@ -1487,9 +1476,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       (alertDialogContext) {
                                                     return AlertDialog(
                                                       title: const Text(
-                                                          'Some field are emty.'),
+                                                          'District or Province is not selected'),
                                                       content: const Text(
-                                                          'Please make sure you input all your infomation!'),
+                                                          'Please select district or province!'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
@@ -1512,9 +1501,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
                                                     title: const Text(
-                                                        'Phone number is not correct.'),
+                                                        'Some field are emty.'),
                                                     content: const Text(
-                                                        'Phone number can\'t be less then 6 number.'),
+                                                        'Please make sure you input all your infomation!'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1531,38 +1520,60 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               }
                                               return;
                                             }
-
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                      'Phone number is not correct.'),
+                                                  content: const Text(
+                                                      'Phone number can\'t be less then 6 number.'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: const Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
                                             if (shouldSetState) {
                                               setState(() {});
                                             }
-                                          },
-                                          text: 'Sign Up',
-                                          options: FFButtonOptions(
-                                            width: 230.0,
-                                            height: 40.0,
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: Colors.white,
-                                                    ),
-                                            elevation: 3.0,
-                                            borderSide: const BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(40.0),
+                                            return;
+                                          }
+
+                                          if (shouldSetState) setState(() {});
+                                        },
+                                        text: 'Sign Up',
+                                        options: FFButtonOptions(
+                                          width: 230.0,
+                                          height: 40.0,
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          iconPadding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: Colors.white,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: const BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
                                           ),
+                                          borderRadius:
+                                              BorderRadius.circular(40.0),
                                         ),
                                       ),
                                     ),
