@@ -104,3 +104,12 @@ double? jsonToDouble(dynamic number) {
 int? stringToint(String? number) {
   return int.tryParse(number!);
 }
+
+int returnLength(String? value) {
+  // create a function to return string length
+  if (value == null) {
+    return 0;
+  } else {
+    return value.length;
+  }
+}

@@ -751,7 +751,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   ),
                                 ),
                               ),
-                            if (FFAppState().UserInfo.isSubAdmin)
+                            if (false)
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 16.0, 0.0),
@@ -826,7 +826,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 ),
                               ),
                             if (!FFAppState().UserInfo.isAdmin &&
-                                !FFAppState().UserInfo.isSubAdmin &&
                                 FFAppState().UserInfo.isMember)
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1110,7 +1109,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   });
 
                                   context.goNamedAuth(
-                                      'HomePage', context.mounted);
+                                      'LoginPage', context.mounted);
                                 },
                                 child: Container(
                                   width: double.infinity,

@@ -3,6 +3,7 @@ import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -77,15 +78,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
-                    child: FutureBuilder<List<NotificationRow>>(
-                      future: NotificationTable().queryRows(
-                        queryFn: (q) => q
-                            .eq(
-                              'UserID',
-                              FFAppState().UserInfo.userID,
-                            )
-                            .order('id'),
-                        limit: 50,
+                    child: FutureBuilder<List<BroadcastNotificationRow>>(
+                      future: BroadcastNotificationTable().queryRows(
+                        queryFn: (q) => q.order('id'),
+                        limit: 100,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -102,170 +98,205 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                             ),
                           );
                         }
-                        List<NotificationRow> listViewNotificationRowList =
+                        List<BroadcastNotificationRow>
+                            listViewBroadcastNotificationRowList =
                             snapshot.data!;
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
-                          itemCount: listViewNotificationRowList.length,
+                          itemCount:
+                              listViewBroadcastNotificationRowList.length,
                           itemBuilder: (context, listViewIndex) {
-                            final listViewNotificationRow =
-                                listViewNotificationRowList[listViewIndex];
-                            return Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 1.0),
-                                    child: Container(
-                                      width: 100.0,
-                                      height: 72.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurRadius: 0.0,
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            offset: const Offset(0.0, 1.0),
-                                          )
-                                        ],
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 16.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.asset(
-                                                'assets/images/vnimc_1.png',
-                                                width: 50.0,
-                                                height: 50.0,
-                                                fit: BoxFit.cover,
+                            final listViewBroadcastNotificationRow =
+                                listViewBroadcastNotificationRowList[
+                                    listViewIndex];
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed(
+                                  'NotificationDetail',
+                                  queryParameters: {
+                                    'id': serializeParam(
+                                      listViewBroadcastNotificationRow.id,
+                                      ParamType.int,
+                                    ),
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: const TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 0),
+                                    ),
+                                  },
+                                );
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 1.0),
+                                      child: Container(
+                                        width: 100.0,
+                                        height: 72.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              blurRadius: 0.0,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              offset: const Offset(0.0, 1.0),
+                                            )
+                                          ],
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  16.0, 0.0, 16.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: CachedNetworkImage(
+                                                  fadeInDuration: const Duration(
+                                                      milliseconds: 500),
+                                                  fadeOutDuration: const Duration(
+                                                      milliseconds: 500),
+                                                  imageUrl:
+                                                      listViewBroadcastNotificationRow
+                                                          .image,
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
-                                            ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        12.0, 0.0, 0.0, 0.0),
-                                                child: SingleChildScrollView(
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        4.0),
-                                                            child: Text(
-                                                              valueOrDefault<
-                                                                  String>(
-                                                                listViewNotificationRow
-                                                                    .title,
-                                                                'sdfsdfsdfsdfsdfasdds',
-                                                              ).maybeHandleOverflow(
-                                                                maxChars: 15,
-                                                                replacement:
-                                                                    '…',
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          12.0, 0.0, 0.0, 0.0),
+                                                  child: SingleChildScrollView(
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                              child: Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  listViewBroadcastNotificationRow
+                                                                      .title,
+                                                                  'sdfsdfsdfsdfsdfasdds',
+                                                                ).maybeHandleOverflow(
+                                                                  maxChars: 15,
+                                                                  replacement:
+                                                                      '…',
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      fontSize:
+                                                                          14.0,
+                                                                    ),
                                                               ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyLarge
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Readex Pro',
-                                                                    fontSize:
-                                                                        14.0,
-                                                                  ),
                                                             ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        4.0),
-                                                            child: Text(
-                                                              dateTimeFormat(
-                                                                      'd/M/y',
-                                                                      listViewNotificationRow
-                                                                          .createdDate)
-                                                                  .maybeHandleOverflow(
-                                                                maxChars: 10,
-                                                                replacement:
-                                                                    '…',
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          4.0),
+                                                              child: Text(
+                                                                dateTimeFormat(
+                                                                        'd/M/y',
+                                                                        listViewBroadcastNotificationRow
+                                                                            .createdDate)
+                                                                    .maybeHandleOverflow(
+                                                                  maxChars: 10,
+                                                                  replacement:
+                                                                      '…',
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyLarge
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      fontSize:
+                                                                          12.0,
+                                                                    ),
                                                               ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyLarge
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Readex Pro',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                    fontSize:
-                                                                        12.0,
-                                                                  ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Text(
-                                                        listViewNotificationRow
-                                                            .contents
-                                                            .maybeHandleOverflow(
-                                                          maxChars: 40,
-                                                          replacement: '…',
+                                                          ],
                                                         ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .labelMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Readex Pro',
-                                                              fontSize: 12.0,
-                                                            ),
-                                                      ),
-                                                    ],
+                                                        Text(
+                                                          listViewBroadcastNotificationRow
+                                                              .contents
+                                                              .maybeHandleOverflow(
+                                                            maxChars: 40,
+                                                            replacement: '…',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                fontSize: 12.0,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             );
                           },
                         );

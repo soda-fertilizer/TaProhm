@@ -73,7 +73,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => RootPageContext.wrap(
-        appStateNotifier.loggedIn ? const HomePageWidget() : const HomePageWidget(),
+        appStateNotifier.loggedIn ? const HomePageWidget() : const LoginPageWidget(),
         errorRoute: state.location,
       ),
       routes: [
@@ -81,7 +81,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => RootPageContext.wrap(
-            appStateNotifier.loggedIn ? const HomePageWidget() : const HomePageWidget(),
+            appStateNotifier.loggedIn ? const HomePageWidget() : const LoginPageWidget(),
           ),
         ),
         FFRoute(
@@ -473,6 +473,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => CreateUserForOfficerWidget(
             selectedID: params.getParam('selectedID', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'NotificationDetail',
+          path: '/notificationDetail',
+          builder: (context, params) => NotificationDetailWidget(
+            id: params.getParam('id', ParamType.int),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -639,7 +646,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/homePage';
+            return '/loginPage';
           }
           return null;
         },

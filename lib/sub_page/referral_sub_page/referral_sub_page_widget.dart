@@ -257,8 +257,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      if (FFAppState().UserInfo.isAdmin ||
-                                          FFAppState().UserInfo.isSubAdmin) {
+                                      if (FFAppState().UserInfo.isAdmin) {
                                         if (Navigator.of(context).canPop()) {
                                           context.pop();
                                         }

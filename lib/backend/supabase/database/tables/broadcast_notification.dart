@@ -30,4 +30,7 @@ class BroadcastNotificationRow extends SupabaseDataRow {
 
   int? get createdBy => getField<int>('CreatedBy');
   set createdBy(int? value) => setField<int>('CreatedBy', value);
+
+  String get image => getField<String>('Image')!;
+  set image(String value) => setField<String>('Image', value);
 }

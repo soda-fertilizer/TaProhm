@@ -96,3 +96,5 @@ export '/sub_page/search_member/search_member_widget.dart'
     show SearchMemberWidget;
 export '/sub_page/create_user_for_officer/create_user_for_officer_widget.dart'
     show CreateUserForOfficerWidget;
+export '/sub_page/notification_detail/notification_detail_widget.dart'
+    show NotificationDetailWidget;

@@ -10,9 +10,9 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
 
   int selectSectorID = 1;
 
-  String selectReferralAndInvite = '000038';
+  String selectReferralAndInvite = '';
 
-  String selectedProvince = '000038';
+  String selectedProvince = '';
 
   ///  State fields for stateful widgets in this component.
 
@@ -34,6 +34,8 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   ApiCallResponse? login2;
   // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
   String? fcmToken;
+  // Stores action output result for [Custom Action - initFirebaseMessage] action in Text widget.
+  String? token2;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));

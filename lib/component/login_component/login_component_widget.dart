@@ -13,6 +13,7 @@ import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -641,31 +642,72 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                     ),
-                                    Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 10.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            await launchURL(
-                                                'https://t.me/informal_economy');
-                                          },
-                                          child: Text(
-                                            'Support',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: const Color(0xFF1C81E0),
-                                                ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await launchURL(
+                                                    'https://t.me/TaProhmAppSupport');
+                                              },
+                                              child: Text(
+                                                'Change password',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color: const Color(0xFF1C81E0),
+                                                    ),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await launchURL(
+                                                    'https://t.me/informal_economy');
+                                              },
+                                              child: Text(
+                                                'Support',
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color: const Color(0xFF1C81E0),
+                                                    ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -687,9 +729,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      _model.token2 =
+                                          await actions.initFirebaseMessage();
                                       await actions.printAction(
                                         _model.selectReferralAndInvite,
                                       );
+
+                                      setState(() {});
                                     },
                                     child: Text(
                                       'Create Account',
@@ -1018,12 +1064,21 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
+                                        maxLength: 11,
+                                        maxLengthEnforcement:
+                                            MaxLengthEnforcement.enforced,
+                                        buildCounter: (context,
+                                                {required currentLength,
+                                                required isFocused,
+                                                maxLength}) =>
+                                            null,
+                                        keyboardType: TextInputType.number,
                                         validator: _model
                                             .signUpPhoneNumberControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
-                                              RegExp('^[^\\s]*\$'))
+                                              RegExp('[0-9]'))
                                         ],
                                       ),
                                     ),
@@ -1058,10 +1113,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       return FlutterFlowDropDown<String>(
                                         controller: _model
                                                 .singUpProvinceValueController ??=
-                                            FormFieldController<String>(
-                                          _model.singUpProvinceValue ??=
-                                              'ភ្នំពេញ',
-                                        ),
+                                            FormFieldController<String>(null),
                                         options: singUpProvinceUsersRowList
                                             .map((e) => e.fullName)
                                             .toList(),
@@ -1249,111 +1301,159 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             var shouldSetState = false;
-                                            if ((_model.singUpFullNameController.text != '') &&
-                                                (_model.signUPPasswordController
-                                                            .text !=
-                                                        '') &&
-                                                (_model.signUpPhoneNumberController
-                                                            .text !=
-                                                        '')) {
-                                              if (_model.singUpDistrictValue !=
-                                                      null &&
-                                                  _model.singUpDistrictValue !=
-                                                      '') {
-                                                _model.checkPhoneNumber =
-                                                    await UsersGroup
-                                                        .checkPhoneNumberCall
-                                                        .call(
-                                                  phoneNumber: _model
-                                                      .signUpPhoneNumberController
-                                                      .text,
-                                                );
-                                                shouldSetState = true;
-                                                if ((_model.checkPhoneNumber
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  _model.createdUser =
-                                                      await UsersTable()
-                                                          .insert({
-                                                    'PhoneNumber': _model
+                                            if (functions.returnLength(_model
+                                                    .signUpPhoneNumberController
+                                                    .text) >
+                                                6) {
+                                              if ((_model.singUpFullNameController.text != '') &&
+                                                  (_model.signUPPasswordController
+                                                              .text !=
+                                                          '') &&
+                                                  (_model.signUpPhoneNumberController
+                                                              .text !=
+                                                          '')) {
+                                                if ((_model.singUpDistrictValue !=
+                                                            null &&
+                                                        _model.singUpDistrictValue !=
+                                                            '') &&
+                                                    (_model.singUpProvinceValue !=
+                                                            null &&
+                                                        _model.singUpProvinceValue !=
+                                                            '')) {
+                                                  _model.checkPhoneNumber =
+                                                      await UsersGroup
+                                                          .checkPhoneNumberCall
+                                                          .call(
+                                                    phoneNumber: _model
                                                         .signUpPhoneNumberController
                                                         .text,
-                                                    'Password': _model
-                                                        .signUPPasswordController
-                                                        .text,
-                                                    'Balance': 0.0,
-                                                    'SectorID':
-                                                        _model.selectSectorID,
-                                                    'Profile': _model.uploadedFileUrl !=
-                                                                ''
-                                                        ? _model.uploadedFileUrl
-                                                        : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                                                    'FullName': _model
-                                                        .singUpFullNameController
-                                                        .text,
-                                                    'UserReferral': _model
-                                                        .selectReferralAndInvite,
-                                                    'IsMember': false,
-                                                    'Invite': _model
-                                                        .selectReferralAndInvite,
-                                                  });
-                                                  shouldSetState = true;
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder: (dialogContext) {
-                                                      return Dialog(
-                                                        elevation: 0,
-                                                        insetPadding:
-                                                            EdgeInsets.zero,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                    0.0, 0.0)
-                                                                .resolve(
-                                                                    Directionality.of(
-                                                                        context)),
-                                                        child: SizedBox(
-                                                          height: 200.0,
-                                                          width: 300.0,
-                                                          child:
-                                                              SinupAlertWidget(
-                                                            phoneNumber: _model
-                                                                .signUpPhoneNumberController
-                                                                .text,
-                                                            password: _model
-                                                                .signUPPasswordController
-                                                                .text,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      setState(() {}));
-
-                                                  if (Navigator.of(context)
-                                                      .canPop()) {
-                                                    context.pop();
-                                                  }
-                                                  context.pushNamed(
-                                                    'LoginPage',
-                                                    extra: <String, dynamic>{
-                                                      kTransitionInfoKey:
-                                                          const TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                        duration: Duration(
-                                                            milliseconds: 0),
-                                                      ),
-                                                    },
                                                   );
+                                                  shouldSetState = true;
+                                                  if ((_model.checkPhoneNumber
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    _model.createdUser =
+                                                        await UsersTable()
+                                                            .insert({
+                                                      'PhoneNumber': _model
+                                                          .signUpPhoneNumberController
+                                                          .text,
+                                                      'Password': _model
+                                                          .signUPPasswordController
+                                                          .text,
+                                                      'Balance': 0.0,
+                                                      'SectorID':
+                                                          _model.selectSectorID,
+                                                      'Profile': _model.uploadedFileUrl !=
+                                                                  ''
+                                                          ? _model
+                                                              .uploadedFileUrl
+                                                          : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                                      'FullName': _model
+                                                          .singUpFullNameController
+                                                          .text,
+                                                      'UserReferral': _model
+                                                          .selectReferralAndInvite,
+                                                      'IsMember': false,
+                                                      'Invite': _model
+                                                          .selectReferralAndInvite,
+                                                    });
+                                                    shouldSetState = true;
+                                                    // Notification
+                                                    await BroadcastNotificationTable()
+                                                        .insert({
+                                                      'Title':
+                                                          'Welcome ${_model.singUpFullNameController.text}',
+                                                      'Contents':
+                                                          'Welcome to our new member  ${_model.singUpFullNameController.text}',
+                                                      'Image': _model.uploadedFileUrl !=
+                                                                  ''
+                                                          ? _model
+                                                              .uploadedFileUrl
+                                                          : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                                    });
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder: (dialogContext) {
+                                                        return Dialog(
+                                                          elevation: 0,
+                                                          insetPadding:
+                                                              EdgeInsets.zero,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          alignment: const AlignmentDirectional(
+                                                                  0.0, 0.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
+                                                          child: SizedBox(
+                                                            height: 200.0,
+                                                            width: 300.0,
+                                                            child:
+                                                                SinupAlertWidget(
+                                                              phoneNumber: _model
+                                                                  .signUpPhoneNumberController
+                                                                  .text,
+                                                              password: _model
+                                                                  .signUPPasswordController
+                                                                  .text,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).then((value) =>
+                                                        setState(() {}));
 
-                                                  if (shouldSetState) {
-                                                    setState(() {});
+                                                    if (Navigator.of(context)
+                                                        .canPop()) {
+                                                      context.pop();
+                                                    }
+                                                    context.pushNamed(
+                                                      'LoginPage',
+                                                      extra: <String, dynamic>{
+                                                        kTransitionInfoKey:
+                                                            const TransitionInfo(
+                                                          hasTransition: true,
+                                                          transitionType:
+                                                              PageTransitionType
+                                                                  .fade,
+                                                          duration: Duration(
+                                                              milliseconds: 0),
+                                                        ),
+                                                      },
+                                                    );
+
+                                                    if (shouldSetState) {
+                                                      setState(() {});
+                                                    }
+                                                    return;
+                                                  } else {
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              'You can\'t use this phone number!'),
+                                                          content: const Text(
+                                                              'Please try another phone number.'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: const Text('Ok'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                    if (shouldSetState) {
+                                                      setState(() {});
+                                                    }
+                                                    return;
                                                   }
-                                                  return;
                                                 } else {
                                                   await showDialog(
                                                     context: context,
@@ -1361,9 +1461,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                         (alertDialogContext) {
                                                       return AlertDialog(
                                                         title: const Text(
-                                                            'You can\'t use this phone number!'),
+                                                            'District or Province is not selected'),
                                                         content: const Text(
-                                                            'Please try another phone number.'),
+                                                            'Please select district or province!'),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () =>
@@ -1387,9 +1487,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       (alertDialogContext) {
                                                     return AlertDialog(
                                                       title: const Text(
-                                                          'District is not selected'),
+                                                          'Some field are emty.'),
                                                       content: const Text(
-                                                          'Please select district!'),
+                                                          'Please make sure you input all your infomation!'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () =>
@@ -1412,9 +1512,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
                                                     title: const Text(
-                                                        'Some field are emty.'),
+                                                        'Phone number is not correct.'),
                                                     content: const Text(
-                                                        'Please make sure you input all your infomation!'),
+                                                        'Phone number can\'t be less then 6 number.'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1426,6 +1526,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   );
                                                 },
                                               );
+                                              if (shouldSetState) {
+                                                setState(() {});
+                                              }
+                                              return;
                                             }
 
                                             if (shouldSetState) {

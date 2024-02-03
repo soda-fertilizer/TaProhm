@@ -317,7 +317,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                       ),
                                                                 ),
                                                                 Text(
-                                                                  'Join: ${dateTimeFormat('d/M/y', functions.dataTimeConverter(getJsonField(
+                                                                  'Join: ${dateTimeFormat('d/M/y h:mm a', functions.dataTimeConverter(getJsonField(
                                                                         datasItem,
                                                                         r'''$.joindate''',
                                                                       ).toString()))}',
