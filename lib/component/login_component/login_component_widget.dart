@@ -719,7 +719,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                   0.0, 20.0, 0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
                                     'Create Account',
@@ -1366,7 +1366,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       .initFirebaseMessage();
                                                   shouldSetState = true;
                                                   if (_model.token != 'null') {
-                                                    await UsersTable().update(
+                                                    _model.updateToken =
+                                                        await UsersTable()
+                                                            .update(
                                                       data: {
                                                         'Token': _model.token,
                                                       },
@@ -1376,7 +1378,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                         _model.createdUser
                                                             ?.userID,
                                                       ),
+                                                      returnRows: true,
                                                     );
+                                                    shouldSetState = true;
                                                   }
                                                   setState(() {
                                                     FFAppState().UserInfo =
@@ -1423,7 +1427,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     context.pop();
                                                   }
                                                   context.pushNamedAuth(
-                                                    'LoginPage',
+                                                    'HomePage',
                                                     context.mounted,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
