@@ -126,81 +126,82 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
 
     return Align(
       alignment: const AlignmentDirectional(0.0, -1.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Container(
-              width: double.infinity,
-              height: MediaQuery.sizeOf(context).width >= 768.0 ? 530.0 : 630.0,
-              constraints: const BoxConstraints(
-                maxWidth: 570.0,
-              ),
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 4.0,
-                    color: Color(0x33000000),
-                    offset: Offset(0.0, 2.0),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  width: 2.0,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                width: double.infinity,
+                height:
+                    MediaQuery.sizeOf(context).width >= 768.0 ? 530.0 : 630.0,
+                constraints: const BoxConstraints(
+                  maxWidth: 570.0,
                 ),
-              ),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: const Alignment(0.0, 0),
-                      child: FlutterFlowButtonTabBar(
-                        useToggleButtonStyle: true,
-                        isScrollable: true,
-                        labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                        unselectedLabelStyle: const TextStyle(),
-                        labelColor: FlutterFlowTheme.of(context).primaryText,
-                        unselectedLabelColor:
-                            FlutterFlowTheme.of(context).secondaryText,
-                        backgroundColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                        unselectedBackgroundColor:
-                            FlutterFlowTheme.of(context).alternate,
-                        borderColor: FlutterFlowTheme.of(context).alternate,
-                        borderWidth: 2.0,
-                        borderRadius: 12.0,
-                        elevation: 0.0,
-                        labelPadding: const EdgeInsetsDirectional.fromSTEB(
-                            32.0, 0.0, 32.0, 0.0),
-                        tabs: const [
-                          Tab(
-                            text: 'Sign In',
-                          ),
-                          Tab(
-                            text: 'Sign Up',
-                          ),
-                        ],
-                        controller: _model.tabBarController,
-                        onTap: (i) async {
-                          [() async {}, () async {}][i]();
-                        },
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: const [
+                    BoxShadow(
+                      blurRadius: 4.0,
+                      color: Color(0x33000000),
+                      offset: Offset(0.0, 2.0),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(12.0),
+                  border: Border.all(
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    width: 2.0,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: const Alignment(0.0, 0),
+                        child: FlutterFlowButtonTabBar(
+                          useToggleButtonStyle: true,
+                          isScrollable: true,
+                          labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                          unselectedLabelStyle: const TextStyle(),
+                          labelColor: FlutterFlowTheme.of(context).primaryText,
+                          unselectedLabelColor:
+                              FlutterFlowTheme.of(context).secondaryText,
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          unselectedBackgroundColor:
+                              FlutterFlowTheme.of(context).alternate,
+                          borderColor: FlutterFlowTheme.of(context).alternate,
+                          borderWidth: 2.0,
+                          borderRadius: 12.0,
+                          elevation: 0.0,
+                          labelPadding: const EdgeInsetsDirectional.fromSTEB(
+                              32.0, 0.0, 32.0, 0.0),
+                          tabs: const [
+                            Tab(
+                              text: 'Sign In',
+                            ),
+                            Tab(
+                              text: 'Sign Up',
+                            ),
+                          ],
+                          controller: _model.tabBarController,
+                          onTap: (i) async {
+                            [() async {}, () async {}][i]();
+                          },
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: TabBarView(
-                        controller: _model.tabBarController,
-                        children: [
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, -1.0),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  24.0, 16.0, 24.0, 0.0),
-                              child: SingleChildScrollView(
+                      Expanded(
+                        child: TabBarView(
+                          controller: _model.tabBarController,
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, -1.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    24.0, 16.0, 24.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -709,15 +710,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       ],
                                     ),
                                   ],
-                                ),
-                              ).animateOnPageLoad(
-                                  animationsMap['columnOnPageLoadAnimation']!),
+                                ).animateOnPageLoad(animationsMap[
+                                    'columnOnPageLoadAnimation']!),
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 0.0),
-                            child: SingleChildScrollView(
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 20.0, 0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1581,16 +1580,17 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                 ].divide(const SizedBox(height: 10.0)),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ).animateOnPageLoad(animationsMap['containerOnPageLoadAnimation']!),
-          ),
-        ],
+              ).animateOnPageLoad(
+                  animationsMap['containerOnPageLoadAnimation']!),
+            ),
+          ],
+        ),
       ),
     );
   }
