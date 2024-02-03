@@ -1577,7 +1577,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       ),
                                     ),
                                   ),
-                                ].divide(const SizedBox(height: 10.0)),
+                                ].divide(const SizedBox(height: 5.0)),
                               ),
                             ),
                           ],
