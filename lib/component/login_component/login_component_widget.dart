@@ -732,7 +732,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       _model.token2 =
                                           await actions.initFirebaseMessage();
                                       await actions.printAction(
-                                        _model.selectReferralAndInvite,
+                                        _model.token2,
                                       );
 
                                       setState(() {});
