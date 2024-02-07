@@ -897,7 +897,6 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
-                                        maxLines: null,
                                         validator: _model
                                             .singUpFullNameControllerValidator
                                             .asValidator(context),
@@ -1091,7 +1090,6 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
-                                        maxLines: null,
                                         maxLength: 11,
                                         maxLengthEnforcement:
                                             MaxLengthEnforcement.enforced,
