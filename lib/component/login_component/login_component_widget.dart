@@ -844,7 +844,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -854,7 +854,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -864,7 +864,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -875,7 +875,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -918,7 +918,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -928,7 +928,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -938,7 +938,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -949,7 +949,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           suffixIcon: InkWell(
                                             onTap: () => setState(
@@ -1011,7 +1011,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -1021,7 +1021,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -1031,7 +1031,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -1042,7 +1042,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(20.0),
+                                                BorderRadius.circular(30.0),
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)

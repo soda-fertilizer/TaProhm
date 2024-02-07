@@ -1,6 +1,6 @@
 
 abstract class FFAppConstants {
-  static const String AppVersion = '1.1.2';
+  static const String AppVersion = '1.1.3';
   static const String BlurHash = 'LGB;KQWC0:V]S}bHIro1aPoeWVR-';
   static const String MapAndroid = 'AIzaSyDsMh4S0LNHpPrXi1Q5iJdY65hE0QobGKc';
   static const String MapIOS = 'AIzaSyBoMNE00U7ihboiXizPKqw0tDBv2GwHoXA';
