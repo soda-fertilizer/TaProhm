@@ -95,7 +95,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
-      initialIndex: 0,
+      initialIndex: 1,
     )..addListener(() => setState(() {}));
     _model.loginPhoneNumberController ??= TextEditingController();
     _model.loginPhoneNumberFocusNode ??= FocusNode();
@@ -815,9 +815,18 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 8.0, 0.0),
+                                  Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.8,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        width: 1.0,
+                                      ),
+                                    ),
                                     child: SizedBox(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.8,
@@ -836,25 +845,27 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium,
-                                          enabledBorder: OutlineInputBorder(
+                                          enabledBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                              color: Color(0x00000000),
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
-                                          focusedBorder: OutlineInputBorder(
+                                          focusedBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                              color: Color(0x00000000),
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -864,7 +875,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -875,20 +889,33 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
+                                        maxLines: null,
                                         validator: _model
                                             .singUpFullNameControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 8.0, 0.0),
+                                  Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.8,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        width: 1.0,
+                                      ),
+                                    ),
                                     child: SizedBox(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.8,
@@ -910,25 +937,27 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium,
-                                          enabledBorder: OutlineInputBorder(
+                                          enabledBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                              color: Color(0x00000000),
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
-                                          focusedBorder: OutlineInputBorder(
+                                          focusedBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                              color: Color(0x00000000),
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -938,7 +967,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
@@ -949,7 +981,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               width: 1.0,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(30.0),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           suffixIcon: InkWell(
                                             onTap: () => setState(
@@ -982,9 +1017,18 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 8.0, 0.0),
+                                  Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.8,
+                                    height: 40.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      border: Border.all(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        width: 1.0,
+                                      ),
+                                    ),
                                     child: SizedBox(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.8,
@@ -999,25 +1043,25 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           labelText: 'Phone',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    fontSize: 14.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium,
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
+                                            borderSide: const BorderSide(
+                                              color: Color(0x00000000),
                                               width: 1.0,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
                                           ),
                                           focusedBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
+                                            borderSide: const BorderSide(
+                                              color: Color(0x00000000),
                                               width: 1.0,
                                             ),
                                             borderRadius:
@@ -1047,6 +1091,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
+                                        maxLines: null,
                                         maxLength: 11,
                                         maxLengthEnforcement:
                                             MaxLengthEnforcement.enforced,
@@ -1068,10 +1113,12 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                   ),
                                   FutureBuilder<List<UsersRow>>(
                                     future: UsersTable().queryRows(
-                                      queryFn: (q) => q.eq(
-                                        'UserReferral',
-                                        '000002',
-                                      ),
+                                      queryFn: (q) => q
+                                          .eq(
+                                            'UserReferral',
+                                            '000002',
+                                          )
+                                          .order('UserID'),
                                     ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
