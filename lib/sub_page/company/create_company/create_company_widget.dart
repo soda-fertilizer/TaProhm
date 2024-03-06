@@ -900,63 +900,100 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                           );
                         },
                       ),
-                      FFButtonWidget(
-                        onPressed: () async {
-                          currentUserLocationValue =
-                              await getCurrentUserLocation(
-                                  defaultLocation: const LatLng(0.0, 0.0));
-                          setState(() {
-                            FFAppState().updateCreateCompanyHolderStruct(
-                              (e) => e
-                                ..name = _model.companyNameController.text
-                                ..phoneNumber =
-                                    _model.phoneNumberController.text
-                                ..telegramLink =
-                                    _model.telegramLinkController.text
-                                ..details = _model.textController5.text
-                                ..discount =
-                                    int.tryParse(_model.discountController.text)
-                                ..location = _model.getLocation ?? currentUserLocationValue
-                                ..profile = valueOrDefault<String>(
-                                  _model.uploadedFileUrl1,
-                                  'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                      Align(
+                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            currentUserLocationValue =
+                                await getCurrentUserLocation(
+                                    defaultLocation: const LatLng(0.0, 0.0));
+                            context.safePop();
+                          },
+                          text: 'Create',
+                          options: FFButtonOptions(
+                            width: MediaQuery.sizeOf(context).width * 0.8,
+                            height: 40.0,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
                                 ),
-                            );
-                          });
-                          if (Navigator.of(context).canPop()) {
-                            context.pop();
-                          }
-                          context.pushNamed(
-                            'CompanyPayment',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: const TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 0),
-                              ),
-                            },
-                          );
-                        },
-                        text: 'Next',
-                        options: FFButtonOptions(
-                          width: double.infinity,
-                          height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(20.0),
                           ),
-                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                      Align(
+                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            currentUserLocationValue =
+                                await getCurrentUserLocation(
+                                    defaultLocation: const LatLng(0.0, 0.0));
+                            setState(() {
+                              FFAppState().updateCreateCompanyHolderStruct(
+                                (e) => e
+                                  ..name = _model.companyNameController.text
+                                  ..phoneNumber =
+                                      _model.phoneNumberController.text
+                                  ..telegramLink =
+                                      _model.telegramLinkController.text
+                                  ..details = _model.textController5.text
+                                  ..discount = int.tryParse(
+                                      _model.discountController.text)
+                                  ..location = _model.getLocation ?? currentUserLocationValue
+                                  ..profile = valueOrDefault<String>(
+                                    _model.uploadedFileUrl1,
+                                    'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                  ),
+                              );
+                            });
+                            if (Navigator.of(context).canPop()) {
+                              context.pop();
+                            }
+                            context.pushNamed(
+                              'CompanyPayment',
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: const TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
+                          },
+                          text: 'Next',
+                          options: FFButtonOptions(
+                            width: MediaQuery.sizeOf(context).width * 0.8,
+                            height: 40.0,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                ),
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                         ),
                       ),
                     ].divide(const SizedBox(height: 10.0)),

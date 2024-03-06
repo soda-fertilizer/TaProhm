@@ -36,28 +36,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await actions.firebaseMessageRefresh(
-        () async {
-          unawaited(
-            () async {
-              await UsersTable().update(
-                data: {
-                  'Token': FFAppState().refreshFCMToken,
-                },
-                matchingRows: (rows) => rows.eq(
-                  'UserID',
-                  FFAppState().UserInfo.userID,
-                ),
-              );
-            }(),
-          );
-          setState(() {
-            FFAppState().updateUserInfoStruct(
-              (e) => e..token = FFAppState().refreshFCMToken,
+      if (!isWeb) {
+        await actions.firebaseMessageRefresh(
+          () async {
+            unawaited(
+              () async {
+                await UsersTable().update(
+                  data: {
+                    'Token': FFAppState().refreshFCMToken,
+                  },
+                  matchingRows: (rows) => rows.eq(
+                    'UserID',
+                    FFAppState().UserInfo.userID,
+                  ),
+                );
+              }(),
             );
-          });
-        },
-      );
+            setState(() {
+              FFAppState().updateUserInfoStruct(
+                (e) => e..token = FFAppState().refreshFCMToken,
+              );
+            });
+          },
+        );
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -1131,7 +1133,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       GoRouter.of(context)
                                           .clearRedirectLocation();
 
-                                      await actions.onesignalLogout();
                                       setState(() {
                                         FFAppState().deleteUserInfo();
                                         FFAppState().UserInfo = UserInfoStruct

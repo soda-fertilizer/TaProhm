@@ -548,31 +548,33 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             shouldSetState = true;
                                             if ((_model.login2?.succeeded ??
                                                 true)) {
-                                              _model.fcmToken = await actions
-                                                  .initFirebaseMessage();
-                                              shouldSetState = true;
-                                              if (_model.fcmToken != null &&
-                                                  _model.fcmToken != '') {
-                                                unawaited(
-                                                  () async {
-                                                    await UsersTable().update(
-                                                      data: {
-                                                        'Token':
-                                                            _model.fcmToken,
-                                                      },
-                                                      matchingRows: (rows) =>
-                                                          rows.eq(
-                                                        'UserID',
-                                                        UsersGroup.loginCall
-                                                            .userID(
-                                                          (_model.login2
-                                                                  ?.jsonBody ??
-                                                              ''),
+                                              if (!isWeb) {
+                                                _model.fcmToken = await actions
+                                                    .initFirebaseMessage();
+                                                shouldSetState = true;
+                                                if (_model.fcmToken != null &&
+                                                    _model.fcmToken != '') {
+                                                  unawaited(
+                                                    () async {
+                                                      await UsersTable().update(
+                                                        data: {
+                                                          'Token':
+                                                              _model.fcmToken,
+                                                        },
+                                                        matchingRows: (rows) =>
+                                                            rows.eq(
+                                                          'UserID',
+                                                          UsersGroup.loginCall
+                                                              .userID(
+                                                            (_model.login2
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  }(),
-                                                );
+                                                      );
+                                                    }(),
+                                                  );
+                                                }
                                               }
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
@@ -1399,25 +1401,28 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                         .createdUser?.userID
                                                         .toString(),
                                                   );
-                                                  _model.token = await actions
-                                                      .initFirebaseMessage();
-                                                  shouldSetState = true;
-                                                  if (_model.token != 'null') {
-                                                    _model.updateToken =
-                                                        await UsersTable()
-                                                            .update(
-                                                      data: {
-                                                        'Token': _model.token,
-                                                      },
-                                                      matchingRows: (rows) =>
-                                                          rows.eq(
-                                                        'UserID',
-                                                        _model.createdUser
-                                                            ?.userID,
-                                                      ),
-                                                      returnRows: true,
-                                                    );
+                                                  if (!isWeb) {
+                                                    _model.token = await actions
+                                                        .initFirebaseMessage();
                                                     shouldSetState = true;
+                                                    if (_model.token !=
+                                                        'null') {
+                                                      _model.updateToken =
+                                                          await UsersTable()
+                                                              .update(
+                                                        data: {
+                                                          'Token': _model.token,
+                                                        },
+                                                        matchingRows: (rows) =>
+                                                            rows.eq(
+                                                          'UserID',
+                                                          _model.createdUser
+                                                              ?.userID,
+                                                        ),
+                                                        returnRows: true,
+                                                      );
+                                                      shouldSetState = true;
+                                                    }
                                                   }
                                                   setState(() {
                                                     FFAppState().UserInfo =
@@ -1430,7 +1435,8 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       phoneNumber: _model
                                                           .createdUser
                                                           ?.phoneNumber,
-                                                      token: _model.token,
+                                                      token: _model
+                                                          .createdUser?.token,
                                                       sectorID: _model
                                                           .createdUser
                                                           ?.sectorID,
