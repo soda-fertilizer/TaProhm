@@ -32,7 +32,7 @@ class EditAccountModel extends FlutterFlowModel<EditAccountWidget> {
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
-  // Stores action output result for [Backend Call - Update Row] action in Button widget.
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
   List<UsersRow>? updatedUser;
 
   /// Initialization and disposal methods.

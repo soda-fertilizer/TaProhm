@@ -15,7 +15,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
@@ -129,6 +128,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -140,15 +140,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
@@ -168,221 +159,232 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     }
 
     return Builder(
-      builder: (context) => GestureDetector(
-        onTap: () => _model.unfocusNode.canRequestFocus
-            ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-            : FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          body: SafeArea(
-            top: true,
-            child: Stack(
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
+      builder: (context) => Title(
+          title: 'HomePage',
+          color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+          child: GestureDetector(
+            onTap: () => _model.unfocusNode.canRequestFocus
+                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                : FocusScope.of(context).unfocus(),
+            child: Scaffold(
+              key: scaffoldKey,
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              body: SafeArea(
+                top: true,
+                child: Stack(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primary,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            20.0, 20.0, 20.0, 10.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Ta Prohm',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineMedium
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    fontSize: 20.0,
-                                  ),
-                            ),
-                            Row(
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primary,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20.0, 20.0, 20.0, 10.0),
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                if (FFAppState().UserInfo.isMember)
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      if (Navigator.of(context).canPop()) {
-                                        context.pop();
-                                      }
-                                      context.pushNamed(
-                                        'Notification',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration: Duration(milliseconds: 0),
-                                          ),
+                                Text(
+                                  'Ta Prohm',
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        fontSize: 20.0,
+                                      ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    if (FFAppState().UserInfo.isMember)
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          if (Navigator.of(context).canPop()) {
+                                            context.pop();
+                                          }
+                                          context.pushNamed(
+                                            'Notification',
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  const TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                                duration:
+                                                    Duration(milliseconds: 0),
+                                              ),
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                    child: Icon(
-                                      Icons.notifications_sharp,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      size: 30.0,
-                                    ),
-                                  ),
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    if (Navigator.of(context).canPop()) {
-                                      context.pop();
-                                    }
-                                    context.pushNamed(
-                                      'SearchCompany',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 0),
+                                        child: Icon(
+                                          Icons.notifications_sharp,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBackground,
+                                          size: 30.0,
                                         ),
+                                      ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (Navigator.of(context).canPop()) {
+                                          context.pop();
+                                        }
+                                        context.pushNamed(
+                                          'SearchCompany',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.fade,
+                                              duration:
+                                                  Duration(milliseconds: 0),
+                                            ),
+                                          },
+                                        );
                                       },
-                                    );
-                                  },
-                                  child: Icon(
-                                    Icons.travel_explore,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    size: 28.0,
-                                  ),
+                                      child: Icon(
+                                        Icons.travel_explore,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        size: 28.0,
+                                      ),
+                                    ),
+                                  ].divide(const SizedBox(width: 10.0)),
                                 ),
                               ].divide(const SizedBox(width: 10.0)),
                             ),
-                          ].divide(const SizedBox(width: 10.0)),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 55.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
-                        child: Builder(
-                          builder: (context) {
-                            final provinces =
-                                FFAppState().ProvinceButton.toList();
-                            return SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(provinces.length,
-                                    (provincesIndex) {
-                                  final provincesItem =
-                                      provinces[provincesIndex];
-                                  return FFButtonWidget(
-                                    onPressed: () async {
-                                      setState(() {
-                                        _model.buttonClickindex =
-                                            provincesIndex;
-                                        _model.selectLocation =
-                                            provincesItem.location;
-                                      });
-                                    },
-                                    text: provincesItem.province,
-                                    options: FFButtonOptions(
-                                      height: 30.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          24.0, 0.0, 24.0, 0.0),
-                                      iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color: provincesIndex ==
-                                              _model.buttonClickindex
-                                          ? FlutterFlowTheme.of(context)
-                                              .secondary
-                                          : FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 12.0,
-                                          ),
-                                      elevation: 3.0,
-                                      borderSide: BorderSide(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondary,
-                                        width: 1.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(24.0),
-                                    ),
-                                  );
-                                }).divide(const SizedBox(width: 5.0)),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: FutureBuilder<List<CompaniesRow>>(
-                        future: FFAppState().company(
-                          requestFn: () => CompaniesTable().queryRows(
-                            queryFn: (q) => q
-                                .eq(
-                                  'IsApprove',
-                                  true,
-                                )
-                                .eq(
-                                  'IsActive',
-                                  true,
-                                ),
                           ),
                         ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
+                        Container(
+                          width: double.infinity,
+                          height: 55.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                5.0, 0.0, 5.0, 0.0),
+                            child: Builder(
+                              builder: (context) {
+                                final provinces =
+                                    FFAppState().ProvinceButton.toList();
+                                return SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: List.generate(provinces.length,
+                                        (provincesIndex) {
+                                      final provincesItem =
+                                          provinces[provincesIndex];
+                                      return FFButtonWidget(
+                                        onPressed: () async {
+                                          setState(() {
+                                            _model.buttonClickindex =
+                                                provincesIndex;
+                                            _model.selectLocation =
+                                                provincesItem.location;
+                                          });
+                                        },
+                                        text: provincesItem.province,
+                                        options: FFButtonOptions(
+                                          height: 30.0,
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
+                                          iconPadding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: provincesIndex ==
+                                                  _model.buttonClickindex
+                                              ? FlutterFlowTheme.of(context)
+                                                  .secondary
+                                              : FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 12.0,
+                                              ),
+                                          elevation: 3.0,
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            width: 1.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
+                                        ),
+                                      );
+                                    }).divide(const SizedBox(width: 5.0)),
                                   ),
-                                ),
-                              ),
-                            );
-                          }
-                          List<CompaniesRow> companyContainerCompaniesRowList =
-                              snapshot.data!;
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).alternate,
+                                );
+                              },
                             ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 1.0, 0.0, 0.0),
-                              child: Builder(
-                                builder: (context) {
-                                  final homePageVar = companyContainerCompaniesRowList
-                                      .sortedList((e) =>
-                                          functions.areSimilarLocation(
+                          ),
+                        ),
+                        Expanded(
+                          child: FutureBuilder<List<CompaniesRow>>(
+                            future: FFAppState().company(
+                              requestFn: () => CompaniesTable().queryRows(
+                                queryFn: (q) => q
+                                    .eq(
+                                      'IsApprove',
+                                      true,
+                                    )
+                                    .eq(
+                                      'IsActive',
+                                      true,
+                                    ),
+                              ),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<CompaniesRow>
+                                  companyContainerCompaniesRowList =
+                                  snapshot.data!;
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).alternate,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 1.0, 0.0, 0.0),
+                                  child: Builder(
+                                    builder: (context) {
+                                      final homePageVar = companyContainerCompaniesRowList
+                                          .sortedList((e) => functions.areSimilarLocation(
                                               e.latitude,
                                               functions
                                                   .splitLatLng(_model.selectLocation ?? currentUserLocationValue)
@@ -391,535 +393,509 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               functions
                                                   .splitLatLng(_model.selectLocation ?? currentUserLocationValue)
                                                   ?.last)!)
-                                      .toList();
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: homePageVar.length,
-                                    itemBuilder: (context, homePageVarIndex) {
-                                      final homePageVarItem =
-                                          homePageVar[homePageVarIndex];
-                                      return Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 5.0, 0.0, 5.0),
-                                        child: Material(
-                                          color: Colors.transparent,
-                                          elevation: 1.0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(0.0),
-                                          ),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                          .toList();
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: homePageVar.length,
+                                        itemBuilder:
+                                            (context, homePageVarIndex) {
+                                          final homePageVarItem =
+                                              homePageVar[homePageVarIndex];
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 5.0, 0.0, 5.0),
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              elevation: 1.0,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(0.0),
+                                              ),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .primaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(0.0),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Container(
-                                                  height: 72.0,
-                                                  decoration: const BoxDecoration(),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(10.0),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        setState(() {
-                                                          FFAppState()
-                                                              .updateShopHolderStruct(
-                                                            (e) => e
-                                                              ..id =
-                                                                  homePageVarItem
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Container(
+                                                      height: 72.0,
+                                                      decoration:
+                                                          const BoxDecoration(),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.all(
+                                                            10.0),
+                                                        child: InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            setState(() {
+                                                              FFAppState()
+                                                                  .updateShopHolderStruct(
+                                                                (e) => e
+                                                                  ..id = homePageVarItem
                                                                       .companyID
-                                                              ..latitude =
-                                                                  homePageVarItem
-                                                                      .latitude
-                                                              ..longitude =
-                                                                  homePageVarItem
-                                                                      .longitude,
-                                                          );
-                                                        });
-                                                        unawaited(
-                                                          () async {
-                                                            await EdgeFunctionGroup
-                                                                .increaseCompanyViewCountCall
-                                                                .call(
-                                                              companyId:
-                                                                  homePageVarItem
-                                                                      .companyID,
+                                                                  ..latitude =
+                                                                      homePageVarItem
+                                                                          .latitude
+                                                                  ..longitude =
+                                                                      homePageVarItem
+                                                                          .longitude,
+                                                              );
+                                                            });
+                                                            unawaited(
+                                                              () async {
+                                                                await EdgeFunctionGroup
+                                                                    .increaseCompanyViewCountCall
+                                                                    .call(
+                                                                  companyId:
+                                                                      homePageVarItem
+                                                                          .companyID,
+                                                                );
+                                                              }(),
                                                             );
-                                                          }(),
-                                                        );
-                                                        if (Navigator.of(
-                                                                context)
-                                                            .canPop()) {
-                                                          context.pop();
-                                                        }
-                                                        context.pushNamed(
-                                                          'Locator',
-                                                          queryParameters: {
-                                                            'moveLocation':
-                                                                serializeParam(
-                                                              functions.returnLatLng(
-                                                                  homePageVarItem
-                                                                      .latitude,
-                                                                  homePageVarItem
-                                                                      .longitude),
-                                                              ParamType.LatLng,
-                                                            ),
-                                                            'clickCompany':
-                                                                serializeParam(
-                                                              true,
-                                                              ParamType.bool,
-                                                            ),
-                                                          }.withoutNulls,
-                                                          extra: <String,
-                                                              dynamic>{
-                                                            kTransitionInfoKey:
-                                                                const TransitionInfo(
-                                                              hasTransition:
+                                                            if (Navigator.of(
+                                                                    context)
+                                                                .canPop()) {
+                                                              context.pop();
+                                                            }
+                                                            context.pushNamed(
+                                                              'Locator',
+                                                              queryParameters: {
+                                                                'moveLocation':
+                                                                    serializeParam(
+                                                                  functions.returnLatLng(
+                                                                      homePageVarItem
+                                                                          .latitude,
+                                                                      homePageVarItem
+                                                                          .longitude),
+                                                                  ParamType
+                                                                      .LatLng,
+                                                                ),
+                                                                'clickCompany':
+                                                                    serializeParam(
                                                                   true,
-                                                              transitionType:
-                                                                  PageTransitionType
-                                                                      .fade,
-                                                              duration: Duration(
-                                                                  milliseconds:
-                                                                      0),
-                                                            ),
+                                                                  ParamType
+                                                                      .bool,
+                                                                ),
+                                                              }.withoutNulls,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                kTransitionInfoKey:
+                                                                    const TransitionInfo(
+                                                                  hasTransition:
+                                                                      true,
+                                                                  transitionType:
+                                                                      PageTransitionType
+                                                                          .fade,
+                                                                  duration: Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                                ),
+                                                              },
+                                                            );
                                                           },
-                                                        );
-                                                      },
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        100.0),
-                                                            child:
-                                                                CachedNetworkImage(
-                                                              fadeInDuration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          500),
-                                                              fadeOutDuration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          500),
-                                                              imageUrl:
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                homePageVarItem
-                                                                    .companyProfile,
-                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/s-m-e-locator-vgu6pa/assets/u2axwx4lw1p4/1.png',
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            100.0),
+                                                                child:
+                                                                    CachedNetworkImage(
+                                                                  fadeInDuration:
+                                                                      const Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                  fadeOutDuration:
+                                                                      const Duration(
+                                                                          milliseconds:
+                                                                              500),
+                                                                  imageUrl:
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                    homePageVarItem
+                                                                        .companyProfile,
+                                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/s-m-e-locator-vgu6pa/assets/u2axwx4lw1p4/1.png',
+                                                                  ),
+                                                                  width: 46.0,
+                                                                  height: 40.0,
+                                                                  fit: BoxFit
+                                                                      .contain,
+                                                                ),
                                                               ),
-                                                              width: 46.0,
-                                                              height: 40.0,
-                                                              fit: BoxFit
-                                                                  .contain,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding: const EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           12.0,
                                                                           0.0,
                                                                           0.0,
                                                                           0.0),
-                                                              child: Container(
-                                                                decoration:
-                                                                    const BoxDecoration(),
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      homePageVarItem
-                                                                          .companyName,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .headlineSmall
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Outfit',
-                                                                            fontSize:
-                                                                                14.0,
-                                                                          ),
-                                                                    ),
-                                                                    Expanded(
-                                                                      child: FutureBuilder<
-                                                                          ApiCallResponse>(
-                                                                        future: CompanyGroup
-                                                                            .companyRatingCall
-                                                                            .call(
-                                                                          id: homePageVarItem
-                                                                              .companyID,
-                                                                        ),
-                                                                        builder:
-                                                                            (context,
-                                                                                snapshot) {
-                                                                          // Customize what your widget looks like when it's loading.
-                                                                          if (!snapshot
-                                                                              .hasData) {
-                                                                            return Center(
-                                                                              child: SizedBox(
-                                                                                width: 50.0,
-                                                                                height: 50.0,
-                                                                                child: CircularProgressIndicator(
-                                                                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                                                                    FlutterFlowTheme.of(context).primary,
-                                                                                  ),
-                                                                                ),
+                                                                  child:
+                                                                      Container(
+                                                                    decoration:
+                                                                        const BoxDecoration(),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
+                                                                          homePageVarItem
+                                                                              .companyName,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .headlineSmall
+                                                                              .override(
+                                                                                fontFamily: 'Outfit',
+                                                                                fontSize: 14.0,
                                                                               ),
-                                                                            );
-                                                                          }
-                                                                          final containerCompanyRatingResponse =
-                                                                              snapshot.data!;
-                                                                          return Container(
-                                                                            width:
-                                                                                double.infinity,
-                                                                            height:
-                                                                                20.0,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                        ),
+                                                                        Expanded(
+                                                                          child:
+                                                                              FutureBuilder<ApiCallResponse>(
+                                                                            future:
+                                                                                CompanyGroup.companyRatingCall.call(
+                                                                              id: homePageVarItem.companyID,
                                                                             ),
-                                                                            child:
-                                                                                Row(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              children: [
-                                                                                Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  children: [
-                                                                                    Text(
-                                                                                      'Rate: ',
-                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                            fontFamily: 'Readex Pro',
-                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                            fontSize: 12.0,
-                                                                                          ),
+                                                                            builder:
+                                                                                (context, snapshot) {
+                                                                              // Customize what your widget looks like when it's loading.
+                                                                              if (!snapshot.hasData) {
+                                                                                return Center(
+                                                                                  child: SizedBox(
+                                                                                    width: 50.0,
+                                                                                    height: 50.0,
+                                                                                    child: CircularProgressIndicator(
+                                                                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                        FlutterFlowTheme.of(context).primary,
+                                                                                      ),
                                                                                     ),
-                                                                                    RatingBarIndicator(
-                                                                                      itemBuilder: (context, index) => const Icon(
-                                                                                        Icons.star_rounded,
-                                                                                        color: Color(0xFFC3A304),
-                                                                                      ),
-                                                                                      direction: Axis.horizontal,
-                                                                                      rating: valueOrDefault<double>(
-                                                                                        CompanyGroup.companyRatingCall
-                                                                                            .rating(
-                                                                                              containerCompanyRatingResponse.jsonBody,
-                                                                                            )
-                                                                                            ?.toDouble(),
-                                                                                        0.0,
-                                                                                      ),
-                                                                                      unratedColor: const Color(0x67C3A304),
-                                                                                      itemCount: 5,
-                                                                                      itemSize: 15.0,
-                                                                                    ),
-                                                                                    if (false)
-                                                                                      Text(
-                                                                                        '(${valueOrDefault<String>(
-                                                                                          CompanyGroup.companyRatingCall
-                                                                                              .ratingCount(
-                                                                                                containerCompanyRatingResponse.jsonBody,
-                                                                                              )
-                                                                                              ?.toString(),
-                                                                                          '0',
-                                                                                        )})',
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium,
-                                                                                      ),
-                                                                                  ],
-                                                                                ),
-                                                                                Container(
-                                                                                  width: 70.0,
-                                                                                  height: 100.0,
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                   ),
-                                                                                  alignment: const AlignmentDirectional(-1.0, 0.0),
-                                                                                  child: SingleChildScrollView(
-                                                                                    child: Column(
+                                                                                );
+                                                                              }
+                                                                              final containerCompanyRatingResponse = snapshot.data!;
+                                                                              return Container(
+                                                                                width: double.infinity,
+                                                                                height: 20.0,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                ),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Row(
                                                                                       mainAxisSize: MainAxisSize.max,
-                                                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                                                       children: [
-                                                                                        Row(
-                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                          children: [
-                                                                                            Icon(
-                                                                                              Icons.remove_red_eye,
-                                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                                              size: 15.0,
-                                                                                            ),
-                                                                                            Text(
-                                                                                              valueOrDefault<String>(
-                                                                                                formatNumber(
-                                                                                                  homePageVarItem.viewCounts,
-                                                                                                  formatType: FormatType.compact,
-                                                                                                ),
-                                                                                                '0',
+                                                                                        Text(
+                                                                                          'Rate: ',
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                fontFamily: 'Readex Pro',
+                                                                                                color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                fontSize: 12.0,
                                                                                               ),
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    fontFamily: 'Readex Pro',
-                                                                                                    fontSize: 10.0,
-                                                                                                  ),
-                                                                                            ),
-                                                                                          ].divide(const SizedBox(width: 5.0)),
                                                                                         ),
+                                                                                        RatingBarIndicator(
+                                                                                          itemBuilder: (context, index) => const Icon(
+                                                                                            Icons.star_rounded,
+                                                                                            color: Color(0xFFC3A304),
+                                                                                          ),
+                                                                                          direction: Axis.horizontal,
+                                                                                          rating: valueOrDefault<double>(
+                                                                                            CompanyGroup.companyRatingCall
+                                                                                                .rating(
+                                                                                                  containerCompanyRatingResponse.jsonBody,
+                                                                                                )
+                                                                                                ?.toDouble(),
+                                                                                            0.0,
+                                                                                          ),
+                                                                                          unratedColor: const Color(0x67C3A304),
+                                                                                          itemCount: 5,
+                                                                                          itemSize: 15.0,
+                                                                                        ),
+                                                                                        if (false)
+                                                                                          Text(
+                                                                                            '(${valueOrDefault<String>(
+                                                                                              CompanyGroup.companyRatingCall
+                                                                                                  .ratingCount(
+                                                                                                    containerCompanyRatingResponse.jsonBody,
+                                                                                                  )
+                                                                                                  ?.toString(),
+                                                                                              '0',
+                                                                                            )})',
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                          ),
                                                                                       ],
                                                                                     ),
-                                                                                  ),
+                                                                                    Container(
+                                                                                      width: 70.0,
+                                                                                      height: 100.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                      ),
+                                                                                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                                                                                      child: SingleChildScrollView(
+                                                                                        child: Column(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                                          children: [
+                                                                                            Row(
+                                                                                              mainAxisSize: MainAxisSize.max,
+                                                                                              children: [
+                                                                                                Icon(
+                                                                                                  Icons.remove_red_eye,
+                                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                  size: 15.0,
+                                                                                                ),
+                                                                                                Text(
+                                                                                                  valueOrDefault<String>(
+                                                                                                    formatNumber(
+                                                                                                      homePageVarItem.viewCounts,
+                                                                                                      formatType: FormatType.compact,
+                                                                                                    ),
+                                                                                                    '0',
+                                                                                                  ),
+                                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                        fontFamily: 'Readex Pro',
+                                                                                                        fontSize: 10.0,
+                                                                                                      ),
+                                                                                                ),
+                                                                                              ].divide(const SizedBox(width: 5.0)),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ].divide(const SizedBox(width: 15.0)),
                                                                                 ),
-                                                                              ].divide(const SizedBox(width: 15.0)),
-                                                                            ),
-                                                                          );
-                                                                        },
-                                                                      ),
+                                                                              );
+                                                                            },
+                                                                          ),
+                                                                        ),
+                                                                      ],
                                                                     ),
-                                                                  ],
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
+                                                            ],
                                                           ),
-                                                        ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  width: double.infinity,
-                                                  height: 215.0,
-                                                  decoration: const BoxDecoration(),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(10.0, 0.0,
-                                                                10.0, 0.0),
-                                                    child: Builder(
-                                                      builder: (context) {
-                                                        final images =
-                                                            homePageVarItem
-                                                                .companyImages
-                                                                .toList();
-                                                        return SingleChildScrollView(
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: List
-                                                                .generate(
+                                                    Container(
+                                                      width: double.infinity,
+                                                      height: 215.0,
+                                                      decoration:
+                                                          const BoxDecoration(),
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    10.0,
+                                                                    0.0,
+                                                                    10.0,
+                                                                    0.0),
+                                                        child: Builder(
+                                                          builder: (context) {
+                                                            final images =
+                                                                homePageVarItem
+                                                                    .companyImages
+                                                                    .toList();
+                                                            return SingleChildScrollView(
+                                                              scrollDirection:
+                                                                  Axis.horizontal,
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: List.generate(
                                                                     images
                                                                         .length,
                                                                     (imagesIndex) {
-                                                              final imagesItem =
-                                                                  images[
-                                                                      imagesIndex];
-                                                              return Stack(
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                                  final imagesItem =
+                                                                      images[
+                                                                          imagesIndex];
+                                                                  return Stack(
+                                                                    children: [
+                                                                      Padding(
+                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             0.0,
                                                                             20.0),
-                                                                    child:
-                                                                        Container(
-                                                                      width:
-                                                                          150.0,
-                                                                      height: double
-                                                                          .infinity,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(15.0),
-                                                                      ),
-                                                                      child:
-                                                                          InkWell(
-                                                                        splashColor:
-                                                                            Colors.transparent,
-                                                                        focusColor:
-                                                                            Colors.transparent,
-                                                                        hoverColor:
-                                                                            Colors.transparent,
-                                                                        highlightColor:
-                                                                            Colors.transparent,
-                                                                        onTap:
-                                                                            () async {
-                                                                          await showModalBottomSheet(
-                                                                            isScrollControlled:
-                                                                                true,
-                                                                            backgroundColor:
-                                                                                const Color(0x77000000),
-                                                                            useSafeArea:
-                                                                                true,
-                                                                            context:
-                                                                                context,
-                                                                            builder:
-                                                                                (context) {
-                                                                              return GestureDetector(
-                                                                                onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
-                                                                                child: Padding(
-                                                                                  padding: MediaQuery.viewInsetsOf(context),
-                                                                                  child: ImageGalleryWidget(
-                                                                                    images: homePageVarItem.companyImages,
-                                                                                    index: imagesIndex,
-                                                                                  ),
-                                                                                ),
-                                                                              );
-                                                                            },
-                                                                          ).then((value) =>
-                                                                              safeSetState(() {}));
-                                                                        },
                                                                         child:
-                                                                            ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
+                                                                            Container(
+                                                                          width:
+                                                                              150.0,
+                                                                          height:
+                                                                              double.infinity,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(15.0),
+                                                                          ),
                                                                           child:
-                                                                              CachedNetworkImage(
-                                                                            fadeInDuration:
-                                                                                const Duration(milliseconds: 500),
-                                                                            fadeOutDuration:
-                                                                                const Duration(milliseconds: 500),
-                                                                            imageUrl:
-                                                                                imagesItem,
-                                                                            width:
-                                                                                300.0,
-                                                                            height:
-                                                                                200.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
+                                                                              InkWell(
+                                                                            splashColor:
+                                                                                Colors.transparent,
+                                                                            focusColor:
+                                                                                Colors.transparent,
+                                                                            hoverColor:
+                                                                                Colors.transparent,
+                                                                            highlightColor:
+                                                                                Colors.transparent,
+                                                                            onTap:
+                                                                                () async {
+                                                                              await showModalBottomSheet(
+                                                                                isScrollControlled: true,
+                                                                                backgroundColor: const Color(0x77000000),
+                                                                                useSafeArea: true,
+                                                                                context: context,
+                                                                                builder: (context) {
+                                                                                  return GestureDetector(
+                                                                                    onTap: () => _model.unfocusNode.canRequestFocus ? FocusScope.of(context).requestFocus(_model.unfocusNode) : FocusScope.of(context).unfocus(),
+                                                                                    child: Padding(
+                                                                                      padding: MediaQuery.viewInsetsOf(context),
+                                                                                      child: ImageGalleryWidget(
+                                                                                        images: homePageVarItem.companyImages,
+                                                                                        index: imagesIndex,
+                                                                                      ),
+                                                                                    ),
+                                                                                  );
+                                                                                },
+                                                                              ).then((value) => safeSetState(() {}));
+                                                                            },
+                                                                            child:
+                                                                                ClipRRect(
+                                                                              borderRadius: BorderRadius.circular(8.0),
+                                                                              child: CachedNetworkImage(
+                                                                                fadeInDuration: const Duration(milliseconds: 500),
+                                                                                fadeOutDuration: const Duration(milliseconds: 500),
+                                                                                imageUrl: imagesItem,
+                                                                                width: 300.0,
+                                                                                height: 200.0,
+                                                                                fit: BoxFit.cover,
+                                                                              ),
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  ),
-                                                                  if (homePageVarItem
-                                                                          .discount !=
-                                                                      0.0)
-                                                                    Container(
-                                                                      width:
-                                                                          70.0,
-                                                                      height:
-                                                                          30.0,
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .error,
-                                                                        borderRadius:
-                                                                            const BorderRadius.only(
-                                                                          bottomLeft:
-                                                                              Radius.circular(0.0),
-                                                                          bottomRight:
-                                                                              Radius.circular(0.0),
-                                                                          topLeft:
-                                                                              Radius.circular(8.0),
-                                                                          topRight:
-                                                                              Radius.circular(0.0),
-                                                                        ),
-                                                                      ),
-                                                                      alignment:
-                                                                          const AlignmentDirectional(
+                                                                      if (homePageVarItem
+                                                                              .discount !=
+                                                                          0.0)
+                                                                        Container(
+                                                                          width:
+                                                                              70.0,
+                                                                          height:
+                                                                              30.0,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).error,
+                                                                            borderRadius:
+                                                                                const BorderRadius.only(
+                                                                              bottomLeft: Radius.circular(0.0),
+                                                                              bottomRight: Radius.circular(0.0),
+                                                                              topLeft: Radius.circular(8.0),
+                                                                              topRight: Radius.circular(0.0),
+                                                                            ),
+                                                                          ),
+                                                                          alignment: const AlignmentDirectional(
                                                                               0.0,
                                                                               0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        '- ${formatNumber(
-                                                                          homePageVarItem
-                                                                              .discount,
-                                                                          formatType:
-                                                                              FormatType.custom,
-                                                                          format:
-                                                                              '',
-                                                                          locale:
-                                                                              '',
-                                                                        )}% Off',
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Readex Pro',
-                                                                              color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                              fontSize: 10.0,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                ],
-                                                              );
-                                                            }).divide(const SizedBox(
-                                                                width: 10.0)),
-                                                          ),
-                                                        );
-                                                      },
+                                                                          child:
+                                                                              Text(
+                                                                            '- ${formatNumber(
+                                                                              homePageVarItem.discount,
+                                                                              formatType: FormatType.custom,
+                                                                              format: '',
+                                                                              locale: '',
+                                                                            )}% Off',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Readex Pro',
+                                                                                  color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                  fontSize: 10.0,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                    ],
+                                                                  );
+                                                                }).divide(const SizedBox(
+                                                                    width:
+                                                                        10.0)),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
+                                          );
+                                        },
                                       );
                                     },
-                                  );
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        wrapWithModel(
+                          model: _model.navPaddingModel,
+                          updateCallback: () => setState(() {}),
+                          child: const NavPaddingWidget(),
+                        ),
+                      ],
                     ),
-                    wrapWithModel(
-                      model: _model.navPaddingModel,
-                      updateCallback: () => setState(() {}),
-                      child: const NavPaddingWidget(),
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 1.0),
+                      child: wrapWithModel(
+                        model: _model.navBarModel,
+                        updateCallback: () => setState(() {}),
+                        child: const NavBarWidget(
+                          selectPageIndex: 1,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
-                  child: wrapWithModel(
-                    model: _model.navBarModel,
-                    updateCallback: () => setState(() {}),
-                    child: const NavBarWidget(
-                      selectPageIndex: 1,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 }

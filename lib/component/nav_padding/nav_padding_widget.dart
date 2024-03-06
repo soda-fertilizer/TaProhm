@@ -24,6 +24,8 @@ class _NavPaddingWidgetState extends State<NavPaddingWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => NavPaddingModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

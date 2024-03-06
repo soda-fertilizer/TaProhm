@@ -18,11 +18,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<String?> initFirebaseMessage() async {
   // Add your function code here!
-  if (isAndroid || isiOS) {
-    await FirebaseMessaging.instance.getAPNSToken();
-    await FirebaseMessaging.instance.subscribeToTopic('total-users');
-    final String? token = await FirebaseMessaging.instance.getToken();
-    return token!;
-  }
-  return 'null';
+
+  await FirebaseMessaging.instance.getAPNSToken();
+  await FirebaseMessaging.instance.subscribeToTopic('total-users');
+  final String? token = await FirebaseMessaging.instance.getToken();
+  return token!;
 }

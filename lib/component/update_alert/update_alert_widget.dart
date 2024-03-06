@@ -25,6 +25,8 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => UpdateAlertModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

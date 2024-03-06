@@ -36,6 +36,8 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.storagePermisson();
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -10,7 +10,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'single_company_map_model.dart';
 export 'single_company_map_model.dart';
@@ -56,6 +55,7 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -67,15 +67,6 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
@@ -128,91 +119,97 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
           );
         }
         List<CompaniesRow> singleCompanyMapCompaniesRowList = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SafeArea(
-              top: true,
-              child: Stack(
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
+        return Title(
+            title: 'SingleCompanyMap',
+            color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+            child: GestureDetector(
+              onTap: () => _model.unfocusNode.canRequestFocus
+                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                  : FocusScope.of(context).unfocus(),
+              child: Scaffold(
+                key: scaffoldKey,
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                body: SafeArea(
+                  top: true,
+                  child: Stack(
                     children: [
-                      Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(),
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: custom_widgets.CustomMap(
-                              width: double.infinity,
-                              height: double.infinity,
-                              center: functions.returnLatLng(
-                                  widget.companyLatitude,
-                                  widget.companyLongitude),
-                              cuLocation: singleCompanyMapCompaniesRowList,
-                              userCurrentLocation: currentUserLocationValue!,
-                              showShop: () async {
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  enableDrag: false,
-                                  context: context,
-                                  builder: (context) {
-                                    return GestureDetector(
-                                      onTap: () => _model
-                                              .unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
-                                      child: Padding(
-                                        padding:
-                                            MediaQuery.viewInsetsOf(context),
-                                        child: SizedBox(
-                                          height: 200.0,
-                                          child: ShowShopWidget(
-                                            locationPara:
-                                                FFAppState().shopHolder,
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: custom_widgets.CustomMap(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  center: functions.returnLatLng(
+                                      widget.companyLatitude,
+                                      widget.companyLongitude),
+                                  cuLocation: singleCompanyMapCompaniesRowList,
+                                  userCurrentLocation:
+                                      currentUserLocationValue!,
+                                  showShop: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: SizedBox(
+                                              height: 200.0,
+                                              child: ShowShopWidget(
+                                                locationPara:
+                                                    FFAppState().shopHolder,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    );
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
                                   },
-                                ).then((value) => safeSetState(() {}));
-                              },
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 1.0),
+                            child: wrapWithModel(
+                              model: _model.navPaddingModel,
+                              updateCallback: () => setState(() {}),
+                              child: const NavPaddingWidget(),
+                            ),
+                          ),
+                        ],
                       ),
                       Align(
                         alignment: const AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
-                          model: _model.navPaddingModel,
+                          model: _model.navBarModel,
                           updateCallback: () => setState(() {}),
-                          child: const NavPaddingWidget(),
+                          child: const NavBarWidget(
+                            selectPageIndex: 2,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 1.0),
-                    child: wrapWithModel(
-                      model: _model.navBarModel,
-                      updateCallback: () => setState(() {}),
-                      child: const NavBarWidget(
-                        selectPageIndex: 2,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        );
+            ));
       },
     );
   }

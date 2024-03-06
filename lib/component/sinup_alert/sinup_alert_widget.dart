@@ -32,6 +32,8 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SinupAlertModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

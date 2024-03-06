@@ -18,11 +18,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future firebaseMessageRefresh(Future<dynamic> Function() refresh) async {
   // Add your function code here!
-  if (isAndroid || isiOS) {
-    await FirebaseMessaging.instance.getAPNSToken();
-    await FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
-      FFAppState().refreshFCMToken = fcmToken;
-      refresh();
-    });
-  }
+
+  await FirebaseMessaging.instance.getAPNSToken();
+  await FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
+    FFAppState().refreshFCMToken = fcmToken;
+    refresh();
+  });
 }

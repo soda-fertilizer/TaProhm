@@ -111,6 +111,8 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
 
     _model.signUpPhoneNumberController ??= TextEditingController();
     _model.signUpPhoneNumberFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -223,7 +225,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       'Welcome Back',
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
-                                          .headlineMedium,
+                                          .headlineMedium
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            fontSize: 22.0,
+                                          ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -413,6 +419,81 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
                                               RegExp('^[^\\s]*\$'))
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 15.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Align(
+                                            alignment:
+                                                const AlignmentDirectional(0.0, 0.0),
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 0.0, 10.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await launchURL(
+                                                      'https://t.me/TaProhmAppSupport');
+                                                },
+                                                child: Text(
+                                                  'Forgot password',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color:
+                                                            const Color(0xFF1C81E0),
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment:
+                                                const AlignmentDirectional(0.0, 0.0),
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 0.0, 10.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await launchURL(
+                                                      'https://t.me/informal_economy');
+                                                },
+                                                child: Text(
+                                                  'Support',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        color:
+                                                            const Color(0xFF1C81E0),
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -642,73 +723,6 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                       ),
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 10.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await launchURL(
-                                                    'https://t.me/TaProhmAppSupport');
-                                              },
-                                              child: Text(
-                                                'Change password',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF1C81E0),
-                                                    ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 10.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await launchURL(
-                                                    'https://t.me/informal_economy');
-                                              },
-                                              child: Text(
-                                                'Support',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF1C81E0),
-                                                    ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
                                   ],
                                 ).animateOnPageLoad(animationsMap[
                                     'columnOnPageLoadAnimation']!),
@@ -721,11 +735,6 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Create Account',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyLarge,
-                                  ),
                                   InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -813,6 +822,15 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         ),
                                         fit: BoxFit.cover,
                                       ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 5.0, 0.0, 5.0),
+                                    child: Text(
+                                      'Picture Profile',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge,
                                     ),
                                   ),
                                   Container(
@@ -1039,7 +1057,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
-                                          labelText: 'Phone',
+                                          labelText: 'Phone number',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
                                                   .labelMedium
@@ -1116,7 +1134,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             'UserReferral',
                                             '000002',
                                           )
-                                          .order('UserID'),
+                                          .order('UserID', ascending: true),
                                     ),
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
@@ -1293,32 +1311,6 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.8,
                                     decoration: const BoxDecoration(),
-                                  ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 10.0),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          await launchURL(
-                                              'https://t.me/informal_economy');
-                                        },
-                                        child: Text(
-                                          'Support',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color: const Color(0xFF1C81E0),
-                                              ),
-                                        ),
-                                      ),
-                                    ),
                                   ),
                                   Align(
                                     alignment: const AlignmentDirectional(0.0, 0.0),

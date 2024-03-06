@@ -10,7 +10,6 @@ import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'locator_model.dart';
 export 'locator_model.dart';
@@ -94,6 +93,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
         .then((loc) => setState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -105,15 +105,6 @@ class _LocatorWidgetState extends State<LocatorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
@@ -166,138 +157,145 @@ class _LocatorWidgetState extends State<LocatorWidget> {
           );
         }
         List<CompaniesRow> locatorCompaniesRowList = snapshot.data!;
-        return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).primary,
-              automaticallyImplyLeading: false,
-              title: Text(
-                'Locator',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Outfit',
-                      color: Colors.white,
-                      fontSize: 20.0,
-                    ),
-              ),
-              actions: const [],
-              centerTitle: false,
-              elevation: 2.0,
-            ),
-            body: SafeArea(
-              top: true,
-              child: Stack(
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
+        return Title(
+            title: 'Locator',
+            color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+            child: GestureDetector(
+              onTap: () => _model.unfocusNode.canRequestFocus
+                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                  : FocusScope.of(context).unfocus(),
+              child: Scaffold(
+                key: scaffoldKey,
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                appBar: AppBar(
+                  backgroundColor: FlutterFlowTheme.of(context).primary,
+                  automaticallyImplyLeading: false,
+                  title: Text(
+                    'Locator',
+                    style: FlutterFlowTheme.of(context).headlineMedium.override(
+                          fontFamily: 'Outfit',
+                          color: Colors.white,
+                          fontSize: 20.0,
+                        ),
+                  ),
+                  actions: const [],
+                  centerTitle: false,
+                  elevation: 2.0,
+                ),
+                body: SafeArea(
+                  top: true,
+                  child: Stack(
                     children: [
-                      Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(),
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: custom_widgets.CustomMap(
-                              width: double.infinity,
-                              height: double.infinity,
-                              center: widget.moveLocation ?? currentUserLocationValue,
-                              cuLocation: locatorCompaniesRowList,
-                              userCurrentLocation: currentUserLocationValue!,
-                              showShop: () async {
-                                if (FFAppState().IsLogged) {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return GestureDetector(
-                                        onTap: () => _model
-                                                .unfocusNode.canRequestFocus
-                                            ? FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode)
-                                            : FocusScope.of(context).unfocus(),
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: SizedBox(
-                                            height: 220.0,
-                                            child: ShowShopWidget(
-                                              locationPara:
-                                                  FFAppState().shopHolder,
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: double.infinity,
+                                child: custom_widgets.CustomMap(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  center: widget.moveLocation ?? currentUserLocationValue,
+                                  cuLocation: locatorCompaniesRowList,
+                                  userCurrentLocation:
+                                      currentUserLocationValue!,
+                                  showShop: () async {
+                                    if (FFAppState().IsLogged) {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: SizedBox(
+                                                height: 220.0,
+                                                child: ShowShopWidget(
+                                                  locationPara:
+                                                      FFAppState().shopHolder,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
 
-                                  return;
-                                } else {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return GestureDetector(
-                                        onTap: () => _model
-                                                .unfocusNode.canRequestFocus
-                                            ? FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode)
-                                            : FocusScope.of(context).unfocus(),
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: SizedBox(
-                                            height: MediaQuery.sizeOf(context)
-                                                    .height *
-                                                0.7,
-                                            child: const LoginComponentWidget(),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
+                                      return;
+                                    } else {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: SizedBox(
+                                                height:
+                                                    MediaQuery.sizeOf(context)
+                                                            .height *
+                                                        0.7,
+                                                child: const LoginComponentWidget(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
 
-                                  return;
-                                }
-                              },
+                                      return;
+                                    }
+                                  },
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 1.0),
+                            child: wrapWithModel(
+                              model: _model.navPaddingModel,
+                              updateCallback: () => setState(() {}),
+                              child: const NavPaddingWidget(),
+                            ),
+                          ),
+                        ],
                       ),
                       Align(
                         alignment: const AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
-                          model: _model.navPaddingModel,
+                          model: _model.navBarModel,
                           updateCallback: () => setState(() {}),
-                          child: const NavPaddingWidget(),
+                          child: const NavBarWidget(
+                            selectPageIndex: 2,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 1.0),
-                    child: wrapWithModel(
-                      model: _model.navBarModel,
-                      updateCallback: () => setState(() {}),
-                      child: const NavBarWidget(
-                        selectPageIndex: 2,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
-        );
+            ));
       },
     );
   }

@@ -64,7 +64,7 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   UsersRow? createdUser;
   // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
   String? token;
-  // Stores action output result for [Backend Call - Update Row] action in Button widget.
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
   List<UsersRow>? updateToken;
 
   /// Initialization and disposal methods.

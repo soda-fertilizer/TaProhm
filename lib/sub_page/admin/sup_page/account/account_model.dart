@@ -37,7 +37,7 @@ class AccountModel extends FlutterFlowModel<AccountWidget> {
   // State field(s) for DropDown widget.
   String? dropDownValue;
   FormFieldController<String>? dropDownValueController;
-  // Stores action output result for [Backend Call - Update Row] action in Button widget.
+  // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
   List<UsersRow>? updatedUser;
   // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
   ApiCallResponse? apiResulta5x;

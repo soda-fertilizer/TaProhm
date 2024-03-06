@@ -31,6 +31,8 @@ class _BigImageWidgetState extends State<BigImageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BigImageModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -37,6 +37,8 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ShowShopModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -185,10 +187,18 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                                 SystemMouseCursors.click,
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () async {
-                                                await launchUrl(Uri(
-                                                  scheme: 'tel',
-                                                  path: showShopCompaniesRow.phoneNumber,
-                                                ));
+                                                if (isWeb) {
+                                                  await actions.openUrl(
+                                                    'tel:${showShopCompaniesRow.phoneNumber}',
+                                                  );
+                                                  return;
+                                                } else {
+                                                  await launchUrl(Uri(
+                                                    scheme: 'tel',
+                                                    path: showShopCompaniesRow.phoneNumber,
+                                                  ));
+                                                  return;
+                                                }
                                               },
                                           )
                                         ],
