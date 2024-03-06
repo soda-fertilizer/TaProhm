@@ -97,6 +97,7 @@ dependencies:
   pointer_interceptor: 0.9.3+4
   postgrest: 1.5.2
   provider: 6.0.5
+  pwa_install: ^0.0.5
   qr_flutter: ^4.1.0
   realtime_client: 1.4.0
   shared_preferences: 2.2.2

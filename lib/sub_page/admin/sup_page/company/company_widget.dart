@@ -841,26 +841,29 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                               widget.companyID,
                                             ),
                                           );
-                                          unawaited(
-                                            () async {
-                                              await EdgeFunctionGroup
-                                                  .referralSecondCall
-                                                  .call(
-                                                phoneNumber: containerUsersRow
-                                                    .phoneNumber,
-                                                money: 50.0,
-                                                invitePhoneNumber:
-                                                    containerUsersRow.invite,
-                                                sector: UsersGroup
-                                                    .sectorPhoneNumberCall
-                                                    .phoneNumber(
-                                                  (_model.sectorPhoneNumber
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                              );
-                                            }(),
-                                          );
+                                          if (_model.amountController.text !=
+                                              '0') {
+                                            unawaited(
+                                              () async {
+                                                await EdgeFunctionGroup
+                                                    .referralSecondCall
+                                                    .call(
+                                                  phoneNumber: containerUsersRow
+                                                      .phoneNumber,
+                                                  money: 50.0,
+                                                  invitePhoneNumber:
+                                                      containerUsersRow.invite,
+                                                  sector: UsersGroup
+                                                      .sectorPhoneNumberCall
+                                                      .phoneNumber(
+                                                    (_model.sectorPhoneNumber
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  ),
+                                                );
+                                              }(),
+                                            );
+                                          }
                                           unawaited(
                                             () async {
                                               await NotificationTable().insert({
