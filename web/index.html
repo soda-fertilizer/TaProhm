@@ -21,41 +21,36 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Ta Prohm">
 
-  <script defer>
-    let deferredPrompt;
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@1.8/dist/add-to-homescreen.min.css">
+<script src="https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@1.8/dist/add-to-homescreen.min.js"></script>
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      deferredPrompt = e;
-    });
+<script defer>
+document.addEventListener('DOMContentLoaded', function () { // document.getElementById('addToHomeScreen').addEventListener('click', function () and add <button id="addToHomeScreen">Add to Home Screen</button> somewhere on your page to get a button instead.
 
-    function promptInstall(){
-       deferredPrompt.prompt();
-    }
-
-    // Listen for app install event
-    window.addEventListener('appinstalled', () => {
-      deferredPrompt = null;
-      appInstalled();
-    });
-
-    // Track how PWA was launched (either from browser or as PWA)
-    function getLaunchMode() {
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-      if(deferredPrompt) hasPrompt();
-      if (document.referrer.startsWith('android-app://')) {
-        appLaunchedAsTWA();
-      } else if (navigator.standalone || isStandalone) {
-        appLaunchedAsPWA();
-      } else {
-        window.appLaunchedInBrowser();
-      }
-    }
+ window.AddToHomeScreenInstance = new window.AddToHomeScreen({
+  appName: 'Aardvark',                                   // Name of the app.
+                                                         // Required.
+  appIconUrl: 'apple-touch-icon.png',                    // App icon link (square, at least 40 x 40 pixels).
+                                                         // Required.
+  assetUrl: 'https://cdn.jsdelivr.net/gh/philfung/add-to-homescreen@1.8/dist/assets/img/',  // Link to directory of library image assets.
+                                                                                            // Required. 
+  showErrorMessageForUnsupportedBrowsers: window.AddToHomeScreen.SHOW_ERRMSG_UNSUPPORTED.ALL, // Show an error message if add-to-home-screen is not supported for this browser
+                                                                                              // (e.g.  "adding to home screen is not supported in IOS Firefox, please open this [website] in IOS Safari instead." or "adding to home screen is not supported on desktop, please open this [website] in your mobile browser instead".  You can also set more granular permissions to show error messages only on mobile browsers and not on desktop browsers, etc)
+                                                                                              // Optional. Default: window.AddToHomeScreen.SHOW_ERRMSG_UNSUPPORTED.ALL 
+  allowUserToCloseModal: false,                          // Allow user to close the 'Add to Homescreen' message? Not allowing will increase installs.
+                                                         // Optional. Default: false.
+  maxModalDisplayCount: -1                               // If set, the modal will only show this many times.
+                                                         // Optional. Default: -1 (no limit).  (Debugging: Use this.clearModalDisplayCount() to reset the count)
+});
+      
+ ret = window.AddToHomeScreenInstance.show();             // show "add-to-homescreen" instructions to user, or do nothing if already added to homescreen
+});
 </script>
 
   
 
   <!-- Favicon -->
-  <link rel="icon" href="logo_(2).png" sizes="any"/>
+  <link rel="icon" href="vnimc_1.png" sizes="any"/>
   
 
   <!-- Open Graph & SEO tags -->
@@ -76,12 +71,7 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#f1f4f8">
 
   <link rel="manifest" href="manifest.json">
-  <script>
-    // The value below is injected by flutter build, do not touch.
-    var serviceWorkerVersion = null;
-  </script>
-  <!-- This script adds the flutter initialization JS code -->
-  <script src="flutter.js" defer></script>
+  
 </head>
 <body>
   
@@ -90,22 +80,13 @@
   
   
   <script>
-    window.addEventListener('load', function (ev) {
-      // Download main.dart.js
-      _flutter.loader.loadEntrypoint({
-        entrypointUrl: 'main.dart.js',
-        serviceWorker: {
-          serviceWorkerUrl: 'flutter_service_worker.js?v=',
-          serviceWorkerVersion: serviceWorkerVersion,
-        },
-        onEntrypointLoaded: async function(engineInitializer) {
-          // Initialize the Flutter engine
-          let appRunner = await engineInitializer.initializeEngine({useColorEmoji: true,});
-          // Run the app
-          await appRunner.runApp();
-        }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js?v=');
       });
-    });
+    }
   </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+
 </body>
 </html>

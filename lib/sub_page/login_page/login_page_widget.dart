@@ -1,7 +1,6 @@
 import '/component/login_component/login_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -29,7 +28,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(notificationsPermission);
-      await actions.pwaInstallPubUp();
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
