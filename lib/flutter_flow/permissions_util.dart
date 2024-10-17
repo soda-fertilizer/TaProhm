@@ -1,5 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+
+import '/flutter_flow/flutter_flow_util.dart';
 
 const kPermissionStateToBool = {
   PermissionStatus.granted: true,
@@ -15,16 +17,18 @@ const photoLibraryPermission = Permission.photos;
 const notificationsPermission = Permission.notification;
 
 Future<bool> getPermissionStatus(Permission setting) async {
-  if (kIsWeb) {
-    return true;
-  }
   final status = await setting.status;
   return kPermissionStateToBool[status]!;
 }
 
 Future<void> requestPermission(Permission setting) async {
-  if (kIsWeb) {
-    return;
+  if (setting == Permission.photos && isAndroid) {
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    if (androidInfo.version.sdkInt <= 32) {
+      await Permission.storage.request();
+    } else {
+      await Permission.photos.request();
+    }
   }
   await setting.request();
 }

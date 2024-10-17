@@ -24,7 +24,6 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (Get max phone number)] action in AdminCreateUser widget.
   ApiCallResponse? maxPhoneNumber;
   // State field(s) for TabBar widget.
@@ -39,25 +38,29 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
 
   // State field(s) for NormalFullName widget.
   FocusNode? normalFullNameFocusNode;
-  TextEditingController? normalFullNameController;
-  String? Function(BuildContext, String?)? normalFullNameControllerValidator;
+  TextEditingController? normalFullNameTextController;
+  String? Function(BuildContext, String?)?
+      normalFullNameTextControllerValidator;
   // State field(s) for NormalPassword widget.
   FocusNode? normalPasswordFocusNode;
-  TextEditingController? normalPasswordController;
+  TextEditingController? normalPasswordTextController;
   late bool normalPasswordVisibility;
-  String? Function(BuildContext, String?)? normalPasswordControllerValidator;
+  String? Function(BuildContext, String?)?
+      normalPasswordTextControllerValidator;
   // State field(s) for NormalPhoneNumber widget.
   FocusNode? normalPhoneNumberFocusNode;
-  TextEditingController? normalPhoneNumberController;
-  String? Function(BuildContext, String?)? normalPhoneNumberControllerValidator;
+  TextEditingController? normalPhoneNumberTextController;
+  String? Function(BuildContext, String?)?
+      normalPhoneNumberTextControllerValidator;
   // State field(s) for NormalReferral widget.
   FocusNode? normalReferralFocusNode;
-  TextEditingController? normalReferralController;
-  String? Function(BuildContext, String?)? normalReferralControllerValidator;
+  TextEditingController? normalReferralTextController;
+  String? Function(BuildContext, String?)?
+      normalReferralTextControllerValidator;
   // State field(s) for NormalInvite widget.
   FocusNode? normalInviteFocusNode;
-  TextEditingController? normalInviteController;
-  String? Function(BuildContext, String?)? normalInviteControllerValidator;
+  TextEditingController? normalInviteTextController;
+  String? Function(BuildContext, String?)? normalInviteTextControllerValidator;
   // State field(s) for NormalSector widget.
   String? normalSectorValue;
   FormFieldController<String>? normalSectorValueController;
@@ -80,17 +83,19 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
 
   // State field(s) for MemberFullName widget.
   FocusNode? memberFullNameFocusNode;
-  TextEditingController? memberFullNameController;
-  String? Function(BuildContext, String?)? memberFullNameControllerValidator;
+  TextEditingController? memberFullNameTextController;
+  String? Function(BuildContext, String?)?
+      memberFullNameTextControllerValidator;
   // State field(s) for MemberPassword widget.
   FocusNode? memberPasswordFocusNode;
-  TextEditingController? memberPasswordController;
+  TextEditingController? memberPasswordTextController;
   late bool memberPasswordVisibility;
-  String? Function(BuildContext, String?)? memberPasswordControllerValidator;
+  String? Function(BuildContext, String?)?
+      memberPasswordTextControllerValidator;
   // State field(s) for MemberReferr widget.
   FocusNode? memberReferrFocusNode;
-  TextEditingController? memberReferrController;
-  String? Function(BuildContext, String?)? memberReferrControllerValidator;
+  TextEditingController? memberReferrTextController;
+  String? Function(BuildContext, String?)? memberReferrTextControllerValidator;
   // State field(s) for MemberSector widget.
   String? memberSectorValue;
   FormFieldController<String>? memberSectorValueController;
@@ -98,8 +103,6 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
   ApiCallResponse? apiResultbep;
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   UsersRow? createUser;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -109,34 +112,29 @@ class AdminCreateUserModel extends FlutterFlowModel<AdminCreateUserWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     normalFullNameFocusNode?.dispose();
-    normalFullNameController?.dispose();
+    normalFullNameTextController?.dispose();
 
     normalPasswordFocusNode?.dispose();
-    normalPasswordController?.dispose();
+    normalPasswordTextController?.dispose();
 
     normalPhoneNumberFocusNode?.dispose();
-    normalPhoneNumberController?.dispose();
+    normalPhoneNumberTextController?.dispose();
 
     normalReferralFocusNode?.dispose();
-    normalReferralController?.dispose();
+    normalReferralTextController?.dispose();
 
     normalInviteFocusNode?.dispose();
-    normalInviteController?.dispose();
+    normalInviteTextController?.dispose();
 
     memberFullNameFocusNode?.dispose();
-    memberFullNameController?.dispose();
+    memberFullNameTextController?.dispose();
 
     memberPasswordFocusNode?.dispose();
-    memberPasswordController?.dispose();
+    memberPasswordTextController?.dispose();
 
     memberReferrFocusNode?.dispose();
-    memberReferrController?.dispose();
+    memberReferrTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

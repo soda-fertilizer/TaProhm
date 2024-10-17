@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'edit_event_model.dart';
 export 'edit_event_model.dart';
 
@@ -38,17 +37,16 @@ class _EditEventWidgetState extends State<EditEventWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.eventDate = widget.evenDate;
-        _model.selectImage = widget.image;
-      });
+      _model.eventDate = widget.evenDate;
+      _model.selectImage = widget.image;
+      safeSetState(() {});
     });
 
     _model.titleFocusNode ??= FocusNode();
 
     _model.detailsFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -60,15 +58,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'EditEvent',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -95,6 +89,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                       fontFamily: 'Outfit',
                       color: Colors.white,
                       fontSize: 22.0,
+                      letterSpacing: 0.0,
                     ),
               ),
               actions: const [],
@@ -126,9 +121,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                     );
                   }
                   List<EventsRow> containerEventsRowList = snapshot.data!;
+
                   final containerEventsRow = containerEventsRowList.isNotEmpty
                       ? containerEventsRowList.first
                       : null;
+
                   return Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(),
@@ -144,19 +141,28 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                             child: SizedBox(
                               width: MediaQuery.sizeOf(context).width * 0.8,
                               child: TextFormField(
-                                controller: _model.titleController ??=
+                                controller: _model.titleTextController ??=
                                     TextEditingController(
                                   text: containerEventsRow?.title,
                                 ),
                                 focusNode: _model.titleFocusNode,
+                                autofocus: false,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   labelText: 'Title',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -188,8 +194,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                                validator: _model.titleControllerValidator
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                validator: _model.titleTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),
@@ -211,27 +222,42 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                               child: SizedBox(
                                 width: double.infinity,
                                 child: TextFormField(
-                                  controller: _model.detailsController ??=
+                                  controller: _model.detailsTextController ??=
                                       TextEditingController(
                                     text: containerEventsRow?.details,
                                   ),
                                   focusNode: _model.detailsFocusNode,
+                                  autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
+                                    isDense: false,
                                     labelText: 'Details',
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     enabledBorder: InputBorder.none,
                                     focusedBorder: InputBorder.none,
                                     errorBorder: InputBorder.none,
                                     focusedErrorBorder: InputBorder.none,
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   maxLines: null,
-                                  validator: _model.detailsControllerValidator
+                                  validator: _model
+                                      .detailsTextControllerValidator
                                       .asValidator(context),
                                 ),
                               ),
@@ -258,6 +284,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                             .override(
                                               fontFamily: 'Outfit',
                                               fontSize: 32.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
                                             ),
                                     pickerBackgroundColor:
@@ -298,6 +325,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                               .override(
                                                 fontFamily: 'Outfit',
                                                 fontSize: 32.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                       pickerBackgroundColor:
@@ -331,12 +359,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                   );
                                 });
                               }
-                              setState(() {
-                                _model.eventDate = _model.datePicked ?? getCurrentTimestamp;
-                              });
+                              _model.eventDate = _model.datePicked ?? getCurrentTimestamp;
+                              safeSetState(() {});
                             },
                             text: dateTimeFormat(
-                                'dd/MM/yyyy hh:mm a', _model.eventDate),
+                                "dd/MM/yyyy hh:mm a", _model.eventDate),
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.8,
                               height: 40.0,
@@ -352,6 +379,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     fontFamily: 'Readex Pro',
                                     color: FlutterFlowTheme.of(context)
                                         .primaryText,
+                                    letterSpacing: 0.0,
                                   ),
                               elevation: 1.0,
                               borderSide: BorderSide(
@@ -377,8 +405,12 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     'Add image',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ),
                                 Padding(
@@ -393,9 +425,8 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          setState(() {
-                                            _model.selectImage = null;
-                                          });
+                                          _model.selectImage = null;
+                                          safeSetState(() {});
                                         },
                                         child: ClipRRect(
                                           borderRadius:
@@ -429,7 +460,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                   validateFileFormat(
                                                       m.storagePath,
                                                       context))) {
-                                            setState(() =>
+                                            safeSetState(() =>
                                                 _model.isDataUploading1 = true);
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
@@ -475,7 +506,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                     selectedMedia.length &&
                                                 downloadUrls.length ==
                                                     selectedMedia.length) {
-                                              setState(() {
+                                              safeSetState(() {
                                                 _model.uploadedLocalFile1 =
                                                     selectedUploadedFiles.first;
                                                 _model.uploadedFileUrl1 =
@@ -484,17 +515,16 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                               showUploadMessage(
                                                   context, 'Success!');
                                             } else {
-                                              setState(() {});
+                                              safeSetState(() {});
                                               showUploadMessage(context,
                                                   'Failed to upload data');
                                               return;
                                             }
                                           }
 
-                                          setState(() {
-                                            _model.selectImage =
-                                                _model.uploadedFileUrl1;
-                                          });
+                                          _model.selectImage =
+                                              _model.uploadedFileUrl1;
+                                          safeSetState(() {});
                                         },
                                         child: ClipRRect(
                                           borderRadius:
@@ -525,7 +555,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                   validateFileFormat(
                                                       m.storagePath,
                                                       context))) {
-                                            setState(() =>
+                                            safeSetState(() =>
                                                 _model.isDataUploading2 = true);
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
@@ -571,7 +601,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                                     selectedMedia.length &&
                                                 downloadUrls.length ==
                                                     selectedMedia.length) {
-                                              setState(() {
+                                              safeSetState(() {
                                                 _model.uploadedLocalFile2 =
                                                     selectedUploadedFiles.first;
                                                 _model.uploadedFileUrl2 =
@@ -580,17 +610,16 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                               showUploadMessage(
                                                   context, 'Success!');
                                             } else {
-                                              setState(() {});
+                                              safeSetState(() {});
                                               showUploadMessage(context,
                                                   'Failed to upload data');
                                               return;
                                             }
                                           }
 
-                                          setState(() {
-                                            _model.selectImage =
-                                                _model.uploadedFileUrl2;
-                                          });
+                                          _model.selectImage =
+                                              _model.uploadedFileUrl2;
+                                          safeSetState(() {});
                                         },
                                         child: ClipRRect(
                                           borderRadius:
@@ -627,8 +656,9 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                               onPressed: () async {
                                 await EventsTable().update(
                                   data: {
-                                    'Title': _model.titleController.text,
-                                    'Details': _model.detailsController.text,
+                                    'Title': _model.titleTextController.text,
+                                    'Details':
+                                        _model.detailsTextController.text,
                                     'EventDate': supaSerialize<DateTime>(
                                         _model.eventDate),
                                     'image': _model.selectImage,
@@ -654,6 +684,7 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       color: Colors.white,
+                                      letterSpacing: 0.0,
                                     ),
                                 elevation: 3.0,
                                 borderSide: const BorderSide(

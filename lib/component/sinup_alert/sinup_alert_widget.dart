@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'sinup_alert_model.dart';
 export 'sinup_alert_model.dart';
 
@@ -33,7 +32,7 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
     super.initState();
     _model = createModel(context, () => SinupAlertModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,8 +44,6 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: 300.0,
       height: 200.0,
@@ -66,12 +63,18 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: Text(
                     'Sing up completed!',
-                    style: FlutterFlowTheme.of(context).bodyLarge,
+                    style: FlutterFlowTheme.of(context).bodyLarge.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
                   ),
                 ),
                 Text(
                   'Please Sing in',
-                  style: FlutterFlowTheme.of(context).bodyMedium,
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
@@ -80,7 +83,10 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
                     children: [
                       Text(
                         'Phone number: ${widget.phoneNumber}',
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                     ],
                   ),
@@ -92,7 +98,10 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
                     children: [
                       Text(
                         'Password: ${widget.password}',
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                     ],
                   ),
@@ -113,14 +122,13 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
+                    onTap: () async {},
                     child: Text(
                       'Ok',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             color: FlutterFlowTheme.of(context).primary,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ),

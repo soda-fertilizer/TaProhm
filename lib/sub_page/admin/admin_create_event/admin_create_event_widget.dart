@@ -34,23 +34,22 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.eventDate = getCurrentTimestamp;
-      });
+      _model.eventDate = getCurrentTimestamp;
+      safeSetState(() {});
     });
 
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    _model.titleController ??= TextEditingController();
+    )..addListener(() => safeSetState(() {}));
+    _model.titleTextController ??= TextEditingController();
     _model.titleFocusNode ??= FocusNode();
 
-    _model.detailsController ??= TextEditingController();
+    _model.detailsTextController ??= TextEditingController();
     _model.detailsFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,9 +67,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
         title: 'AdminCreateEvent',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -97,6 +94,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                       fontFamily: 'Outfit',
                       color: Colors.white,
                       fontSize: 22.0,
+                      letterSpacing: 0.0,
                     ),
               ),
               actions: const [],
@@ -113,7 +111,11 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
-                      labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).titleMedium.override(
+                                fontFamily: 'Readex Pro',
+                                letterSpacing: 0.0,
+                              ),
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       padding: const EdgeInsets.all(4.0),
@@ -147,16 +149,25 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                 child: SizedBox(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   child: TextFormField(
-                                    controller: _model.titleController,
+                                    controller: _model.titleTextController,
                                     focusNode: _model.titleFocusNode,
+                                    autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,
                                       labelText: 'Title',
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
@@ -194,9 +205,14 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                             BorderRadius.circular(20.0),
                                       ),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
-                                    validator: _model.titleControllerValidator
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
+                                    validator: _model
+                                        .titleTextControllerValidator
                                         .asValidator(context),
                                   ),
                                 ),
@@ -218,25 +234,39 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                   child: SizedBox(
                                     width: double.infinity,
                                     child: TextFormField(
-                                      controller: _model.detailsController,
+                                      controller: _model.detailsTextController,
                                       focusNode: _model.detailsFocusNode,
+                                      autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
+                                        isDense: false,
                                         labelText: 'Details',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: InputBorder.none,
                                         focusedBorder: InputBorder.none,
                                         errorBorder: InputBorder.none,
                                         focusedErrorBorder: InputBorder.none,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       maxLines: null,
                                       validator: _model
-                                          .detailsControllerValidator
+                                          .detailsTextControllerValidator
                                           .asValidator(context),
                                     ),
                                   ),
@@ -264,6 +294,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                 .override(
                                                   fontFamily: 'Outfit',
                                                   fontSize: 32.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                         pickerBackgroundColor:
@@ -306,6 +337,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                   .override(
                                                     fontFamily: 'Outfit',
                                                     fontSize: 32.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                           pickerBackgroundColor:
@@ -340,12 +372,11 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                       );
                                     });
                                   }
-                                  setState(() {
-                                    _model.eventDate = _model.datePicked ?? getCurrentTimestamp;
-                                  });
+                                  _model.eventDate = _model.datePicked ?? getCurrentTimestamp;
+                                  safeSetState(() {});
                                 },
                                 text: dateTimeFormat(
-                                    'dd/MM/yyyy hh:mm a', _model.eventDate),
+                                    "dd/MM/yyyy hh:mm a", _model.eventDate),
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 0.8,
                                   height: 40.0,
@@ -361,6 +392,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                         fontFamily: 'Readex Pro',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 1.0,
                                   borderSide: BorderSide(
@@ -388,7 +420,11 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                       child: Text(
                                         'Add image',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                     Padding(
@@ -403,9 +439,8 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              setState(() {
-                                                _model.selectImage = null;
-                                              });
+                                              _model.selectImage = null;
+                                              safeSetState(() {});
                                             },
                                             child: ClipRRect(
                                               borderRadius:
@@ -439,7 +474,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                       validateFileFormat(
                                                           m.storagePath,
                                                           context))) {
-                                                setState(() => _model
+                                                safeSetState(() => _model
                                                     .isDataUploading1 = true);
                                                 var selectedUploadedFiles =
                                                     <FFUploadedFile>[];
@@ -488,7 +523,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                         selectedMedia.length &&
                                                     downloadUrls.length ==
                                                         selectedMedia.length) {
-                                                  setState(() {
+                                                  safeSetState(() {
                                                     _model.uploadedLocalFile1 =
                                                         selectedUploadedFiles
                                                             .first;
@@ -498,17 +533,16 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                   showUploadMessage(
                                                       context, 'Success!');
                                                 } else {
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                   showUploadMessage(context,
                                                       'Failed to upload data');
                                                   return;
                                                 }
                                               }
 
-                                              setState(() {
-                                                _model.selectImage =
-                                                    _model.uploadedFileUrl1;
-                                              });
+                                              _model.selectImage =
+                                                  _model.uploadedFileUrl1;
+                                              safeSetState(() {});
                                             },
                                             child: ClipRRect(
                                               borderRadius:
@@ -539,7 +573,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                       validateFileFormat(
                                                           m.storagePath,
                                                           context))) {
-                                                setState(() => _model
+                                                safeSetState(() => _model
                                                     .isDataUploading2 = true);
                                                 var selectedUploadedFiles =
                                                     <FFUploadedFile>[];
@@ -588,7 +622,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                         selectedMedia.length &&
                                                     downloadUrls.length ==
                                                         selectedMedia.length) {
-                                                  setState(() {
+                                                  safeSetState(() {
                                                     _model.uploadedLocalFile2 =
                                                         selectedUploadedFiles
                                                             .first;
@@ -598,17 +632,16 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                   showUploadMessage(
                                                       context, 'Success!');
                                                 } else {
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                   showUploadMessage(context,
                                                       'Failed to upload data');
                                                   return;
                                                 }
                                               }
 
-                                              setState(() {
-                                                _model.selectImage =
-                                                    _model.uploadedFileUrl2;
-                                              });
+                                              _model.selectImage =
+                                                  _model.uploadedFileUrl2;
+                                              safeSetState(() {});
                                             },
                                             child: ClipRRect(
                                               borderRadius:
@@ -649,16 +682,17 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                     0.0, 0.0, 0.0, 10.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if ((_model.titleController.text !=
+                                    if ((_model.titleTextController.text !=
                                                 '') &&
-                                        (_model.detailsController.text !=
+                                        (_model.detailsTextController.text !=
                                                 '') &&
                                         (_model.selectImage != null &&
                                             _model.selectImage != '')) {
                                       await EventsTable().insert({
-                                        'Title': _model.titleController.text,
+                                        'Title':
+                                            _model.titleTextController.text,
                                         'Details':
-                                            _model.detailsController.text,
+                                            _model.detailsTextController.text,
                                         'EventDate': supaSerialize<DateTime>(
                                             _model.eventDate),
                                         'CreateBy':
@@ -670,10 +704,14 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                           await EdgeFunctionGroup
                                               .broadcastPushNotifcationCall
                                               .call(
-                                            title: functions.charLimit(17,
-                                                _model.titleController.text),
-                                            contents: functions.charLimit(57,
-                                                _model.detailsController.text),
+                                            title: functions.charLimit(
+                                                17,
+                                                _model
+                                                    .titleTextController.text),
+                                            contents: functions.charLimit(
+                                                57,
+                                                _model.detailsTextController
+                                                    .text),
                                           );
                                         }(),
                                       );
@@ -715,6 +753,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(
@@ -755,6 +794,7 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                             }
                             List<EventsRow> listViewEventsRowList =
                                 snapshot.data!;
+
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               scrollDirection: Axis.vertical,
@@ -856,11 +896,13 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryText,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                         Text(
                                                           dateTimeFormat(
-                                                              'MMM,dd,yyyy  hh:mm a',
+                                                              "MMM,dd,yyyy  hh:mm a",
                                                               listViewEventsRow
                                                                   .eventDate),
                                                           style: FlutterFlowTheme
@@ -873,6 +915,8 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                                         context)
                                                                     .secondaryText,
                                                                 fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                         Text(
@@ -895,6 +939,8 @@ class _AdminCreateEventWidgetState extends State<AdminCreateEventWidget>
                                                                         context)
                                                                     .secondaryText,
                                                                 fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                       ].divide(const SizedBox(

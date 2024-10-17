@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 import 'view_review_model.dart';
 export 'view_review_model.dart';
 
@@ -32,7 +31,7 @@ class _ViewReviewWidgetState extends State<ViewReviewWidget> {
 
     _model.detailFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,8 +43,6 @@ class _ViewReviewWidgetState extends State<ViewReviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<CompaniesRatingRow>>(
       future: CompaniesRatingTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -73,17 +70,17 @@ class _ViewReviewWidgetState extends State<ViewReviewWidget> {
         }
         List<CompaniesRatingRow> viewReviewCompaniesRatingRowList =
             snapshot.data!;
+
         final viewReviewCompaniesRatingRow =
             viewReviewCompaniesRatingRowList.isNotEmpty
                 ? viewReviewCompaniesRatingRowList.first
                 : null;
+
         return Title(
             title: 'ViewReview',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -110,6 +107,7 @@ class _ViewReviewWidgetState extends State<ViewReviewWidget> {
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 22.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -154,26 +152,40 @@ class _ViewReviewWidgetState extends State<ViewReviewWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 8.0, 0.0),
                               child: TextFormField(
-                                controller: _model.detailController ??=
+                                controller: _model.detailTextController ??=
                                     TextEditingController(
                                   text: viewReviewCompaniesRatingRow.detail,
                                 ),
                                 focusNode: _model.detailFocusNode,
+                                autofocus: false,
                                 readOnly: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: InputBorder.none,
                                   focusedBorder: InputBorder.none,
                                   errorBorder: InputBorder.none,
                                   focusedErrorBorder: InputBorder.none,
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 maxLines: null,
-                                validator: _model.detailControllerValidator
+                                validator: _model.detailTextControllerValidator
                                     .asValidator(context),
                               ),
                             ),

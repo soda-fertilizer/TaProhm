@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'admin_main_referral_model.dart';
 export 'admin_main_referral_model.dart';
 
@@ -25,7 +24,7 @@ class _AdminMainReferralWidgetState extends State<AdminMainReferralWidget> {
     super.initState();
     _model = createModel(context, () => AdminMainReferralModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -37,15 +36,11 @@ class _AdminMainReferralWidgetState extends State<AdminMainReferralWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'AdminMainReferral',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -74,6 +69,7 @@ class _AdminMainReferralWidgetState extends State<AdminMainReferralWidget> {
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -111,6 +107,7 @@ class _AdminMainReferralWidgetState extends State<AdminMainReferralWidget> {
                           }
                           List<SectorsRow> listViewSectorsRowList =
                               snapshot.data!;
+
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             scrollDirection: Axis.vertical,
@@ -132,7 +129,10 @@ class _AdminMainReferralWidgetState extends State<AdminMainReferralWidget> {
                                         blurRadius: 0.0,
                                         color: FlutterFlowTheme.of(context)
                                             .alternate,
-                                        offset: const Offset(0.0, 1.0),
+                                        offset: const Offset(
+                                          0.0,
+                                          1.0,
+                                        ),
                                       )
                                     ],
                                   ),
@@ -165,7 +165,12 @@ class _AdminMainReferralWidgetState extends State<AdminMainReferralWidget> {
                                                         .sectorName!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyLarge,
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                   ),
                                                 ),
                                               ],

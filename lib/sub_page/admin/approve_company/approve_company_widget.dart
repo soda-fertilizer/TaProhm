@@ -4,8 +4,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:provider/provider.dart';
 import 'approve_company_model.dart';
 export 'approve_company_model.dart';
 
@@ -26,7 +26,7 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
     super.initState();
     _model = createModel(context, () => ApproveCompanyModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,15 +38,11 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'ApproveCompany',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -75,6 +71,7 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -110,6 +107,7 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
                     }
                     List<CompaniesRow> listViewCompaniesRowList =
                         snapshot.data!;
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
@@ -151,7 +149,10 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
                                     blurRadius: 0.0,
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
-                                    offset: const Offset(0.0, 1.0),
+                                    offset: const Offset(
+                                      0.0,
+                                      1.0,
+                                    ),
                                   )
                                 ],
                               ),
@@ -168,9 +169,13 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
                                         borderRadius:
                                             BorderRadius.circular(44.0),
                                         child: OctoImage(
-                                          placeholderBuilder:
-                                              OctoPlaceholder.blurHash(
-                                            FFAppConstants.BlurHash,
+                                          placeholderBuilder: (_) =>
+                                              const SizedBox.expand(
+                                            child: Image(
+                                              image: BlurHashImage(
+                                                  FFAppConstants.BlurHash),
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                           image: CachedNetworkImageProvider(
                                             listViewCompaniesRow.companyProfile,
@@ -200,7 +205,12 @@ class _ApproveCompanyWidgetState extends State<ApproveCompanyWidget> {
                                                     .companyName,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyLarge,
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ),
                                           ],

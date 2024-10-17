@@ -7,7 +7,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 import 'review_list_model.dart';
 export 'review_list_model.dart';
 
@@ -33,7 +32,7 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
     super.initState();
     _model = createModel(context, () => ReviewListModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,8 +44,6 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<ApiCallResponse>(
       future: CompanyGroup.compayRatingByCompanyCall.call(
         id: widget.company?.companyID,
@@ -70,13 +67,12 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
           );
         }
         final reviewListCompayRatingByCompanyResponse = snapshot.data!;
+
         return Title(
             title: 'ReviewList',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -103,6 +99,7 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 22.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -116,6 +113,7 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
                       final datas = reviewListCompayRatingByCompanyResponse
                           .jsonBody
                           .toList();
+
                       return ListView.builder(
                         padding: EdgeInsets.zero,
                         scrollDirection: Axis.vertical,
@@ -162,7 +160,10 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
                                       blurRadius: 0.0,
                                       color: FlutterFlowTheme.of(context)
                                           .alternate,
-                                      offset: const Offset(0.0, 1.0),
+                                      offset: const Offset(
+                                        0.0,
+                                        1.0,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -222,6 +223,7 @@ class _ReviewListWidgetState extends State<ReviewListWidget> {
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ),

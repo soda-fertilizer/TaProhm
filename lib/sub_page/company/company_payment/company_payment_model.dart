@@ -11,8 +11,8 @@ class CompanyPaymentModel extends FlutterFlowModel<CompanyPaymentWidget> {
 
   // State field(s) for Amount widget.
   FocusNode? amountFocusNode;
-  TextEditingController? amountController;
-  String? Function(BuildContext, String?)? amountControllerValidator;
+  TextEditingController? amountTextController;
+  String? Function(BuildContext, String?)? amountTextControllerValidator;
   bool isDataUploading1 = false;
   FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -23,18 +23,12 @@ class CompanyPaymentModel extends FlutterFlowModel<CompanyPaymentWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl2 = '';
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
     amountFocusNode?.dispose();
-    amountController?.dispose();
+    amountTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

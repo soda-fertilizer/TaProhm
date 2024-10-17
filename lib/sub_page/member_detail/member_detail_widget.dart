@@ -7,7 +7,6 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 import 'member_detail_model.dart';
 export 'member_detail_model.dart';
 
@@ -38,8 +37,8 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -51,8 +50,6 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<UsersRow>>(
       future: UsersTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -79,16 +76,16 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
           );
         }
         List<UsersRow> memberDetailUsersRowList = snapshot.data!;
+
         final memberDetailUsersRow = memberDetailUsersRowList.isNotEmpty
             ? memberDetailUsersRowList.first
             : null;
+
         return Title(
             title: 'MemberDetail',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -115,6 +112,7 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 22.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -174,7 +172,11 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                           replacement: '…',
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                       Text(
                                         'Tel: ${memberDetailUsersRow.phoneNumber}',
@@ -186,6 +188,7 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
                                               fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                     ],
@@ -211,6 +214,7 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       fontSize: 14.0,
+                                      letterSpacing: 0.0,
                                     ),
                                 unselectedLabelStyle: const TextStyle(),
                                 indicatorColor:
@@ -264,6 +268,7 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                         List<CompaniesRow>
                                             listViewCompaniesRowList =
                                             snapshot.data!;
+
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
                                           scrollDirection: Axis.vertical,
@@ -321,8 +326,10 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .alternate,
-                                                        offset:
-                                                            const Offset(0.0, 1.0),
+                                                        offset: const Offset(
+                                                          0.0,
+                                                          1.0,
+                                                        ),
                                                       )
                                                     ],
                                                   ),
@@ -396,7 +403,13 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                                           .companyName,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodySmall,
+                                                                          .bodySmall
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
                                                                     ),
                                                                     Row(
                                                                       mainAxisSize:
@@ -405,8 +418,12 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                                       children: [
                                                                         Text(
                                                                           'Tel: ',
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).labelSmall,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelSmall
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
                                                                         ),
                                                                         InkWell(
                                                                           splashColor:
@@ -429,6 +446,7 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                                             style: FlutterFlowTheme.of(context).labelSmall.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   color: const Color(0xFF1900FF),
+                                                                                  letterSpacing: 0.0,
                                                                                   fontWeight: FontWeight.bold,
                                                                                 ),
                                                                           ),
@@ -446,6 +464,7 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                                               .labelSmall
                                                                               .override(
                                                                                 fontFamily: 'Readex Pro',
+                                                                                letterSpacing: 0.0,
                                                                                 fontWeight: FontWeight.normal,
                                                                               ),
                                                                         ),
@@ -470,6 +489,7 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                                             style: FlutterFlowTheme.of(context).labelSmall.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   color: const Color(0xFF1900FF),
+                                                                                  letterSpacing: 0.0,
                                                                                   fontWeight: FontWeight.bold,
                                                                                 ),
                                                                           ),
@@ -523,12 +543,14 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                         }
                                         final listViewCompayRatingByUserResponse =
                                             snapshot.data!;
+
                                         return Builder(
                                           builder: (context) {
                                             final datas =
                                                 listViewCompayRatingByUserResponse
                                                     .jsonBody
                                                     .toList();
+
                                             return ListView.builder(
                                               padding: EdgeInsets.zero,
                                               scrollDirection: Axis.vertical,
@@ -591,7 +613,9 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                                     .of(context)
                                                                 .alternate,
                                                             offset: const Offset(
-                                                                0.0, 1.0),
+                                                              0.0,
+                                                              1.0,
+                                                            ),
                                                           )
                                                         ],
                                                       ),
@@ -675,8 +699,12 @@ class _MemberDetailWidgetState extends State<MemberDetailWidget>
                                                                             datasItem,
                                                                             r'''$.companyname''',
                                                                           ).toString(),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodySmall,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodySmall
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
                                                                         ),
                                                                       ),
                                                                       RatingBarIndicator(

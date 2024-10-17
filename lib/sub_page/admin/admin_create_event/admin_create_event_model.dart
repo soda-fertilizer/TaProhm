@@ -11,7 +11,6 @@ class AdminCreateEventModel extends FlutterFlowModel<AdminCreateEventWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -19,12 +18,12 @@ class AdminCreateEventModel extends FlutterFlowModel<AdminCreateEventWidget> {
 
   // State field(s) for Title widget.
   FocusNode? titleFocusNode;
-  TextEditingController? titleController;
-  String? Function(BuildContext, String?)? titleControllerValidator;
+  TextEditingController? titleTextController;
+  String? Function(BuildContext, String?)? titleTextControllerValidator;
   // State field(s) for Details widget.
   FocusNode? detailsFocusNode;
-  TextEditingController? detailsController;
-  String? Function(BuildContext, String?)? detailsControllerValidator;
+  TextEditingController? detailsTextController;
+  String? Function(BuildContext, String?)? detailsTextControllerValidator;
   DateTime? datePicked;
   bool isDataUploading1 = false;
   FFUploadedFile uploadedLocalFile1 =
@@ -36,23 +35,16 @@ class AdminCreateEventModel extends FlutterFlowModel<AdminCreateEventWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl2 = '';
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     titleFocusNode?.dispose();
-    titleController?.dispose();
+    titleTextController?.dispose();
 
     detailsFocusNode?.dispose();
-    detailsController?.dispose();
+    detailsTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

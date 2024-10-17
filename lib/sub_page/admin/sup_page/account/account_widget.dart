@@ -10,7 +10,6 @@ import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'account_model.dart';
 export 'account_model.dart';
 
@@ -40,9 +39,8 @@ class _AccountWidgetState extends State<AccountWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.sectorID = widget.sectorID;
-      });
+      _model.sectorID = widget.sectorID;
+      safeSetState(() {});
     });
 
     _model.textFieldFocusNode1 ??= FocusNode();
@@ -53,7 +51,7 @@ class _AccountWidgetState extends State<AccountWidget> {
 
     _model.textFieldFocusNode4 ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -65,8 +63,6 @@ class _AccountWidgetState extends State<AccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<UsersRow>>(
       future: FFAppState().adminRequestAccount(
         uniqueQueryKey: widget.userID.toString(),
@@ -96,19 +92,19 @@ class _AccountWidgetState extends State<AccountWidget> {
           );
         }
         List<UsersRow> accountUsersRowList = snapshot.data!;
+
         // Return an empty Container when the item does not exist.
         if (snapshot.data!.isEmpty) {
           return Container();
         }
         final accountUsersRow =
             accountUsersRowList.isNotEmpty ? accountUsersRowList.first : null;
+
         return Title(
             title: 'Account',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -133,7 +129,10 @@ class _AccountWidgetState extends State<AccountWidget> {
                     alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Text(
                       'Account',
-                      style: FlutterFlowTheme.of(context).titleMedium,
+                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ),
                   actions: const [],
@@ -167,7 +166,8 @@ class _AccountWidgetState extends State<AccountWidget> {
                               if (selectedMedia != null &&
                                   selectedMedia.every((m) => validateFileFormat(
                                       m.storagePath, context))) {
-                                setState(() => _model.isDataUploading = true);
+                                safeSetState(
+                                    () => _model.isDataUploading = true);
                                 var selectedUploadedFiles = <FFUploadedFile>[];
 
                                 var downloadUrls = <String>[];
@@ -201,14 +201,14 @@ class _AccountWidgetState extends State<AccountWidget> {
                                         selectedMedia.length &&
                                     downloadUrls.length ==
                                         selectedMedia.length) {
-                                  setState(() {
+                                  safeSetState(() {
                                     _model.uploadedLocalFile =
                                         selectedUploadedFiles.first;
                                     _model.uploadedFileUrl = downloadUrls.first;
                                   });
                                   showUploadMessage(context, 'Success!');
                                 } else {
-                                  setState(() {});
+                                  safeSetState(() {});
                                   showUploadMessage(
                                       context, 'Failed to upload data');
                                   return;
@@ -238,14 +238,23 @@ class _AccountWidgetState extends State<AccountWidget> {
                               text: accountUsersRow?.fullName,
                             ),
                             focusNode: _model.textFieldFocusNode1,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'User name',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -276,7 +285,12 @@ class _AccountWidgetState extends State<AccountWidget> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             validator: _model.textController1Validator
                                 .asValidator(context),
                           ),
@@ -288,15 +302,24 @@ class _AccountWidgetState extends State<AccountWidget> {
                               text: accountUsersRow?.phoneNumber,
                             ),
                             focusNode: _model.textFieldFocusNode2,
+                            autofocus: false,
                             readOnly: accountUsersRow!.isMember,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Phone number',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -327,7 +350,12 @@ class _AccountWidgetState extends State<AccountWidget> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             validator: _model.textController2Validator
                                 .asValidator(context),
                           ),
@@ -339,14 +367,23 @@ class _AccountWidgetState extends State<AccountWidget> {
                               text: accountUsersRow?.userReferral,
                             ),
                             focusNode: _model.textFieldFocusNode3,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Referral',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -377,7 +414,12 @@ class _AccountWidgetState extends State<AccountWidget> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             validator: _model.textController3Validator
                                 .asValidator(context),
                           ),
@@ -389,14 +431,23 @@ class _AccountWidgetState extends State<AccountWidget> {
                               text: accountUsersRow?.invite,
                             ),
                             focusNode: _model.textFieldFocusNode4,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Invite ID',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -427,7 +478,12 @@ class _AccountWidgetState extends State<AccountWidget> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             validator: _model.textController4Validator
                                 .asValidator(context),
                           ),
@@ -453,34 +509,34 @@ class _AccountWidgetState extends State<AccountWidget> {
                               }
                               List<SectorsRow> dropDownSectorsRowList =
                                   snapshot.data!;
+
                               return FlutterFlowDropDown<String>(
                                 controller: _model.dropDownValueController ??=
                                     FormFieldController<String>(
-                                  _model.dropDownValue ??=
-                                      widget.sectorID != null
-                                          ? dropDownSectorsRowList
-                                              .where((e) =>
-                                                  widget.sectorID == e.sectorID)
-                                              .toList()
-                                              .first
-                                              .sectorName
-                                          : 'វិស័យកសិកម្ម ជលផល និងបរិស្ថាន',
+                                  _model.dropDownValue ??= widget.sectorID !=
+                                          null
+                                      ? dropDownSectorsRowList
+                                          .where((e) =>
+                                              widget.sectorID == e.sectorID)
+                                          .toList()
+                                          .first
+                                          .sectorName
+                                      : 'វិស័យកសិកម្ម ជលផល និងបរិស្ថាន',
                                 ),
                                 options: dropDownSectorsRowList
                                     .map((e) => e.sectorName)
                                     .withoutNulls
                                     .toList(),
                                 onChanged: (val) async {
-                                  setState(() => _model.dropDownValue = val);
-                                  setState(() {
-                                    _model.sectorID = dropDownSectorsRowList
-                                        .where((e) =>
-                                            _model.dropDownValue ==
-                                            e.sectorName)
-                                        .toList()
-                                        .first
-                                        .sectorID;
-                                  });
+                                  safeSetState(
+                                      () => _model.dropDownValue = val);
+                                  _model.sectorID = dropDownSectorsRowList
+                                      .where((e) =>
+                                          _model.dropDownValue == e.sectorName)
+                                      .toList()
+                                      .first
+                                      .sectorID;
+                                  safeSetState(() {});
                                 },
                                 width: double.infinity,
                                 height: 40.0,
@@ -489,6 +545,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       fontSize: 14.0,
+                                      letterSpacing: 0.0,
                                     ),
                                 hintText: 'Please select sector',
                                 icon: Icon(
@@ -556,6 +613,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(
@@ -600,6 +658,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                     money: 1.0,
                                     action: 'plus',
                                   );
+
                                   await TransactionsTable().insert({
                                     'TypeID': 5,
                                     'Amount': 1.0,
@@ -609,7 +668,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                   });
                                   context.safePop();
 
-                                  setState(() {});
+                                  safeSetState(() {});
                                 },
                                 text: 'Approved',
                                 options: FFButtonOptions(
@@ -625,6 +684,7 @@ class _AccountWidgetState extends State<AccountWidget> {
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(

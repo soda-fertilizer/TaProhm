@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'transactions_model.dart';
 export 'transactions_model.dart';
 
@@ -26,7 +25,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
     super.initState();
     _model = createModel(context, () => TransactionsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,8 +37,6 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: const AlignmentDirectional(0.0, -1.0),
       child: Padding(
@@ -103,6 +100,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               fontSize: 12.0,
+                              letterSpacing: 0.0,
                             ),
                       ),
                     ],
@@ -159,6 +157,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               fontSize: 12.0,
+                              letterSpacing: 0.0,
                             ),
                       ),
                     ],
@@ -215,6 +214,7 @@ class _TransactionsWidgetState extends State<TransactionsWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               fontSize: 12.0,
+                              letterSpacing: 0.0,
                             ),
                       ),
                     ],

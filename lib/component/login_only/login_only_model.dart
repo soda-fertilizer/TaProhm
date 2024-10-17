@@ -8,19 +8,18 @@ class LoginOnlyModel extends FlutterFlowModel<LoginOnlyWidget> {
 
   // State field(s) for LoginPhoneNumber widget.
   FocusNode? loginPhoneNumberFocusNode;
-  TextEditingController? loginPhoneNumberController;
-  String? Function(BuildContext, String?)? loginPhoneNumberControllerValidator;
+  TextEditingController? loginPhoneNumberTextController;
+  String? Function(BuildContext, String?)?
+      loginPhoneNumberTextControllerValidator;
   // State field(s) for LoginPassword widget.
   FocusNode? loginPasswordFocusNode;
-  TextEditingController? loginPasswordController;
+  TextEditingController? loginPasswordTextController;
   late bool loginPasswordVisibility;
-  String? Function(BuildContext, String?)? loginPasswordControllerValidator;
+  String? Function(BuildContext, String?)? loginPasswordTextControllerValidator;
   // Stores action output result for [Backend Call - API (Login)] action in Button widget.
   ApiCallResponse? login;
   // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
   String? fcmToken;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -30,13 +29,9 @@ class LoginOnlyModel extends FlutterFlowModel<LoginOnlyWidget> {
   @override
   void dispose() {
     loginPhoneNumberFocusNode?.dispose();
-    loginPhoneNumberController?.dispose();
+    loginPhoneNumberTextController?.dispose();
 
     loginPasswordFocusNode?.dispose();
-    loginPasswordController?.dispose();
+    loginPasswordTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -1,14 +1,11 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
-class UserInfoStruct extends FFFirebaseStruct {
+class UserInfoStruct extends BaseStruct {
   UserInfoStruct({
     int? userID,
     String? fullName,
@@ -23,7 +20,6 @@ class UserInfoStruct extends FFFirebaseStruct {
     bool? isTestAccount,
     String? invite,
     bool? isSubAdmin,
-    FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _userID = userID,
         _fullName = fullName,
         _phoneNumber = phoneNumber,
@@ -36,87 +32,101 @@ class UserInfoStruct extends FFFirebaseStruct {
         _isMember = isMember,
         _isTestAccount = isTestAccount,
         _invite = invite,
-        _isSubAdmin = isSubAdmin,
-        super(firestoreUtilData);
+        _isSubAdmin = isSubAdmin;
 
   // "UserID" field.
   int? _userID;
   int get userID => _userID ?? 0;
   set userID(int? val) => _userID = val;
-  void incrementUserID(int amount) => _userID = userID + amount;
+
+  void incrementUserID(int amount) => userID = userID + amount;
+
   bool hasUserID() => _userID != null;
 
   // "FullName" field.
   String? _fullName;
   String get fullName => _fullName ?? '';
   set fullName(String? val) => _fullName = val;
+
   bool hasFullName() => _fullName != null;
 
   // "PhoneNumber" field.
   String? _phoneNumber;
   String get phoneNumber => _phoneNumber ?? '';
   set phoneNumber(String? val) => _phoneNumber = val;
+
   bool hasPhoneNumber() => _phoneNumber != null;
 
   // "Token" field.
   String? _token;
   String get token => _token ?? '';
   set token(String? val) => _token = val;
+
   bool hasToken() => _token != null;
 
   // "SectorID" field.
   int? _sectorID;
   int get sectorID => _sectorID ?? 0;
   set sectorID(int? val) => _sectorID = val;
-  void incrementSectorID(int amount) => _sectorID = sectorID + amount;
+
+  void incrementSectorID(int amount) => sectorID = sectorID + amount;
+
   bool hasSectorID() => _sectorID != null;
 
   // "IsAdmin" field.
   bool? _isAdmin;
   bool get isAdmin => _isAdmin ?? false;
   set isAdmin(bool? val) => _isAdmin = val;
+
   bool hasIsAdmin() => _isAdmin != null;
 
   // "Profile" field.
   String? _profile;
   String get profile => _profile ?? '';
   set profile(String? val) => _profile = val;
+
   bool hasProfile() => _profile != null;
 
   // "UserReferral" field.
   String? _userReferral;
   String get userReferral => _userReferral ?? '';
   set userReferral(String? val) => _userReferral = val;
+
   bool hasUserReferral() => _userReferral != null;
 
   // "HashedPassword" field.
   String? _hashedPassword;
   String get hashedPassword => _hashedPassword ?? '';
   set hashedPassword(String? val) => _hashedPassword = val;
+
   bool hasHashedPassword() => _hashedPassword != null;
 
   // "IsMember" field.
   bool? _isMember;
   bool get isMember => _isMember ?? false;
   set isMember(bool? val) => _isMember = val;
+
   bool hasIsMember() => _isMember != null;
 
   // "IsTestAccount" field.
   bool? _isTestAccount;
   bool get isTestAccount => _isTestAccount ?? false;
   set isTestAccount(bool? val) => _isTestAccount = val;
+
   bool hasIsTestAccount() => _isTestAccount != null;
 
   // "Invite" field.
   String? _invite;
   String get invite => _invite ?? '';
   set invite(String? val) => _invite = val;
+
   bool hasInvite() => _invite != null;
 
   // "IsSubAdmin" field.
   bool? _isSubAdmin;
   bool get isSubAdmin => _isSubAdmin ?? false;
   set isSubAdmin(bool? val) => _isSubAdmin = val;
+
   bool hasIsSubAdmin() => _isSubAdmin != null;
 
   static UserInfoStruct fromMap(Map<String, dynamic> data) => UserInfoStruct(
@@ -332,10 +342,6 @@ UserInfoStruct createUserInfoStruct({
   bool? isTestAccount,
   String? invite,
   bool? isSubAdmin,
-  Map<String, dynamic> fieldValues = const {},
-  bool clearUnsetFields = true,
-  bool create = false,
-  bool delete = false,
 }) =>
     UserInfoStruct(
       userID: userID,
@@ -351,69 +357,4 @@ UserInfoStruct createUserInfoStruct({
       isTestAccount: isTestAccount,
       invite: invite,
       isSubAdmin: isSubAdmin,
-      firestoreUtilData: FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-        delete: delete,
-        fieldValues: fieldValues,
-      ),
     );
-
-UserInfoStruct? updateUserInfoStruct(
-  UserInfoStruct? userInfo, {
-  bool clearUnsetFields = true,
-  bool create = false,
-}) =>
-    userInfo
-      ?..firestoreUtilData = FirestoreUtilData(
-        clearUnsetFields: clearUnsetFields,
-        create: create,
-      );
-
-void addUserInfoStructData(
-  Map<String, dynamic> firestoreData,
-  UserInfoStruct? userInfo,
-  String fieldName, [
-  bool forFieldValue = false,
-]) {
-  firestoreData.remove(fieldName);
-  if (userInfo == null) {
-    return;
-  }
-  if (userInfo.firestoreUtilData.delete) {
-    firestoreData[fieldName] = FieldValue.delete();
-    return;
-  }
-  final clearFields =
-      !forFieldValue && userInfo.firestoreUtilData.clearUnsetFields;
-  if (clearFields) {
-    firestoreData[fieldName] = <String, dynamic>{};
-  }
-  final userInfoData = getUserInfoFirestoreData(userInfo, forFieldValue);
-  final nestedData = userInfoData.map((k, v) => MapEntry('$fieldName.$k', v));
-
-  final mergeFields = userInfo.firestoreUtilData.create || clearFields;
-  firestoreData
-      .addAll(mergeFields ? mergeNestedFields(nestedData) : nestedData);
-}
-
-Map<String, dynamic> getUserInfoFirestoreData(
-  UserInfoStruct? userInfo, [
-  bool forFieldValue = false,
-]) {
-  if (userInfo == null) {
-    return {};
-  }
-  final firestoreData = mapToFirestore(userInfo.toMap());
-
-  // Add any Firestore field values
-  userInfo.firestoreUtilData.fieldValues
-      .forEach((k, v) => firestoreData[k] = v);
-
-  return forFieldValue ? mergeNestedFields(firestoreData) : firestoreData;
-}
-
-List<Map<String, dynamic>> getUserInfoListFirestoreData(
-  List<UserInfoStruct>? userInfos,
-) =>
-    userInfos?.map((e) => getUserInfoFirestoreData(e, true)).toList() ?? [];

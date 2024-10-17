@@ -31,7 +31,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
     super.initState();
     _model = createModel(context, () => NavBarModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -99,6 +99,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                               ? FlutterFlowTheme.of(context).primary
                               : FlutterFlowTheme.of(context).secondaryText,
                           fontSize: 8.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                 ],
@@ -148,6 +149,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                               ? FlutterFlowTheme.of(context).primary
                               : FlutterFlowTheme.of(context).secondaryText,
                           fontSize: 8.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                 ],
@@ -215,6 +217,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 ? FlutterFlowTheme.of(context).primary
                                 : FlutterFlowTheme.of(context).secondaryText,
                             fontSize: 8.0,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ],
@@ -265,6 +268,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 ? FlutterFlowTheme.of(context).primary
                                 : FlutterFlowTheme.of(context).secondaryText,
                             fontSize: 8.0,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ],
@@ -315,6 +319,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                                 ? FlutterFlowTheme.of(context).primary
                                 : FlutterFlowTheme.of(context).secondaryText,
                             fontSize: 8.0,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ],
@@ -336,7 +341,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                     context.pop();
                   }
                   context.pushNamed(
-                    'Profile',
+                    'MyCompany',
                     extra: <String, dynamic>{
                       kTransitionInfoKey: const TransitionInfo(
                         hasTransition: true,
@@ -367,20 +372,21 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Icon(
-                    Icons.person,
+                    Icons.business,
                     color: widget.selectPageIndex == 5
                         ? FlutterFlowTheme.of(context).primary
                         : FlutterFlowTheme.of(context).secondaryText,
                     size: 24.0,
                   ),
                   Text(
-                    'Profile',
+                    'Listing',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           color: widget.selectPageIndex == 5
                               ? FlutterFlowTheme.of(context).primary
                               : FlutterFlowTheme.of(context).secondaryText,
                           fontSize: 8.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                 ],

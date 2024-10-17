@@ -1,4 +1,4 @@
-import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/component/nav_bar/nav_bar_widget.dart';
 import '/component/nav_padding/nav_padding_widget.dart';
@@ -44,18 +44,17 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(locationPermission);
-      setState(() {
-        _model.addToLocationList(CustomMapLocationStruct(
-          id: widget.companyID,
-          latitude: widget.companyLatitude,
-          longitude: widget.companyLongitude,
-        ));
-      });
+      _model.addToLocationList(CustomMapLocationStruct(
+        id: widget.companyID,
+        latitude: widget.companyLatitude,
+        longitude: widget.companyLongitude,
+      ));
+      safeSetState(() {});
     });
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -119,13 +118,12 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
           );
         }
         List<CompaniesRow> singleCompanyMapCompaniesRowList = snapshot.data!;
+
         return Title(
             title: 'SingleCompanyMap',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -159,13 +157,8 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
                                       context: context,
                                       builder: (context) {
                                         return GestureDetector(
-                                          onTap: () => _model
-                                                  .unfocusNode.canRequestFocus
-                                              ? FocusScope.of(context)
-                                                  .requestFocus(
-                                                      _model.unfocusNode)
-                                              : FocusScope.of(context)
-                                                  .unfocus(),
+                                          onTap: () =>
+                                              FocusScope.of(context).unfocus(),
                                           child: Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
@@ -189,7 +182,7 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
                             alignment: const AlignmentDirectional(0.0, 1.0),
                             child: wrapWithModel(
                               model: _model.navPaddingModel,
-                              updateCallback: () => setState(() {}),
+                              updateCallback: () => safeSetState(() {}),
                               child: const NavPaddingWidget(),
                             ),
                           ),
@@ -199,7 +192,7 @@ class _SingleCompanyMapWidgetState extends State<SingleCompanyMapWidget> {
                         alignment: const AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
                           model: _model.navBarModel,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: const NavBarWidget(
                             selectPageIndex: 2,
                           ),

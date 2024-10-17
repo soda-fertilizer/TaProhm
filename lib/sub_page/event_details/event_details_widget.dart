@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'event_details_model.dart';
 export 'event_details_model.dart';
 
@@ -30,7 +29,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
     super.initState();
     _model = createModel(context, () => EventDetailsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -42,8 +41,6 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<EventsRow>>(
       future: EventsTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -70,16 +67,16 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
           );
         }
         List<EventsRow> eventDetailsEventsRowList = snapshot.data!;
+
         final eventDetailsEventsRow = eventDetailsEventsRowList.isNotEmpty
             ? eventDetailsEventsRowList.first
             : null;
+
         return Title(
             title: 'EventDetails',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -106,6 +103,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 22.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -129,7 +127,12 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 'Null',
                               ),
                               textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context).titleLarge,
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ),
@@ -153,7 +156,12 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                               eventDetailsEventsRow?.details,
                               'Null',
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ),
                       ].divide(const SizedBox(height: 16.0)),

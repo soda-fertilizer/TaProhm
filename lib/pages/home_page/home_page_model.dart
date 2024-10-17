@@ -26,21 +26,24 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   double selectLon = 0.0;
 
+  int? selectProvinceID;
+
+  int? buttonClickindex2;
+
+  double? selectDistrictID;
+
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (check password change)] action in HomePage widget.
-  ApiCallResponse? passwordChange;
+  // Stores action output result for [Backend Call - API (get nearest district)] action in HomePage widget.
+  ApiCallResponse? locationID;
   // Stores action output result for [Backend Call - API (AppVersion)] action in HomePage widget.
   ApiCallResponse? appVersion;
-  // Stores action output result for [Backend Call - API (Check Maintenance mode)] action in HomePage widget.
-  ApiCallResponse? check;
+  // Stores action output result for [Backend Call - API (check password change)] action in HomePage widget.
+  ApiCallResponse? passwordChange;
   // Model for NavPadding component.
   late NavPaddingModel navPaddingModel;
   // Model for NavBar component.
   late NavBarModel navBarModel;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -50,12 +53,7 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     navPaddingModel.dispose();
     navBarModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

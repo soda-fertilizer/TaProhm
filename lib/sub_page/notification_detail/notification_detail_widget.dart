@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'notification_detail_model.dart';
 export 'notification_detail_model.dart';
 
@@ -31,7 +30,7 @@ class _NotificationDetailWidgetState extends State<NotificationDetailWidget> {
     super.initState();
     _model = createModel(context, () => NotificationDetailModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -43,8 +42,6 @@ class _NotificationDetailWidgetState extends State<NotificationDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<BroadcastNotificationRow>>(
       future: BroadcastNotificationTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -72,17 +69,17 @@ class _NotificationDetailWidgetState extends State<NotificationDetailWidget> {
         }
         List<BroadcastNotificationRow>
             notificationDetailBroadcastNotificationRowList = snapshot.data!;
+
         final notificationDetailBroadcastNotificationRow =
             notificationDetailBroadcastNotificationRowList.isNotEmpty
                 ? notificationDetailBroadcastNotificationRowList.first
                 : null;
+
         return Title(
             title: 'NotificationDetail',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -109,6 +106,7 @@ class _NotificationDetailWidgetState extends State<NotificationDetailWidget> {
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 22.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -133,7 +131,12 @@ class _NotificationDetailWidgetState extends State<NotificationDetailWidget> {
                                 'Null',
                               ),
                               textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context).titleLarge,
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ),
@@ -160,7 +163,12 @@ class _NotificationDetailWidgetState extends State<NotificationDetailWidget> {
                                   ?.contents,
                               'Null',
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ),
                       ].divide(const SizedBox(height: 16.0)),

@@ -11,19 +11,20 @@ class ViewCompanyModel extends FlutterFlowModel<ViewCompanyWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for CompanyName widget.
   FocusNode? companyNameFocusNode;
-  TextEditingController? companyNameController;
-  String? Function(BuildContext, String?)? companyNameControllerValidator;
+  TextEditingController? companyNameTextController;
+  String? Function(BuildContext, String?)? companyNameTextControllerValidator;
   // State field(s) for TelegramNumber widget.
   FocusNode? telegramNumberFocusNode;
-  TextEditingController? telegramNumberController;
-  String? Function(BuildContext, String?)? telegramNumberControllerValidator;
+  TextEditingController? telegramNumberTextController;
+  String? Function(BuildContext, String?)?
+      telegramNumberTextControllerValidator;
   // State field(s) for TelegramUsername widget.
   FocusNode? telegramUsernameFocusNode;
-  TextEditingController? telegramUsernameController;
-  String? Function(BuildContext, String?)? telegramUsernameControllerValidator;
+  TextEditingController? telegramUsernameTextController;
+  String? Function(BuildContext, String?)?
+      telegramUsernameTextControllerValidator;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController4;
@@ -35,28 +36,21 @@ class ViewCompanyModel extends FlutterFlowModel<ViewCompanyWidget> {
   FFUploadedFile uploadedLocalFile2 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     companyNameFocusNode?.dispose();
-    companyNameController?.dispose();
+    companyNameTextController?.dispose();
 
     telegramNumberFocusNode?.dispose();
-    telegramNumberController?.dispose();
+    telegramNumberTextController?.dispose();
 
     telegramUsernameFocusNode?.dispose();
-    telegramUsernameController?.dispose();
+    telegramUsernameTextController?.dispose();
 
     textFieldFocusNode?.dispose();
     textController4?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

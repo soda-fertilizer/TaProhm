@@ -7,8 +7,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:provider/provider.dart';
 import 'company_info_model.dart';
 export 'company_info_model.dart';
 
@@ -34,7 +34,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
     super.initState();
     _model = createModel(context, () => CompanyInfoModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,8 +46,6 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<CompaniesRow>>(
       future: CompaniesTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -74,16 +72,16 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
           );
         }
         List<CompaniesRow> companyInfoCompaniesRowList = snapshot.data!;
+
         final companyInfoCompaniesRow = companyInfoCompaniesRowList.isNotEmpty
             ? companyInfoCompaniesRowList.first
             : null;
+
         return Title(
             title: 'CompanyInfo',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -113,6 +111,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
                                 fontSize: 22.0,
+                                letterSpacing: 0.0,
                               ),
                     ),
                   ),
@@ -141,15 +140,12 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                               context: context,
                               builder: (context) {
                                 return GestureDetector(
-                                  onTap: () =>
-                                      _model.unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
+                                  onTap: () => FocusScope.of(context).unfocus(),
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
                                     child: BigImageWidget(
-                                      imgURL: companyInfoCompaniesRow.companyProfile,
+                                      imgURL: companyInfoCompaniesRow
+                                          .companyProfile,
                                     ),
                                   ),
                                 );
@@ -173,7 +169,11 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                         ),
                         Text(
                           companyInfoCompaniesRow.companyName,
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                         Container(
                           width: double.infinity,
@@ -190,6 +190,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                             .companyImages
                                             .toList() ??
                                         [];
+
                                     return Wrap(
                                       spacing: 10.0,
                                       runSpacing: 10.0,
@@ -232,13 +233,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                                 context: context,
                                                 builder: (context) {
                                                   return GestureDetector(
-                                                    onTap: () => _model
-                                                            .unfocusNode
-                                                            .canRequestFocus
-                                                        ? FocusScope.of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode)
-                                                        : FocusScope.of(context)
+                                                    onTap: () =>
+                                                        FocusScope.of(context)
                                                             .unfocus(),
                                                     child: Padding(
                                                       padding: MediaQuery
@@ -246,7 +242,8 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                                               context),
                                                       child: ImageGalleryWidget(
                                                         images:
-                                                            companyInfoCompaniesRow.companyImages,
+                                                            companyInfoCompaniesRow
+                                                                .companyImages,
                                                       ),
                                                     ),
                                                   );
@@ -258,9 +255,14 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(0.0),
                                               child: OctoImage(
-                                                placeholderBuilder:
-                                                    OctoPlaceholder.blurHash(
-                                                  FFAppConstants.BlurHash,
+                                                placeholderBuilder: (_) =>
+                                                    const SizedBox.expand(
+                                                  child: Image(
+                                                    image: BlurHashImage(
+                                                        FFAppConstants
+                                                            .BlurHash),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                                 image:
                                                     CachedNetworkImageProvider(
@@ -300,7 +302,11 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                     Text(
                                       companyInfoCompaniesRow.detail,
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -344,6 +350,7 @@ class _CompanyInfoWidgetState extends State<CompanyInfoWidget> {
                                   .override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
                               borderSide: const BorderSide(

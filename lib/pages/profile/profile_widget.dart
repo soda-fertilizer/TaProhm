@@ -11,6 +11,7 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
@@ -52,17 +53,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 );
               }(),
             );
-            setState(() {
-              FFAppState().updateUserInfoStruct(
-                (e) => e..token = FFAppState().refreshFCMToken,
-              );
-            });
+            FFAppState().updateUserInfoStruct(
+              (e) => e..token = FFAppState().refreshFCMToken,
+            );
+            safeSetState(() {});
           },
         );
       }
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -80,9 +80,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         title: 'Profile',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primary,
@@ -126,9 +124,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(50.0),
                                       child: OctoImage(
-                                        placeholderBuilder:
-                                            OctoPlaceholder.blurHash(
-                                          FFAppConstants.BlurHash,
+                                        placeholderBuilder: (_) =>
+                                            const SizedBox.expand(
+                                          child: Image(
+                                            image: BlurHashImage(
+                                                FFAppConstants.BlurHash),
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                         image: CachedNetworkImageProvider(
                                           FFAppState().UserInfo.profile,
@@ -165,6 +167,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                 .of(context)
                                                             .primaryBackground,
                                                         fontSize: 16.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                             ),
                                             Padding(
@@ -182,6 +185,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                   .of(context)
                                                               .primaryBackground,
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ),
@@ -264,6 +268,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             fontSize: 12.0,
+                                            letterSpacing: 0.0,
                                           ),
                                     ),
                                   ),
@@ -285,13 +290,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         context: context,
                                         builder: (context) {
                                           return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
+                                            onTap: () => FocusScope.of(context)
+                                                .unfocus(),
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
@@ -319,7 +319,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           BoxShadow(
                                             blurRadius: 5.0,
                                             color: Color(0x3416202A),
-                                            offset: Offset(0.0, 2.0),
+                                            offset: Offset(
+                                              0.0,
+                                              2.0,
+                                            ),
                                           )
                                         ],
                                         borderRadius:
@@ -352,6 +355,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                         fontFamily:
                                                             'Readex Pro',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ),
@@ -406,7 +410,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             BoxShadow(
                                               blurRadius: 5.0,
                                               color: Color(0x3416202A),
-                                              offset: Offset(0.0, 2.0),
+                                              offset: Offset(
+                                                0.0,
+                                                2.0,
+                                              ),
                                             )
                                           ],
                                           borderRadius:
@@ -439,6 +446,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ),
@@ -493,7 +501,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             BoxShadow(
                                               blurRadius: 5.0,
                                               color: Color(0x3416202A),
-                                              offset: Offset(0.0, 2.0),
+                                              offset: Offset(
+                                                0.0,
+                                                2.0,
+                                              ),
                                             )
                                           ],
                                           borderRadius:
@@ -526,6 +537,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ),
@@ -560,7 +572,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         BoxShadow(
                                           blurRadius: 5.0,
                                           color: Color(0x3416202A),
-                                          offset: Offset(0.0, 2.0),
+                                          offset: Offset(
+                                            0.0,
+                                            2.0,
+                                          ),
                                         )
                                       ],
                                       borderRadius: BorderRadius.circular(12.0),
@@ -591,6 +606,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ),
@@ -642,7 +658,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           BoxShadow(
                                             blurRadius: 5.0,
                                             color: Color(0x3416202A),
-                                            offset: Offset(0.0, 2.0),
+                                            offset: Offset(
+                                              0.0,
+                                              2.0,
+                                            ),
                                           )
                                         ],
                                         borderRadius:
@@ -675,6 +694,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                         fontFamily:
                                                             'Readex Pro',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ),
@@ -718,7 +738,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             BoxShadow(
                                               blurRadius: 5.0,
                                               color: Color(0x3416202A),
-                                              offset: Offset(0.0, 2.0),
+                                              offset: Offset(
+                                                0.0,
+                                                2.0,
+                                              ),
                                             )
                                           ],
                                           borderRadius:
@@ -751,6 +774,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ),
@@ -794,7 +818,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             BoxShadow(
                                               blurRadius: 5.0,
                                               color: Color(0x3416202A),
-                                              offset: Offset(0.0, 2.0),
+                                              offset: Offset(
+                                                0.0,
+                                                2.0,
+                                              ),
                                             )
                                           ],
                                           borderRadius:
@@ -827,6 +854,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ),
@@ -882,7 +910,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             BoxShadow(
                                               blurRadius: 5.0,
                                               color: Color(0x3416202A),
-                                              offset: Offset(0.0, 2.0),
+                                              offset: Offset(
+                                                0.0,
+                                                2.0,
+                                              ),
                                             )
                                           ],
                                           borderRadius:
@@ -915,6 +946,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                                   ),
                                                 ),
@@ -946,6 +978,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           fontSize: 12.0,
+                                          letterSpacing: 0.0,
                                         ),
                                   ),
                                 ),
@@ -980,7 +1013,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           BoxShadow(
                                             blurRadius: 5.0,
                                             color: Color(0x3416202A),
-                                            offset: Offset(0.0, 2.0),
+                                            offset: Offset(
+                                              0.0,
+                                              2.0,
+                                            ),
                                           )
                                         ],
                                         borderRadius:
@@ -1013,6 +1049,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                         fontFamily:
                                                             'Readex Pro',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ),
@@ -1065,7 +1102,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           BoxShadow(
                                             blurRadius: 5.0,
                                             color: Color(0x3416202A),
-                                            offset: Offset(0.0, 2.0),
+                                            offset: Offset(
+                                              0.0,
+                                              2.0,
+                                            ),
                                           )
                                         ],
                                         borderRadius:
@@ -1098,6 +1138,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                         fontFamily:
                                                             'Readex Pro',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ),
@@ -1133,14 +1174,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       GoRouter.of(context)
                                           .clearRedirectLocation();
 
-                                      setState(() {
-                                        FFAppState().deleteUserInfo();
-                                        FFAppState().UserInfo = UserInfoStruct
-                                            .fromSerializableMap(jsonDecode(
-                                                '{"IsTestAccount":"false"}'));
+                                      FFAppState().deleteUserInfo();
+                                      FFAppState().UserInfo = UserInfoStruct
+                                          .fromSerializableMap(jsonDecode(
+                                              '{\"IsTestAccount\":\"false\"}'));
 
-                                        FFAppState().IsLogged = false;
-                                      });
+                                      FFAppState().IsLogged = false;
+                                      safeSetState(() {});
 
                                       context.goNamedAuth(
                                           'LoginPage', context.mounted);
@@ -1155,7 +1195,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           BoxShadow(
                                             blurRadius: 5.0,
                                             color: Color(0x3416202A),
-                                            offset: Offset(0.0, 2.0),
+                                            offset: Offset(
+                                              0.0,
+                                              2.0,
+                                            ),
                                           )
                                         ],
                                         borderRadius:
@@ -1188,6 +1231,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                         fontFamily:
                                                             'Readex Pro',
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ),
@@ -1212,7 +1256,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                       wrapWithModel(
                         model: _model.navPaddingModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavPaddingWidget(),
                       ),
                     ],
@@ -1221,7 +1265,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     alignment: const AlignmentDirectional(0.0, 1.0),
                     child: wrapWithModel(
                       model: _model.navBarModel,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const NavBarWidget(
                         selectPageIndex: 5,
                       ),

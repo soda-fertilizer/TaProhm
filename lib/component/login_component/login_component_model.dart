@@ -23,17 +23,16 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
 
   // State field(s) for LoginPhoneNumber widget.
   FocusNode? loginPhoneNumberFocusNode;
-  TextEditingController? loginPhoneNumberController;
-  String? Function(BuildContext, String?)? loginPhoneNumberControllerValidator;
+  TextEditingController? loginPhoneNumberTextController;
+  String? Function(BuildContext, String?)?
+      loginPhoneNumberTextControllerValidator;
   // State field(s) for LoginPassword widget.
   FocusNode? loginPasswordFocusNode;
-  TextEditingController? loginPasswordController;
+  TextEditingController? loginPasswordTextController;
   late bool loginPasswordVisibility;
-  String? Function(BuildContext, String?)? loginPasswordControllerValidator;
+  String? Function(BuildContext, String?)? loginPasswordTextControllerValidator;
   // Stores action output result for [Backend Call - API (Login)] action in Button widget.
   ApiCallResponse? login2;
-  // Stores action output result for [Custom Action - initFirebaseMessage] action in Button widget.
-  String? fcmToken;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -41,17 +40,20 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
 
   // State field(s) for SingUpFullName widget.
   FocusNode? singUpFullNameFocusNode;
-  TextEditingController? singUpFullNameController;
-  String? Function(BuildContext, String?)? singUpFullNameControllerValidator;
+  TextEditingController? singUpFullNameTextController;
+  String? Function(BuildContext, String?)?
+      singUpFullNameTextControllerValidator;
   // State field(s) for SignUPPassword widget.
   FocusNode? signUPPasswordFocusNode;
-  TextEditingController? signUPPasswordController;
+  TextEditingController? signUPPasswordTextController;
   late bool signUPPasswordVisibility;
-  String? Function(BuildContext, String?)? signUPPasswordControllerValidator;
+  String? Function(BuildContext, String?)?
+      signUPPasswordTextControllerValidator;
   // State field(s) for SignUpPhoneNumber widget.
   FocusNode? signUpPhoneNumberFocusNode;
-  TextEditingController? signUpPhoneNumberController;
-  String? Function(BuildContext, String?)? signUpPhoneNumberControllerValidator;
+  TextEditingController? signUpPhoneNumberTextController;
+  String? Function(BuildContext, String?)?
+      signUpPhoneNumberTextControllerValidator;
   // State field(s) for SingUpProvince widget.
   String? singUpProvinceValue;
   FormFieldController<String>? singUpProvinceValueController;
@@ -67,8 +69,6 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
   List<UsersRow>? updateToken;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     loginPasswordVisibility = false;
@@ -79,22 +79,18 @@ class LoginComponentModel extends FlutterFlowModel<LoginComponentWidget> {
   void dispose() {
     tabBarController?.dispose();
     loginPhoneNumberFocusNode?.dispose();
-    loginPhoneNumberController?.dispose();
+    loginPhoneNumberTextController?.dispose();
 
     loginPasswordFocusNode?.dispose();
-    loginPasswordController?.dispose();
+    loginPasswordTextController?.dispose();
 
     singUpFullNameFocusNode?.dispose();
-    singUpFullNameController?.dispose();
+    singUpFullNameTextController?.dispose();
 
     signUPPasswordFocusNode?.dispose();
-    signUPPasswordController?.dispose();
+    signUPPasswordTextController?.dispose();
 
     signUpPhoneNumberFocusNode?.dispose();
-    signUpPhoneNumberController?.dispose();
+    signUpPhoneNumberTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

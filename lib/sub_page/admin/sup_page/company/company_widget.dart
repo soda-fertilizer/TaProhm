@@ -12,8 +12,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:provider/provider.dart';
 import 'company_model.dart';
 export 'company_model.dart';
 
@@ -65,7 +65,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
 
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -77,8 +77,6 @@ class _CompanyWidgetState extends State<CompanyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<CompaniesRow>>(
       future: CompaniesTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -105,16 +103,16 @@ class _CompanyWidgetState extends State<CompanyWidget> {
           );
         }
         List<CompaniesRow> companyCompaniesRowList = snapshot.data!;
+
         final companyCompaniesRow = companyCompaniesRowList.isNotEmpty
             ? companyCompaniesRowList.first
             : null;
+
         return Title(
             title: 'Company',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -144,6 +142,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
                                 fontSize: 22.0,
+                                letterSpacing: 0.0,
                               ),
                     ),
                   ),
@@ -178,9 +177,11 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                         );
                       }
                       List<UsersRow> containerUsersRowList = snapshot.data!;
+
                       final containerUsersRow = containerUsersRowList.isNotEmpty
                           ? containerUsersRowList.first
                           : null;
+
                       return Container(
                         decoration: const BoxDecoration(),
                         child: Padding(
@@ -238,7 +239,12 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                 ),
                                                 Text(
                                                   'ID: ${containerUsersRow.phoneNumber}',
@@ -253,6 +259,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                                                     context)
                                                                 .secondaryText,
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ],
@@ -282,20 +289,29 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                   ],
                                 ),
                                 TextFormField(
-                                  controller: _model.amountController ??=
+                                  controller: _model.amountTextController ??=
                                       TextEditingController(
                                     text:
                                         companyCompaniesRow.amount.toString(),
                                   ),
                                   focusNode: _model.amountFocusNode,
+                                  autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     labelText: 'Amount',
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -329,10 +345,15 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   keyboardType: TextInputType.number,
-                                  validator: _model.amountControllerValidator
+                                  validator: _model
+                                      .amountTextControllerValidator
                                       .asValidator(context),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
@@ -340,19 +361,29 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                   ],
                                 ),
                                 TextFormField(
-                                  controller: _model.companyNameController ??=
-                                      TextEditingController(
+                                  controller:
+                                      _model.companyNameTextController ??=
+                                          TextEditingController(
                                     text: companyCompaniesRow.companyName,
                                   ),
                                   focusNode: _model.companyNameFocusNode,
+                                  autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     labelText: 'Company name',
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -386,27 +417,40 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   validator: _model
-                                      .companyNameControllerValidator
+                                      .companyNameTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 TextFormField(
                                   controller:
-                                      _model.telegramNumberController ??=
+                                      _model.telegramNumberTextController ??=
                                           TextEditingController(
                                     text: companyCompaniesRow.phoneNumber,
                                   ),
                                   focusNode: _model.telegramNumberFocusNode,
+                                  autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     labelText: 'Phone number',
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -440,27 +484,40 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   validator: _model
-                                      .telegramNumberControllerValidator
+                                      .telegramNumberTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 TextFormField(
                                   controller:
-                                      _model.telegramUsernameController ??=
+                                      _model.telegramUsernameTextController ??=
                                           TextEditingController(
                                     text: companyCompaniesRow.telegramUrl,
                                   ),
                                   focusNode: _model.telegramUsernameFocusNode,
+                                  autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
                                     labelText: 'Telegram link',
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -494,10 +551,14 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   validator: _model
-                                      .telegramUsernameControllerValidator
+                                      .telegramUsernameTextControllerValidator
                                       .asValidator(context),
                                 ),
                                 Container(
@@ -519,13 +580,22 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                       text: companyCompaniesRow.detail,
                                     ),
                                     focusNode: _model.textFieldFocusNode,
+                                    autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       hintText: 'Company detail',
                                       hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(
                                           color: Color(0x00000000),
@@ -559,8 +629,12 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     maxLines: 5,
                                     validator: _model.textController5Validator
                                         .asValidator(context),
@@ -599,6 +673,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(
@@ -620,7 +695,11 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                         child: Text(
                                           'Add image',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -631,6 +710,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             .companyImages
                                             .toList() ??
                                         [];
+
                                     return Wrap(
                                       spacing: 10.0,
                                       runSpacing: 10.0,
@@ -650,10 +730,9 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
-                                            setState(() {
-                                              _model.selectImageIndex =
-                                                  imagesIndex;
-                                            });
+                                            _model.selectImageIndex =
+                                                imagesIndex;
+                                            safeSetState(() {});
                                             await actions.printAction(
                                               _model.selectImageIndex
                                                   ?.toString(),
@@ -683,9 +762,14 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(0.0),
                                               child: OctoImage(
-                                                placeholderBuilder:
-                                                    OctoPlaceholder.blurHash(
-                                                  FFAppConstants.BlurHash,
+                                                placeholderBuilder: (_) =>
+                                                    const SizedBox.expand(
+                                                  child: Image(
+                                                    image: BlurHashImage(
+                                                        FFAppConstants
+                                                            .BlurHash),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                                 image:
                                                     CachedNetworkImageProvider(
@@ -714,7 +798,11 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                     child: Text(
                                       'Payment image',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                   ),
                                 ),
@@ -797,6 +885,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               color: Colors.white,
+                                              letterSpacing: 0.0,
                                             ),
                                         elevation: 3.0,
                                         borderSide: const BorderSide(
@@ -816,6 +905,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                                 .call(
                                           sectorId: containerUsersRow.sectorID,
                                         );
+
                                         shouldSetState = true;
                                         if ((_model
                                                 .sectorPhoneNumber?.succeeded ??
@@ -823,25 +913,26 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                           await CompaniesTable().update(
                                             data: {
                                               'PhoneNumber': _model
-                                                  .telegramNumberController
+                                                  .telegramNumberTextController
                                                   .text,
                                               'Detail':
                                                   _model.textController5.text,
                                               'CompanyName': companyCompaniesRow
                                                   .companyName,
                                               'TelegramUrl': _model
-                                                  .telegramUsernameController
+                                                  .telegramUsernameTextController
                                                   .text,
                                               'IsApprove': true,
-                                              'Amount': double.tryParse(
-                                                  _model.amountController.text),
+                                              'Amount': double.tryParse(_model
+                                                  .amountTextController.text),
                                             },
                                             matchingRows: (rows) => rows.eq(
                                               'CompanyID',
                                               widget.companyID,
                                             ),
                                           );
-                                          if (_model.amountController.text !=
+                                          if (_model
+                                                  .amountTextController.text !=
                                               '0') {
                                             unawaited(
                                               () async {
@@ -875,16 +966,22 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             }(),
                                           );
                                           context.safePop();
-                                          if (shouldSetState) setState(() {});
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
                                           return;
                                         } else {
                                           await action_blocks
                                               .noInternet(context);
-                                          if (shouldSetState) setState(() {});
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
                                           return;
                                         }
 
-                                        if (shouldSetState) setState(() {});
+                                        if (shouldSetState) {
+                                          safeSetState(() {});
+                                        }
                                       },
                                       text: 'Confirm',
                                       options: FFButtonOptions(
@@ -904,6 +1001,7 @@ class _CompanyWidgetState extends State<CompanyWidget> {
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               color: Colors.white,
+                                              letterSpacing: 0.0,
                                             ),
                                         elevation: 3.0,
                                         borderSide: const BorderSide(

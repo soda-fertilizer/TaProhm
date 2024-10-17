@@ -43,7 +43,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
       return;
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -118,7 +118,10 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                 ),
                 Text(
                   '\$ 1',
-                  style: FlutterFlowTheme.of(context).displayLarge,
+                  style: FlutterFlowTheme.of(context).displayLarge.override(
+                        fontFamily: 'Outfit',
+                        letterSpacing: 0.0,
+                      ),
                 ),
                 Container(
                   width: double.infinity,
@@ -182,13 +185,23 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                               'ABA Pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                             Text(
                                               'Click to pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelSmall,
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ],
                                         ),
@@ -262,13 +275,23 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                                 'Acleda Pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Text(
                                                 'Click to pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -342,13 +365,23 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                                 'Wing Pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Text(
                                                 'Click to pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -385,7 +418,11 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                             const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Add image',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                       Padding(
@@ -400,9 +437,8 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                setState(() {
-                                  _model.uploadedImage = null;
-                                });
+                                _model.uploadedImage = null;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -432,7 +468,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading1 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -469,7 +505,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile1 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl1 =
@@ -477,17 +513,15 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl1;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl1;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -515,7 +549,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading2 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -552,7 +586,7 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile2 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl2 =
@@ -560,17 +594,15 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl2;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl2;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -607,11 +639,10 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      setState(() {
-                        FFAppState().updateCreatAccountHolderStruct(
-                          (e) => e..pymentImage = _model.uploadedImage,
-                        );
-                      });
+                      FFAppState().updateCreatAccountHolderStruct(
+                        (e) => e..pymentImage = _model.uploadedImage,
+                      );
+                      safeSetState(() {});
                       await UsersTable().insert({
                         'PhoneNumber':
                             FFAppState().CreatAccountHolder.phoneNumber,
@@ -626,12 +657,12 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                         'Balance': 0.0,
                         'CreatedBy': FFAppState().UserInfo.userID,
                       });
-                      setState(() {
-                        FFAppState().deleteCreatAccountHolder();
-                        FFAppState().CreatAccountHolder =
-                            UserCreationStruct.fromSerializableMap(jsonDecode(
-                                '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png"}'));
-                      });
+                      FFAppState().deleteCreatAccountHolder();
+                      FFAppState().CreatAccountHolder =
+                          UserCreationStruct.fromSerializableMap(jsonDecode(
+                              '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\"}'));
+
+                      safeSetState(() {});
                       await showDialog(
                         context: context,
                         builder: (alertDialogContext) {
@@ -660,7 +691,11 @@ class _AcountPaymentWidgetState extends State<AcountPaymentWidget> {
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).secondary,
-                      textStyle: FlutterFlowTheme.of(context).bodyLarge,
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyLarge.override(
+                                fontFamily: 'Readex Pro',
+                                letterSpacing: 0.0,
+                              ),
                       elevation: 0.0,
                       borderSide: const BorderSide(
                         color: Colors.transparent,

@@ -31,8 +31,6 @@ class AdminAccountPaymentModel
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   UsersRow? createUser2;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
@@ -40,8 +38,4 @@ class AdminAccountPaymentModel
   void dispose() {
     tabBarController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

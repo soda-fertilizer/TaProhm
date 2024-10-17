@@ -30,8 +30,8 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,9 +49,7 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
         title: 'InvideMember',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -76,7 +74,10 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Invide Member',
-                  style: FlutterFlowTheme.of(context).titleMedium,
+                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
               actions: const [],
@@ -97,6 +98,7 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                           FlutterFlowTheme.of(context).titleMedium.override(
                                 fontFamily: 'Readex Pro',
                                 fontSize: 14.0,
+                                letterSpacing: 0.0,
                               ),
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
@@ -166,10 +168,11 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                               }
                               List<UsersRow> listViewUsersRowList =
                                   snapshot.data!;
+
                               return RefreshIndicator(
                                 onRefresh: () async {
                                   FFAppState().clearAdminRequestAccountCache();
-                                  setState(
+                                  safeSetState(
                                       () => _model.requestCompleter1 = null);
                                   await _model.waitForRequestCompleted1();
                                 },
@@ -195,7 +198,10 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(0.0, 1.0),
+                                              offset: const Offset(
+                                                0.0,
+                                                1.0,
+                                              ),
                                             )
                                           ],
                                         ),
@@ -254,7 +260,13 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyLarge,
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                         ),
                                                       ),
                                                       Text(
@@ -262,7 +274,13 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMedium,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                       ),
                                                     ],
                                                   ),
@@ -329,10 +347,11 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                               }
                               List<UsersRow> listViewUsersRowList =
                                   snapshot.data!;
+
                               return RefreshIndicator(
                                 onRefresh: () async {
                                   FFAppState().clearAdminRequestAccountCache();
-                                  setState(
+                                  safeSetState(
                                       () => _model.requestCompleter2 = null);
                                   await _model.waitForRequestCompleted2();
                                 },
@@ -358,7 +377,10 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(0.0, 1.0),
+                                              offset: const Offset(
+                                                0.0,
+                                                1.0,
+                                              ),
                                             )
                                           ],
                                         ),
@@ -417,7 +439,13 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .bodyLarge,
+                                                              .bodyLarge
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                         ),
                                                       ),
                                                       Text(
@@ -425,7 +453,13 @@ class _InvideMemberWidgetState extends State<InvideMemberWidget>
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .labelMedium,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                       ),
                                                     ],
                                                   ),

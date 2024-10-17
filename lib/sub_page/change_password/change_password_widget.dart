@@ -30,13 +30,13 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
     super.initState();
     _model = createModel(context, () => ChangePasswordModel());
 
-    _model.oldPasswordController ??= TextEditingController();
+    _model.oldPasswordTextController ??= TextEditingController();
     _model.oldPasswordFocusNode ??= FocusNode();
 
-    _model.newPasswordController ??= TextEditingController();
+    _model.newPasswordTextController ??= TextEditingController();
     _model.newPasswordFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,9 +54,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
         title: 'ChangePassword',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -85,6 +83,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -102,41 +101,48 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 16.0),
                     child: TextFormField(
-                      controller: _model.oldPasswordController,
+                      controller: _model.oldPasswordTextController,
                       focusNode: _model.oldPasswordFocusNode,
                       onChanged: (_) => EasyDebounce.debounce(
-                        '_model.oldPasswordController',
+                        '_model.oldPasswordTextController',
                         const Duration(milliseconds: 2000),
                         () async {
                           var shouldSetState = false;
                           _model.hashedPassword = await actions.passwordHash(
-                            _model.oldPasswordController.text,
+                            _model.oldPasswordTextController.text,
                           );
                           shouldSetState = true;
                           if (_model.hashedPassword ==
                               FFAppState().UserInfo.hashedPassword) {
-                            setState(() {
-                              _model.isOldPasswordNotCorrect = false;
-                            });
-                            if (shouldSetState) setState(() {});
+                            _model.isOldPasswordNotCorrect = false;
+                            safeSetState(() {});
+                            if (shouldSetState) safeSetState(() {});
                             return;
                           } else {
-                            setState(() {
-                              _model.isOldPasswordNotCorrect = true;
-                            });
-                            if (shouldSetState) setState(() {});
+                            _model.isOldPasswordNotCorrect = true;
+                            safeSetState(() {});
+                            if (shouldSetState) safeSetState(() {});
                             return;
                           }
 
-                          if (shouldSetState) setState(() {});
+                          if (shouldSetState) safeSetState(() {});
                         },
                       ),
+                      autofocus: false,
                       textCapitalization: TextCapitalization.none,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Old password',
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: _model.isOldPasswordNotCorrect
@@ -170,8 +176,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         filled: true,
                         fillColor: FlutterFlowTheme.of(context).accent4,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      validator: _model.oldPasswordControllerValidator
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
+                      validator: _model.oldPasswordTextControllerValidator
                           .asValidator(context),
                     ),
                   ),
@@ -179,14 +188,23 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 16.0),
                     child: TextFormField(
-                      controller: _model.newPasswordController,
+                      controller: _model.newPasswordTextController,
                       focusNode: _model.newPasswordFocusNode,
+                      autofocus: false,
                       textCapitalization: TextCapitalization.none,
                       obscureText: !_model.newPasswordVisibility,
                       decoration: InputDecoration(
                         labelText: 'New password',
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -218,7 +236,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         filled: true,
                         fillColor: FlutterFlowTheme.of(context).accent4,
                         suffixIcon: InkWell(
-                          onTap: () => setState(
+                          onTap: () => safeSetState(
                             () => _model.newPasswordVisibility =
                                 !_model.newPasswordVisibility,
                           ),
@@ -231,8 +249,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           ),
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      validator: _model.newPasswordControllerValidator
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
+                      validator: _model.newPasswordTextControllerValidator
                           .asValidator(context),
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('^[^\\s]*\$'))
@@ -248,6 +269,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               color: FlutterFlowTheme.of(context).error,
+                              letterSpacing: 0.0,
                             ),
                       ),
                     ),
@@ -258,8 +280,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       FFButtonWidget(
                         onPressed: () async {
                           var shouldSetState = false;
-                          if ((_model.oldPasswordController.text == '') &&
-                              (_model.newPasswordController.text == '') &&
+                          if ((_model.oldPasswordTextController.text == '') &&
+                              (_model.newPasswordTextController.text ==
+                                      '') &&
                               !_model.isOldPasswordNotCorrect) {
                             await showDialog(
                               context: context,
@@ -277,11 +300,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                                 );
                               },
                             );
-                            if (shouldSetState) setState(() {});
+                            if (shouldSetState) safeSetState(() {});
                             return;
                           } else {
                             _model.hashed = await actions.passwordHash(
-                              _model.newPasswordController.text,
+                              _model.newPasswordTextController.text,
                             );
                             shouldSetState = true;
                             await UsersTable().update(
@@ -297,14 +320,13 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                             await authManager.signOut();
                             GoRouter.of(context).clearRedirectLocation();
 
-                            setState(() {
-                              FFAppState().deleteUserInfo();
-                              FFAppState().UserInfo =
-                                  UserInfoStruct.fromSerializableMap(jsonDecode(
-                                      '{"IsTestAccount":"false"}'));
+                            FFAppState().deleteUserInfo();
+                            FFAppState().UserInfo =
+                                UserInfoStruct.fromSerializableMap(jsonDecode(
+                                    '{\"IsTestAccount\":\"false\"}'));
 
-                              FFAppState().IsLogged = false;
-                            });
+                            FFAppState().IsLogged = false;
+                            safeSetState(() {});
                             if (Navigator.of(context).canPop()) {
                               context.pop();
                             }
@@ -320,11 +342,11 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                               },
                             );
 
-                            if (shouldSetState) setState(() {});
+                            if (shouldSetState) safeSetState(() {});
                             return;
                           }
 
-                          if (shouldSetState) setState(() {});
+                          if (shouldSetState) safeSetState(() {});
                         },
                         text: 'Save',
                         options: FFButtonOptions(
@@ -338,6 +360,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                           elevation: 3.0,
                           borderSide: const BorderSide(

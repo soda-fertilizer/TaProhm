@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:provider/provider.dart';
 import 'pin_location_model.dart';
 export 'pin_location_model.dart';
 
@@ -28,8 +27,8 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
     _model = createModel(context, () => PinLocationModel());
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -41,7 +40,6 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -63,9 +61,7 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
         title: 'PinLocation',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
@@ -121,11 +117,10 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
                         ),
                         FFButtonWidget(
                           onPressed: () async {
-                            FFAppState().update(() {
-                              FFAppState().updateCreateCompanyHolderStruct(
-                                (e) => e..location = _model.googleMapsCenter,
-                              );
-                            });
+                            FFAppState().updateCreateCompanyHolderStruct(
+                              (e) => e..location = _model.googleMapsCenter,
+                            );
+                            FFAppState().update(() {});
                             context.safePop();
                           },
                           text: 'Save',
@@ -142,6 +137,7 @@ class _PinLocationWidgetState extends State<PinLocationWidget> {
                                 .override(
                                   fontFamily: 'Readex Pro',
                                   color: Colors.white,
+                                  letterSpacing: 0.0,
                                 ),
                             elevation: 3.0,
                             borderRadius: BorderRadius.circular(0.0),

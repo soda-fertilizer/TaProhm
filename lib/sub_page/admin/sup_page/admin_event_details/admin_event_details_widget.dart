@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'admin_event_details_model.dart';
 export 'admin_event_details_model.dart';
 
@@ -33,7 +32,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
     super.initState();
     _model = createModel(context, () => AdminEventDetailsModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,8 +44,6 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<EventsRow>>(
       future: EventsTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -73,17 +70,17 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
           );
         }
         List<EventsRow> adminEventDetailsEventsRowList = snapshot.data!;
+
         final adminEventDetailsEventsRow =
             adminEventDetailsEventsRowList.isNotEmpty
                 ? adminEventDetailsEventsRowList.first
                 : null;
+
         return Title(
             title: 'AdminEventDetails',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -110,6 +107,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 22.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -133,7 +131,12 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                 'Null',
                               ),
                               textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context).titleLarge,
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ),
                         ),
@@ -157,7 +160,12 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                               adminEventDetailsEventsRow?.details,
                               'Null',
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
                         ),
                         if (functions.calculateDateDifference(
@@ -196,6 +204,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(
@@ -251,6 +260,7 @@ class _AdminEventDetailsWidgetState extends State<AdminEventDetailsWidget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(

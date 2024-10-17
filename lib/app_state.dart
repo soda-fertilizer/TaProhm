@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'flutter_flow/request_manager.dart';
-import '/backend/backend.dart';
-import 'backend/api_requests/api_manager.dart';
+import '/backend/schema/structs/index.dart';
+import '/backend/api_requests/api_manager.dart';
 import 'backend/supabase/supabase.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:csv/csv.dart';
@@ -82,26 +82,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTestLocation(LatLng value) {
-    _testLocation.add(value);
+    testLocation.add(value);
   }
 
   void removeFromTestLocation(LatLng value) {
-    _testLocation.remove(value);
+    testLocation.remove(value);
   }
 
   void removeAtIndexFromTestLocation(int index) {
-    _testLocation.removeAt(index);
+    testLocation.removeAt(index);
   }
 
   void updateTestLocationAtIndex(
     int index,
     LatLng Function(LatLng) updateFn,
   ) {
-    _testLocation[index] = updateFn(_testLocation[index]);
+    testLocation[index] = updateFn(_testLocation[index]);
   }
 
   void insertAtIndexInTestLocation(int index, LatLng value) {
-    _testLocation.insert(index, value);
+    testLocation.insert(index, value);
   }
 
   List<String> _Letters = [
@@ -139,26 +139,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToLetters(String value) {
-    _Letters.add(value);
+    Letters.add(value);
   }
 
   void removeFromLetters(String value) {
-    _Letters.remove(value);
+    Letters.remove(value);
   }
 
   void removeAtIndexFromLetters(int index) {
-    _Letters.removeAt(index);
+    Letters.removeAt(index);
   }
 
   void updateLettersAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _Letters[index] = updateFn(_Letters[index]);
+    Letters[index] = updateFn(_Letters[index]);
   }
 
   void insertAtIndexInLetters(int index, String value) {
-    _Letters.insert(index, value);
+    Letters.insert(index, value);
   }
 
   List<String> _name = [
@@ -178,26 +178,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToName(String value) {
-    _name.add(value);
+    name.add(value);
   }
 
   void removeFromName(String value) {
-    _name.remove(value);
+    name.remove(value);
   }
 
   void removeAtIndexFromName(int index) {
-    _name.removeAt(index);
+    name.removeAt(index);
   }
 
   void updateNameAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _name[index] = updateFn(_name[index]);
+    name[index] = updateFn(_name[index]);
   }
 
   void insertAtIndexInName(int index, String value) {
-    _name.insert(index, value);
+    name.insert(index, value);
   }
 
   List<String> _SelectCompanyImage = [
@@ -213,26 +213,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToSelectCompanyImage(String value) {
-    _SelectCompanyImage.add(value);
+    SelectCompanyImage.add(value);
   }
 
   void removeFromSelectCompanyImage(String value) {
-    _SelectCompanyImage.remove(value);
+    SelectCompanyImage.remove(value);
   }
 
   void removeAtIndexFromSelectCompanyImage(int index) {
-    _SelectCompanyImage.removeAt(index);
+    SelectCompanyImage.removeAt(index);
   }
 
   void updateSelectCompanyImageAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _SelectCompanyImage[index] = updateFn(_SelectCompanyImage[index]);
+    SelectCompanyImage[index] = updateFn(_SelectCompanyImage[index]);
   }
 
   void insertAtIndexInSelectCompanyImage(int index, String value) {
-    _SelectCompanyImage.insert(index, value);
+    SelectCompanyImage.insert(index, value);
   }
 
   bool _IsLogged = false;
@@ -253,31 +253,31 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToAdminCompanyImage(String value) {
-    _AdminCompanyImage.add(value);
+    AdminCompanyImage.add(value);
   }
 
   void removeFromAdminCompanyImage(String value) {
-    _AdminCompanyImage.remove(value);
+    AdminCompanyImage.remove(value);
   }
 
   void removeAtIndexFromAdminCompanyImage(int index) {
-    _AdminCompanyImage.removeAt(index);
+    AdminCompanyImage.removeAt(index);
   }
 
   void updateAdminCompanyImageAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _AdminCompanyImage[index] = updateFn(_AdminCompanyImage[index]);
+    AdminCompanyImage[index] = updateFn(_AdminCompanyImage[index]);
   }
 
   void insertAtIndexInAdminCompanyImage(int index, String value) {
-    _AdminCompanyImage.insert(index, value);
+    AdminCompanyImage.insert(index, value);
   }
 
   UserCreationStruct _CreatAccountHolder =
       UserCreationStruct.fromSerializableMap(jsonDecode(
-          '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png"}'));
+          '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\"}'));
   UserCreationStruct get CreatAccountHolder => _CreatAccountHolder;
   set CreatAccountHolder(UserCreationStruct value) {
     _CreatAccountHolder = value;
@@ -296,7 +296,7 @@ class FFAppState extends ChangeNotifier {
 
   CompanyCreationStruct _CreateCompanyHolder =
       CompanyCreationStruct.fromSerializableMap(jsonDecode(
-          '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png","ImageDetails":"[]","IsVertify":"false"}'));
+          '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\",\"ImageDetails\":\"[]\",\"IsVertify\":\"false\"}'));
   CompanyCreationStruct get CreateCompanyHolder => _CreateCompanyHolder;
   set CreateCompanyHolder(CompanyCreationStruct value) {
     _CreateCompanyHolder = value;
@@ -316,11 +316,11 @@ class FFAppState extends ChangeNotifier {
 
   List<LocationStruct> _testUserLocation = [
     LocationStruct.fromSerializableMap(jsonDecode(
-        '{"UserID":"1","Location":"11.5563738,104.9282099"}')),
+        '{\"UserID\":\"1\",\"Location\":\"11.5563738,104.9282099\"}')),
     LocationStruct.fromSerializableMap(jsonDecode(
-        '{"UserID":"2","Location":"12.0982918,105.3131185"}')),
+        '{\"UserID\":\"2\",\"Location\":\"12.0982918,105.3131185\"}')),
     LocationStruct.fromSerializableMap(jsonDecode(
-        '{"UserID":"3","Location":"11.5103727,104.7514569"}'))
+        '{\"UserID\":\"3\",\"Location\":\"11.5103727,104.7514569\"}'))
   ];
   List<LocationStruct> get testUserLocation => _testUserLocation;
   set testUserLocation(List<LocationStruct> value) {
@@ -328,26 +328,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTestUserLocation(LocationStruct value) {
-    _testUserLocation.add(value);
+    testUserLocation.add(value);
   }
 
   void removeFromTestUserLocation(LocationStruct value) {
-    _testUserLocation.remove(value);
+    testUserLocation.remove(value);
   }
 
   void removeAtIndexFromTestUserLocation(int index) {
-    _testUserLocation.removeAt(index);
+    testUserLocation.removeAt(index);
   }
 
   void updateTestUserLocationAtIndex(
     int index,
     LocationStruct Function(LocationStruct) updateFn,
   ) {
-    _testUserLocation[index] = updateFn(_testUserLocation[index]);
+    testUserLocation[index] = updateFn(_testUserLocation[index]);
   }
 
   void insertAtIndexInTestUserLocation(int index, LocationStruct value) {
-    _testUserLocation.insert(index, value);
+    testUserLocation.insert(index, value);
   }
 
   CustomMapLocationStruct _shopHolder = CustomMapLocationStruct();
@@ -367,7 +367,7 @@ class FFAppState extends ChangeNotifier {
   }
 
   UserInfoStruct _UserInfo = UserInfoStruct.fromSerializableMap(
-      jsonDecode('{"IsTestAccount":"false"}'));
+      jsonDecode('{\"IsTestAccount\":\"false\"}'));
   UserInfoStruct get UserInfo => _UserInfo;
   set UserInfo(UserInfoStruct value) {
     _UserInfo = value;
@@ -385,55 +385,55 @@ class FFAppState extends ChangeNotifier {
 
   List<LocationButtonStruct> _ProvinceButton = [
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"រាជនីភ្នំពេញ","location":"11.543806398027,104.822496883571"}')),
+        '{\"province\":\"រាជនីភ្នំពេញ\",\"location\":\"11.543806398027,104.822496883571\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកំពត","location":"10.5945236,104.1614987"}')),
+        '{\"province\":\"ខេត្តកំពត\",\"location\":\"10.5945236,104.1614987\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកណ្តាល","location":"11.4565296,104.9047875"}')),
+        '{\"province\":\"ខេត្តកណ្តាល\",\"location\":\"11.4565296,104.9047875\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តពោធិ៍សាត់","location":"12.4859817,103.9122534"}')),
+        '{\"province\":\"ខេត្តពោធិ៍សាត់\",\"location\":\"12.4859817,103.9122534\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តរតនគិរី","location":"13.6887625,107.001551"}')),
+        '{\"province\":\"ខេត្តរតនគិរី\",\"location\":\"13.6887625,107.001551\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តបាត់ដំបង","location":"13.097243,103.1609987"}')),
+        '{\"province\":\"ខេត្តបាត់ដំបង\",\"location\":\"13.097243,103.1609987\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកំពង់ចាម","location":"12.0583955,105.2460407"}')),
+        '{\"province\":\"ខេត្តកំពង់ចាម\",\"location\":\"12.0583955,105.2460407\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តសៀមរាប","location":"13.4032174,103.8346537"}')),
+        '{\"province\":\"ខេត្តសៀមរាប\",\"location\":\"13.4032174,103.8346537\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកំពង់ឆ្នាំង","location":"12.2530842,104.6684802"}')),
+        '{\"province\":\"ខេត្តកំពង់ឆ្នាំង\",\"location\":\"12.2530842,104.6684802\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តស្ទឹងត្រែង","location":"13.5164491,105.9635813"}')),
+        '{\"province\":\"ខេត្តស្ទឹងត្រែង\",\"location\":\"13.5164491,105.9635813\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកែប","location":"10.5366344,104.3047087"}')),
+        '{\"province\":\"ខេត្តកែប\",\"location\":\"10.5366344,104.3047087\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តស្វាយរៀង","location":"11.0879008,105.7910697"}')),
+        '{\"province\":\"ខេត្តស្វាយរៀង\",\"location\":\"11.0879008,105.7910697\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តតាកែវ","location":"10.9852956,104.7809697"}')),
+        '{\"province\":\"ខេត្តតាកែវ\",\"location\":\"10.9852956,104.7809697\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តត្បូងឃ្មុំ","location":"11.9149092,105.6547726"}')),
+        '{\"province\":\"ខេត្តត្បូងឃ្មុំ\",\"location\":\"11.9149092,105.6547726\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកំពង់ស្ពឺ","location":"11.4333537,104.2730332"}')),
+        '{\"province\":\"ខេត្តកំពង់ស្ពឺ\",\"location\":\"11.4333537,104.2730332\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តបន្ទាយមានជ័យ","location":"13.5858712,102.960583"}')),
+        '{\"province\":\"ខេត្តបន្ទាយមានជ័យ\",\"location\":\"13.5858712,102.960583\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកំពង់ធំ","location":"12.6472479,104.9227638"}')),
+        '{\"province\":\"ខេត្តកំពង់ធំ\",\"location\":\"12.6472479,104.9227638\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តឧត្ដរមានជ័យ","location":"14.2443481,103.5721055"}')),
+        '{\"province\":\"ខេត្តឧត្ដរមានជ័យ\",\"location\":\"14.2443481,103.5721055\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តព្រះវិហារ","location":"13.755592,104.9718959"}')),
+        '{\"province\":\"ខេត្តព្រះវិហារ\",\"location\":\"13.755592,104.9718959\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តប៉ៃលិន","location":"12.8510294,102.608646"}')),
+        '{\"province\":\"ខេត្តប៉ៃលិន\",\"location\":\"12.8510294,102.608646\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តមណ្ឌលគិរី","location":"12.4687725,107.1901973"}')),
+        '{\"province\":\"ខេត្តមណ្ឌលគិរី\",\"location\":\"12.4687725,107.1901973\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តក្រចេះ","location":"12.4944187,106.0247805"}')),
+        '{\"province\":\"ខេត្តក្រចេះ\",\"location\":\"12.4944187,106.0247805\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តកោះកុង","location":"11.6836627,103.3696454"}')),
+        '{\"province\":\"ខេត្តកោះកុង\",\"location\":\"11.6836627,103.3696454\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តព្រះសីហនុ","location":"10.6265384,103.5116496"}')),
+        '{\"province\":\"ខេត្តព្រះសីហនុ\",\"location\":\"10.6265384,103.5116496\"}')),
     LocationButtonStruct.fromSerializableMap(jsonDecode(
-        '{"province":"ខេត្តព្រៃវែង","location":"11.4849954,105.3220705"}'))
+        '{\"province\":\"ខេត្តព្រៃវែង\",\"location\":\"11.4849954,105.3220705\"}'))
   ];
   List<LocationButtonStruct> get ProvinceButton => _ProvinceButton;
   set ProvinceButton(List<LocationButtonStruct> value) {
@@ -441,26 +441,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToProvinceButton(LocationButtonStruct value) {
-    _ProvinceButton.add(value);
+    ProvinceButton.add(value);
   }
 
   void removeFromProvinceButton(LocationButtonStruct value) {
-    _ProvinceButton.remove(value);
+    ProvinceButton.remove(value);
   }
 
   void removeAtIndexFromProvinceButton(int index) {
-    _ProvinceButton.removeAt(index);
+    ProvinceButton.removeAt(index);
   }
 
   void updateProvinceButtonAtIndex(
     int index,
     LocationButtonStruct Function(LocationButtonStruct) updateFn,
   ) {
-    _ProvinceButton[index] = updateFn(_ProvinceButton[index]);
+    ProvinceButton[index] = updateFn(_ProvinceButton[index]);
   }
 
   void insertAtIndexInProvinceButton(int index, LocationButtonStruct value) {
-    _ProvinceButton.insert(index, value);
+    ProvinceButton.insert(index, value);
   }
 
   String _refreshFCMToken = '';

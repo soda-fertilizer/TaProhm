@@ -11,7 +11,6 @@ class EditAccountModel extends FlutterFlowModel<EditAccountWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -35,14 +34,11 @@ class EditAccountModel extends FlutterFlowModel<EditAccountWidget> {
   // Stores action output result for [Backend Call - Update Row(s)] action in Button widget.
   List<UsersRow>? updatedUser;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
@@ -52,8 +48,4 @@ class EditAccountModel extends FlutterFlowModel<EditAccountWidget> {
     textFieldFocusNode3?.dispose();
     textController3?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -17,7 +17,6 @@ class BalanceModel extends FlutterFlowModel<BalanceWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   bool apiRequestCompleted = false;
   String? apiRequestLastUniqueKey;
   // State field(s) for TabBar widget.
@@ -28,8 +27,6 @@ class BalanceModel extends FlutterFlowModel<BalanceWidget> {
   // Model for NavBar component.
   late NavBarModel navBarModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     navBarModel = createModel(context, () => NavBarModel());
@@ -37,15 +34,11 @@ class BalanceModel extends FlutterFlowModel<BalanceWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     navBarModel.dispose();
   }
 
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
-
+  /// Additional helper methods.
   Future waitForApiRequestCompleted({
     double minWait = 0,
     double maxWait = double.infinity,

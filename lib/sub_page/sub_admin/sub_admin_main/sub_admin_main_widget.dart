@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'sub_admin_main_model.dart';
 export 'sub_admin_main_model.dart';
 
@@ -23,7 +22,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
     super.initState();
     _model = createModel(context, () => SubAdminMainModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -35,15 +34,11 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'SubAdminMain',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -72,6 +67,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -158,6 +154,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                     ],
@@ -219,6 +216,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                     ],
@@ -280,6 +278,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               fontSize: 12.0,
+                                              letterSpacing: 0.0,
                                             ),
                                       ),
                                     ],
@@ -343,6 +342,7 @@ class _SubAdminMainWidgetState extends State<SubAdminMainWidget> {
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 fontSize: 12.0,
+                                                letterSpacing: 0.0,
                                               ),
                                         ),
                                       ],

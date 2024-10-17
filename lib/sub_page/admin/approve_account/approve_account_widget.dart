@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'approve_account_model.dart';
 export 'approve_account_model.dart';
 
@@ -24,7 +23,7 @@ class _ApproveAccountWidgetState extends State<ApproveAccountWidget> {
     super.initState();
     _model = createModel(context, () => ApproveAccountModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -36,15 +35,11 @@ class _ApproveAccountWidgetState extends State<ApproveAccountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'ApproveAccount',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,7 +64,10 @@ class _ApproveAccountWidgetState extends State<ApproveAccountWidget> {
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Request Account',
-                  style: FlutterFlowTheme.of(context).titleMedium,
+                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
               actions: const [],
@@ -103,6 +101,7 @@ class _ApproveAccountWidgetState extends State<ApproveAccountWidget> {
                       );
                     }
                     List<UsersRow> listViewUsersRowList = snapshot.data!;
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
@@ -144,7 +143,10 @@ class _ApproveAccountWidgetState extends State<ApproveAccountWidget> {
                                     blurRadius: 0.0,
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
-                                    offset: const Offset(0.0, 1.0),
+                                    offset: const Offset(
+                                      0.0,
+                                      1.0,
+                                    ),
                                   )
                                 ],
                               ),
@@ -186,14 +188,24 @@ class _ApproveAccountWidgetState extends State<ApproveAccountWidget> {
                                                 listViewUsersRow.fullName,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyLarge,
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ),
                                             Text(
                                               listViewUsersRow.phoneNumber,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelMedium,
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ],
                                         ),

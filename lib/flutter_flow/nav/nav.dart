@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
@@ -72,17 +74,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => RootPageContext.wrap(
-        appStateNotifier.loggedIn ? const HomePageWidget() : const LoginPageWidget(),
-        errorRoute: state.location,
-      ),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? const HomePageWidget() : const LoginPageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => RootPageContext.wrap(
-            appStateNotifier.loggedIn ? const HomePageWidget() : const LoginPageWidget(),
-          ),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? const HomePageWidget() : const LoginPageWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -93,8 +92,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Locator',
           path: '/locator',
           builder: (context, params) => LocatorWidget(
-            moveLocation: params.getParam('moveLocation', ParamType.LatLng),
-            clickCompany: params.getParam('clickCompany', ParamType.bool),
+            moveLocation: params.getParam(
+              'moveLocation',
+              ParamType.LatLng,
+            ),
+            clickCompany: params.getParam(
+              'clickCompany',
+              ParamType.bool,
+            ),
           ),
         ),
         FFRoute(
@@ -166,8 +171,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Transfer',
           path: '/transfer',
           builder: (context, params) => TransferWidget(
-            qrCode: params.getParam('qrCode', ParamType.String),
-            amount: params.getParam('amount', ParamType.double),
+            qrCode: params.getParam(
+              'qrCode',
+              ParamType.String,
+            ),
+            amount: params.getParam(
+              'amount',
+              ParamType.double,
+            ),
           ),
         ),
         FFRoute(
@@ -179,32 +190,52 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ReferralSubPage',
           path: '/referralSubPage',
           builder: (context, params) => ReferralSubPageWidget(
-            userPhoneNumber:
-                params.getParam('userPhoneNumber', ParamType.String),
-            tabIndex: params.getParam('tabIndex', ParamType.int),
+            userPhoneNumber: params.getParam(
+              'userPhoneNumber',
+              ParamType.String,
+            ),
+            tabIndex: params.getParam(
+              'tabIndex',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'Account',
           path: '/account',
           builder: (context, params) => AccountWidget(
-            userID: params.getParam('userID', ParamType.int),
-            sectorID: params.getParam('sectorID', ParamType.int),
+            userID: params.getParam(
+              'userID',
+              ParamType.int,
+            ),
+            sectorID: params.getParam(
+              'sectorID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'Company',
           path: '/company',
           builder: (context, params) => CompanyWidget(
-            companyID: params.getParam('companyID', ParamType.int),
-            userID: params.getParam('userID', ParamType.int),
+            companyID: params.getParam(
+              'companyID',
+              ParamType.int,
+            ),
+            userID: params.getParam(
+              'userID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'Transaction',
           path: '/transaction',
           builder: (context, params) => TransactionWidget(
-            transactionID: params.getParam('transactionID', ParamType.int),
+            transactionID: params.getParam(
+              'transactionID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
@@ -216,7 +247,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ViewCompany',
           path: '/viewCompany',
           builder: (context, params) => ViewCompanyWidget(
-            companyID: params.getParam('companyID', ParamType.int),
+            companyID: params.getParam(
+              'companyID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
@@ -228,45 +262,94 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'CompanyInfo',
           path: '/companyInfo',
           builder: (context, params) => CompanyInfoWidget(
-            companyID: params.getParam('companyID', ParamType.int),
+            companyID: params.getParam(
+              'companyID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'SingleCompanyMap',
           path: '/singleCompanyMap',
           builder: (context, params) => SingleCompanyMapWidget(
-            companyID: params.getParam('companyID', ParamType.int),
-            companyLatitude:
-                params.getParam('companyLatitude', ParamType.double),
-            companyLongitude:
-                params.getParam('companyLongitude', ParamType.double),
+            companyID: params.getParam(
+              'companyID',
+              ParamType.int,
+            ),
+            companyLatitude: params.getParam(
+              'companyLatitude',
+              ParamType.double,
+            ),
+            companyLongitude: params.getParam(
+              'companyLongitude',
+              ParamType.double,
+            ),
           ),
         ),
         FFRoute(
           name: 'EditCompany',
           path: '/editCompany',
           builder: (context, params) => EditCompanyWidget(
-            companyID: params.getParam('companyID', ParamType.int),
-            name: params.getParam('name', ParamType.String),
-            phoneNumber: params.getParam('phoneNumber', ParamType.String),
-            link: params.getParam('link', ParamType.String),
-            discount: params.getParam('discount', ParamType.double),
-            haveDocument: params.getParam('haveDocument', ParamType.bool),
-            location: params.getParam('location', ParamType.LatLng),
-            images: params.getParam<String>('images', ParamType.String, true),
-            profile: params.getParam('profile', ParamType.String),
-            detail: params.getParam('detail', ParamType.String),
-            userID: params.getParam('userID', ParamType.int),
+            companyID: params.getParam(
+              'companyID',
+              ParamType.int,
+            ),
+            name: params.getParam(
+              'name',
+              ParamType.String,
+            ),
+            phoneNumber: params.getParam(
+              'phoneNumber',
+              ParamType.String,
+            ),
+            link: params.getParam(
+              'link',
+              ParamType.String,
+            ),
+            discount: params.getParam(
+              'discount',
+              ParamType.double,
+            ),
+            haveDocument: params.getParam(
+              'haveDocument',
+              ParamType.bool,
+            ),
+            location: params.getParam(
+              'location',
+              ParamType.LatLng,
+            ),
+            images: params.getParam<String>(
+              'images',
+              ParamType.String,
+              isList: true,
+            ),
+            profile: params.getParam(
+              'profile',
+              ParamType.String,
+            ),
+            detail: params.getParam(
+              'detail',
+              ParamType.String,
+            ),
+            userID: params.getParam(
+              'userID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'GraphTree',
           path: '/graphTree',
           builder: (context, params) => GraphTreeWidget(
-            users:
-                params.getParam<UsersRow>('users', ParamType.SupabaseRow, true),
-            headOfUser:
-                params.getParam<UsersRow>('headOfUser', ParamType.SupabaseRow),
+            users: params.getParam<UsersRow>(
+              'users',
+              ParamType.SupabaseRow,
+              isList: true,
+            ),
+            headOfUser: params.getParam<UsersRow>(
+              'headOfUser',
+              ParamType.SupabaseRow,
+            ),
           ),
         ),
         FFRoute(
@@ -278,14 +361,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'EditAccount',
           path: '/editAccount',
           builder: (context, params) => EditAccountWidget(
-            userID: params.getParam('userID', ParamType.int),
+            userID: params.getParam(
+              'userID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'AdminCreateUser',
           path: '/adminCreateUser',
           builder: (context, params) => AdminCreateUserWidget(
-            selectID: params.getParam('selectID', ParamType.String),
+            selectID: params.getParam(
+              'selectID',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -327,27 +416,72 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'MemberPayment',
           path: '/memberPayment',
           builder: (context, params) => MemberPaymentWidget(
-            name: params.getParam('name', ParamType.String),
-            referral: params.getParam('referral', ParamType.String),
-            password: params.getParam('password', ParamType.String),
-            sectorID: params.getParam('sectorID', ParamType.int),
-            isNewMember: params.getParam('isNewMember', ParamType.bool),
-            profile: params.getParam('profile', ParamType.String),
-            phoneNumber: params.getParam('phoneNumber', ParamType.String),
+            name: params.getParam(
+              'name',
+              ParamType.String,
+            ),
+            referral: params.getParam(
+              'referral',
+              ParamType.String,
+            ),
+            password: params.getParam(
+              'password',
+              ParamType.String,
+            ),
+            sectorID: params.getParam(
+              'sectorID',
+              ParamType.int,
+            ),
+            isNewMember: params.getParam(
+              'isNewMember',
+              ParamType.bool,
+            ),
+            profile: params.getParam(
+              'profile',
+              ParamType.String,
+            ),
+            phoneNumber: params.getParam(
+              'phoneNumber',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
           name: 'TeamPayment',
           path: '/teamPayment',
           builder: (context, params) => TeamPaymentWidget(
-            name: params.getParam('name', ParamType.String),
-            referral: params.getParam('referral', ParamType.String),
-            invite: params.getParam('invite', ParamType.String),
-            password: params.getParam('password', ParamType.String),
-            sectorID: params.getParam('sectorID', ParamType.int),
-            profile: params.getParam('profile', ParamType.String),
-            phoneNumber: params.getParam('phoneNumber', ParamType.String),
-            isNew: params.getParam('isNew', ParamType.bool),
+            name: params.getParam(
+              'name',
+              ParamType.String,
+            ),
+            referral: params.getParam(
+              'referral',
+              ParamType.String,
+            ),
+            invite: params.getParam(
+              'invite',
+              ParamType.String,
+            ),
+            password: params.getParam(
+              'password',
+              ParamType.String,
+            ),
+            sectorID: params.getParam(
+              'sectorID',
+              ParamType.int,
+            ),
+            profile: params.getParam(
+              'profile',
+              ParamType.String,
+            ),
+            phoneNumber: params.getParam(
+              'phoneNumber',
+              ParamType.String,
+            ),
+            isNew: params.getParam(
+              'isNew',
+              ParamType.bool,
+            ),
           ),
         ),
         FFRoute(
@@ -364,14 +498,38 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AdminAccountPayment',
           path: '/adminAccountPayment',
           builder: (context, params) => AdminAccountPaymentWidget(
-            name: params.getParam('name', ParamType.String),
-            referral: params.getParam('referral', ParamType.String),
-            password: params.getParam('password', ParamType.String),
-            sectorID: params.getParam('sectorID', ParamType.int),
-            isMember: params.getParam('isMember', ParamType.bool),
-            profile: params.getParam('profile', ParamType.String),
-            phoneNumber: params.getParam('phoneNumber', ParamType.String),
-            inviteID: params.getParam('inviteID', ParamType.String),
+            name: params.getParam(
+              'name',
+              ParamType.String,
+            ),
+            referral: params.getParam(
+              'referral',
+              ParamType.String,
+            ),
+            password: params.getParam(
+              'password',
+              ParamType.String,
+            ),
+            sectorID: params.getParam(
+              'sectorID',
+              ParamType.int,
+            ),
+            isMember: params.getParam(
+              'isMember',
+              ParamType.bool,
+            ),
+            profile: params.getParam(
+              'profile',
+              ParamType.String,
+            ),
+            phoneNumber: params.getParam(
+              'phoneNumber',
+              ParamType.String,
+            ),
+            inviteID: params.getParam(
+              'inviteID',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -383,7 +541,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'EventDetails',
           path: '/eventDetails',
           builder: (context, params) => EventDetailsWidget(
-            id: params.getParam('id', ParamType.int),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
@@ -395,8 +556,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AdminSubAccount',
           path: '/adminSubAccount',
           builder: (context, params) => AdminSubAccountWidget(
-            phoneNumeber: params.getParam('phoneNumeber', ParamType.String),
-            tabIndex: params.getParam('tabIndex', ParamType.int),
+            phoneNumeber: params.getParam(
+              'phoneNumeber',
+              ParamType.String,
+            ),
+            tabIndex: params.getParam(
+              'tabIndex',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
@@ -408,24 +575,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'SubAdminSubAccount',
           path: '/subAdminSubAccount',
           builder: (context, params) => SubAdminSubAccountWidget(
-            phoneNumber: params.getParam('phoneNumber', ParamType.String),
-            tabIndex: params.getParam('tabIndex', ParamType.int),
+            phoneNumber: params.getParam(
+              'phoneNumber',
+              ParamType.String,
+            ),
+            tabIndex: params.getParam(
+              'tabIndex',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'AdminEventDetails',
           path: '/adminEventDetails',
           builder: (context, params) => AdminEventDetailsWidget(
-            id: params.getParam('id', ParamType.int),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'EditEvent',
           path: '/editEvent',
           builder: (context, params) => EditEventWidget(
-            id: params.getParam('id', ParamType.int),
-            evenDate: params.getParam('evenDate', ParamType.DateTime),
-            image: params.getParam('image', ParamType.String),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+            evenDate: params.getParam(
+              'evenDate',
+              ParamType.DateTime,
+            ),
+            image: params.getParam(
+              'image',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -437,29 +622,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Review',
           path: '/review',
           builder: (context, params) => ReviewWidget(
-            companyID: params.getParam('companyID', ParamType.int),
+            companyID: params.getParam(
+              'companyID',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'MemberDetail',
           path: '/memberDetail',
           builder: (context, params) => MemberDetailWidget(
-            id: params.getParam('id', ParamType.int),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'ViewReview',
           path: '/viewReview',
           builder: (context, params) => ViewReviewWidget(
-            id: params.getParam('id', ParamType.int),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(
           name: 'ReviewList',
           path: '/reviewList',
           builder: (context, params) => ReviewListWidget(
-            company:
-                params.getParam<CompaniesRow>('company', ParamType.SupabaseRow),
+            company: params.getParam<CompaniesRow>(
+              'company',
+              ParamType.SupabaseRow,
+            ),
           ),
         ),
         FFRoute(
@@ -471,14 +667,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'CreateUserForOfficer',
           path: '/createUserForOfficer',
           builder: (context, params) => CreateUserForOfficerWidget(
-            selectedID: params.getParam('selectedID', ParamType.String),
+            selectedID: params.getParam(
+              'selectedID',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
           name: 'NotificationDetail',
           path: '/notificationDetail',
           builder: (context, params) => NotificationDetailWidget(
-            id: params.getParam('id', ParamType.int),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
@@ -556,7 +758,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -575,7 +777,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -596,10 +798,10 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
-    List<String>? collectionNamePath,
-  ]) {
+    StructBuilder<T>? structBuilder,
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }
@@ -612,8 +814,12 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList,
-        collectionNamePath: collectionNamePath);
+    return deserializeParam<T>(
+      param,
+      type,
+      isList,
+      structBuilder: structBuilder,
+    );
   }
 }
 
@@ -645,7 +851,7 @@ class FFRoute {
           }
 
           if (requireAuth && !appStateNotifier.loggedIn) {
-            appStateNotifier.setRedirectLocationIfUnset(state.location);
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
             return '/loginPage';
           }
           return null;
@@ -664,7 +870,7 @@ class FFRoute {
                   color: FlutterFlowTheme.of(context).primaryBackground,
                   child: Center(
                     child: Image.asset(
-                      'assets/images/vnimc_1.png',
+                      'assets/images/logo.png',
                       width: 200.0,
                       height: 200.0,
                       fit: BoxFit.contain,
@@ -724,7 +930,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;
@@ -734,4 +940,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

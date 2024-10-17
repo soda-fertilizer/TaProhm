@@ -42,10 +42,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.maxPhoneNumber = await GetMaxPhoneNumberCall.call();
+
       if ((_model.maxPhoneNumber?.succeeded ?? true)) {
-        setState(() {
-          _model.isLodaingCompleted = true;
-        });
+        _model.isLodaingCompleted = true;
+        safeSetState(() {});
         return;
       } else {
         await action_blocks.noInternet(context);
@@ -57,35 +57,35 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    _model.normalFullNameController ??= TextEditingController();
+    )..addListener(() => safeSetState(() {}));
+    _model.normalFullNameTextController ??= TextEditingController();
     _model.normalFullNameFocusNode ??= FocusNode();
 
-    _model.normalPasswordController ??= TextEditingController();
+    _model.normalPasswordTextController ??= TextEditingController();
     _model.normalPasswordFocusNode ??= FocusNode();
 
-    _model.normalPhoneNumberController ??= TextEditingController();
+    _model.normalPhoneNumberTextController ??= TextEditingController();
     _model.normalPhoneNumberFocusNode ??= FocusNode();
 
-    _model.normalReferralController ??=
+    _model.normalReferralTextController ??=
         TextEditingController(text: widget.selectID);
     _model.normalReferralFocusNode ??= FocusNode();
 
-    _model.normalInviteController ??=
+    _model.normalInviteTextController ??=
         TextEditingController(text: widget.selectID);
     _model.normalInviteFocusNode ??= FocusNode();
 
-    _model.memberFullNameController ??= TextEditingController();
+    _model.memberFullNameTextController ??= TextEditingController();
     _model.memberFullNameFocusNode ??= FocusNode();
 
-    _model.memberPasswordController ??= TextEditingController();
+    _model.memberPasswordTextController ??= TextEditingController();
     _model.memberPasswordFocusNode ??= FocusNode();
 
-    _model.memberReferrController ??=
+    _model.memberReferrTextController ??=
         TextEditingController(text: widget.selectID);
     _model.memberReferrFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -103,9 +103,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
         title: 'AdminCreateUser',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -134,6 +132,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -151,7 +150,11 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                       labelColor: FlutterFlowTheme.of(context).primaryText,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
-                      labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                      labelStyle:
+                          FlutterFlowTheme.of(context).titleMedium.override(
+                                fontFamily: 'Readex Pro',
+                                letterSpacing: 0.0,
+                              ),
                       unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
                       padding: const EdgeInsets.all(4.0),
@@ -200,7 +203,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           selectedMedia.every((m) =>
                                               validateFileFormat(
                                                   m.storagePath, context))) {
-                                        setState(() =>
+                                        safeSetState(() =>
                                             _model.isDataUploading1 = true);
                                         var selectedUploadedFiles =
                                             <FFUploadedFile>[];
@@ -239,7 +242,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 selectedMedia.length &&
                                             downloadUrls.length ==
                                                 selectedMedia.length) {
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.uploadedLocalFile1 =
                                                 selectedUploadedFiles.first;
                                             _model.uploadedFileUrl1 =
@@ -248,7 +251,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           showUploadMessage(
                                               context, 'Success!');
                                         } else {
-                                          setState(() {});
+                                          safeSetState(() {});
                                           showUploadMessage(
                                               context, 'Failed to upload data');
                                           return;
@@ -279,19 +282,28 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           0.8,
                                       child: TextFormField(
                                         controller:
-                                            _model.normalFullNameController,
+                                            _model.normalFullNameTextController,
                                         focusNode:
                                             _model.normalFullNameFocusNode,
+                                        autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Full Name',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -335,9 +347,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .normalFullNameControllerValidator
+                                            .normalFullNameTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -350,9 +366,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           0.8,
                                       child: TextFormField(
                                         controller:
-                                            _model.normalPasswordController,
+                                            _model.normalPasswordTextController,
                                         focusNode:
                                             _model.normalPasswordFocusNode,
+                                        autofocus: false,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         obscureText:
@@ -362,10 +379,18 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           labelText: 'Password',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -408,7 +433,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 BorderRadius.circular(20.0),
                                           ),
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model
                                                       .normalPasswordVisibility =
                                                   !_model
@@ -427,9 +452,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .normalPasswordControllerValidator
+                                            .normalPasswordTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -445,20 +474,29 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       width: MediaQuery.sizeOf(context).width *
                                           0.8,
                                       child: TextFormField(
-                                        controller:
-                                            _model.normalPhoneNumberController,
+                                        controller: _model
+                                            .normalPhoneNumberTextController,
                                         focusNode:
                                             _model.normalPhoneNumberFocusNode,
+                                        autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Phone',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -502,9 +540,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .normalPhoneNumberControllerValidator
+                                            .normalPhoneNumberTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -521,19 +563,28 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           0.8,
                                       child: TextFormField(
                                         controller:
-                                            _model.normalReferralController,
+                                            _model.normalReferralTextController,
                                         focusNode:
                                             _model.normalReferralFocusNode,
+                                        autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Referral ID',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -577,9 +628,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .normalReferralControllerValidator
+                                            .normalReferralTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -596,18 +651,27 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           0.8,
                                       child: TextFormField(
                                         controller:
-                                            _model.normalInviteController,
+                                            _model.normalInviteTextController,
                                         focusNode: _model.normalInviteFocusNode,
+                                        autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Invite ID',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -651,9 +715,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .normalInviteControllerValidator
+                                            .normalInviteTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -686,6 +754,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       List<SectorsRow>
                                           normalSectorSectorsRowList =
                                           snapshot.data!;
+
                                       return FlutterFlowDropDown<String>(
                                         controller: _model
                                                 .normalSectorValueController ??=
@@ -706,19 +775,17 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 ))
                                             .toList(),
                                         onChanged: (val) async {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.normalSectorValue = val);
-                                          setState(() {
-                                            _model.selectSectorID =
-                                                normalSectorSectorsRowList
-                                                    .where((e) =>
-                                                        e.sectorName ==
-                                                        _model
-                                                            .normalSectorValue)
-                                                    .toList()
-                                                    .first
-                                                    .sectorID;
-                                          });
+                                          _model.selectSectorID =
+                                              normalSectorSectorsRowList
+                                                  .where((e) =>
+                                                      e.sectorName ==
+                                                      _model.normalSectorValue)
+                                                  .toList()
+                                                  .first
+                                                  .sectorID;
+                                          safeSetState(() {});
                                         },
                                         width:
                                             MediaQuery.sizeOf(context).width *
@@ -729,6 +796,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                             ),
                                         hintText: 'Please select sector',
                                         icon: Icon(
@@ -767,19 +835,19 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             var shouldSetState = false;
-                                            if ((_model.normalFullNameController.text != '') &&
+                                            if ((_model.normalFullNameTextController.text != '') &&
                                                 (_model
-                                                            .normalPasswordController
+                                                            .normalPasswordTextController
                                                             .text !=
                                                         '') &&
                                                 (_model
-                                                            .normalPhoneNumberController
+                                                            .normalPhoneNumberTextController
                                                             .text !=
                                                         '') &&
-                                                (_model.normalReferralController
+                                                (_model.normalReferralTextController
                                                             .text !=
                                                         '') &&
-                                                (_model.normalInviteController
+                                                (_model.normalInviteTextController
                                                             .text !=
                                                         '')) {
                                               _model.checkphonenumber =
@@ -787,9 +855,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                       .checkPhoneNumberCall
                                                       .call(
                                                 phoneNumber: _model
-                                                    .normalPhoneNumberController
+                                                    .normalPhoneNumberTextController
                                                     .text,
                                               );
+
                                               shouldSetState = true;
                                               if ((_model.checkphonenumber
                                                       ?.succeeded ??
@@ -799,9 +868,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                         .checkReferralCall
                                                         .call(
                                                   phoneNumber: _model
-                                                      .normalReferralController
+                                                      .normalReferralTextController
                                                       .text,
                                                 );
+
                                                 shouldSetState = true;
                                                 if ((_model.checkreferral
                                                         ?.succeeded ??
@@ -811,9 +881,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                           .checkReferralCall
                                                           .call(
                                                     phoneNumber: _model
-                                                        .normalInviteController
+                                                        .normalInviteTextController
                                                         .text,
                                                   );
+
                                                   shouldSetState = true;
                                                   if ((_model.checkinvide
                                                           ?.succeeded ??
@@ -827,21 +898,21 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                       queryParameters: {
                                                         'name': serializeParam(
                                                           _model
-                                                              .normalFullNameController
+                                                              .normalFullNameTextController
                                                               .text,
                                                           ParamType.String,
                                                         ),
                                                         'referral':
                                                             serializeParam(
                                                           _model
-                                                              .normalReferralController
+                                                              .normalReferralTextController
                                                               .text,
                                                           ParamType.String,
                                                         ),
                                                         'password':
                                                             serializeParam(
                                                           _model
-                                                              .normalPasswordController
+                                                              .normalPasswordTextController
                                                               .text,
                                                           ParamType.String,
                                                         ),
@@ -867,14 +938,14 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                         'phoneNumber':
                                                             serializeParam(
                                                           _model
-                                                              .normalPhoneNumberController
+                                                              .normalPhoneNumberTextController
                                                               .text,
                                                           ParamType.String,
                                                         ),
                                                         'inviteID':
                                                             serializeParam(
                                                           _model
-                                                              .normalInviteController
+                                                              .normalInviteTextController
                                                               .text,
                                                           ParamType.String,
                                                         ),
@@ -893,7 +964,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                     );
 
                                                     if (shouldSetState) {
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     }
                                                     return;
                                                   } else {
@@ -918,7 +989,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                       },
                                                     );
                                                     if (shouldSetState) {
-                                                      setState(() {});
+                                                      safeSetState(() {});
                                                     }
                                                     return;
                                                   }
@@ -944,7 +1015,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                     },
                                                   );
                                                   if (shouldSetState) {
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   }
                                                   return;
                                                 }
@@ -970,7 +1041,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                   },
                                                 );
                                                 if (shouldSetState) {
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 }
                                                 return;
                                               }
@@ -995,13 +1066,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 },
                                               );
                                               if (shouldSetState) {
-                                                setState(() {});
+                                                safeSetState(() {});
                                               }
                                               return;
                                             }
 
                                             if (shouldSetState) {
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                           },
                                           text: 'Next',
@@ -1022,6 +1093,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                     .override(
                                                       fontFamily: 'Readex Pro',
                                                       color: Colors.white,
+                                                      letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
                                             borderSide: const BorderSide(
@@ -1042,17 +1114,18 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           var shouldSetState = false;
-                                          if ((_model.normalFullNameController.text != '') &&
-                                              (_model.normalPasswordController
+                                          if ((_model.normalFullNameTextController.text != '') &&
+                                              (_model.normalPasswordTextController
                                                           .text !=
                                                       '') &&
-                                              (_model.normalPhoneNumberController
+                                              (_model
+                                                          .normalPhoneNumberTextController
                                                           .text !=
                                                       '') &&
-                                              (_model.normalReferralController
+                                              (_model.normalReferralTextController
                                                           .text !=
                                                       '') &&
-                                              (_model.normalInviteController
+                                              (_model.normalInviteTextController
                                                           .text !=
                                                       '')) {
                                             _model.checkphonenumberNew =
@@ -1060,9 +1133,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                     .checkPhoneNumberCall
                                                     .call(
                                               phoneNumber: _model
-                                                  .normalPhoneNumberController
+                                                  .normalPhoneNumberTextController
                                                   .text,
                                             );
+
                                             shouldSetState = true;
                                             if ((_model.checkphonenumberNew
                                                     ?.succeeded ??
@@ -1072,9 +1146,10 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                       .checkReferralCall
                                                       .call(
                                                 phoneNumber: _model
-                                                    .normalReferralController
+                                                    .normalReferralTextController
                                                     .text,
                                               );
+
                                               shouldSetState = true;
                                               if ((_model.checkreferralNew
                                                       ?.succeeded ??
@@ -1084,19 +1159,20 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                         .checkReferralCall
                                                         .call(
                                                   phoneNumber: _model
-                                                      .normalInviteController
+                                                      .normalInviteTextController
                                                       .text,
                                                 );
+
                                                 shouldSetState = true;
                                                 if ((_model.checkinvideNew
                                                         ?.succeeded ??
                                                     true)) {
                                                   await UsersTable().insert({
                                                     'PhoneNumber': _model
-                                                        .normalPhoneNumberController
+                                                        .normalPhoneNumberTextController
                                                         .text,
                                                     'Password': _model
-                                                        .normalPasswordController
+                                                        .normalPasswordTextController
                                                         .text,
                                                     'Balance': 0.0,
                                                     'SectorID':
@@ -1107,14 +1183,14 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                         : _model
                                                             .uploadedFileUrl1,
                                                     'FullName': _model
-                                                        .normalFullNameController
+                                                        .normalFullNameTextController
                                                         .text,
                                                     'UserReferral': _model
-                                                        .normalReferralController
+                                                        .normalReferralTextController
                                                         .text,
                                                     'IsMember': false,
                                                     'Invite': _model
-                                                        .normalInviteController
+                                                        .normalInviteTextController
                                                         .text,
                                                     'CreatedBy': FFAppState()
                                                         .UserInfo
@@ -1122,7 +1198,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                   });
                                                   context.safePop();
                                                   if (shouldSetState) {
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   }
                                                   return;
                                                 } else {
@@ -1147,7 +1223,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                     },
                                                   );
                                                   if (shouldSetState) {
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   }
                                                   return;
                                                 }
@@ -1173,7 +1249,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                   },
                                                 );
                                                 if (shouldSetState) {
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 }
                                                 return;
                                               }
@@ -1198,7 +1274,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 },
                                               );
                                               if (shouldSetState) {
-                                                setState(() {});
+                                                safeSetState(() {});
                                               }
                                               return;
                                             }
@@ -1223,12 +1299,14 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               },
                                             );
                                             if (shouldSetState) {
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                             return;
                                           }
 
-                                          if (shouldSetState) setState(() {});
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
                                         },
                                         text: 'Create',
                                         options: FFButtonOptions(
@@ -1248,6 +1326,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                   .override(
                                                     fontFamily: 'Readex Pro',
                                                     color: Colors.white,
+                                                    letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
                                           borderSide: const BorderSide(
@@ -1291,7 +1370,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         selectedMedia.every((m) =>
                                             validateFileFormat(
                                                 m.storagePath, context))) {
-                                      setState(
+                                      safeSetState(
                                           () => _model.isDataUploading2 = true);
                                       var selectedUploadedFiles =
                                           <FFUploadedFile>[];
@@ -1329,7 +1408,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               selectedMedia.length &&
                                           downloadUrls.length ==
                                               selectedMedia.length) {
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.uploadedLocalFile2 =
                                               selectedUploadedFiles.first;
                                           _model.uploadedFileUrl2 =
@@ -1337,7 +1416,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         });
                                         showUploadMessage(context, 'Success!');
                                       } else {
-                                        setState(() {});
+                                        safeSetState(() {});
                                         showUploadMessage(
                                             context, 'Failed to upload data');
                                         return;
@@ -1367,8 +1446,12 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               ''),
                                         )}'
                                       : 'ID: Loading...',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
@@ -1378,16 +1461,25 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         MediaQuery.sizeOf(context).width * 0.8,
                                     child: TextFormField(
                                       controller:
-                                          _model.memberFullNameController,
+                                          _model.memberFullNameTextController,
                                       focusNode: _model.memberFullNameFocusNode,
+                                      autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         isDense: true,
                                         labelText: 'Full Name',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -1426,9 +1518,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       validator: _model
-                                          .memberFullNameControllerValidator
+                                          .memberFullNameTextControllerValidator
                                           .asValidator(context),
                                     ),
                                   ),
@@ -1441,8 +1537,9 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         MediaQuery.sizeOf(context).width * 0.8,
                                     child: TextFormField(
                                       controller:
-                                          _model.memberPasswordController,
+                                          _model.memberPasswordTextController,
                                       focusNode: _model.memberPasswordFocusNode,
+                                      autofocus: false,
                                       textCapitalization:
                                           TextCapitalization.none,
                                       obscureText:
@@ -1451,9 +1548,17 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         isDense: true,
                                         labelText: 'Password',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -1491,7 +1596,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               BorderRadius.circular(20.0),
                                         ),
                                         suffixIcon: InkWell(
-                                          onTap: () => setState(
+                                          onTap: () => safeSetState(
                                             () => _model
                                                     .memberPasswordVisibility =
                                                 !_model
@@ -1509,9 +1614,13 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       validator: _model
-                                          .memberPasswordControllerValidator
+                                          .memberPasswordTextControllerValidator
                                           .asValidator(context),
                                       inputFormatters: [
                                         FilteringTextInputFormatter.allow(
@@ -1527,16 +1636,26 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.8,
                                     child: TextFormField(
-                                      controller: _model.memberReferrController,
+                                      controller:
+                                          _model.memberReferrTextController,
                                       focusNode: _model.memberReferrFocusNode,
+                                      autofocus: false,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         isDense: true,
                                         labelText: 'Referral ID',
                                         labelStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
@@ -1575,10 +1694,14 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                         ),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       keyboardType: TextInputType.number,
                                       validator: _model
-                                          .memberReferrControllerValidator
+                                          .memberReferrTextControllerValidator
                                           .asValidator(context),
                                       inputFormatters: [
                                         FilteringTextInputFormatter.allow(
@@ -1611,6 +1734,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     List<SectorsRow>
                                         memberSectorSectorsRowList =
                                         snapshot.data!;
+
                                     return FlutterFlowDropDown<String>(
                                       controller:
                                           _model.memberSectorValueController ??=
@@ -1631,18 +1755,17 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               ))
                                           .toList(),
                                       onChanged: (val) async {
-                                        setState(() =>
+                                        safeSetState(() =>
                                             _model.memberSectorValue = val);
-                                        setState(() {
-                                          _model.selectSectorID =
-                                              memberSectorSectorsRowList
-                                                  .where((e) =>
-                                                      e.sectorName ==
-                                                      _model.memberSectorValue)
-                                                  .toList()
-                                                  .first
-                                                  .sectorID;
-                                        });
+                                        _model.selectSectorID =
+                                            memberSectorSectorsRowList
+                                                .where((e) =>
+                                                    e.sectorName ==
+                                                    _model.memberSectorValue)
+                                                .toList()
+                                                .first
+                                                .sectorID;
+                                        safeSetState(() {});
                                       },
                                       width: MediaQuery.sizeOf(context).width *
                                           0.8,
@@ -1652,6 +1775,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                           ),
                                       hintText: 'Please select sector',
                                       icon: Icon(
@@ -1687,21 +1811,23 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         var shouldSetState = false;
-                                        if ((_model.memberFullNameController
+                                        if ((_model.memberFullNameTextController
                                                         .text !=
                                                     '') &&
-                                            (_model.memberReferrController
+                                            (_model.memberReferrTextController
                                                         .text !=
                                                     '') &&
-                                            (_model.memberPasswordController
+                                            (_model.memberPasswordTextController
                                                         .text !=
                                                     '')) {
                                           _model.apiResultbep = await UsersGroup
                                               .checkReferralCall
                                               .call(
                                             phoneNumber: _model
-                                                .memberReferrController.text,
+                                                .memberReferrTextController
+                                                .text,
                                           );
+
                                           shouldSetState = true;
                                           if ((_model.apiResultbep?.succeeded ??
                                               true)) {
@@ -1714,7 +1840,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                 r'''$''',
                                               ).toString(),
                                               'Password': _model
-                                                  .memberPasswordController
+                                                  .memberPasswordTextController
                                                   .text,
                                               'IsApprove': true,
                                               'Balance': 0.0,
@@ -1724,13 +1850,15 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                                   ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
                                                   : _model.uploadedFileUrl2,
                                               'FullName': _model
-                                                  .memberFullNameController
+                                                  .memberFullNameTextController
                                                   .text,
                                               'UserReferral': _model
-                                                  .memberReferrController.text,
+                                                  .memberReferrTextController
+                                                  .text,
                                               'IsMember': true,
                                               'Invite': _model
-                                                  .memberReferrController.text,
+                                                  .memberReferrTextController
+                                                  .text,
                                               'CreatedBy':
                                                   FFAppState().UserInfo.userID,
                                             });
@@ -1746,7 +1874,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             );
                                             context.safePop();
                                             if (shouldSetState) {
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                             return;
                                           } else {
@@ -1770,7 +1898,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               },
                                             );
                                             if (shouldSetState) {
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                             return;
                                           }
@@ -1794,11 +1922,15 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                               );
                                             },
                                           );
-                                          if (shouldSetState) setState(() {});
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
                                           return;
                                         }
 
-                                        if (shouldSetState) setState(() {});
+                                        if (shouldSetState) {
+                                          safeSetState(() {});
+                                        }
                                       },
                                       text: 'Create',
                                       options: FFButtonOptions(
@@ -1816,6 +1948,7 @@ class _AdminCreateUserWidgetState extends State<AdminCreateUserWidget>
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               color: Colors.white,
+                                              letterSpacing: 0.0,
                                             ),
                                         elevation: 3.0,
                                         borderSide: const BorderSide(

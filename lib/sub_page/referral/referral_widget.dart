@@ -31,8 +31,8 @@ class _ReferralWidgetState extends State<ReferralWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -86,13 +86,12 @@ class _ReferralWidgetState extends State<ReferralWidget>
           );
         }
         List<UsersRow> referralUsersRowList = snapshot.data!;
+
         return Title(
             title: 'Referral',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -105,6 +104,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 22.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -176,6 +176,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                                         fontFamily:
                                                             'Readex Pro',
                                                         fontSize: 14.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                             ),
                                             Text(
@@ -189,6 +190,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                                             context)
                                                         .secondaryText,
                                                     fontSize: 12.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                             ),
                                           ],
@@ -274,6 +276,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       fontSize: 14.0,
+                                      letterSpacing: 0.0,
                                     ),
                                 unselectedLabelStyle: const TextStyle(),
                                 indicatorColor:
@@ -311,12 +314,21 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                               final referralVar =
                                                   referralUsersRowList
                                                       .where((e) =>
-                                                          FFAppState()
+                                                          (int curentUserID,
+                                                                  int listUserID,
+                                                                  bool isAdmin) {
+                                                            return curentUserID !=
+                                                                    listUserID &&
+                                                                isAdmin ==
+                                                                    false;
+                                                          }(
+                                                              FFAppState()
                                                                   .UserInfo
-                                                                  .userID !=
-                                                              e.userID &&
-                                                          e.isAdmin == false)
+                                                                  .userID,
+                                                              e.userID,
+                                                              e.isAdmin))
                                                       .toList();
+
                                               return ListView.builder(
                                                 padding: EdgeInsets.zero,
                                                 scrollDirection: Axis.vertical,
@@ -382,7 +394,9 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                                                       .of(context)
                                                                   .alternate,
                                                               offset: const Offset(
-                                                                  0.0, 1.0),
+                                                                0.0,
+                                                                1.0,
+                                                              ),
                                                             )
                                                           ],
                                                         ),
@@ -463,6 +477,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                                                               style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                     fontFamily: 'Readex Pro',
                                                                                     fontSize: 12.0,
+                                                                                    letterSpacing: 0.0,
                                                                                   ),
                                                                             ),
                                                                           ),
@@ -484,6 +499,7 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                                                             .override(
                                                                               fontFamily: 'Readex Pro',
                                                                               fontSize: 10.0,
+                                                                              letterSpacing: 0.0,
                                                                             ),
                                                                       ),
                                                                     ],
@@ -512,7 +528,8 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                       ),
                                       wrapWithModel(
                                         model: _model.navPaddingModel,
-                                        updateCallback: () => setState(() {}),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
                                         child: const NavPaddingWidget(),
                                       ),
                                     ],
@@ -546,10 +563,12 @@ class _ReferralWidgetState extends State<ReferralWidget>
                                         }
                                         List<UsersRow> graphTreeUsersRowList =
                                             snapshot.data!;
+
                                         final graphTreeUsersRow =
                                             graphTreeUsersRowList.isNotEmpty
                                                 ? graphTreeUsersRowList.first
                                                 : null;
+
                                         return SizedBox(
                                           width: double.infinity,
                                           height: double.infinity,

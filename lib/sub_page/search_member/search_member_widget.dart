@@ -7,7 +7,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'search_member_model.dart';
 export 'search_member_model.dart';
 
@@ -31,7 +30,7 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -43,15 +42,11 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'SearchMember',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).alternate,
@@ -78,6 +73,7 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                       fontFamily: 'Outfit',
                       color: Colors.white,
                       fontSize: 20.0,
+                      letterSpacing: 0.0,
                     ),
               ),
               actions: const [],
@@ -108,19 +104,19 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                                 await UsersGroup.searchUserAndCompanyCall.call(
                               pFullname: _model.textController.text,
                             );
+
                             shouldSetState = true;
                             if ((_model.apiResultgy4?.succeeded ?? true)) {
-                              setState(() {
-                                _model.isSearch = true;
-                              });
-                              if (shouldSetState) setState(() {});
+                              _model.isSearch = true;
+                              safeSetState(() {});
+                              if (shouldSetState) safeSetState(() {});
                               return;
                             } else {
-                              if (shouldSetState) setState(() {});
+                              if (shouldSetState) safeSetState(() {});
                               return;
                             }
 
-                            if (shouldSetState) setState(() {});
+                            if (shouldSetState) safeSetState(() {});
                           },
                         ),
                         autofocus: true,
@@ -128,9 +124,17 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                         decoration: InputDecoration(
                           isDense: true,
                           labelText: 'Search..',
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           alignLabelWithHint: false,
-                          hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: FlutterFlowTheme.of(context).secondaryText,
@@ -164,7 +168,10 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                             size: 24.0,
                           ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                         validator:
                             _model.textControllerValidator.asValidator(context),
                       ),
@@ -180,6 +187,7 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                           builder: (context) {
                             final datas =
                                 (_model.apiResultgy4?.jsonBody ?? '').toList();
+
                             return ListView.separated(
                               padding: EdgeInsets.zero,
                               scrollDirection: Axis.vertical,
@@ -233,7 +241,10 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(0.0, 1.0),
+                                              offset: const Offset(
+                                                0.0,
+                                                1.0,
+                                              ),
                                             )
                                           ],
                                         ),
@@ -303,16 +314,24 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                                                                         'Readex Pro',
                                                                     fontSize:
                                                                         12.0,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                             Text(
-                                                              'Join: ${dateTimeFormat('d/M/y', functions.dataTimeConverter(getJsonField(
+                                                              'Join: ${dateTimeFormat("d/M/y", functions.dataTimeConverter(getJsonField(
                                                                     datasItem,
                                                                     r'''$.joindate''',
                                                                   ).toString()))}',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodySmall,
+                                                                  .bodySmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
                                                             ),
                                                           ],
                                                         ),
@@ -324,7 +343,13 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                                                               'Tel: ',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodySmall,
+                                                                  .bodySmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
                                                             ),
                                                             InkWell(
                                                               splashColor: Colors
@@ -358,6 +383,8 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                                                                           'Readex Pro',
                                                                       color: const Color(
                                                                           0xFF1900FF),
+                                                                      letterSpacing:
+                                                                          0.0,
                                                                     ),
                                                               ),
                                                             ),
@@ -380,6 +407,8 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                                                                         'Readex Pro',
                                                                     fontSize:
                                                                         12.0,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                             Text(
@@ -398,6 +427,8 @@ class _SearchMemberWidgetState extends State<SearchMemberWidget> {
                                                                         .error,
                                                                     fontSize:
                                                                         12.0,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ],

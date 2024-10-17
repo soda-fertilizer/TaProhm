@@ -7,15 +7,14 @@ import 'package:flutter/material.dart';
 class TransferModel extends FlutterFlowModel<TransferWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for PhoneNumber widget.
   FocusNode? phoneNumberFocusNode;
-  TextEditingController? phoneNumberController;
-  String? Function(BuildContext, String?)? phoneNumberControllerValidator;
+  TextEditingController? phoneNumberTextController;
+  String? Function(BuildContext, String?)? phoneNumberTextControllerValidator;
   // State field(s) for Amount widget.
   FocusNode? amountFocusNode;
-  TextEditingController? amountController;
-  String? Function(BuildContext, String?)? amountControllerValidator;
+  TextEditingController? amountTextController;
+  String? Function(BuildContext, String?)? amountTextControllerValidator;
   var scanner = '';
   // Stores action output result for [Backend Call - API (one user name)] action in Button widget.
   ApiCallResponse? responseUserName;
@@ -28,22 +27,15 @@ class TransferModel extends FlutterFlowModel<TransferWidget> {
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   TransactionsRow? userTranfer;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     phoneNumberFocusNode?.dispose();
-    phoneNumberController?.dispose();
+    phoneNumberTextController?.dispose();
 
     amountFocusNode?.dispose();
-    amountController?.dispose();
+    amountTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

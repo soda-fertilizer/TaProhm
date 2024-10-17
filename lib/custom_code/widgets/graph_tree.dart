@@ -1,5 +1,4 @@
 // Automatic FlutterFlow imports
-import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
@@ -45,7 +44,7 @@ class _GraphTreeState extends State<GraphTree> {
       // ! This is for on tap action
       onTap: () {
         FFAppState().GrapTreeSelectUserPhoneNumber = user.phoneNumber;
-        widget.onNodeClick!();
+        widget.onNodeClick();
       },
       child: Container(
           padding: const EdgeInsets.all(16),

@@ -13,6 +13,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'edit_company_model.dart';
@@ -64,31 +65,32 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await requestPermission(cameraPermission);
       await requestPermission(photoLibraryPermission);
-      setState(() {
-        _model.profile = widget.profile!;
-        _model.selectImage = widget.images!.toList().cast<String>();
-        _model.haveDocument = widget.haveDocument!;
-      });
+      _model.profile = widget.profile!;
+      _model.selectImage = widget.images!.toList().cast<String>();
+      _model.haveDocument = widget.haveDocument!;
+      safeSetState(() {});
     });
 
-    _model.companyNameController ??= TextEditingController(text: widget.name);
+    _model.companyNameTextController ??=
+        TextEditingController(text: widget.name);
     _model.companyNameFocusNode ??= FocusNode();
 
-    _model.phoneNumberController ??=
+    _model.phoneNumberTextController ??=
         TextEditingController(text: widget.phoneNumber);
     _model.phoneNumberFocusNode ??= FocusNode();
 
-    _model.telegramLinkController ??= TextEditingController(text: widget.link);
+    _model.telegramLinkTextController ??=
+        TextEditingController(text: widget.link);
     _model.telegramLinkFocusNode ??= FocusNode();
 
-    _model.discountController ??=
+    _model.discountTextController ??=
         TextEditingController(text: widget.discount?.toString());
     _model.discountFocusNode ??= FocusNode();
 
     _model.textController5 ??= TextEditingController(text: widget.detail);
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -106,9 +108,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
         title: 'EditCompany',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -137,6 +137,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -169,9 +170,11 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                     );
                   }
                   List<UsersRow> containerUsersRowList = snapshot.data!;
+
                   final containerUsersRow = containerUsersRowList.isNotEmpty
                       ? containerUsersRowList.first
                       : null;
+
                   return Container(
                     decoration: const BoxDecoration(),
                     child: Padding(
@@ -232,7 +235,12 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Text(
                                                 'ID: ${containerUsersRow.phoneNumber}',
@@ -246,6 +254,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                                                   context)
                                                               .secondaryText,
                                                       fontSize: 12.0,
+                                                      letterSpacing: 0.0,
                                                     ),
                                               ),
                                             ],
@@ -276,7 +285,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                       selectedMedia.every((m) =>
                                           validateFileFormat(
                                               m.storagePath, context))) {
-                                    setState(
+                                    safeSetState(
                                         () => _model.isDataUploading1 = true);
                                     var selectedUploadedFiles =
                                         <FFUploadedFile>[];
@@ -307,21 +316,20 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                             selectedMedia.length &&
                                         downloadUrls.length ==
                                             selectedMedia.length) {
-                                      setState(() {
+                                      safeSetState(() {
                                         _model.uploadedLocalFile1 =
                                             selectedUploadedFiles.first;
                                         _model.uploadedFileUrl1 =
                                             downloadUrls.first;
                                       });
                                     } else {
-                                      setState(() {});
+                                      safeSetState(() {});
                                       return;
                                     }
                                   }
 
-                                  setState(() {
-                                    _model.profile = _model.uploadedFileUrl1;
-                                  });
+                                  _model.profile = _model.uploadedFileUrl1;
+                                  safeSetState(() {});
                                 },
                                 child: Container(
                                   width: 100.0,
@@ -338,16 +346,25 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                               ),
                             ),
                             TextFormField(
-                              controller: _model.companyNameController,
+                              controller: _model.companyNameTextController,
                               focusNode: _model.companyNameFocusNode,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
                                 labelText: 'Company name',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -378,21 +395,36 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                              validator: _model.companyNameControllerValidator
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              validator: _model
+                                  .companyNameTextControllerValidator
                                   .asValidator(context),
                             ),
                             TextFormField(
-                              controller: _model.phoneNumberController,
+                              controller: _model.phoneNumberTextController,
                               focusNode: _model.phoneNumberFocusNode,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
                                 labelText: 'Phone number',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -423,8 +455,14 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                              validator: _model.phoneNumberControllerValidator
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              validator: _model
+                                  .phoneNumberTextControllerValidator
                                   .asValidator(context),
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
@@ -432,16 +470,25 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                               ],
                             ),
                             TextFormField(
-                              controller: _model.telegramLinkController,
+                              controller: _model.telegramLinkTextController,
                               focusNode: _model.telegramLinkFocusNode,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
                                 labelText: 'Telegram link',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -472,8 +519,14 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                              validator: _model.telegramLinkControllerValidator
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              validator: _model
+                                  .telegramLinkTextControllerValidator
                                   .asValidator(context),
                             ),
                             Row(
@@ -482,22 +535,35 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                               children: [
                                 Text(
                                   'Discount (%): ',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
                                 SizedBox(
                                   width: MediaQuery.sizeOf(context).width * 0.4,
                                   child: TextFormField(
-                                    controller: _model.discountController,
+                                    controller: _model.discountTextController,
                                     focusNode: _model.discountFocusNode,
+                                    autofocus: false,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       isDense: true,
                                       labelText: 'Discount',
                                       labelStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       hintStyle: FlutterFlowTheme.of(context)
-                                          .labelMedium,
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                           color: FlutterFlowTheme.of(context)
@@ -535,12 +601,16 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                             BorderRadius.circular(30.0),
                                       ),
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     textAlign: TextAlign.start,
                                     keyboardType: TextInputType.number,
                                     validator: _model
-                                        .discountControllerValidator
+                                        .discountTextControllerValidator
                                         .asValidator(context),
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
@@ -573,18 +643,21 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                       value: _model.checkboxValue ??=
                                           _model.haveDocument,
                                       onChanged: (newValue) async {
-                                        setState(() =>
+                                        safeSetState(() =>
                                             _model.checkboxValue = newValue!);
                                         if (newValue!) {
-                                          setState(() {
-                                            _model.haveDocument = true;
-                                          });
+                                          _model.haveDocument = true;
+                                          safeSetState(() {});
                                         } else {
-                                          setState(() {
-                                            _model.haveDocument = false;
-                                          });
+                                          _model.haveDocument = false;
+                                          safeSetState(() {});
                                         }
                                       },
+                                      side: BorderSide(
+                                        width: 2,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                      ),
                                       activeColor:
                                           FlutterFlowTheme.of(context).primary,
                                       checkColor:
@@ -593,8 +666,12 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   ),
                                   Text(
                                     'I have document',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ],
                               ),
@@ -614,13 +691,22 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                               child: TextFormField(
                                 controller: _model.textController5,
                                 focusNode: _model.textFieldFocusNode,
+                                autofocus: false,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   hintText: 'Company detail',
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                       color: Color(0x00000000),
@@ -650,7 +736,12 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 maxLines: 5,
                                 validator: _model.textController5Validator
                                     .asValidator(context),
@@ -665,11 +756,8 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   context: context,
                                   builder: (context) {
                                     return GestureDetector(
-                                      onTap: () => _model
-                                              .unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
+                                      onTap: () =>
+                                          FocusScope.of(context).unfocus(),
                                       child: Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
@@ -683,7 +771,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                 ).then((value) => safeSetState(
                                     () => _model.getLocation = value));
 
-                                setState(() {});
+                                safeSetState(() {});
                               },
                               text: _model.getLocation == null
                                   ? 'Pin location'
@@ -702,6 +790,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       color: Colors.white,
+                                      letterSpacing: 0.0,
                                     ),
                                 elevation: 3.0,
                                 borderSide: const BorderSide(
@@ -731,7 +820,11 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                     child: Text(
                                       'Add image',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                   ),
                                 ),
@@ -747,10 +840,9 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          setState(() {
-                                            _model.removeAtIndexFromSelectImage(
-                                                _model.selectImageIndex!);
-                                          });
+                                          _model.removeAtIndexFromSelectImage(
+                                              _model.selectImageIndex!);
+                                          safeSetState(() {});
                                         },
                                         child: ClipRRect(
                                           borderRadius:
@@ -784,7 +876,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                                   validateFileFormat(
                                                       m.storagePath,
                                                       context))) {
-                                            setState(() =>
+                                            safeSetState(() =>
                                                 _model.isDataUploading2 = true);
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
@@ -830,7 +922,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                                     selectedMedia.length &&
                                                 downloadUrls.length ==
                                                     selectedMedia.length) {
-                                              setState(() {
+                                              safeSetState(() {
                                                 _model.uploadedLocalFiles2 =
                                                     selectedUploadedFiles;
                                                 _model.uploadedFileUrls2 =
@@ -839,7 +931,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                               showUploadMessage(
                                                   context, 'Success!');
                                             } else {
-                                              setState(() {});
+                                              safeSetState(() {});
                                               showUploadMessage(context,
                                                   'Failed to upload data');
                                               return;
@@ -848,23 +940,21 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
 
                                           while (_model.imageLoop <
                                               _model.uploadedFileUrls2.length) {
-                                            setState(() {
-                                              _model.addToSelectImage(
-                                                  _model.uploadedFileUrls2[
-                                                      _model.imageLoop]);
-                                              _model.imageLoop =
-                                                  _model.imageLoop + 1;
-                                            });
+                                            _model.addToSelectImage(
+                                                _model.uploadedFileUrls2[
+                                                    _model.imageLoop]);
+                                            _model.imageLoop =
+                                                _model.imageLoop + 1;
+                                            safeSetState(() {});
                                           }
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.isDataUploading2 = false;
                                             _model.uploadedLocalFiles2 = [];
                                             _model.uploadedFileUrls2 = [];
                                           });
 
-                                          setState(() {
-                                            _model.imageLoop = 0;
-                                          });
+                                          _model.imageLoop = 0;
+                                          safeSetState(() {});
                                         },
                                         child: ClipRRect(
                                           borderRadius:
@@ -896,7 +986,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                                   validateFileFormat(
                                                       m.storagePath,
                                                       context))) {
-                                            setState(() =>
+                                            safeSetState(() =>
                                                 _model.isDataUploading3 = true);
                                             var selectedUploadedFiles =
                                                 <FFUploadedFile>[];
@@ -942,7 +1032,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                                     selectedMedia.length &&
                                                 downloadUrls.length ==
                                                     selectedMedia.length) {
-                                              setState(() {
+                                              safeSetState(() {
                                                 _model.uploadedLocalFile3 =
                                                     selectedUploadedFiles.first;
                                                 _model.uploadedFileUrl3 =
@@ -951,18 +1041,17 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                               showUploadMessage(
                                                   context, 'Success!');
                                             } else {
-                                              setState(() {});
+                                              safeSetState(() {});
                                               showUploadMessage(context,
                                                   'Failed to upload data');
                                               return;
                                             }
                                           }
 
-                                          setState(() {
-                                            _model.addToSelectImage(
-                                                _model.uploadedFileUrl3);
-                                          });
-                                          setState(() {
+                                          _model.addToSelectImage(
+                                              _model.uploadedFileUrl3);
+                                          safeSetState(() {});
+                                          safeSetState(() {
                                             _model.isDataUploading3 = false;
                                             _model.uploadedLocalFile3 =
                                                 FFUploadedFile(
@@ -990,6 +1079,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                             Builder(
                               builder: (context) {
                                 final images = _model.selectImage.toList();
+
                                 return Wrap(
                                   spacing: 10.0,
                                   runSpacing: 10.0,
@@ -1025,18 +1115,20 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          setState(() {
-                                            _model.selectImageIndex =
-                                                imagesIndex;
-                                          });
+                                          _model.selectImageIndex = imagesIndex;
+                                          safeSetState(() {});
                                         },
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(0.0),
                                           child: OctoImage(
-                                            placeholderBuilder:
-                                                OctoPlaceholder.blurHash(
-                                              FFAppConstants.BlurHash,
+                                            placeholderBuilder: (_) =>
+                                                const SizedBox.expand(
+                                              child: Image(
+                                                image: BlurHashImage(
+                                                    FFAppConstants.BlurHash),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                             image: CachedNetworkImageProvider(
                                               imagesItem,
@@ -1129,6 +1221,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(
@@ -1142,14 +1235,14 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                   onPressed: () async {
                                     await CompaniesTable().update(
                                       data: {
-                                        'CompanyName':
-                                            _model.companyNameController.text,
+                                        'CompanyName': _model
+                                            .companyNameTextController.text,
                                         'CompanyProfile': _model.profile,
                                         'CompanyImages': _model.selectImage,
-                                        'PhoneNumber':
-                                            _model.phoneNumberController.text,
-                                        'TelegramUrl':
-                                            _model.telegramLinkController.text,
+                                        'PhoneNumber': _model
+                                            .phoneNumberTextController.text,
+                                        'TelegramUrl': _model
+                                            .telegramLinkTextController.text,
                                         'Detail': _model.textController5.text,
                                         'Latitude': functions
                                             .splitLatLng(
@@ -1160,12 +1253,12 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                                 _model.getLocation ?? widget.location)
                                             ?.last,
                                         'IsVertify': _model.haveDocument,
-                                        'Discount': _model.discountController
+                                        'Discount': _model.discountTextController
                                                         .text ==
                                                     ''
                                             ? widget.discount
-                                            : double.tryParse(
-                                                _model.discountController.text),
+                                            : double.tryParse(_model
+                                                .discountTextController.text),
                                       },
                                       matchingRows: (rows) => rows.eq(
                                         'CompanyID',
@@ -1189,6 +1282,7 @@ class _EditCompanyWidgetState extends State<EditCompanyWidget> {
                                         .override(
                                           fontFamily: 'Readex Pro',
                                           color: Colors.white,
+                                          letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
                                     borderSide: const BorderSide(

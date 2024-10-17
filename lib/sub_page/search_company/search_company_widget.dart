@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'search_company_model.dart';
 export 'search_company_model.dart';
 
@@ -29,7 +28,7 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -41,15 +40,11 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'SearchCompany',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -78,6 +73,7 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -105,19 +101,19 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                               await CompanyGroup.searchCompanyCall.call(
                             companyName: _model.textController.text,
                           );
+
                           shouldSetState = true;
                           if ((_model.apiResultbfs?.succeeded ?? true)) {
-                            setState(() {
-                              _model.isSearch = true;
-                            });
-                            if (shouldSetState) setState(() {});
+                            _model.isSearch = true;
+                            safeSetState(() {});
+                            if (shouldSetState) safeSetState(() {});
                             return;
                           } else {
-                            if (shouldSetState) setState(() {});
+                            if (shouldSetState) safeSetState(() {});
                             return;
                           }
 
-                          if (shouldSetState) setState(() {});
+                          if (shouldSetState) safeSetState(() {});
                         },
                       ),
                       autofocus: true,
@@ -125,9 +121,17 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                       decoration: InputDecoration(
                         isDense: true,
                         labelText: 'Search..',
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                         alignLabelWithHint: false,
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                        hintStyle:
+                            FlutterFlowTheme.of(context).labelMedium.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).secondaryText,
@@ -160,7 +164,10 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                           Icons.search,
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                       validator:
                           _model.textControllerValidator.asValidator(context),
                     ),
@@ -174,6 +181,7 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                           builder: (context) {
                             final byList =
                                 (_model.apiResultbfs?.jsonBody ?? '').toList();
+
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               scrollDirection: Axis.vertical,
@@ -189,23 +197,22 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      setState(() {
-                                        FFAppState().updateShopHolderStruct(
-                                          (e) => e
-                                            ..id = getJsonField(
-                                              byListItem,
-                                              r'''$.CompanyID''',
-                                            )
-                                            ..latitude = getJsonField(
-                                              byListItem,
-                                              r'''$.Latitude''',
-                                            )
-                                            ..longitude = getJsonField(
-                                              byListItem,
-                                              r'''$.Longitude''',
-                                            ),
-                                        );
-                                      });
+                                      FFAppState().updateShopHolderStruct(
+                                        (e) => e
+                                          ..id = getJsonField(
+                                            byListItem,
+                                            r'''$.CompanyID''',
+                                          )
+                                          ..latitude = getJsonField(
+                                            byListItem,
+                                            r'''$.Latitude''',
+                                          )
+                                          ..longitude = getJsonField(
+                                            byListItem,
+                                            r'''$.Longitude''',
+                                          ),
+                                      );
+                                      safeSetState(() {});
 
                                       context.pushNamed(
                                         'Locator',
@@ -248,7 +255,10 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                                             blurRadius: 0.0,
                                             color: FlutterFlowTheme.of(context)
                                                 .alternate,
-                                            offset: const Offset(0.0, 1.0),
+                                            offset: const Offset(
+                                              0.0,
+                                              1.0,
+                                            ),
                                           )
                                         ],
                                       ),
@@ -312,6 +322,8 @@ class _SearchCompanyWidgetState extends State<SearchCompanyWidget> {
                                                                       'Readex Pro',
                                                                   fontSize:
                                                                       14.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ),

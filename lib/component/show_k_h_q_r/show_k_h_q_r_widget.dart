@@ -6,8 +6,8 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:provider/provider.dart';
 import 'show_k_h_q_r_model.dart';
 export 'show_k_h_q_r_model.dart';
 
@@ -37,7 +37,7 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
       await actions.storagePermisson();
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,8 +49,6 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(0.0),
       child: BackdropFilter(
@@ -68,13 +66,19 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
             children: [
               Text(
                 'KHQR',
-                style: FlutterFlowTheme.of(context).headlineSmall,
+                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                      fontFamily: 'Outfit',
+                      letterSpacing: 0.0,
+                    ),
               ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: OctoImage(
-                  placeholderBuilder: OctoPlaceholder.blurHash(
-                    FFAppConstants.BlurHash,
+                  placeholderBuilder: (_) => const SizedBox.expand(
+                    child: Image(
+                      image: BlurHashImage(FFAppConstants.BlurHash),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   image: const CachedNetworkImageProvider(
                     'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/KHQR.jpg',
@@ -103,6 +107,7 @@ class _ShowKHQRWidgetState extends State<ShowKHQRWidget> {
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Readex Pro',
                           color: Colors.white,
+                          letterSpacing: 0.0,
                         ),
                     elevation: 3.0,
                     borderSide: const BorderSide(

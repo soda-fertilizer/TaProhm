@@ -26,7 +26,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
     super.initState();
     _model = createModel(context, () => NotificationModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,9 +44,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
         title: 'Notification',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -59,6 +57,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                       fontFamily: 'Outfit',
                       color: Colors.white,
                       fontSize: 20.0,
+                      letterSpacing: 0.0,
                     ),
               ),
               actions: const [],
@@ -96,6 +95,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                             List<BroadcastNotificationRow>
                                 listViewBroadcastNotificationRowList =
                                 snapshot.data!;
+
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               scrollDirection: Axis.vertical,
@@ -150,7 +150,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
-                                                  offset: const Offset(0.0, 1.0),
+                                                  offset: const Offset(
+                                                    0.0,
+                                                    1.0,
+                                                  ),
                                                 )
                                               ],
                                             ),
@@ -236,6 +239,8 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                                                               'Readex Pro',
                                                                           fontSize:
                                                                               14.0,
+                                                                          letterSpacing:
+                                                                              0.0,
                                                                         ),
                                                                   ),
                                                                 ),
@@ -248,7 +253,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                                                           4.0),
                                                                   child: Text(
                                                                     dateTimeFormat(
-                                                                            'd/M/y',
+                                                                            "d/M/y",
                                                                             listViewBroadcastNotificationRow.createdDate)
                                                                         .maybeHandleOverflow(
                                                                       maxChars:
@@ -266,6 +271,8 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                                                               FlutterFlowTheme.of(context).primaryText,
                                                                           fontSize:
                                                                               12.0,
+                                                                          letterSpacing:
+                                                                              0.0,
                                                                         ),
                                                                   ),
                                                                 ),
@@ -287,6 +294,8 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                                                         'Readex Pro',
                                                                     fontSize:
                                                                         12.0,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ],
@@ -310,7 +319,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                       ),
                       wrapWithModel(
                         model: _model.navPaddingModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavPaddingWidget(),
                       ),
                     ],
@@ -320,7 +329,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                       alignment: const AlignmentDirectional(0.0, 1.0),
                       child: wrapWithModel(
                         model: _model.navBarModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavBarWidget(
                           selectPageIndex: 3,
                         ),

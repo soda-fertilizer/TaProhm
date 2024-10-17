@@ -1,6 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'nav_padding_model.dart';
 export 'nav_padding_model.dart';
 
@@ -25,7 +24,7 @@ class _NavPaddingWidgetState extends State<NavPaddingWidget> {
     super.initState();
     _model = createModel(context, () => NavPaddingModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -37,8 +36,6 @@ class _NavPaddingWidgetState extends State<NavPaddingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: double.infinity,
       height: 50.0,

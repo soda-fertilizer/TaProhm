@@ -39,27 +39,26 @@ class _ReviewWidgetState extends State<ReviewWidget> {
         userId: FFAppState().UserInfo.userID,
         companyId: widget.companyID,
       );
+
       if ((_model.apiResultsmu?.succeeded ?? true)) {
-        setState(() {
-          _model.readyRating = true;
-          _model.isLoaded = true;
-        });
+        _model.readyRating = true;
+        _model.isLoaded = true;
+        safeSetState(() {});
         return;
       } else {
-        setState(() {
-          _model.readyRating = false;
-          _model.isLoaded = true;
-        });
+        _model.readyRating = false;
+        _model.isLoaded = true;
+        safeSetState(() {});
         return;
       }
     });
 
-    _model.detailController ??= TextEditingController();
+    _model.detailTextController ??= TextEditingController();
     _model.detailFocusNode ??= FocusNode();
 
     _model.readyDetailFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -77,9 +76,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
         title: 'Review',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -106,6 +103,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                       fontFamily: 'Outfit',
                       color: Colors.white,
                       fontSize: 22.0,
+                      letterSpacing: 0.0,
                     ),
               ),
               actions: const [],
@@ -130,7 +128,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   RatingBar.builder(
-                                    onRatingUpdate: (newValue) => setState(
+                                    onRatingUpdate: (newValue) => safeSetState(
                                         () => _model.ratingBarValue = newValue),
                                     itemBuilder: (context, index) => const Icon(
                                       Icons.star_rounded,
@@ -163,17 +161,27 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             8.0, 0.0, 8.0, 0.0),
                                         child: TextFormField(
-                                          controller: _model.detailController,
+                                          controller:
+                                              _model.detailTextController,
                                           focusNode: _model.detailFocusNode,
+                                          autofocus: false,
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: 'Details',
                                             labelStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             hintStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .labelMedium,
+                                                    .labelMedium
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      letterSpacing: 0.0,
+                                                    ),
                                             enabledBorder: InputBorder.none,
                                             focusedBorder: InputBorder.none,
                                             errorBorder: InputBorder.none,
@@ -181,10 +189,14 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                                 InputBorder.none,
                                           ),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                           maxLines: null,
                                           validator: _model
-                                              .detailControllerValidator
+                                              .detailTextControllerValidator
                                               .asValidator(context),
                                         ),
                                       ),
@@ -197,7 +209,8 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                         'CompanyID': widget.companyID,
                                         'Rating':
                                             _model.ratingBarValue?.round(),
-                                        'Detail': _model.detailController.text,
+                                        'Detail':
+                                            _model.detailTextController.text,
                                       });
                                       context.safePop();
                                     },
@@ -216,6 +229,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: Colors.white,
+                                            letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
                                       borderSide: const BorderSide(
@@ -257,10 +271,12 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                               List<CompaniesRatingRow>
                                   updateReviewCompaniesRatingRowList =
                                   snapshot.data!;
+
                               final updateReviewCompaniesRatingRow =
                                   updateReviewCompaniesRatingRowList.isNotEmpty
                                       ? updateReviewCompaniesRatingRowList.first
                                       : null;
+
                               return Container(
                                 decoration: const BoxDecoration(),
                                 child: Padding(
@@ -270,9 +286,10 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       RatingBar.builder(
-                                        onRatingUpdate: (newValue) => setState(
-                                            () => _model.readyRatingBarValue =
-                                                newValue),
+                                        onRatingUpdate: (newValue) =>
+                                            safeSetState(() =>
+                                                _model.readyRatingBarValue =
+                                                    newValue),
                                         itemBuilder: (context, index) => const Icon(
                                           Icons.star_rounded,
                                           color: Color(0xFFFFD700),
@@ -310,7 +327,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                                     8.0, 0.0, 8.0, 0.0),
                                             child: TextFormField(
                                               controller: _model
-                                                      .readyDetailController ??=
+                                                      .readyDetailTextController ??=
                                                   TextEditingController(
                                                 text:
                                                     updateReviewCompaniesRatingRow
@@ -318,15 +335,26 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                               ),
                                               focusNode:
                                                   _model.readyDetailFocusNode,
+                                              autofocus: false,
                                               obscureText: false,
                                               decoration: InputDecoration(
                                                 labelText: 'Details',
                                                 labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 hintStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                 enabledBorder: InputBorder.none,
                                                 focusedBorder: InputBorder.none,
                                                 errorBorder: InputBorder.none,
@@ -335,10 +363,15 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                               ),
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               maxLines: null,
                                               validator: _model
-                                                  .readyDetailControllerValidator
+                                                  .readyDetailTextControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -352,7 +385,8 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                                   .readyRatingBarValue
                                                   ?.round(),
                                               'Detail': _model
-                                                  .readyDetailController.text,
+                                                  .readyDetailTextController
+                                                  .text,
                                             },
                                             matchingRows: (rows) => rows.eq(
                                               'ID',
@@ -382,6 +416,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                                                   .override(
                                                     fontFamily: 'Readex Pro',
                                                     color: Colors.white,
+                                                    letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
                                           borderSide: const BorderSide(
@@ -408,7 +443,10 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Text(
                         'Loding...',
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                     );
                   }

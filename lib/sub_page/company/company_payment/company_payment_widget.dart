@@ -45,10 +45,10 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
       return;
     });
 
-    _model.amountController ??= TextEditingController();
+    _model.amountTextController ??= TextEditingController();
     _model.amountFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -124,7 +124,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: TextFormField(
-                    controller: _model.amountController,
+                    controller: _model.amountTextController,
                     focusNode: _model.amountFocusNode,
                     autofocus: true,
                     obscureText: false,
@@ -159,12 +159,15 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    style: FlutterFlowTheme.of(context).displayMedium,
+                    style: FlutterFlowTheme.of(context).displayMedium.override(
+                          fontFamily: 'Outfit',
+                          letterSpacing: 0.0,
+                        ),
                     textAlign: TextAlign.center,
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
-                    validator:
-                        _model.amountControllerValidator.asValidator(context),
+                    validator: _model.amountTextControllerValidator
+                        .asValidator(context),
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                     ],
@@ -232,13 +235,23 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                               'ABA Pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                             Text(
                                               'Click to pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelSmall,
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ],
                                         ),
@@ -312,13 +325,23 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                                 'Acleda Pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Text(
                                                 'Click to pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -392,13 +415,23 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                                 'Wing Pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Text(
                                                 'Click to pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -435,7 +468,11 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                             const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Add image',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                       Padding(
@@ -450,9 +487,8 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                setState(() {
-                                  _model.uploadedImage = null;
-                                });
+                                _model.uploadedImage = null;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -482,7 +518,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading1 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -519,7 +555,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile1 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl1 =
@@ -527,17 +563,15 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl1;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl1;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -567,7 +601,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading2 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -604,7 +638,7 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile2 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl2 =
@@ -612,17 +646,15 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl2;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl2;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -663,11 +695,10 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                     onPressed: () async {
                       if (_model.uploadedImage != null &&
                           _model.uploadedImage != '') {
-                        setState(() {
-                          FFAppState().updateCreateCompanyHolderStruct(
-                            (e) => e..pymentImage = _model.uploadedImage,
-                          );
-                        });
+                        FFAppState().updateCreateCompanyHolderStruct(
+                          (e) => e..pymentImage = _model.uploadedImage,
+                        );
+                        safeSetState(() {});
                         await CompaniesTable().insert({
                           'PhoneNumber':
                               FFAppState().CreateCompanyHolder.phoneNumber,
@@ -695,16 +726,16 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                               .discount
                               .toDouble(),
                           'Amount': valueOrDefault<double>(
-                            double.tryParse(_model.amountController.text),
+                            double.tryParse(_model.amountTextController.text),
                             0.0,
                           ),
                         });
-                        setState(() {
-                          FFAppState().deleteCreateCompanyHolder();
-                          FFAppState().CreateCompanyHolder = CompanyCreationStruct
-                              .fromSerializableMap(jsonDecode(
-                                  '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png","ImageDetails":"[]","IsVertify":"false"}'));
-                        });
+                        FFAppState().deleteCreateCompanyHolder();
+                        FFAppState().CreateCompanyHolder = CompanyCreationStruct
+                            .fromSerializableMap(jsonDecode(
+                                '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\",\"ImageDetails\":\"[]\",\"IsVertify\":\"false\"}'));
+
+                        safeSetState(() {});
                         await showDialog(
                           context: context,
                           builder: (alertDialogContext) {
@@ -753,7 +784,11 @@ class _CompanyPaymentWidgetState extends State<CompanyPaymentWidget> {
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).secondary,
-                      textStyle: FlutterFlowTheme.of(context).bodyLarge,
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyLarge.override(
+                                fontFamily: 'Readex Pro',
+                                letterSpacing: 0.0,
+                              ),
                       elevation: 0.0,
                       borderSide: const BorderSide(
                         color: Colors.transparent,

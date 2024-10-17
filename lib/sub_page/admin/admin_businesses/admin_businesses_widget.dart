@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'admin_businesses_model.dart';
 export 'admin_businesses_model.dart';
 
@@ -26,7 +25,7 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
     super.initState();
     _model = createModel(context, () => AdminBusinessesModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,15 +37,11 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'AdminBusinesses',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -71,7 +66,10 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Businesses',
-                  style: FlutterFlowTheme.of(context).titleMedium,
+                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
               actions: const [],
@@ -115,10 +113,11 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
                     }
                     List<CompaniesRow> listViewCompaniesRowList =
                         snapshot.data!;
+
                     return RefreshIndicator(
                       onRefresh: () async {
                         FFAppState().clearAdminRequestAccountCache();
-                        setState(() => _model.requestCompleter = null);
+                        safeSetState(() => _model.requestCompleter = null);
                         await _model.waitForRequestCompleted();
                       },
                       child: ListView.builder(
@@ -173,7 +172,7 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
                                     'images': serializeParam(
                                       listViewCompaniesRow.companyImages,
                                       ParamType.String,
-                                      true,
+                                      isList: true,
                                     ),
                                     'profile': serializeParam(
                                       listViewCompaniesRow.companyProfile,
@@ -201,7 +200,10 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
                                       blurRadius: 0.0,
                                       color: FlutterFlowTheme.of(context)
                                           .alternate,
-                                      offset: const Offset(0.0, 1.0),
+                                      offset: const Offset(
+                                        0.0,
+                                        1.0,
+                                      ),
                                     )
                                   ],
                                 ),
@@ -250,7 +252,12 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyLarge,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                 ),
                                               ),
                                               Text(
@@ -258,7 +265,12 @@ class _AdminBusinessesWidgetState extends State<AdminBusinessesWidget> {
                                                     .phoneNumber,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelMedium,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),

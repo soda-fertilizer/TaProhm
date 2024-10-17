@@ -69,8 +69,8 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -99,6 +99,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                     fontFamily: 'Outfit',
                     color: Colors.white,
                     fontSize: 22.0,
+                    letterSpacing: 0.0,
                   ),
             ),
             actions: const [],
@@ -119,7 +120,11 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                           labelColor: FlutterFlowTheme.of(context).primaryText,
                           unselectedLabelColor:
                               FlutterFlowTheme.of(context).secondaryText,
-                          labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           unselectedLabelStyle: const TextStyle(),
                           indicatorColor: FlutterFlowTheme.of(context).primary,
                           padding: const EdgeInsets.all(4.0),
@@ -202,7 +207,11 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                   '\$ 1',
                                   textAlign: TextAlign.center,
                                   style: FlutterFlowTheme.of(context)
-                                      .displayMedium,
+                                      .displayMedium
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
                                 Container(
                                   width: double.infinity,
@@ -277,13 +286,25 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                               'ABA Pay',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .bodyMedium,
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
                                                             ),
                                                             Text(
                                                               'Click to pay',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .labelSmall,
+                                                                  .labelSmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
                                                             ),
                                                           ],
                                                         ),
@@ -373,13 +394,25 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                                 'Acleda Pay',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                               ),
                                                               Text(
                                                                 'Click to pay',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelSmall,
+                                                                    .labelSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                               ),
                                                             ],
                                                           ),
@@ -470,13 +503,25 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                                 'Wing Pay',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                               ),
                                                               Text(
                                                                 'Click to pay',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelSmall,
+                                                                    .labelSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                               ),
                                                             ],
                                                           ),
@@ -517,7 +562,11 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                         child: Text(
                                           'Add image',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                       ),
                                       Padding(
@@ -533,9 +582,8 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                setState(() {
-                                                  _model.uploadedImage = null;
-                                                });
+                                                _model.uploadedImage = null;
+                                                safeSetState(() {});
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
@@ -570,7 +618,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                         validateFileFormat(
                                                             m.storagePath,
                                                             context))) {
-                                                  setState(() => _model
+                                                  safeSetState(() => _model
                                                       .isDataUploading1 = true);
                                                   var selectedUploadedFiles =
                                                       <FFUploadedFile>[];
@@ -624,7 +672,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                       downloadUrls.length ==
                                                           selectedMedia
                                                               .length) {
-                                                    setState(() {
+                                                    safeSetState(() {
                                                       _model.uploadedLocalFile1 =
                                                           selectedUploadedFiles
                                                               .first;
@@ -634,17 +682,16 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                     showUploadMessage(
                                                         context, 'Success!');
                                                   } else {
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                     showUploadMessage(context,
                                                         'Failed to upload data');
                                                     return;
                                                   }
                                                 }
 
-                                                setState(() {
-                                                  _model.uploadedImage =
-                                                      _model.uploadedFileUrl1;
-                                                });
+                                                _model.uploadedImage =
+                                                    _model.uploadedFileUrl1;
+                                                safeSetState(() {});
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
@@ -677,7 +724,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                         validateFileFormat(
                                                             m.storagePath,
                                                             context))) {
-                                                  setState(() => _model
+                                                  safeSetState(() => _model
                                                       .isDataUploading2 = true);
                                                   var selectedUploadedFiles =
                                                       <FFUploadedFile>[];
@@ -731,7 +778,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                       downloadUrls.length ==
                                                           selectedMedia
                                                               .length) {
-                                                    setState(() {
+                                                    safeSetState(() {
                                                       _model.uploadedLocalFile2 =
                                                           selectedUploadedFiles
                                                               .first;
@@ -741,17 +788,16 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                     showUploadMessage(
                                                         context, 'Success!');
                                                   } else {
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                     showUploadMessage(context,
                                                         'Failed to upload data');
                                                     return;
                                                   }
                                                 }
 
-                                                setState(() {
-                                                  _model.uploadedImage =
-                                                      _model.uploadedFileUrl2;
-                                                });
+                                                _model.uploadedImage =
+                                                    _model.uploadedFileUrl2;
+                                                safeSetState(() {});
                                               },
                                               child: ClipRRect(
                                                 borderRadius:
@@ -821,7 +867,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                       );
                                       context.safePop();
 
-                                      setState(() {});
+                                      safeSetState(() {});
                                     },
                                     text: 'Active',
                                     options: FFButtonOptions(
@@ -835,7 +881,11 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                       color: FlutterFlowTheme.of(context)
                                           .secondary,
                                       textStyle: FlutterFlowTheme.of(context)
-                                          .bodyLarge,
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                       elevation: 0.0,
                                       borderSide: const BorderSide(
                                         color: Colors.transparent,
@@ -872,10 +922,12 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                 }
                                 List<UsersRow> containerUsersRowList =
                                     snapshot.data!;
+
                                 final containerUsersRow =
                                     containerUsersRowList.isNotEmpty
                                         ? containerUsersRowList.first
                                         : null;
+
                                 return Container(
                                   decoration: const BoxDecoration(),
                                   child: Padding(
@@ -894,7 +946,11 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                             '\$ 1',
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .displayMedium,
+                                                .displayMedium
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                         Text(
@@ -904,7 +960,11 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                             decimalType: DecimalType.automatic,
                                           )} USD',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
+                                              .bodyLarge
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
                                         ),
                                         Padding(
                                           padding:
@@ -936,7 +996,7 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                   },
                                                 );
                                                 if (shouldSetState) {
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 }
                                                 return;
                                               } else {
@@ -1013,13 +1073,13 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                 );
                                                 context.safePop();
                                                 if (shouldSetState) {
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 }
                                                 return;
                                               }
 
                                               if (shouldSetState) {
-                                                setState(() {});
+                                                safeSetState(() {});
                                               }
                                             },
                                             text: 'Active',
@@ -1035,7 +1095,12 @@ class _AdminAccountPaymentWidgetState extends State<AdminAccountPaymentWidget>
                                                       .secondary,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyLarge,
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                               elevation: 0.0,
                                               borderSide: const BorderSide(
                                                 color: Colors.transparent,

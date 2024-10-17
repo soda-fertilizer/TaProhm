@@ -12,7 +12,6 @@ class AccountModel extends FlutterFlowModel<AccountWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -42,14 +41,11 @@ class AccountModel extends FlutterFlowModel<AccountWidget> {
   // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
   ApiCallResponse? apiResulta5x;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
@@ -62,8 +58,4 @@ class AccountModel extends FlutterFlowModel<AccountWidget> {
     textFieldFocusNode4?.dispose();
     textController4?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

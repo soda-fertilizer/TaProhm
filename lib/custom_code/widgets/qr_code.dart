@@ -1,5 +1,4 @@
 // Automatic FlutterFlow imports
-import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
@@ -41,6 +40,5 @@ class _QrCodeState extends State<QrCode> {
       version: QrVersions.auto,
       size: widget.qrSize,
     );
-    ;
   }
 }

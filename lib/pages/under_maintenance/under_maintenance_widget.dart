@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'under_maintenance_model.dart';
 export 'under_maintenance_model.dart';
 
@@ -22,7 +21,7 @@ class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {
     super.initState();
     _model = createModel(context, () => UnderMaintenanceModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -34,15 +33,11 @@ class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'UnderMaintenance',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
@@ -71,6 +66,7 @@ class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               fontSize: 16.0,
+                              letterSpacing: 0.0,
                             ),
                       ),
                     ),
@@ -79,6 +75,7 @@ class _UnderMaintenanceWidgetState extends State<UnderMaintenanceWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             fontSize: 12.0,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ],

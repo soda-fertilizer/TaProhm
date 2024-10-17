@@ -61,7 +61,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
       return;
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -137,7 +137,10 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                 Text(
                   widget.isNew! ? '\$ 200' : '\$ 50',
                   textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).displayMedium,
+                  style: FlutterFlowTheme.of(context).displayMedium.override(
+                        fontFamily: 'Outfit',
+                        letterSpacing: 0.0,
+                      ),
                 ),
                 Container(
                   width: double.infinity,
@@ -201,13 +204,23 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                               'ABA Pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                             Text(
                                               'Click to pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelSmall,
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ],
                                         ),
@@ -280,13 +293,23 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                               'Acleda Pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                             Text(
                                               'Click to pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelSmall,
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ],
                                         ),
@@ -359,13 +382,23 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                               'Wing Pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                             Text(
                                               'Click to pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelSmall,
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ],
                                         ),
@@ -402,7 +435,11 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                             const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Add image',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                       Padding(
@@ -417,9 +454,8 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                setState(() {
-                                  _model.uploadedImage = null;
-                                });
+                                _model.uploadedImage = null;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -449,7 +485,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading1 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -486,7 +522,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile1 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl1 =
@@ -494,17 +530,15 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl1;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl1;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -534,7 +568,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading2 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -571,7 +605,7 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile2 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl2 =
@@ -579,17 +613,15 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl2;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl2;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -652,7 +684,11 @@ class _TeamPaymentWidgetState extends State<TeamPaymentWidget> {
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).secondary,
-                      textStyle: FlutterFlowTheme.of(context).bodyLarge,
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyLarge.override(
+                                fontFamily: 'Readex Pro',
+                                letterSpacing: 0.0,
+                              ),
                       elevation: 0.0,
                       borderSide: const BorderSide(
                         color: Colors.transparent,

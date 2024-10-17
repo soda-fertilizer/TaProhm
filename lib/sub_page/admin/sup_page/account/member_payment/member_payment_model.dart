@@ -28,15 +28,9 @@ class MemberPaymentModel extends FlutterFlowModel<MemberPaymentWidget> {
   // Stores action output result for [Backend Call - API (Update Balance)] action in Button widget.
   ApiCallResponse? apiResulta5x;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {}
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

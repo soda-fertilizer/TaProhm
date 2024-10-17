@@ -42,10 +42,10 @@ class _CreateUserForOfficerWidgetState
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.maxPhoneNumber = await GetMaxPhoneNumberCall.call();
+
       if ((_model.maxPhoneNumber?.succeeded ?? true)) {
-        setState(() {
-          _model.isLodaingCompleted = true;
-        });
+        _model.isLodaingCompleted = true;
+        safeSetState(() {});
         return;
       } else {
         await action_blocks.noInternet(context);
@@ -53,24 +53,24 @@ class _CreateUserForOfficerWidgetState
       }
     });
 
-    _model.normalFullNameController ??= TextEditingController();
+    _model.normalFullNameTextController ??= TextEditingController();
     _model.normalFullNameFocusNode ??= FocusNode();
 
-    _model.normalPasswordController ??= TextEditingController();
+    _model.normalPasswordTextController ??= TextEditingController();
     _model.normalPasswordFocusNode ??= FocusNode();
 
-    _model.normalPhoneNumberController ??= TextEditingController();
+    _model.normalPhoneNumberTextController ??= TextEditingController();
     _model.normalPhoneNumberFocusNode ??= FocusNode();
 
-    _model.normalReferralController ??=
+    _model.normalReferralTextController ??=
         TextEditingController(text: widget.selectedID);
     _model.normalReferralFocusNode ??= FocusNode();
 
-    _model.normalInviteController ??=
+    _model.normalInviteTextController ??=
         TextEditingController(text: widget.selectedID);
     _model.normalInviteFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -88,9 +88,7 @@ class _CreateUserForOfficerWidgetState
         title: 'CreateUserForOfficer',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -119,6 +117,7 @@ class _CreateUserForOfficerWidgetState
                         fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                       ),
                 ),
               ),
@@ -152,7 +151,7 @@ class _CreateUserForOfficerWidgetState
                           if (selectedMedia != null &&
                               selectedMedia.every((m) =>
                                   validateFileFormat(m.storagePath, context))) {
-                            setState(() => _model.isDataUploading = true);
+                            safeSetState(() => _model.isDataUploading = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
 
                             var downloadUrls = <String>[];
@@ -184,14 +183,14 @@ class _CreateUserForOfficerWidgetState
                             if (selectedUploadedFiles.length ==
                                     selectedMedia.length &&
                                 downloadUrls.length == selectedMedia.length) {
-                              setState(() {
+                              safeSetState(() {
                                 _model.uploadedLocalFile =
                                     selectedUploadedFiles.first;
                                 _model.uploadedFileUrl = downloadUrls.first;
                               });
                               showUploadMessage(context, 'Success!');
                             } else {
-                              setState(() {});
+                              safeSetState(() {});
                               showUploadMessage(
                                   context, 'Failed to upload data');
                               return;
@@ -220,16 +219,25 @@ class _CreateUserForOfficerWidgetState
                         child: SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.8,
                           child: TextFormField(
-                            controller: _model.normalFullNameController,
+                            controller: _model.normalFullNameTextController,
                             focusNode: _model.normalFullNameFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Full Name',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -260,8 +268,14 @@ class _CreateUserForOfficerWidgetState
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.normalFullNameControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model
+                                .normalFullNameTextControllerValidator
                                 .asValidator(context),
                           ),
                         ),
@@ -272,17 +286,26 @@ class _CreateUserForOfficerWidgetState
                         child: SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.8,
                           child: TextFormField(
-                            controller: _model.normalPasswordController,
+                            controller: _model.normalPasswordTextController,
                             focusNode: _model.normalPasswordFocusNode,
+                            autofocus: false,
                             textCapitalization: TextCapitalization.none,
                             obscureText: !_model.normalPasswordVisibility,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Password',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -313,7 +336,7 @@ class _CreateUserForOfficerWidgetState
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               suffixIcon: InkWell(
-                                onTap: () => setState(
+                                onTap: () => safeSetState(
                                   () => _model.normalPasswordVisibility =
                                       !_model.normalPasswordVisibility,
                                 ),
@@ -327,8 +350,14 @@ class _CreateUserForOfficerWidgetState
                                 ),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.normalPasswordControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model
+                                .normalPasswordTextControllerValidator
                                 .asValidator(context),
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -343,16 +372,25 @@ class _CreateUserForOfficerWidgetState
                         child: SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.8,
                           child: TextFormField(
-                            controller: _model.normalPhoneNumberController,
+                            controller: _model.normalPhoneNumberTextController,
                             focusNode: _model.normalPhoneNumberFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Phone',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -383,9 +421,14 @@ class _CreateUserForOfficerWidgetState
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             validator: _model
-                                .normalPhoneNumberControllerValidator
+                                .normalPhoneNumberTextControllerValidator
                                 .asValidator(context),
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -400,16 +443,25 @@ class _CreateUserForOfficerWidgetState
                         child: SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.8,
                           child: TextFormField(
-                            controller: _model.normalReferralController,
+                            controller: _model.normalReferralTextController,
                             focusNode: _model.normalReferralFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Referral ID',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -440,8 +492,14 @@ class _CreateUserForOfficerWidgetState
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.normalReferralControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model
+                                .normalReferralTextControllerValidator
                                 .asValidator(context),
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -456,16 +514,25 @@ class _CreateUserForOfficerWidgetState
                         child: SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.8,
                           child: TextFormField(
-                            controller: _model.normalInviteController,
+                            controller: _model.normalInviteTextController,
                             focusNode: _model.normalInviteFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Invite ID',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -496,8 +563,14 @@ class _CreateUserForOfficerWidgetState
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.normalInviteControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model
+                                .normalInviteTextControllerValidator
                                 .asValidator(context),
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -527,6 +600,7 @@ class _CreateUserForOfficerWidgetState
                           }
                           List<SectorsRow> normalSectorSectorsRowList =
                               snapshot.data!;
+
                           return FlutterFlowDropDown<String>(
                             controller: _model.normalSectorValueController ??=
                                 FormFieldController<String>(
@@ -545,17 +619,15 @@ class _CreateUserForOfficerWidgetState
                                     ))
                                 .toList(),
                             onChanged: (val) async {
-                              setState(() => _model.normalSectorValue = val);
-                              setState(() {
-                                _model.selectSectorID =
-                                    normalSectorSectorsRowList
-                                        .where((e) =>
-                                            e.sectorName ==
-                                            _model.normalSectorValue)
-                                        .toList()
-                                        .first
-                                        .sectorID;
-                              });
+                              safeSetState(
+                                  () => _model.normalSectorValue = val);
+                              _model.selectSectorID = normalSectorSectorsRowList
+                                  .where((e) =>
+                                      e.sectorName == _model.normalSectorValue)
+                                  .toList()
+                                  .first
+                                  .sectorID;
+                              safeSetState(() {});
                             },
                             width: MediaQuery.sizeOf(context).width * 0.8,
                             height: 40.0,
@@ -564,6 +636,7 @@ class _CreateUserForOfficerWidgetState
                                 .override(
                                   fontFamily: 'Readex Pro',
                                   fontSize: 14.0,
+                                  letterSpacing: 0.0,
                                 ),
                             hintText: 'Please select sector',
                             icon: Icon(
@@ -599,39 +672,45 @@ class _CreateUserForOfficerWidgetState
                             child: FFButtonWidget(
                               onPressed: () async {
                                 var shouldSetState = false;
-                                if ((_model.normalFullNameController.text != '') &&
-                                    (_model.normalPasswordController.text !=
-                                            '') &&
-                                    (_model.normalPhoneNumberController
+                                if ((_model.normalFullNameTextController.text != '') &&
+                                    (_model.normalPasswordTextController
                                                 .text !=
                                             '') &&
-                                    (_model.normalReferralController.text !=
+                                    (_model.normalPhoneNumberTextController
+                                                .text !=
                                             '') &&
-                                    (_model.normalInviteController.text !=
+                                    (_model.normalReferralTextController
+                                                .text !=
+                                            '') &&
+                                    (_model.normalInviteTextController
+                                                .text !=
                                             '')) {
                                   _model.checkphonenumber = await UsersGroup
                                       .checkPhoneNumberCall
                                       .call(
-                                    phoneNumber:
-                                        _model.normalPhoneNumberController.text,
+                                    phoneNumber: _model
+                                        .normalPhoneNumberTextController.text,
                                   );
+
                                   shouldSetState = true;
                                   if ((_model.checkphonenumber?.succeeded ??
                                       true)) {
                                     _model.checkreferral =
                                         await UsersGroup.checkReferralCall.call(
-                                      phoneNumber:
-                                          _model.normalReferralController.text,
+                                      phoneNumber: _model
+                                          .normalReferralTextController.text,
                                     );
+
                                     shouldSetState = true;
                                     if ((_model.checkreferral?.succeeded ??
                                         true)) {
                                       _model.checkinvide = await UsersGroup
                                           .checkReferralCall
                                           .call(
-                                        phoneNumber:
-                                            _model.normalInviteController.text,
+                                        phoneNumber: _model
+                                            .normalInviteTextController.text,
                                       );
+
                                       shouldSetState = true;
                                       if ((_model.checkinvide?.succeeded ??
                                           true)) {
@@ -642,17 +721,20 @@ class _CreateUserForOfficerWidgetState
                                           'AdminAccountPayment',
                                           queryParameters: {
                                             'name': serializeParam(
-                                              _model.normalFullNameController
+                                              _model
+                                                  .normalFullNameTextController
                                                   .text,
                                               ParamType.String,
                                             ),
                                             'referral': serializeParam(
-                                              _model.normalReferralController
+                                              _model
+                                                  .normalReferralTextController
                                                   .text,
                                               ParamType.String,
                                             ),
                                             'password': serializeParam(
-                                              _model.normalPasswordController
+                                              _model
+                                                  .normalPasswordTextController
                                                   .text,
                                               ParamType.String,
                                             ),
@@ -672,13 +754,14 @@ class _CreateUserForOfficerWidgetState
                                               ParamType.String,
                                             ),
                                             'phoneNumber': serializeParam(
-                                              _model.normalPhoneNumberController
+                                              _model
+                                                  .normalPhoneNumberTextController
                                                   .text,
                                               ParamType.String,
                                             ),
                                             'inviteID': serializeParam(
-                                              _model
-                                                  .normalInviteController.text,
+                                              _model.normalInviteTextController
+                                                  .text,
                                               ParamType.String,
                                             ),
                                           }.withoutNulls,
@@ -693,7 +776,9 @@ class _CreateUserForOfficerWidgetState
                                           },
                                         );
 
-                                        if (shouldSetState) setState(() {});
+                                        if (shouldSetState) {
+                                          safeSetState(() {});
+                                        }
                                         return;
                                       } else {
                                         await showDialog(
@@ -715,7 +800,9 @@ class _CreateUserForOfficerWidgetState
                                             );
                                           },
                                         );
-                                        if (shouldSetState) setState(() {});
+                                        if (shouldSetState) {
+                                          safeSetState(() {});
+                                        }
                                         return;
                                       }
                                     } else {
@@ -737,7 +824,7 @@ class _CreateUserForOfficerWidgetState
                                           );
                                         },
                                       );
-                                      if (shouldSetState) setState(() {});
+                                      if (shouldSetState) safeSetState(() {});
                                       return;
                                     }
                                   } else {
@@ -758,7 +845,7 @@ class _CreateUserForOfficerWidgetState
                                         );
                                       },
                                     );
-                                    if (shouldSetState) setState(() {});
+                                    if (shouldSetState) safeSetState(() {});
                                     return;
                                   }
                                 } else {
@@ -779,11 +866,11 @@ class _CreateUserForOfficerWidgetState
                                       );
                                     },
                                   );
-                                  if (shouldSetState) setState(() {});
+                                  if (shouldSetState) safeSetState(() {});
                                   return;
                                 }
 
-                                if (shouldSetState) setState(() {});
+                                if (shouldSetState) safeSetState(() {});
                               },
                               text: 'Next',
                               options: FFButtonOptions(
@@ -799,6 +886,7 @@ class _CreateUserForOfficerWidgetState
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       color: Colors.white,
+                                      letterSpacing: 0.0,
                                     ),
                                 elevation: 3.0,
                                 borderSide: const BorderSide(
@@ -818,61 +906,68 @@ class _CreateUserForOfficerWidgetState
                           child: FFButtonWidget(
                             onPressed: () async {
                               var shouldSetState = false;
-                              if ((_model.normalFullNameController.text != '') &&
-                                  (_model.normalPasswordController.text !=
+                              if ((_model.normalFullNameTextController.text != '') &&
+                                  (_model.normalPasswordTextController
+                                              .text !=
                                           '') &&
-                                  (_model.normalPhoneNumberController.text !=
+                                  (_model.normalPhoneNumberTextController
+                                              .text !=
                                           '') &&
-                                  (_model.normalReferralController.text !=
+                                  (_model.normalReferralTextController
+                                              .text !=
                                           '') &&
-                                  (_model.normalInviteController.text !=
+                                  (_model.normalInviteTextController.text !=
                                           '')) {
                                 _model.checkphonenumberNew =
                                     await UsersGroup.checkPhoneNumberCall.call(
-                                  phoneNumber:
-                                      _model.normalPhoneNumberController.text,
+                                  phoneNumber: _model
+                                      .normalPhoneNumberTextController.text,
                                 );
+
                                 shouldSetState = true;
                                 if ((_model.checkphonenumber?.succeeded ??
                                     true)) {
                                   _model.checkreferralNew =
                                       await UsersGroup.checkReferralCall.call(
-                                    phoneNumber:
-                                        _model.normalReferralController.text,
+                                    phoneNumber: _model
+                                        .normalReferralTextController.text,
                                   );
+
                                   shouldSetState = true;
                                   if ((_model.checkreferral?.succeeded ??
                                       true)) {
                                     _model.checkinvideNew =
                                         await UsersGroup.checkReferralCall.call(
-                                      phoneNumber:
-                                          _model.normalInviteController.text,
+                                      phoneNumber: _model
+                                          .normalInviteTextController.text,
                                     );
+
                                     shouldSetState = true;
                                     if ((_model.checkinvide?.succeeded ??
                                         true)) {
                                       await UsersTable().insert({
                                         'PhoneNumber': _model
-                                            .normalPhoneNumberController.text,
+                                            .normalPhoneNumberTextController
+                                            .text,
                                         'Password': _model
-                                            .normalPasswordController.text,
+                                            .normalPasswordTextController.text,
                                         'Balance': 0.0,
                                         'SectorID': _model.selectSectorID,
                                         'Profile': _model.uploadedFileUrl == ''
                                             ? 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png'
                                             : _model.uploadedFileUrl,
                                         'FullName': _model
-                                            .normalFullNameController.text,
+                                            .normalFullNameTextController.text,
                                         'UserReferral': _model
-                                            .normalReferralController.text,
+                                            .normalReferralTextController.text,
                                         'IsMember': false,
-                                        'Invite':
-                                            _model.normalInviteController.text,
+                                        'Invite': _model
+                                            .normalInviteTextController.text,
                                         'CreatedBy':
                                             FFAppState().UserInfo.userID,
                                       });
                                       context.safePop();
-                                      if (shouldSetState) setState(() {});
+                                      if (shouldSetState) safeSetState(() {});
                                       return;
                                     } else {
                                       await showDialog(
@@ -893,7 +988,7 @@ class _CreateUserForOfficerWidgetState
                                           );
                                         },
                                       );
-                                      if (shouldSetState) setState(() {});
+                                      if (shouldSetState) safeSetState(() {});
                                       return;
                                     }
                                   } else {
@@ -915,7 +1010,7 @@ class _CreateUserForOfficerWidgetState
                                         );
                                       },
                                     );
-                                    if (shouldSetState) setState(() {});
+                                    if (shouldSetState) safeSetState(() {});
                                     return;
                                   }
                                 } else {
@@ -936,7 +1031,7 @@ class _CreateUserForOfficerWidgetState
                                       );
                                     },
                                   );
-                                  if (shouldSetState) setState(() {});
+                                  if (shouldSetState) safeSetState(() {});
                                   return;
                                 }
                               } else {
@@ -957,11 +1052,11 @@ class _CreateUserForOfficerWidgetState
                                     );
                                   },
                                 );
-                                if (shouldSetState) setState(() {});
+                                if (shouldSetState) safeSetState(() {});
                                 return;
                               }
 
-                              if (shouldSetState) setState(() {});
+                              if (shouldSetState) safeSetState(() {});
                             },
                             text: 'Create',
                             options: FFButtonOptions(
@@ -977,6 +1072,7 @@ class _CreateUserForOfficerWidgetState
                                   .override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
                               borderSide: const BorderSide(

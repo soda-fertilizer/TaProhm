@@ -26,10 +26,10 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
     super.initState();
     _model = createModel(context, () => WithdrawalModel());
 
-    _model.amountController ??= TextEditingController();
+    _model.amountTextController ??= TextEditingController();
     _model.amountFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -69,16 +69,16 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
           );
         }
         List<UsersRow> withdrawalUsersRowList = snapshot.data!;
+
         final withdrawalUsersRow = withdrawalUsersRowList.isNotEmpty
             ? withdrawalUsersRowList.first
             : null;
+
         return Title(
             title: 'Withdrawal',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -108,6 +108,7 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
                                 fontSize: 22.0,
+                                letterSpacing: 0.0,
                               ),
                     ),
                   ),
@@ -130,18 +131,32 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                             formatType: FormatType.decimal,
                             decimalType: DecimalType.automatic,
                           )} USD',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                         TextFormField(
-                          controller: _model.amountController,
+                          controller: _model.amountTextController,
                           focusNode: _model.amountFocusNode,
+                          autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
                             labelText: 'Amount',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color:
@@ -172,9 +187,13 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           keyboardType: TextInputType.number,
-                          validator: _model.amountControllerValidator
+                          validator: _model.amountTextControllerValidator
                               .asValidator(context),
                           inputFormatters: [
                             FilteringTextInputFormatter.allow(RegExp('[0-9]'))
@@ -183,7 +202,7 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                         FFButtonWidget(
                           onPressed: () async {
                             var shouldSetState = false;
-                            if (double.parse(_model.amountController.text) >
+                            if (double.parse(_model.amountTextController.text) >
                                 withdrawalUsersRow!.balance) {
                               await showDialog(
                                 context: context,
@@ -202,13 +221,13 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                                   );
                                 },
                               );
-                              if (shouldSetState) setState(() {});
+                              if (shouldSetState) safeSetState(() {});
                               return;
                             } else {
                               _model.requestDeposit =
                                   await TransactionsTable().insert({
                                 'Amount': double.tryParse(
-                                    _model.amountController.text),
+                                    _model.amountTextController.text),
                                 'IsApprove': false,
                                 'UserPhoneNumber':
                                     FFAppState().UserInfo.phoneNumber,
@@ -223,11 +242,11 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                                 'Title': 'Request Withdrawal',
                               });
                               context.safePop();
-                              if (shouldSetState) setState(() {});
+                              if (shouldSetState) safeSetState(() {});
                               return;
                             }
 
-                            if (shouldSetState) setState(() {});
+                            if (shouldSetState) safeSetState(() {});
                           },
                           text: 'Confirm',
                           options: FFButtonOptions(
@@ -242,6 +261,7 @@ class _WithdrawalWidgetState extends State<WithdrawalWidget> {
                                 .override(
                                   fontFamily: 'Readex Pro',
                                   color: Colors.white,
+                                  letterSpacing: 0.0,
                                 ),
                             elevation: 3.0,
                             borderSide: const BorderSide(

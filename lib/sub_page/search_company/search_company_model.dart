@@ -10,7 +10,6 @@ class SearchCompanyModel extends FlutterFlowModel<SearchCompanyWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -18,19 +17,12 @@ class SearchCompanyModel extends FlutterFlowModel<SearchCompanyWidget> {
   // Stores action output result for [Backend Call - API (Search company)] action in TextField widget.
   ApiCallResponse? apiResultbfs;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

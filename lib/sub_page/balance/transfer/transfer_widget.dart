@@ -42,14 +42,15 @@ class _TransferWidgetState extends State<TransferWidget> {
       await requestPermission(cameraPermission);
     });
 
-    _model.phoneNumberController ??= TextEditingController(text: widget.qrCode);
+    _model.phoneNumberTextController ??=
+        TextEditingController(text: widget.qrCode);
     _model.phoneNumberFocusNode ??= FocusNode();
 
-    _model.amountController ??=
+    _model.amountTextController ??=
         TextEditingController(text: widget.amount?.toString());
     _model.amountFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -89,15 +90,15 @@ class _TransferWidgetState extends State<TransferWidget> {
           );
         }
         List<UsersRow> transferUsersRowList = snapshot.data!;
+
         final transferUsersRow =
             transferUsersRowList.isNotEmpty ? transferUsersRowList.first : null;
+
         return Title(
             title: 'Transfer',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -127,6 +128,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
                                 fontSize: 22.0,
+                                letterSpacing: 0.0,
                               ),
                     ),
                   ),
@@ -146,7 +148,10 @@ class _TransferWidgetState extends State<TransferWidget> {
                           formatType: FormatType.decimal,
                           decimalType: DecimalType.automatic,
                         )} USD',
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
                       ),
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
@@ -155,16 +160,25 @@ class _TransferWidgetState extends State<TransferWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             TextFormField(
-                              controller: _model.phoneNumberController,
+                              controller: _model.phoneNumberTextController,
                               focusNode: _model.phoneNumberFocusNode,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
                                 labelText: 'ID',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -195,21 +209,36 @@ class _TransferWidgetState extends State<TransferWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                              validator: _model.phoneNumberControllerValidator
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              validator: _model
+                                  .phoneNumberTextControllerValidator
                                   .asValidator(context),
                             ),
                             TextFormField(
-                              controller: _model.amountController,
+                              controller: _model.amountTextController,
                               focusNode: _model.amountFocusNode,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: true,
                                 labelText: 'Amount',
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context)
@@ -240,9 +269,14 @@ class _TransferWidgetState extends State<TransferWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               keyboardType: TextInputType.number,
-                              validator: _model.amountControllerValidator
+                              validator: _model.amountTextControllerValidator
                                   .asValidator(context),
                             ),
                           ].divide(const SizedBox(height: 10.0)),
@@ -274,7 +308,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                   ),
                                   'amount': serializeParam(
                                     double.tryParse(
-                                        _model.amountController.text),
+                                        _model.amountTextController.text),
                                     ParamType.double,
                                   ),
                                 }.withoutNulls,
@@ -287,7 +321,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                 },
                               );
 
-                              setState(() {});
+                              safeSetState(() {});
                             },
                             text: 'Qr code',
                             options: FFButtonOptions(
@@ -303,6 +337,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                   .override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
                               borderSide: const BorderSide(
@@ -316,13 +351,15 @@ class _TransferWidgetState extends State<TransferWidget> {
                             onPressed: () async {
                               var shouldSetState = false;
                               if (transferUsersRow!.balance >
-                                  double.parse(_model.amountController.text)) {
-                                if (_model.amountController.text != '') {
+                                  double.parse(
+                                      _model.amountTextController.text)) {
+                                if (_model.amountTextController.text != '') {
                                   _model.responseUserName =
                                       await UsersGroup.oneUserNameCall.call(
                                     phoneNumber:
-                                        _model.phoneNumberController.text,
+                                        _model.phoneNumberTextController.text,
                                   );
+
                                   shouldSetState = true;
                                   if ((_model.responseUserName?.succeeded ??
                                       true)) {
@@ -331,12 +368,12 @@ class _TransferWidgetState extends State<TransferWidget> {
                                         await TransactionsTable().insert({
                                       'TypeID': 3,
                                       'Amount': double.tryParse(
-                                          _model.amountController.text),
+                                          _model.amountTextController.text),
                                       'IsApprove': true,
                                       'UserPhoneNumber':
                                           FFAppState().UserInfo.phoneNumber,
                                       'TransferToUserPhoneNumber':
-                                          _model.phoneNumberController.text,
+                                          _model.phoneNumberTextController.text,
                                       'Detail':
                                           'To: ${UsersGroup.oneUserNameCall.name(
                                         (_model.responseUserName?.jsonBody ??
@@ -354,7 +391,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                           phoneNumber:
                                               FFAppState().UserInfo.phoneNumber,
                                           money: double.tryParse(
-                                              _model.amountController.text),
+                                              _model.amountTextController.text),
                                           action: 'minus',
                                         );
                                       }(),
@@ -367,10 +404,10 @@ class _TransferWidgetState extends State<TransferWidget> {
                                             await EdgeFunctionGroup
                                                 .updateBalanceCall
                                                 .call(
-                                          phoneNumber:
-                                              _model.phoneNumberController.text,
+                                          phoneNumber: _model
+                                              .phoneNumberTextController.text,
                                           money: double.tryParse(
-                                              _model.amountController.text),
+                                              _model.amountTextController.text),
                                           action: 'plus',
                                         );
                                       }(),
@@ -381,10 +418,10 @@ class _TransferWidgetState extends State<TransferWidget> {
                                         await TransactionsTable().insert({
                                       'TypeID': 7,
                                       'Amount': double.tryParse(
-                                          _model.amountController.text),
+                                          _model.amountTextController.text),
                                       'IsApprove': true,
                                       'UserPhoneNumber':
-                                          _model.phoneNumberController.text,
+                                          _model.phoneNumberTextController.text,
                                       'TransferToUserPhoneNumber':
                                           FFAppState().UserInfo.phoneNumber,
                                       'Detail':
@@ -400,13 +437,13 @@ class _TransferWidgetState extends State<TransferWidget> {
                                             (_model.responseUserName
                                                     ?.jsonBody ??
                                                 ''),
-                                          )} ID: ${_model.phoneNumberController.text}, Transfer ID: ${_model.ownTransfer?.transactionID.toString()} Receive ID: ${_model.userTranfer?.transactionID.toString()}',
+                                          )} ID: ${_model.phoneNumberTextController.text}, Transfer ID: ${_model.ownTransfer?.transactionID.toString()} Receive ID: ${_model.userTranfer?.transactionID.toString()}',
                                           'Title': 'Tranfer Money',
                                         });
                                       }(),
                                     );
                                     context.safePop();
-                                    if (shouldSetState) setState(() {});
+                                    if (shouldSetState) safeSetState(() {});
                                     return;
                                   } else {
                                     await showDialog(
@@ -426,7 +463,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                         );
                                       },
                                     );
-                                    if (shouldSetState) setState(() {});
+                                    if (shouldSetState) safeSetState(() {});
                                     return;
                                   }
                                 } else {
@@ -447,7 +484,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                       );
                                     },
                                   );
-                                  if (shouldSetState) setState(() {});
+                                  if (shouldSetState) safeSetState(() {});
                                   return;
                                 }
                               } else {
@@ -468,11 +505,11 @@ class _TransferWidgetState extends State<TransferWidget> {
                                     );
                                   },
                                 );
-                                if (shouldSetState) setState(() {});
+                                if (shouldSetState) safeSetState(() {});
                                 return;
                               }
 
-                              if (shouldSetState) setState(() {});
+                              if (shouldSetState) safeSetState(() {});
                             },
                             text: 'Confirm',
                             options: FFButtonOptions(
@@ -488,6 +525,7 @@ class _TransferWidgetState extends State<TransferWidget> {
                                   .override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
                               borderSide: const BorderSide(

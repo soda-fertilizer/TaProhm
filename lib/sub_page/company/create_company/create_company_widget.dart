@@ -13,6 +13,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:octo_image/octo_image.dart';
 import 'package:provider/provider.dart';
 import 'create_company_model.dart';
@@ -42,19 +43,19 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
       await requestPermission(photoLibraryPermission);
     });
 
-    _model.companyNameController ??=
+    _model.companyNameTextController ??=
         TextEditingController(text: FFAppState().CreateCompanyHolder.name);
     _model.companyNameFocusNode ??= FocusNode();
 
-    _model.phoneNumberController ??= TextEditingController(
+    _model.phoneNumberTextController ??= TextEditingController(
         text: FFAppState().CreateCompanyHolder.phoneNumber);
     _model.phoneNumberFocusNode ??= FocusNode();
 
-    _model.telegramLinkController ??= TextEditingController(
+    _model.telegramLinkTextController ??= TextEditingController(
         text: FFAppState().CreateCompanyHolder.telegramLink);
     _model.telegramLinkFocusNode ??= FocusNode();
 
-    _model.discountController ??= TextEditingController(
+    _model.discountTextController ??= TextEditingController(
         text: FFAppState().CreateCompanyHolder.discount.toString());
     _model.discountFocusNode ??= FocusNode();
 
@@ -62,7 +63,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
         TextEditingController(text: FFAppState().CreateCompanyHolder.details);
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -102,13 +103,12 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
           );
         }
         List<CompaniesRow> createCompanyCompaniesRowList = snapshot.data!;
+
         return Title(
             title: 'CreateCompany',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -138,6 +138,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
                                 fontSize: 22.0,
+                                letterSpacing: 0.0,
                               ),
                     ),
                   ),
@@ -174,7 +175,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading1 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -204,27 +205,26 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile1 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl1 =
                                           downloadUrls.first;
                                     });
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  FFAppState().updateCreateCompanyHolderStruct(
-                                    (e) => e
-                                      ..profile = valueOrDefault<String>(
-                                        _model.uploadedFileUrl1,
-                                        'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                                      ),
-                                  );
-                                });
+                                FFAppState().updateCreateCompanyHolderStruct(
+                                  (e) => e
+                                    ..profile = valueOrDefault<String>(
+                                      _model.uploadedFileUrl1,
+                                      'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                    ),
+                                );
+                                safeSetState(() {});
                               },
                               child: Container(
                                 width: 100.0,
@@ -255,16 +255,25 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                             ),
                           ),
                           TextFormField(
-                            controller: _model.companyNameController,
+                            controller: _model.companyNameTextController,
                             focusNode: _model.companyNameFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Company name',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -294,22 +303,37 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 ),
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
+                              contentPadding: const EdgeInsets.all(15.0),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.companyNameControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model.companyNameTextControllerValidator
                                 .asValidator(context),
                           ),
                           TextFormField(
-                            controller: _model.phoneNumberController,
+                            controller: _model.phoneNumberTextController,
                             focusNode: _model.phoneNumberFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
                               labelText: 'Phone number',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -339,25 +363,40 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 ),
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
+                              contentPadding: const EdgeInsets.all(15.0),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.phoneNumberControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model.phoneNumberTextControllerValidator
                                 .asValidator(context),
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                             ],
                           ),
                           TextFormField(
-                            controller: _model.telegramLinkController,
+                            controller: _model.telegramLinkTextController,
                             focusNode: _model.telegramLinkFocusNode,
+                            autofocus: false,
                             obscureText: false,
                             decoration: InputDecoration(
                               isDense: true,
-                              labelText: 'Telegram link',
-                              labelStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              hintStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              labelText: 'Telegram Username',
+                              labelStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.of(context)
@@ -387,9 +426,16 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 ),
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
+                              contentPadding: const EdgeInsets.all(15.0),
                             ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                            validator: _model.telegramLinkControllerValidator
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            validator: _model
+                                .telegramLinkTextControllerValidator
                                 .asValidator(context),
                           ),
                           Row(
@@ -398,21 +444,34 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                             children: [
                               Text(
                                 'Discount (%): ',
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                               SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.4,
                                 child: TextFormField(
-                                  controller: _model.discountController,
+                                  controller: _model.discountTextController,
                                   focusNode: _model.discountFocusNode,
+                                  autofocus: false,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     isDense: true,
-                                    labelText: 'Discount',
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     hintStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium,
+                                        .labelMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -445,11 +504,17 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                       ),
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
+                                    contentPadding: const EdgeInsets.all(15.0),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   keyboardType: TextInputType.number,
-                                  validator: _model.discountControllerValidator
+                                  validator: _model
+                                      .discountTextControllerValidator
                                       .asValidator(context),
                                   inputFormatters: [
                                     FilteringTextInputFormatter.allow(
@@ -483,24 +548,27 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                         .CreateCompanyHolder
                                         .isVertify,
                                     onChanged: (newValue) async {
-                                      setState(() =>
+                                      safeSetState(() =>
                                           _model.checkboxValue = newValue!);
                                       if (newValue!) {
-                                        setState(() {
-                                          FFAppState()
-                                              .updateCreateCompanyHolderStruct(
-                                            (e) => e..isVertify = true,
-                                          );
-                                        });
+                                        FFAppState()
+                                            .updateCreateCompanyHolderStruct(
+                                          (e) => e..isVertify = true,
+                                        );
+                                        safeSetState(() {});
                                       } else {
-                                        setState(() {
-                                          FFAppState()
-                                              .updateCreateCompanyHolderStruct(
-                                            (e) => e..isVertify = false,
-                                          );
-                                        });
+                                        FFAppState()
+                                            .updateCreateCompanyHolderStruct(
+                                          (e) => e..isVertify = false,
+                                        );
+                                        safeSetState(() {});
                                       }
                                     },
+                                    side: BorderSide(
+                                      width: 2,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
                                     activeColor:
                                         FlutterFlowTheme.of(context).primary,
                                     checkColor:
@@ -509,8 +577,12 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 ),
                                 Text(
                                   'I have document',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
                               ],
                             ),
@@ -530,13 +602,22 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                             child: TextFormField(
                               controller: _model.textController5,
                               focusNode: _model.textFieldFocusNode,
+                              autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
+                                labelStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 hintText: 'Company detail',
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
                                     color: Color(0x00000000),
@@ -566,7 +647,12 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                               maxLines: 5,
                               validator: _model.textController5Validator
                                   .asValidator(context),
@@ -581,11 +667,8 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 context: context,
                                 builder: (context) {
                                   return GestureDetector(
-                                    onTap: () => _model
-                                            .unfocusNode.canRequestFocus
-                                        ? FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode)
-                                        : FocusScope.of(context).unfocus(),
+                                    onTap: () =>
+                                        FocusScope.of(context).unfocus(),
                                     child: Padding(
                                       padding: MediaQuery.viewInsetsOf(context),
                                       child: const SizedBox(
@@ -598,7 +681,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                               ).then((value) => safeSetState(
                                   () => _model.getLocation = value));
 
-                              setState(() {});
+                              safeSetState(() {});
                             },
                             text: _model.getLocation == null
                                 ? 'Pin location'
@@ -616,6 +699,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                   .override(
                                     fontFamily: 'Readex Pro',
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
                               borderSide: const BorderSide(
@@ -646,8 +730,12 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                   },
                                   child: Text(
                                     'Add image',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          letterSpacing: 0.0,
+                                        ),
                                   ),
                                 ),
                               ),
@@ -663,16 +751,15 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        FFAppState().update(() {
-                                          FFAppState()
-                                              .updateCreateCompanyHolderStruct(
-                                            (e) => e
-                                              ..updateImageDetails(
-                                                (e) => e.removeAt(
-                                                    _model.selectImageIndex!),
-                                              ),
-                                          );
-                                        });
+                                        FFAppState()
+                                            .updateCreateCompanyHolderStruct(
+                                          (e) => e
+                                            ..updateImageDetails(
+                                              (e) => e.removeAt(
+                                                  _model.selectImageIndex!),
+                                            ),
+                                        );
+                                        FFAppState().update(() {});
                                       },
                                       child: ClipRRect(
                                         borderRadius:
@@ -703,7 +790,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                             selectedMedia.every((m) =>
                                                 validateFileFormat(
                                                     m.storagePath, context))) {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.isDataUploading2 = true);
                                           var selectedUploadedFiles =
                                               <FFUploadedFile>[];
@@ -744,7 +831,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                                   selectedMedia.length &&
                                               downloadUrls.length ==
                                                   selectedMedia.length) {
-                                            setState(() {
+                                            safeSetState(() {
                                               _model.uploadedLocalFiles2 =
                                                   selectedUploadedFiles;
                                               _model.uploadedFileUrls2 =
@@ -753,7 +840,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                             showUploadMessage(
                                                 context, 'Success!');
                                           } else {
-                                            setState(() {});
+                                            safeSetState(() {});
                                             showUploadMessage(context,
                                                 'Failed to upload data');
                                             return;
@@ -762,31 +849,28 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
 
                                         while (_model.imageLoop <
                                             _model.uploadedFileUrls2.length) {
-                                          setState(() {
-                                            FFAppState()
-                                                .updateCreateCompanyHolderStruct(
-                                              (e) => e
-                                                ..updateImageDetails(
-                                                  (e) => e.add(
-                                                      _model.uploadedFileUrls2[
-                                                          _model.imageLoop]),
-                                                ),
-                                            );
-                                          });
-                                          setState(() {
-                                            _model.imageLoop =
-                                                _model.imageLoop + 1;
-                                          });
+                                          FFAppState()
+                                              .updateCreateCompanyHolderStruct(
+                                            (e) => e
+                                              ..updateImageDetails(
+                                                (e) => e.add(
+                                                    _model.uploadedFileUrls2[
+                                                        _model.imageLoop]),
+                                              ),
+                                          );
+                                          safeSetState(() {});
+                                          _model.imageLoop =
+                                              _model.imageLoop + 1;
+                                          safeSetState(() {});
                                         }
-                                        setState(() {
+                                        safeSetState(() {
                                           _model.isDataUploading2 = false;
                                           _model.uploadedLocalFiles2 = [];
                                           _model.uploadedFileUrls2 = [];
                                         });
 
-                                        setState(() {
-                                          _model.imageLoop = 0;
-                                        });
+                                        _model.imageLoop = 0;
+                                        safeSetState(() {});
                                       },
                                       child: ClipRRect(
                                         borderRadius:
@@ -816,7 +900,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                             selectedMedia.every((m) =>
                                                 validateFileFormat(
                                                     m.storagePath, context))) {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.isDataUploading3 = true);
                                           var selectedUploadedFiles =
                                               <FFUploadedFile>[];
@@ -857,7 +941,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                                   selectedMedia.length &&
                                               downloadUrls.length ==
                                                   selectedMedia.length) {
-                                            setState(() {
+                                            safeSetState(() {
                                               _model.uploadedLocalFile3 =
                                                   selectedUploadedFiles.first;
                                               _model.uploadedFileUrl3 =
@@ -866,24 +950,23 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                             showUploadMessage(
                                                 context, 'Success!');
                                           } else {
-                                            setState(() {});
+                                            safeSetState(() {});
                                             showUploadMessage(context,
                                                 'Failed to upload data');
                                             return;
                                           }
                                         }
 
-                                        setState(() {
-                                          FFAppState()
-                                              .updateCreateCompanyHolderStruct(
-                                            (e) => e
-                                              ..updateImageDetails(
-                                                (e) => e.add(
-                                                    _model.uploadedFileUrl3),
-                                              ),
-                                          );
-                                        });
-                                        setState(() {
+                                        FFAppState()
+                                            .updateCreateCompanyHolderStruct(
+                                          (e) => e
+                                            ..updateImageDetails(
+                                              (e) => e
+                                                  .add(_model.uploadedFileUrl3),
+                                            ),
+                                        );
+                                        safeSetState(() {});
+                                        safeSetState(() {
                                           _model.isDataUploading3 = false;
                                           _model.uploadedLocalFile3 =
                                               FFUploadedFile(
@@ -914,6 +997,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                   .CreateCompanyHolder
                                   .imageDetails
                                   .toList();
+
                               return Wrap(
                                 spacing: 10.0,
                                 runSpacing: 10.0,
@@ -932,9 +1016,8 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      setState(() {
-                                        _model.selectImageIndex = imagesIndex;
-                                      });
+                                      _model.selectImageIndex = imagesIndex;
+                                      safeSetState(() {});
                                       await actions.printAction(
                                         _model.selectImageIndex?.toString(),
                                       );
@@ -960,9 +1043,13 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                         borderRadius:
                                             BorderRadius.circular(0.0),
                                         child: OctoImage(
-                                          placeholderBuilder:
-                                              OctoPlaceholder.blurHash(
-                                            FFAppConstants.BlurHash,
+                                          placeholderBuilder: (_) =>
+                                              const SizedBox.expand(
+                                            child: Image(
+                                              image: BlurHashImage(
+                                                  FFAppConstants.BlurHash),
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                           image: CachedNetworkImageProvider(
                                             imagesItem,
@@ -991,7 +1078,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                   await CompaniesTable().insert({
                                     'UserID': FFAppState().UserInfo.userID,
                                     'CompanyName':
-                                        _model.companyNameController.text,
+                                        _model.companyNameTextController.text,
                                     'CompanyProfile': valueOrDefault<String>(
                                       _model.uploadedFileUrl1,
                                       'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
@@ -1000,9 +1087,9 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                         .CreateCompanyHolder
                                         .imageDetails,
                                     'PhoneNumber':
-                                        _model.phoneNumberController.text,
+                                        _model.phoneNumberTextController.text,
                                     'TelegramUrl':
-                                        _model.telegramLinkController.text,
+                                        'https://t.me/${_model.telegramLinkTextController.text}',
                                     'Detail': _model.textController5.text,
                                     'Latitude': functions
                                         .splitLatLng(_model.getLocation ?? currentUserLocationValue)
@@ -1011,23 +1098,23 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                         .splitLatLng(_model.getLocation ?? currentUserLocationValue)
                                         ?.last,
                                     'Discount': double.tryParse(
-                                        _model.discountController.text),
+                                        _model.discountTextController.text),
                                     'PaymentImage':
                                         'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/photo_place_holder.jpg',
                                     'Amount': 0.0,
                                   });
-                                  setState(() {
-                                    FFAppState().deleteCreateCompanyHolder();
-                                    FFAppState().CreateCompanyHolder =
-                                        CompanyCreationStruct
-                                            .fromSerializableMap(jsonDecode(
-                                                '{"Profile":"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png","ImageDetails":"[]","IsVertify":"false"}'));
-                                  });
+                                  FFAppState().deleteCreateCompanyHolder();
+                                  FFAppState().CreateCompanyHolder =
+                                      CompanyCreationStruct.fromSerializableMap(
+                                          jsonDecode(
+                                              '{\"Profile\":\"https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png\",\"ImageDetails\":\"[]\",\"IsVertify\":\"false\"}'));
+
+                                  safeSetState(() {});
                                   context.safePop();
                                 },
                                 text: 'Create',
                                 options: FFButtonOptions(
-                                  width: MediaQuery.sizeOf(context).width * 0.8,
+                                  width: double.infinity,
                                   height: 40.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
@@ -1039,6 +1126,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(
@@ -1057,26 +1145,24 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                   currentUserLocationValue =
                                       await getCurrentUserLocation(
                                           defaultLocation: const LatLng(0.0, 0.0));
-                                  setState(() {
-                                    FFAppState()
-                                        .updateCreateCompanyHolderStruct(
-                                      (e) => e
-                                        ..name =
-                                            _model.companyNameController.text
-                                        ..phoneNumber =
-                                            _model.phoneNumberController.text
-                                        ..telegramLink =
-                                            _model.telegramLinkController.text
-                                        ..details = _model.textController5.text
-                                        ..discount = int.tryParse(
-                                            _model.discountController.text)
-                                        ..location = _model.getLocation ?? currentUserLocationValue
-                                        ..profile = valueOrDefault<String>(
-                                          _model.uploadedFileUrl1,
-                                          'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
-                                        ),
-                                    );
-                                  });
+                                  FFAppState().updateCreateCompanyHolderStruct(
+                                    (e) => e
+                                      ..name =
+                                          _model.companyNameTextController.text
+                                      ..phoneNumber =
+                                          _model.phoneNumberTextController.text
+                                      ..telegramLink =
+                                          'https://t.me/${_model.telegramLinkTextController.text}'
+                                      ..details = _model.textController5.text
+                                      ..discount = int.tryParse(
+                                          _model.discountTextController.text)
+                                      ..location = _model.getLocation ?? currentUserLocationValue
+                                      ..profile = valueOrDefault<String>(
+                                        _model.uploadedFileUrl1,
+                                        'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
+                                      ),
+                                  );
+                                  safeSetState(() {});
                                   if (Navigator.of(context).canPop()) {
                                     context.pop();
                                   }
@@ -1093,7 +1179,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                 },
                                 text: 'Next',
                                 options: FFButtonOptions(
-                                  width: MediaQuery.sizeOf(context).width * 0.8,
+                                  width: double.infinity,
                                   height: 40.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
@@ -1105,6 +1191,7 @@ class _CreateCompanyWidgetState extends State<CreateCompanyWidget> {
                                       .override(
                                         fontFamily: 'Readex Pro',
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(

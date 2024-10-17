@@ -11,25 +11,17 @@ class ViewReviewModel extends FlutterFlowModel<ViewReviewWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for Detail widget.
   FocusNode? detailFocusNode;
-  TextEditingController? detailController;
-  String? Function(BuildContext, String?)? detailControllerValidator;
-
-  /// Initialization and disposal methods.
+  TextEditingController? detailTextController;
+  String? Function(BuildContext, String?)? detailTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     detailFocusNode?.dispose();
-    detailController?.dispose();
+    detailTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

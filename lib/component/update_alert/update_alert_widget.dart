@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'update_alert_model.dart';
 export 'update_alert_model.dart';
 
@@ -26,7 +25,7 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
     super.initState();
     _model = createModel(context, () => UpdateAlertModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,8 +37,6 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: 300.0,
       height: 300.0,
@@ -61,13 +58,19 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
             ),
             Text(
               'Update',
-              style: FlutterFlowTheme.of(context).titleLarge,
+              style: FlutterFlowTheme.of(context).titleLarge.override(
+                    fontFamily: 'Outfit',
+                    letterSpacing: 0.0,
+                  ),
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 0.0),
               child: Text(
                 '    We would like to inform you that a new version of our app is available for download. To enjoy the latest benefits of our app, please update it as soon as possible. ',
-                style: FlutterFlowTheme.of(context).bodyMedium,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
+                    ),
               ),
             ),
             Padding(
@@ -81,14 +84,13 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
+                    onTap: () async {},
                     child: Text(
                       'LATER',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             color: FlutterFlowTheme.of(context).primary,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ),
@@ -105,14 +107,13 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                         await launchURL(
                             'https://play.google.com/store/apps/details?id=com.soda.taprohm');
                       }
-
-                      Navigator.pop(context);
                     },
                     child: Text(
                       'UPDATE NOW',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             color: FlutterFlowTheme.of(context).primary,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ),

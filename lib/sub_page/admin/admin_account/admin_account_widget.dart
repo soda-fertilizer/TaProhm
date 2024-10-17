@@ -33,7 +33,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
         'Users',
         () async {
           FFAppState().clearAdminRequestAccountCache();
-          setState(() {
+          safeSetState(() {
             FFAppState()
                 .clearAdminRequestAccountCacheKey(_model.requestLastUniqueKey);
             _model.requestCompleted = false;
@@ -47,8 +47,8 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -66,9 +66,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
         title: 'AdminAccount',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -93,7 +91,10 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Account',
-                  style: FlutterFlowTheme.of(context).titleMedium,
+                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
               actions: const [],
@@ -151,6 +152,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                     );
                   }
                   List<UsersRow> tabBarUsersRowList = snapshot.data!;
+
                   return Column(
                     children: [
                       Align(
@@ -159,7 +161,11 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                           labelColor: FlutterFlowTheme.of(context).primaryText,
                           unselectedLabelColor:
                               FlutterFlowTheme.of(context).secondaryText,
-                          labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           unselectedLabelStyle: const TextStyle(),
                           indicatorColor: FlutterFlowTheme.of(context).primary,
                           padding: const EdgeInsets.all(4.0),
@@ -224,6 +230,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                   }
                                   List<UsersRow> listViewUsersRowList =
                                       snapshot.data!;
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
@@ -263,7 +270,10 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
-                                                  offset: const Offset(0.0, 1.0),
+                                                  offset: const Offset(
+                                                    0.0,
+                                                    1.0,
+                                                  ),
                                                 )
                                               ],
                                             ),
@@ -333,6 +343,8 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                                             .primaryText
                                                                         : FlutterFlowTheme.of(context)
                                                                             .error,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ),
@@ -340,7 +352,13 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                             'ID: ${listViewUsersRow.phoneNumber}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .labelMedium,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                           ),
                                                         ],
                                                       ),
@@ -372,6 +390,7 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                   final tabBarVar = tabBarUsersRowList
                                       .where((e) => e.isMember == true)
                                       .toList();
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
@@ -394,7 +413,10 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
-                                                offset: const Offset(0.0, 1.0),
+                                                offset: const Offset(
+                                                  0.0,
+                                                  1.0,
+                                                ),
                                               )
                                             ],
                                           ),
@@ -487,6 +509,8 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                                             .primaryText
                                                                         : FlutterFlowTheme.of(context)
                                                                             .error,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ),
@@ -494,7 +518,13 @@ class _AdminAccountWidgetState extends State<AdminAccountWidget>
                                                             'ID: ${tabBarVarItem.phoneNumber}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .labelMedium,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                           ),
                                                         ],
                                                       ),

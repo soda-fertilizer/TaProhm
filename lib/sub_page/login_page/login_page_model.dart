@@ -10,11 +10,8 @@ class LoginPageModel extends FlutterFlowModel<LoginPageWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for LoginComponent component.
   late LoginComponentModel loginComponentModel;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -23,11 +20,6 @@ class LoginPageModel extends FlutterFlowModel<LoginPageWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     loginComponentModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

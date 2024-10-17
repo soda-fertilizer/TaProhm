@@ -10,13 +10,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/upload_data.dart';
-import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
 import 'login_component_model.dart';
 export 'login_component_model.dart';
 
@@ -31,55 +29,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
     with TickerProviderStateMixin {
   late LoginComponentModel _model;
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 1.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 80.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        ScaleEffect(
-          curve: Curves.easeInOut,
-          delay: 150.ms,
-          duration: 400.ms,
-          begin: const Offset(0.8, 0.8),
-          end: const Offset(1.0, 1.0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        VisibilityEffect(duration: 300.ms),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 300.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 300.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 20.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -96,23 +46,73 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
       vsync: this,
       length: 2,
       initialIndex: 1,
-    )..addListener(() => setState(() {}));
-    _model.loginPhoneNumberController ??= TextEditingController();
+    )..addListener(() => safeSetState(() {}));
+    _model.loginPhoneNumberTextController ??= TextEditingController();
     _model.loginPhoneNumberFocusNode ??= FocusNode();
 
-    _model.loginPasswordController ??= TextEditingController();
+    _model.loginPasswordTextController ??= TextEditingController();
     _model.loginPasswordFocusNode ??= FocusNode();
 
-    _model.singUpFullNameController ??= TextEditingController();
+    _model.singUpFullNameTextController ??= TextEditingController();
     _model.singUpFullNameFocusNode ??= FocusNode();
 
-    _model.signUPPasswordController ??= TextEditingController();
+    _model.signUPPasswordTextController ??= TextEditingController();
     _model.signUPPasswordFocusNode ??= FocusNode();
 
-    _model.signUpPhoneNumberController ??= TextEditingController();
+    _model.signUpPhoneNumberTextController ??= TextEditingController();
     _model.signUpPhoneNumberFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 80.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          ScaleEffect(
+            curve: Curves.easeInOut,
+            delay: 150.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.8, 0.8),
+            end: const Offset(1.0, 1.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 300.ms),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 300.0.ms,
+            duration: 400.0.ms,
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -124,8 +124,6 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: const AlignmentDirectional(0.0, -1.0),
       child: SingleChildScrollView(
@@ -148,7 +146,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                     BoxShadow(
                       blurRadius: 4.0,
                       color: Color(0x33000000),
-                      offset: Offset(0.0, 2.0),
+                      offset: Offset(
+                        0.0,
+                        2.0,
+                      ),
                     )
                   ],
                   borderRadius: BorderRadius.circular(12.0),
@@ -166,7 +167,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                         child: FlutterFlowButtonTabBar(
                           useToggleButtonStyle: true,
                           isScrollable: true,
-                          labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           unselectedLabelStyle: const TextStyle(),
                           labelColor: FlutterFlowTheme.of(context).primaryText,
                           unselectedLabelColor:
@@ -229,6 +234,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           .override(
                                             fontFamily: 'Outfit',
                                             fontSize: 22.0,
+                                            letterSpacing: 0.0,
                                           ),
                                     ),
                                     Padding(
@@ -238,17 +244,22 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         'Fill out the information below in order to access your account.',
                                         textAlign: TextAlign.start,
                                         style: FlutterFlowTheme.of(context)
-                                            .labelMedium,
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 16.0),
                                       child: TextFormField(
-                                        controller:
-                                            _model.loginPhoneNumberController,
+                                        controller: _model
+                                            .loginPhoneNumberTextController,
                                         focusNode:
                                             _model.loginPhoneNumberFocusNode,
+                                        autofocus: false,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         obscureText: false,
@@ -263,10 +274,15 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryText,
+                                                letterSpacing: 0.0,
                                               ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -314,9 +330,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   .accent4,
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .loginPhoneNumberControllerValidator
+                                            .loginPhoneNumberTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -329,9 +349,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           8.0, 0.0, 8.0, 16.0),
                                       child: TextFormField(
                                         controller:
-                                            _model.loginPasswordController,
+                                            _model.loginPasswordTextController,
                                         focusNode:
                                             _model.loginPasswordFocusNode,
+                                        autofocus: false,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         obscureText:
@@ -341,10 +362,18 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           labelText: 'Password',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -391,7 +420,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               FlutterFlowTheme.of(context)
                                                   .accent4,
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model
                                                       .loginPasswordVisibility =
                                                   !_model
@@ -412,9 +441,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .loginPasswordControllerValidator
+                                            .loginPasswordTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -457,6 +490,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                             'Readex Pro',
                                                         color:
                                                             const Color(0xFF1C81E0),
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ),
@@ -489,6 +523,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                             'Readex Pro',
                                                         color:
                                                             const Color(0xFF1C81E0),
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ),
@@ -525,6 +560,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .error,
+                                                  letterSpacing: 0.0,
                                                 ),
                                           ),
                                         ),
@@ -540,42 +576,17 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             _model.login2 =
                                                 await UsersGroup.loginCall.call(
                                               phoneNumber: _model
-                                                  .loginPhoneNumberController
+                                                  .loginPhoneNumberTextController
                                                   .text,
                                               password: _model
-                                                  .loginPasswordController.text,
+                                                  .loginPasswordTextController
+                                                  .text,
                                             );
+
                                             shouldSetState = true;
                                             if ((_model.login2?.succeeded ??
                                                 true)) {
-                                              if (!isWeb) {
-                                                _model.fcmToken = await actions
-                                                    .initFirebaseMessage();
-                                                shouldSetState = true;
-                                                if (_model.fcmToken != null &&
-                                                    _model.fcmToken != '') {
-                                                  unawaited(
-                                                    () async {
-                                                      await UsersTable().update(
-                                                        data: {
-                                                          'Token':
-                                                              _model.fcmToken,
-                                                        },
-                                                        matchingRows: (rows) =>
-                                                            rows.eq(
-                                                          'UserID',
-                                                          UsersGroup.loginCall
-                                                              .userID(
-                                                            (_model.login2
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }(),
-                                                  );
-                                                }
-                                              }
+                                              if (!isWeb) {}
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
                                               await authManager.signIn(
@@ -595,84 +606,82 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     )
                                                     ?.toString(),
                                               );
-                                              setState(() {
-                                                FFAppState().IsLogged = true;
-                                                FFAppState().UserInfo =
-                                                    UserInfoStruct(
-                                                  userID: UsersGroup.loginCall
-                                                      .userID(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  fullName: UsersGroup.loginCall
-                                                      .fullName(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  phoneNumber: UsersGroup
-                                                      .loginCall
-                                                      .phoneNumber(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  sectorID: UsersGroup.loginCall
-                                                      .sectorID(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  isAdmin: UsersGroup.loginCall
-                                                      .isAdmin(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  profile: UsersGroup.loginCall
-                                                      .profile(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  userReferral: UsersGroup
-                                                      .loginCall
-                                                      .userReferral(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  hashedPassword: UsersGroup
-                                                      .loginCall
-                                                      .hashedPassword(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  isMember: UsersGroup.loginCall
-                                                      .isMember(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  isTestAccount: UsersGroup
-                                                      .loginCall
-                                                      .isTestAccount(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  invite: UsersGroup.loginCall
-                                                      .invite(
-                                                        (_model.login2
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                      )
-                                                      .toString(),
-                                                  isSubAdmin: UsersGroup
-                                                      .loginCall
-                                                      .isSubAdmin(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                  token: UsersGroup.loginCall
-                                                      .token(
-                                                    (_model.login2?.jsonBody ??
-                                                        ''),
-                                                  ),
-                                                );
-                                              });
+                                              FFAppState().IsLogged = true;
+                                              FFAppState().UserInfo =
+                                                  UserInfoStruct(
+                                                userID:
+                                                    UsersGroup.loginCall.userID(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                fullName: UsersGroup.loginCall
+                                                    .fullName(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                phoneNumber: UsersGroup
+                                                    .loginCall
+                                                    .phoneNumber(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                sectorID: UsersGroup.loginCall
+                                                    .sectorID(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                isAdmin: UsersGroup.loginCall
+                                                    .isAdmin(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                profile: UsersGroup.loginCall
+                                                    .profile(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                userReferral: UsersGroup
+                                                    .loginCall
+                                                    .userReferral(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                hashedPassword: UsersGroup
+                                                    .loginCall
+                                                    .hashedPassword(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                isMember: UsersGroup.loginCall
+                                                    .isMember(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                isTestAccount: UsersGroup
+                                                    .loginCall
+                                                    .isTestAccount(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                invite: UsersGroup.loginCall
+                                                    .invite(
+                                                      (_model.login2
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    )
+                                                    .toString(),
+                                                isSubAdmin: UsersGroup.loginCall
+                                                    .isSubAdmin(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                                token:
+                                                    UsersGroup.loginCall.token(
+                                                  (_model.login2?.jsonBody ??
+                                                      ''),
+                                                ),
+                                              );
+                                              safeSetState(() {});
                                               if (Navigator.of(context)
                                                   .canPop()) {
                                                 context.pop();
@@ -681,18 +690,18 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   'HomePage', context.mounted);
 
                                               if (shouldSetState) {
-                                                setState(() {});
+                                                safeSetState(() {});
                                               }
                                               return;
                                             } else {
                                               if (shouldSetState) {
-                                                setState(() {});
+                                                safeSetState(() {});
                                               }
                                               return;
                                             }
 
                                             if (shouldSetState) {
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                           },
                                           text: 'Sign in',
@@ -713,6 +722,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     .override(
                                                       fontFamily: 'Readex Pro',
                                                       color: Colors.white,
+                                                      letterSpacing: 0.0,
                                                     ),
                                             elevation: 3.0,
                                             borderSide: const BorderSide(
@@ -755,7 +765,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           selectedMedia.every((m) =>
                                               validateFileFormat(
                                                   m.storagePath, context))) {
-                                        setState(() =>
+                                        safeSetState(() =>
                                             _model.isDataUploading = true);
                                         var selectedUploadedFiles =
                                             <FFUploadedFile>[];
@@ -794,7 +804,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 selectedMedia.length &&
                                             downloadUrls.length ==
                                                 selectedMedia.length) {
-                                          setState(() {
+                                          safeSetState(() {
                                             _model.uploadedLocalFile =
                                                 selectedUploadedFiles.first;
                                             _model.uploadedFileUrl =
@@ -803,7 +813,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           showUploadMessage(
                                               context, 'Success!');
                                         } else {
-                                          setState(() {});
+                                          safeSetState(() {});
                                           showUploadMessage(
                                               context, 'Failed to upload data');
                                           return;
@@ -832,7 +842,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                     child: Text(
                                       'Picture Profile',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyLarge,
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
                                   ),
                                   Container(
@@ -852,19 +866,28 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           0.8,
                                       child: TextFormField(
                                         controller:
-                                            _model.singUpFullNameController,
+                                            _model.singUpFullNameTextController,
                                         focusNode:
                                             _model.singUpFullNameFocusNode,
+                                        autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
                                           labelText: 'Full Name',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -916,9 +939,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .singUpFullNameControllerValidator
+                                            .singUpFullNameTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -940,9 +967,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           0.8,
                                       child: TextFormField(
                                         controller:
-                                            _model.signUPPasswordController,
+                                            _model.signUPPasswordTextController,
                                         focusNode:
                                             _model.signUPPasswordFocusNode,
+                                        autofocus: false,
                                         textCapitalization:
                                             TextCapitalization.none,
                                         obscureText:
@@ -952,10 +980,18 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           labelText: 'Password',
                                           labelStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -1006,7 +1042,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             ),
                                           ),
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model
                                                       .signUPPasswordVisibility =
                                                   !_model
@@ -1025,9 +1061,13 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         validator: _model
-                                            .signUPPasswordControllerValidator
+                                            .signUPPasswordTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -1052,10 +1092,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       width: MediaQuery.sizeOf(context).width *
                                           0.8,
                                       child: TextFormField(
-                                        controller:
-                                            _model.signUpPhoneNumberController,
+                                        controller: _model
+                                            .signUpPhoneNumberTextController,
                                         focusNode:
                                             _model.signUpPhoneNumberFocusNode,
+                                        autofocus: false,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           isDense: true,
@@ -1066,10 +1107,15 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   .override(
                                                     fontFamily: 'Readex Pro',
                                                     fontSize: 14.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                           hintStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                                  .labelMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Color(0x00000000),
@@ -1109,7 +1155,11 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                         maxLength: 11,
                                         maxLengthEnforcement:
                                             MaxLengthEnforcement.enforced,
@@ -1120,7 +1170,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             null,
                                         keyboardType: TextInputType.number,
                                         validator: _model
-                                            .signUpPhoneNumberControllerValidator
+                                            .signUpPhoneNumberTextControllerValidator
                                             .asValidator(context),
                                         inputFormatters: [
                                           FilteringTextInputFormatter.allow(
@@ -1158,6 +1208,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                       List<UsersRow>
                                           singUpProvinceUsersRowList =
                                           snapshot.data!;
+
                                       return FlutterFlowDropDown<String>(
                                         controller: _model
                                                 .singUpProvinceValueController ??=
@@ -1166,28 +1217,27 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             .map((e) => e.fullName)
                                             .toList(),
                                         onChanged: (val) async {
-                                          setState(() =>
+                                          safeSetState(() =>
                                               _model.singUpProvinceValue = val);
-                                          setState(() {
-                                            _model.selectReferralAndInvite =
-                                                singUpProvinceUsersRowList
-                                                    .where((e) =>
-                                                        _model
-                                                            .singUpProvinceValue ==
-                                                        e.fullName)
-                                                    .toList()
-                                                    .first
-                                                    .phoneNumber;
-                                            _model.selectedProvince =
-                                                singUpProvinceUsersRowList
-                                                    .where((e) =>
-                                                        _model
-                                                            .singUpProvinceValue ==
-                                                        e.fullName)
-                                                    .toList()
-                                                    .first
-                                                    .phoneNumber;
-                                          });
+                                          _model.selectReferralAndInvite =
+                                              singUpProvinceUsersRowList
+                                                  .where((e) =>
+                                                      _model
+                                                          .singUpProvinceValue ==
+                                                      e.fullName)
+                                                  .toList()
+                                                  .first
+                                                  .phoneNumber;
+                                          _model.selectedProvince =
+                                              singUpProvinceUsersRowList
+                                                  .where((e) =>
+                                                      _model
+                                                          .singUpProvinceValue ==
+                                                      e.fullName)
+                                                  .toList()
+                                                  .first
+                                                  .phoneNumber;
+                                          safeSetState(() {});
                                         },
                                         width:
                                             MediaQuery.sizeOf(context).width *
@@ -1198,6 +1248,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                             .override(
                                               fontFamily: 'Readex Pro',
                                               fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                             ),
                                         hintText: 'Please select province',
                                         icon: Icon(
@@ -1251,6 +1302,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         List<UsersRow>
                                             singUpDistrictUsersRowList =
                                             snapshot.data!;
+
                                         return FlutterFlowDropDown<String>(
                                           controller: _model
                                                   .singUpDistrictValueController ??=
@@ -1259,19 +1311,18 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               .map((e) => e.fullName)
                                               .toList(),
                                           onChanged: (val) async {
-                                            setState(() => _model
+                                            safeSetState(() => _model
                                                 .singUpDistrictValue = val);
-                                            setState(() {
-                                              _model.selectReferralAndInvite =
-                                                  singUpDistrictUsersRowList
-                                                      .where((e) =>
-                                                          _model
-                                                              .singUpDistrictValue ==
-                                                          e.fullName)
-                                                      .toList()
-                                                      .first
-                                                      .phoneNumber;
-                                            });
+                                            _model.selectReferralAndInvite =
+                                                singUpDistrictUsersRowList
+                                                    .where((e) =>
+                                                        _model
+                                                            .singUpDistrictValue ==
+                                                        e.fullName)
+                                                    .toList()
+                                                    .first
+                                                    .phoneNumber;
+                                            safeSetState(() {});
                                           },
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -1283,6 +1334,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   .override(
                                                     fontFamily: 'Readex Pro',
                                                     fontSize: 14.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                           hintText: 'Please select district',
                                           icon: Icon(
@@ -1323,14 +1375,14 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                         onPressed: () async {
                                           var shouldSetState = false;
                                           if (functions.returnLength(_model
-                                                  .signUpPhoneNumberController
+                                                  .signUpPhoneNumberTextController
                                                   .text) >
                                               6) {
-                                            if ((_model.singUpFullNameController.text != '') &&
-                                                (_model.signUPPasswordController
+                                            if ((_model.singUpFullNameTextController.text != '') &&
+                                                (_model.signUPPasswordTextController
                                                             .text !=
                                                         '') &&
-                                                (_model.signUpPhoneNumberController
+                                                (_model.signUpPhoneNumberTextController
                                                             .text !=
                                                         '')) {
                                               if ((_model.singUpDistrictValue !=
@@ -1346,9 +1398,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                         .checkPhoneNumberCall
                                                         .call(
                                                   phoneNumber: _model
-                                                      .signUpPhoneNumberController
+                                                      .signUpPhoneNumberTextController
                                                       .text,
                                                 );
+
                                                 shouldSetState = true;
                                                 if ((_model.checkPhoneNumber
                                                         ?.succeeded ??
@@ -1357,10 +1410,10 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       await UsersTable()
                                                           .insert({
                                                     'PhoneNumber': _model
-                                                        .signUpPhoneNumberController
+                                                        .signUpPhoneNumberTextController
                                                         .text,
                                                     'Password': _model
-                                                        .signUPPasswordController
+                                                        .signUPPasswordTextController
                                                         .text,
                                                     'Balance': 0.0,
                                                     'SectorID':
@@ -1370,7 +1423,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                         ? _model.uploadedFileUrl
                                                         : 'https://kwlydfajqnlgqirgtgze.supabase.co/storage/v1/object/public/images/profile.png',
                                                     'FullName': _model
-                                                        .singUpFullNameController
+                                                        .singUpFullNameTextController
                                                         .text,
                                                     'UserReferral': _model
                                                         .selectReferralAndInvite,
@@ -1383,9 +1436,9 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   await BroadcastNotificationTable()
                                                       .insert({
                                                     'Title':
-                                                        'Welcome ${_model.singUpFullNameController.text}',
+                                                        'Welcome ${_model.singUpFullNameTextController.text}',
                                                     'Contents':
-                                                        'Welcome to our new member  ${_model.singUpFullNameController.text}',
+                                                        'Welcome to our new member  ${_model.singUpFullNameTextController.text}',
                                                     'Image': _model.uploadedFileUrl !=
                                                                 ''
                                                         ? _model.uploadedFileUrl
@@ -1424,47 +1477,41 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                       shouldSetState = true;
                                                     }
                                                   }
-                                                  setState(() {
-                                                    FFAppState().UserInfo =
-                                                        UserInfoStruct(
-                                                      userID: _model
-                                                          .createdUser?.userID,
-                                                      fullName: _model
-                                                          .createdUser
-                                                          ?.fullName,
-                                                      phoneNumber: _model
-                                                          .createdUser
-                                                          ?.phoneNumber,
-                                                      token: _model
-                                                          .createdUser?.token,
-                                                      sectorID: _model
-                                                          .createdUser
-                                                          ?.sectorID,
-                                                      isAdmin: _model
-                                                          .createdUser?.isAdmin,
-                                                      profile: _model
-                                                          .createdUser?.profile,
-                                                      userReferral: _model
-                                                          .createdUser
-                                                          ?.userReferral,
-                                                      hashedPassword: _model
-                                                          .createdUser
-                                                          ?.password,
-                                                      isMember: _model
-                                                          .createdUser
-                                                          ?.isMember,
-                                                      isTestAccount: _model
-                                                          .createdUser
-                                                          ?.isTestAccount,
-                                                      invite: _model
-                                                          .createdUser?.invite,
-                                                      isSubAdmin: _model
-                                                          .createdUser
-                                                          ?.isSubAdmin,
-                                                    );
-                                                    FFAppState().IsLogged =
-                                                        true;
-                                                  });
+                                                  FFAppState().UserInfo =
+                                                      UserInfoStruct(
+                                                    userID: _model
+                                                        .createdUser?.userID,
+                                                    fullName: _model
+                                                        .createdUser?.fullName,
+                                                    phoneNumber: _model
+                                                        .createdUser
+                                                        ?.phoneNumber,
+                                                    token: _model
+                                                        .createdUser?.token,
+                                                    sectorID: _model
+                                                        .createdUser?.sectorID,
+                                                    isAdmin: _model
+                                                        .createdUser?.isAdmin,
+                                                    profile: _model
+                                                        .createdUser?.profile,
+                                                    userReferral: _model
+                                                        .createdUser
+                                                        ?.userReferral,
+                                                    hashedPassword: _model
+                                                        .createdUser?.password,
+                                                    isMember: _model
+                                                        .createdUser?.isMember,
+                                                    isTestAccount: _model
+                                                        .createdUser
+                                                        ?.isTestAccount,
+                                                    invite: _model
+                                                        .createdUser?.invite,
+                                                    isSubAdmin: _model
+                                                        .createdUser
+                                                        ?.isSubAdmin,
+                                                  );
+                                                  FFAppState().IsLogged = true;
+                                                  safeSetState(() {});
                                                   if (Navigator.of(context)
                                                       .canPop()) {
                                                     context.pop();
@@ -1486,7 +1533,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   );
 
                                                   if (shouldSetState) {
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   }
                                                   return;
                                                 } else {
@@ -1511,7 +1558,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                     },
                                                   );
                                                   if (shouldSetState) {
-                                                    setState(() {});
+                                                    safeSetState(() {});
                                                   }
                                                   return;
                                                 }
@@ -1537,7 +1584,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   },
                                                 );
                                                 if (shouldSetState) {
-                                                  setState(() {});
+                                                  safeSetState(() {});
                                                 }
                                                 return;
                                               }
@@ -1562,7 +1609,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                 },
                                               );
                                               if (shouldSetState) {
-                                                setState(() {});
+                                                safeSetState(() {});
                                               }
                                               return;
                                             }
@@ -1587,12 +1634,14 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                               },
                                             );
                                             if (shouldSetState) {
-                                              setState(() {});
+                                              safeSetState(() {});
                                             }
                                             return;
                                           }
 
-                                          if (shouldSetState) setState(() {});
+                                          if (shouldSetState) {
+                                            safeSetState(() {});
+                                          }
                                         },
                                         text: 'Sign Up',
                                         options: FFButtonOptions(
@@ -1612,6 +1661,7 @@ class _LoginComponentWidgetState extends State<LoginComponentWidget>
                                                   .override(
                                                     fontFamily: 'Readex Pro',
                                                     color: Colors.white,
+                                                    letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
                                           borderSide: const BorderSide(

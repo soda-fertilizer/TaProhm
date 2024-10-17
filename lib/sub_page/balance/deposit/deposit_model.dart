@@ -12,8 +12,8 @@ class DepositModel extends FlutterFlowModel<DepositWidget> {
 
   // State field(s) for Amount widget.
   FocusNode? amountFocusNode;
-  TextEditingController? amountController;
-  String? Function(BuildContext, String?)? amountControllerValidator;
+  TextEditingController? amountTextController;
+  String? Function(BuildContext, String?)? amountTextControllerValidator;
   bool isDataUploading1 = false;
   FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -27,18 +27,12 @@ class DepositModel extends FlutterFlowModel<DepositWidget> {
   // Stores action output result for [Backend Call - Insert Row] action in Button widget.
   TransactionsRow? requestWithdrawal;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
     amountFocusNode?.dispose();
-    amountController?.dispose();
+    amountTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

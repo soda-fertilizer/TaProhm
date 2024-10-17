@@ -6,8 +6,8 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:octo_image/octo_image.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'show_shop_model.dart';
 export 'show_shop_model.dart';
@@ -38,7 +38,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
     super.initState();
     _model = createModel(context, () => ShowShopModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -50,8 +50,6 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<CompaniesRow>>(
       future: CompaniesTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -75,9 +73,11 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
           );
         }
         List<CompaniesRow> showShopCompaniesRowList = snapshot.data!;
+
         final showShopCompaniesRow = showShopCompaniesRowList.isNotEmpty
             ? showShopCompaniesRowList.first
             : null;
+
         return Stack(
           children: [
             Column(
@@ -119,8 +119,11 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(0.0),
                             child: OctoImage(
-                              placeholderBuilder: OctoPlaceholder.blurHash(
-                                FFAppConstants.BlurHash,
+                              placeholderBuilder: (_) => const SizedBox.expand(
+                                child: Image(
+                                  image: BlurHashImage(FFAppConstants.BlurHash),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                               image: CachedNetworkImageProvider(
                                 showShopCompaniesRow!.companyProfile,
@@ -156,11 +159,12 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                           .override(
                                             fontFamily: 'Outfit',
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                           ),
                                     ),
                                     RichText(
-                                      textScaleFactor: MediaQuery.of(context)
-                                          .textScaleFactor,
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
@@ -172,6 +176,7 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryText,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                           ),
@@ -195,7 +200,8 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                                 } else {
                                                   await launchUrl(Uri(
                                                     scheme: 'tel',
-                                                    path: showShopCompaniesRow.phoneNumber,
+                                                    path: showShopCompaniesRow
+                                                        .phoneNumber,
                                                   ));
                                                   return;
                                                 }
@@ -203,12 +209,16 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                           )
                                         ],
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                     RichText(
-                                      textScaleFactor: MediaQuery.of(context)
-                                          .textScaleFactor,
+                                      textScaler:
+                                          MediaQuery.of(context).textScaler,
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
@@ -220,11 +230,13 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryText,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                           ),
                                           TextSpan(
-                                            text: showShopCompaniesRow.telegramUrl,
+                                            text: showShopCompaniesRow
+                                                .telegramUrl,
                                             style: const TextStyle(
                                               color: Color(0xFF1C81E0),
                                             ),
@@ -240,7 +252,11 @@ class _ShowShopWidgetState extends State<ShowShopWidget> {
                                           )
                                         ],
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                   ].divide(const SizedBox(height: 20.0)),

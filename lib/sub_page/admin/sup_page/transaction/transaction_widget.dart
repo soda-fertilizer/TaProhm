@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'transaction_model.dart';
 export 'transaction_model.dart';
 
@@ -37,7 +36,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -49,8 +48,6 @@ class _TransactionWidgetState extends State<TransactionWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<TransactionsRow>>(
       future: TransactionsTable().querySingleRow(
         queryFn: (q) => q.eq(
@@ -77,17 +74,17 @@ class _TransactionWidgetState extends State<TransactionWidget> {
           );
         }
         List<TransactionsRow> transactionTransactionsRowList = snapshot.data!;
+
         final transactionTransactionsRow =
             transactionTransactionsRowList.isNotEmpty
                 ? transactionTransactionsRowList.first
                 : null;
+
         return Title(
             title: 'Transaction',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -112,7 +109,10 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                     alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Text(
                       'Transaction',
-                      style: FlutterFlowTheme.of(context).titleMedium,
+                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ),
                   actions: const [],
@@ -144,9 +144,11 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                         );
                       }
                       List<UsersRow> containerUsersRowList = snapshot.data!;
+
                       final containerUsersRow = containerUsersRowList.isNotEmpty
                           ? containerUsersRowList.first
                           : null;
+
                       return Container(
                         decoration: const BoxDecoration(),
                         child: Padding(
@@ -159,24 +161,38 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                               if (transactionTransactionsRow?.typeID == 1)
                                 Text(
                                   'User Balance: ${containerUsersRow?.balance.toString()}',
-                                  style: FlutterFlowTheme.of(context).bodyLarge,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
                               TextFormField(
-                                controller: _model.amountController ??=
+                                controller: _model.amountTextController ??=
                                     TextEditingController(
                                   text: transactionTransactionsRow?.amount
                                       .toString(),
                                 ),
                                 focusNode: _model.amountFocusNode,
+                                autofocus: false,
                                 readOnly: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   isDense: true,
                                   labelText: 'Amont',
-                                  labelStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  labelStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -208,13 +224,19 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                                validator: _model.amountControllerValidator
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                validator: _model.amountTextControllerValidator
                                     .asValidator(context),
                               ),
                               TextFormField(
                                 controller: _model.textController2,
                                 focusNode: _model.textFieldFocusNode,
+                                autofocus: false,
                                 readOnly: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
@@ -223,8 +245,12 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                       transactionTransactionsRow?.typeID == 1
                                           ? 'Withdrawal'
                                           : 'Deposit',
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       color: FlutterFlowTheme.of(context)
@@ -256,7 +282,12 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                                 validator: _model.textController2Validator
                                     .asValidator(context),
                               ),
@@ -317,6 +348,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: Colors.white,
+                                            letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
                                       borderSide: const BorderSide(
@@ -480,6 +512,7 @@ class _TransactionWidgetState extends State<TransactionWidget> {
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: Colors.white,
+                                            letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
                                       borderSide: const BorderSide(

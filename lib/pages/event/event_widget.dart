@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'event_model.dart';
 export 'event_model.dart';
 
@@ -26,7 +25,7 @@ class _EventWidgetState extends State<EventWidget> {
     super.initState();
     _model = createModel(context, () => EventModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -38,15 +37,11 @@ class _EventWidgetState extends State<EventWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'Event',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -59,6 +54,7 @@ class _EventWidgetState extends State<EventWidget> {
                       fontFamily: 'Outfit',
                       color: Colors.white,
                       fontSize: 20.0,
+                      letterSpacing: 0.0,
                     ),
               ),
               actions: const [],
@@ -108,6 +104,7 @@ class _EventWidgetState extends State<EventWidget> {
                               }
                               List<EventsRow> listViewEventsRowList =
                                   snapshot.data!;
+
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.vertical,
@@ -213,11 +210,13 @@ class _EventWidgetState extends State<EventWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                           Text(
                                                             dateTimeFormat(
-                                                                'MMM,dd,yyyy  hh:mm a',
+                                                                "MMM,dd,yyyy  hh:mm a",
                                                                 listViewEventsRow
                                                                     .eventDate),
                                                             style: FlutterFlowTheme
@@ -231,6 +230,8 @@ class _EventWidgetState extends State<EventWidget> {
                                                                       .secondaryText,
                                                                   fontSize:
                                                                       12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                           Text(
@@ -254,6 +255,8 @@ class _EventWidgetState extends State<EventWidget> {
                                                                       .secondaryText,
                                                                   fontSize:
                                                                       12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                 ),
                                                           ),
                                                         ].divide(const SizedBox(
@@ -277,7 +280,7 @@ class _EventWidgetState extends State<EventWidget> {
                       ),
                       wrapWithModel(
                         model: _model.navPaddingModel,
-                        updateCallback: () => setState(() {}),
+                        updateCallback: () => safeSetState(() {}),
                         child: const NavPaddingWidget(),
                       ),
                     ],
@@ -286,7 +289,7 @@ class _EventWidgetState extends State<EventWidget> {
                     alignment: const AlignmentDirectional(0.0, 1.0),
                     child: wrapWithModel(
                       model: _model.navBarModel,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const NavBarWidget(
                         selectPageIndex: 4,
                       ),

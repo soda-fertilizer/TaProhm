@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'show_qr_code_model.dart';
 export 'show_qr_code_model.dart';
 
@@ -33,7 +32,7 @@ class _ShowQrCodeWidgetState extends State<ShowQrCodeWidget> {
     super.initState();
     _model = createModel(context, () => ShowQrCodeModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -45,8 +44,6 @@ class _ShowQrCodeWidgetState extends State<ShowQrCodeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: const AlignmentDirectional(0.0, 0.0),
       child: Container(

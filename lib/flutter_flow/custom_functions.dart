@@ -8,8 +8,6 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'lat_lng.dart';
 import 'place.dart';
 import 'uploaded_file.dart';
-import '/backend/backend.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
 import '/backend/supabase/supabase.dart';
@@ -112,4 +110,15 @@ int returnLength(String? value) {
   } else {
     return value.length;
   }
+}
+
+double returnBiggerIfTarget(
+  int inputValue,
+  int inputID,
+  int targetID,
+) {
+  if (inputID == targetID) {
+    return inputValue * 100;
+  }
+  return inputValue / 100;
 }

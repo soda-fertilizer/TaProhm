@@ -22,18 +22,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
-	<array>
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Editor</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <!--FF_REVERSED_CLIENT_ID-->
-                
-            </array>
-        </dict>
-
-        <dict>
+	<array>        <dict>
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
@@ -59,8 +48,6 @@
     <string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
     <string>In order to upload data, this app requires permission to access the photo library.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-    <string>To save device to storage we need your permission.</string>
 	<key>PermissionGroupNotification</key>
     <string>We need to access you notifications.</string>
 

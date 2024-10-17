@@ -14,7 +14,6 @@ class SearchMemberModel extends FlutterFlowModel<SearchMemberWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
@@ -22,19 +21,12 @@ class SearchMemberModel extends FlutterFlowModel<SearchMemberWidget> {
   // Stores action output result for [Backend Call - API (search user and company)] action in TextField widget.
   ApiCallResponse? apiResultgy4;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode?.dispose();
     textController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

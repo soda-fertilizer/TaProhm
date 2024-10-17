@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class ReferralModel extends FlutterFlowModel<ReferralWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -15,8 +14,6 @@ class ReferralModel extends FlutterFlowModel<ReferralWidget> {
   // Model for NavPadding component.
   late NavPaddingModel navPaddingModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     navPaddingModel = createModel(context, () => NavPaddingModel());
@@ -24,12 +21,7 @@ class ReferralModel extends FlutterFlowModel<ReferralWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     navPaddingModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -34,7 +34,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
       while (true) {
         await Future.delayed(const Duration(milliseconds: 1000));
         FFAppState().clearUserTransactionCache();
-        setState(() {
+        safeSetState(() {
           FFAppState()
               .clearUserTransactionCacheKey(_model.apiRequestLastUniqueKey);
           _model.apiRequestCompleted = false;
@@ -47,8 +47,8 @@ class _BalanceWidgetState extends State<BalanceWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -66,9 +66,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
         title: 'Balance',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primary,
@@ -81,6 +79,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                       fontFamily: 'Outfit',
                       color: Colors.white,
                       fontSize: 20.0,
+                      letterSpacing: 0.0,
                     ),
               ),
               actions: const [],
@@ -154,6 +153,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 10.0,
+                                                letterSpacing: 0.0,
                                               ),
                                         ),
                                       ),
@@ -175,6 +175,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryBackground,
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                           ),
                                     ),
                                     Divider(
@@ -209,10 +210,12 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                         }
                                         List<UsersRow> moneyUsersRowList =
                                             snapshot.data!;
+
                                         final moneyUsersRow =
                                             moneyUsersRowList.isNotEmpty
                                                 ? moneyUsersRowList.first
                                                 : null;
+
                                         return Text(
                                           '\$ ${formatNumber(
                                             moneyUsersRow?.balance,
@@ -228,6 +231,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 16.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w800,
                                               ),
                                         );
@@ -325,6 +329,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ],
@@ -395,6 +400,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ],
@@ -465,6 +471,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                           fontFamily:
                                                               'Readex Pro',
                                                           fontSize: 12.0,
+                                                          letterSpacing: 0.0,
                                                         ),
                                               ),
                                             ],
@@ -518,6 +525,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                     }
                                     final tabBarUserListTransactionsNoDateResponse =
                                         snapshot.data!;
+
                                     return Column(
                                       children: [
                                         Align(
@@ -535,6 +543,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                     .override(
                                                       fontFamily: 'Readex Pro',
                                                       fontSize: 14.0,
+                                                      letterSpacing: 0.0,
                                                     ),
                                             unselectedLabelStyle: const TextStyle(),
                                             indicatorColor:
@@ -578,6 +587,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                 .toList()
                                                                 .toList() ??
                                                             [];
+
                                                     return ListView.separated(
                                                       padding: EdgeInsets.zero,
                                                       scrollDirection:
@@ -649,6 +659,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               .override(
                                                                                 fontFamily: 'Readex Pro',
                                                                                 fontSize: 12.0,
+                                                                                letterSpacing: 0.0,
                                                                               ),
                                                                         ),
                                                                         Text(
@@ -656,8 +667,12 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                             transationsItem,
                                                                             r'''$.detail''',
                                                                           ).toString(),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).labelSmall,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelSmall
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
                                                                         ),
                                                                       ].divide(const SizedBox(
                                                                               height: 10.0)),
@@ -677,7 +692,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               .end,
                                                                       children: [
                                                                         Text(
-                                                                          dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                          dateTimeFormat("dd/MM/yyyy hh:mm a", functions.dataTimeConverter(getJsonField(
                                                                                     transationsItem,
                                                                                     r'''$.createddate''',
                                                                                   ).toString()))
@@ -687,8 +702,12 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                             replacement:
                                                                                 '…',
                                                                           ),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).labelSmall,
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .labelSmall
+                                                                              .override(
+                                                                                fontFamily: 'Readex Pro',
+                                                                                letterSpacing: 0.0,
+                                                                              ),
                                                                         ),
                                                                         Builder(
                                                                           builder:
@@ -697,17 +716,17 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                                     getJsonField(
                                                                                       transationsItem,
                                                                                       r'''$.type''',
-                                                                                    )) ||
+                                                                                    ).toString()) ||
                                                                                 (_model.tranfer ==
                                                                                     getJsonField(
                                                                                       transationsItem,
                                                                                       r'''$.type''',
-                                                                                    )) ||
+                                                                                    ).toString()) ||
                                                                                 (_model.buy ==
                                                                                     getJsonField(
                                                                                       transationsItem,
                                                                                       r'''$.type''',
-                                                                                    ))) {
+                                                                                    ).toString())) {
                                                                               return Text(
                                                                                 '-${getJsonField(
                                                                                   transationsItem,
@@ -716,6 +735,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Readex Pro',
                                                                                       color: FlutterFlowTheme.of(context).error,
+                                                                                      letterSpacing: 0.0,
                                                                                     ),
                                                                               );
                                                                             } else {
@@ -727,6 +747,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Readex Pro',
                                                                                       color: FlutterFlowTheme.of(context).success,
+                                                                                      letterSpacing: 0.0,
                                                                                     ),
                                                                               );
                                                                             }
@@ -764,6 +785,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                 .toList()
                                                                 .toList() ??
                                                             [];
+
                                                     return ListView.separated(
                                                       padding: EdgeInsets.zero,
                                                       scrollDirection:
@@ -834,6 +856,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                             .override(
                                                                               fontFamily: 'Readex Pro',
                                                                               fontSize: 12.0,
+                                                                              letterSpacing: 0.0,
                                                                             ),
                                                                       ),
                                                                       Text(
@@ -852,6 +875,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               fontFamily: 'Readex Pro',
                                                                               color: FlutterFlowTheme.of(context).secondaryText,
                                                                               fontSize: 12.0,
+                                                                              letterSpacing: 0.0,
                                                                             ),
                                                                       ),
                                                                     ].divide(const SizedBox(
@@ -870,7 +894,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                             .end,
                                                                     children: [
                                                                       Text(
-                                                                        dateTimeFormat('dd/MM/yyyy hh:mm a', functions.dataTimeConverter(getJsonField(
+                                                                        dateTimeFormat("dd/MM/yyyy hh:mm a", functions.dataTimeConverter(getJsonField(
                                                                                   pandingsItem,
                                                                                   r'''$.createddate''',
                                                                                 ).toString()))
@@ -881,7 +905,11 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               '…',
                                                                         ),
                                                                         style: FlutterFlowTheme.of(context)
-                                                                            .labelSmall,
+                                                                            .labelSmall
+                                                                            .override(
+                                                                              fontFamily: 'Readex Pro',
+                                                                              letterSpacing: 0.0,
+                                                                            ),
                                                                       ),
                                                                       Builder(
                                                                         builder:
@@ -890,7 +918,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               getJsonField(
                                                                                 pandingsItem,
                                                                                 r'''$.type''',
-                                                                              )) {
+                                                                              ).toString()) {
                                                                             return Text(
                                                                               '+${getJsonField(
                                                                                 pandingsItem,
@@ -899,6 +927,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Readex Pro',
                                                                                     color: FlutterFlowTheme.of(context).success,
+                                                                                    letterSpacing: 0.0,
                                                                                   ),
                                                                             );
                                                                           } else {
@@ -910,6 +939,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Readex Pro',
                                                                                     color: FlutterFlowTheme.of(context).error,
+                                                                                    letterSpacing: 0.0,
                                                                                   ),
                                                                             );
                                                                           }
@@ -953,7 +983,7 @@ class _BalanceWidgetState extends State<BalanceWidget>
                     alignment: const AlignmentDirectional(0.0, 1.0),
                     child: wrapWithModel(
                       model: _model.navBarModel,
-                      updateCallback: () => setState(() {}),
+                      updateCallback: () => safeSetState(() {}),
                       child: const NavBarWidget(
                         selectPageIndex: 3,
                       ),

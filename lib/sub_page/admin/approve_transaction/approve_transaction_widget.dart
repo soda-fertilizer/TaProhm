@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'approve_transaction_model.dart';
 export 'approve_transaction_model.dart';
 
@@ -31,18 +30,17 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.fromDate = getCurrentTimestamp;
-        _model.toDate = getCurrentTimestamp;
-      });
+      _model.fromDate = getCurrentTimestamp;
+      _model.toDate = getCurrentTimestamp;
+      safeSetState(() {});
     });
 
     _model.tabBarController = TabController(
       vsync: this,
       length: 3,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -54,8 +52,6 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<ApiCallResponse>(
       future: TransactionsGroup.listTransactionsCall.call(),
       builder: (context, snapshot) {
@@ -77,13 +73,12 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
           );
         }
         final approveTransactionListTransactionsResponse = snapshot.data!;
+
         return Title(
             title: 'ApproveTransaction',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -113,6 +108,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
                                 fontSize: 22.0,
+                                letterSpacing: 0.0,
                               ),
                     ),
                   ),
@@ -134,6 +130,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                               FlutterFlowTheme.of(context).titleMedium.override(
                                     fontFamily: 'Readex Pro',
                                     fontSize: 14.0,
+                                    letterSpacing: 0.0,
                                   ),
                           unselectedLabelStyle: const TextStyle(),
                           indicatorColor: FlutterFlowTheme.of(context).primary,
@@ -176,10 +173,11 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                     getJsonField(
                                                       e,
                                                       r'''$.type''',
-                                                    ))
+                                                    ).toString())
                                                 .toList()
                                                 .toList() ??
                                             [];
+
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
@@ -234,7 +232,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .alternate,
-                                                    offset: const Offset(0.0, 1.0),
+                                                    offset: const Offset(
+                                                      0.0,
+                                                      1.0,
+                                                    ),
                                                   )
                                                 ],
                                               ),
@@ -308,7 +309,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                               29),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyLarge,
+                                                                      .bodyLarge
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
                                                                 ),
                                                               ),
                                                               Padding(
@@ -337,6 +344,8 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                             .secondaryText,
                                                                         fontSize:
                                                                             14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
                                                                       ),
                                                                 ),
                                                               ),
@@ -371,6 +380,8 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondary,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                         ),
                                                       ),
@@ -404,10 +415,11 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                     getJsonField(
                                                       e,
                                                       r'''$.type''',
-                                                    ))
+                                                    ).toString())
                                                 .toList()
                                                 .toList() ??
                                             [];
+
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
@@ -462,7 +474,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .alternate,
-                                                    offset: const Offset(0.0, 1.0),
+                                                    offset: const Offset(
+                                                      0.0,
+                                                      1.0,
+                                                    ),
                                                   )
                                                 ],
                                               ),
@@ -528,7 +543,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                 ).toString(),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyLarge,
+                                                                    .bodyLarge
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Readex Pro',
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
                                                               ),
                                                             ),
                                                           ],
@@ -550,6 +571,8 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .error,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                     ),
                                                   ],
@@ -579,7 +602,11 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                           Text(
                                             'from: ',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                           FFButtonWidget(
                                             onPressed: () async {
@@ -601,13 +628,12 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   );
                                                 });
                                               }
-                                              setState(() {
-                                                _model.fromDate =
-                                                    _model.datePicked1 ?? getCurrentTimestamp;
-                                              });
+                                              _model.fromDate =
+                                                  _model.datePicked1 ?? getCurrentTimestamp;
+                                              safeSetState(() {});
                                             },
                                             text: dateTimeFormat(
-                                                'd/M/y', _model.fromDate),
+                                                "d/M/y", _model.fromDate),
                                             options: FFButtonOptions(
                                               height: 40.0,
                                               padding: const EdgeInsetsDirectional
@@ -626,6 +652,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                             'Readex Pro',
                                                         color: Colors.white,
                                                         fontSize: 10.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
                                               borderSide: const BorderSide(
@@ -644,7 +671,11 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                           Text(
                                             'to: ',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                           FFButtonWidget(
                                             onPressed: () async {
@@ -666,13 +697,12 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                   );
                                                 });
                                               }
-                                              setState(() {
-                                                _model.toDate =
-                                                    _model.datePicked2 ?? getCurrentTimestamp;
-                                              });
+                                              _model.toDate =
+                                                  _model.datePicked2 ?? getCurrentTimestamp;
+                                              safeSetState(() {});
                                             },
                                             text: dateTimeFormat(
-                                                'd/M/y', _model.toDate),
+                                                "d/M/y", _model.toDate),
                                             options: FFButtonOptions(
                                               height: 40.0,
                                               padding: const EdgeInsetsDirectional
@@ -691,6 +721,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                             'Readex Pro',
                                                         color: Colors.white,
                                                         fontSize: 10.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
                                               borderSide: const BorderSide(
@@ -749,12 +780,14 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                             }
                                             final listViewListHistoryTransactionsResponse =
                                                 snapshot.data!;
+
                                             return Builder(
                                               builder: (context) {
                                                 final history =
                                                     listViewListHistoryTransactionsResponse
                                                         .jsonBody
                                                         .toList();
+
                                                 return ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   scrollDirection:
@@ -787,7 +820,9 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                       .of(context)
                                                                   .alternate,
                                                               offset: const Offset(
-                                                                  0.0, 1.0),
+                                                                0.0,
+                                                                1.0,
+                                                              ),
                                                             )
                                                           ],
                                                         ),
@@ -869,6 +904,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                             style: FlutterFlowTheme.of(context).bodyLarge.override(
                                                                                   fontFamily: 'Readex Pro',
                                                                                   fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
                                                                                 ),
                                                                           ),
                                                                         ),
@@ -888,6 +924,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                                   fontFamily: 'Readex Pro',
                                                                                   color: FlutterFlowTheme.of(context).secondaryText,
                                                                                   fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
                                                                                 ),
                                                                           ),
                                                                         ),
@@ -903,8 +940,10 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                               historyItem,
                                                                               r'''$.detail''',
                                                                             ).toString(),
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).labelSmall,
+                                                                            style: FlutterFlowTheme.of(context).labelSmall.override(
+                                                                                  fontFamily: 'Readex Pro',
+                                                                                  letterSpacing: 0.0,
+                                                                                ),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -926,7 +965,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                   children: [
                                                                     Text(
                                                                       dateTimeFormat(
-                                                                          'jm',
+                                                                          "jm",
                                                                           functions
                                                                               .dataTimeConverter(getJsonField(
                                                                             historyItem,
@@ -934,7 +973,13 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                           ).toString())),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .labelSmall,
+                                                                          .labelSmall
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Readex Pro',
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                          ),
                                                                     ),
                                                                     Builder(
                                                                       builder:
@@ -943,17 +988,17 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                                 getJsonField(
                                                                                   historyItem,
                                                                                   r'''$.type''',
-                                                                                )) ||
+                                                                                ).toString()) ||
                                                                             ('Withdrawal' ==
                                                                                 getJsonField(
                                                                                   historyItem,
                                                                                   r'''$.type''',
-                                                                                )) ||
+                                                                                ).toString()) ||
                                                                             (_model.buy ==
                                                                                 getJsonField(
                                                                                   historyItem,
                                                                                   r'''$.type''',
-                                                                                ))) {
+                                                                                ).toString())) {
                                                                           return Text(
                                                                             '-${getJsonField(
                                                                               historyItem,
@@ -963,6 +1008,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                                   fontFamily: 'Readex Pro',
                                                                                   color: FlutterFlowTheme.of(context).error,
                                                                                   fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
                                                                                 ),
                                                                           );
                                                                         } else {
@@ -975,6 +1021,7 @@ class _ApproveTransactionWidgetState extends State<ApproveTransactionWidget>
                                                                                   fontFamily: 'Readex Pro',
                                                                                   color: FlutterFlowTheme.of(context).success,
                                                                                   fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
                                                                                 ),
                                                                           );
                                                                         }

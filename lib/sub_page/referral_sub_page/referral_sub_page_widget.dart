@@ -43,8 +43,8 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
             0,
           ),
           1),
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -94,13 +94,12 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
           );
         }
         List<UsersRow> referralSubPageUsersRowList = snapshot.data!;
+
         return Title(
             title: 'ReferralSubPage',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -130,6 +129,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                 fontFamily: 'Outfit',
                                 color: Colors.white,
                                 fontSize: 22.0,
+                                letterSpacing: 0.0,
                               ),
                     ),
                   ),
@@ -162,9 +162,11 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                         );
                       }
                       List<UsersRow> containerUsersRowList = snapshot.data!;
+
                       final containerUsersRow = containerUsersRowList.isNotEmpty
                           ? containerUsersRowList.first
                           : null;
+
                       return Container(
                         width: double.infinity,
                         height: double.infinity,
@@ -226,7 +228,12 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                                 ),
                                                 Text(
                                                   'ID: ${containerUsersRow.phoneNumber}',
@@ -241,6 +248,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                                     context)
                                                                 .secondaryText,
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
                                                       ),
                                                 ),
                                               ],
@@ -334,6 +342,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                           ),
                                       unselectedLabelStyle: const TextStyle(),
                                       indicatorColor:
@@ -368,6 +377,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                               final referralSubPageVar =
                                                   referralSubPageUsersRowList
                                                       .toList();
+
                                               return ListView.builder(
                                                 padding: EdgeInsets.zero,
                                                 scrollDirection: Axis.vertical,
@@ -420,7 +430,9 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                                       .of(context)
                                                                   .alternate,
                                                               offset: const Offset(
-                                                                  0.0, 1.0),
+                                                                0.0,
+                                                                1.0,
+                                                              ),
                                                             )
                                                           ],
                                                         ),
@@ -503,6 +515,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                                               .override(
                                                                                 fontFamily: 'Readex Pro',
                                                                                 fontSize: 12.0,
+                                                                                letterSpacing: 0.0,
                                                                               ),
                                                                         ),
                                                                       ),
@@ -513,6 +526,7 @@ class _ReferralSubPageWidgetState extends State<ReferralSubPageWidget>
                                                                             .override(
                                                                               fontFamily: 'Readex Pro',
                                                                               fontSize: 10.0,
+                                                                              letterSpacing: 0.0,
                                                                             ),
                                                                       ),
                                                                     ],

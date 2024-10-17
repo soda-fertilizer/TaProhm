@@ -24,7 +24,6 @@ class EditCompanyModel extends FlutterFlowModel<EditCompanyWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   bool isDataUploading1 = false;
   FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -32,20 +31,20 @@ class EditCompanyModel extends FlutterFlowModel<EditCompanyWidget> {
 
   // State field(s) for CompanyName widget.
   FocusNode? companyNameFocusNode;
-  TextEditingController? companyNameController;
-  String? Function(BuildContext, String?)? companyNameControllerValidator;
+  TextEditingController? companyNameTextController;
+  String? Function(BuildContext, String?)? companyNameTextControllerValidator;
   // State field(s) for PhoneNumber widget.
   FocusNode? phoneNumberFocusNode;
-  TextEditingController? phoneNumberController;
-  String? Function(BuildContext, String?)? phoneNumberControllerValidator;
+  TextEditingController? phoneNumberTextController;
+  String? Function(BuildContext, String?)? phoneNumberTextControllerValidator;
   // State field(s) for TelegramLink widget.
   FocusNode? telegramLinkFocusNode;
-  TextEditingController? telegramLinkController;
-  String? Function(BuildContext, String?)? telegramLinkControllerValidator;
+  TextEditingController? telegramLinkTextController;
+  String? Function(BuildContext, String?)? telegramLinkTextControllerValidator;
   // State field(s) for Discount widget.
   FocusNode? discountFocusNode;
-  TextEditingController? discountController;
-  String? Function(BuildContext, String?)? discountControllerValidator;
+  TextEditingController? discountTextController;
+  String? Function(BuildContext, String?)? discountTextControllerValidator;
   // State field(s) for Checkbox widget.
   bool? checkboxValue;
   // State field(s) for TextField widget.
@@ -63,31 +62,24 @@ class EditCompanyModel extends FlutterFlowModel<EditCompanyWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl3 = '';
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     companyNameFocusNode?.dispose();
-    companyNameController?.dispose();
+    companyNameTextController?.dispose();
 
     phoneNumberFocusNode?.dispose();
-    phoneNumberController?.dispose();
+    phoneNumberTextController?.dispose();
 
     telegramLinkFocusNode?.dispose();
-    telegramLinkController?.dispose();
+    telegramLinkTextController?.dispose();
 
     discountFocusNode?.dispose();
-    discountController?.dispose();
+    discountTextController?.dispose();
 
     textFieldFocusNode?.dispose();
     textController5?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

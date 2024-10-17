@@ -12,38 +12,30 @@ class ReviewModel extends FlutterFlowModel<ReviewWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (check rating)] action in Review widget.
   ApiCallResponse? apiResultsmu;
   // State field(s) for RatingBar widget.
   double? ratingBarValue;
   // State field(s) for Detail widget.
   FocusNode? detailFocusNode;
-  TextEditingController? detailController;
-  String? Function(BuildContext, String?)? detailControllerValidator;
+  TextEditingController? detailTextController;
+  String? Function(BuildContext, String?)? detailTextControllerValidator;
   // State field(s) for ReadyRatingBar widget.
   double? readyRatingBarValue;
   // State field(s) for ReadyDetail widget.
   FocusNode? readyDetailFocusNode;
-  TextEditingController? readyDetailController;
-  String? Function(BuildContext, String?)? readyDetailControllerValidator;
-
-  /// Initialization and disposal methods.
+  TextEditingController? readyDetailTextController;
+  String? Function(BuildContext, String?)? readyDetailTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     detailFocusNode?.dispose();
-    detailController?.dispose();
+    detailTextController?.dispose();
 
     readyDetailFocusNode?.dispose();
-    readyDetailController?.dispose();
+    readyDetailTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

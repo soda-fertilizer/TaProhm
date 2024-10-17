@@ -42,7 +42,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
 
     _model.textFieldFocusNode3 ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -82,6 +82,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
           );
         }
         List<UsersRow> editAccountUsersRowList = snapshot.data!;
+
         // Return an empty Container when the item does not exist.
         if (snapshot.data!.isEmpty) {
           return Container();
@@ -89,13 +90,12 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
         final editAccountUsersRow = editAccountUsersRowList.isNotEmpty
             ? editAccountUsersRowList.first
             : null;
+
         return Title(
             title: 'EditAccount',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -120,7 +120,10 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                     alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Text(
                       'Edit Account',
-                      style: FlutterFlowTheme.of(context).titleMedium,
+                      style: FlutterFlowTheme.of(context).titleMedium.override(
+                            fontFamily: 'Readex Pro',
+                            letterSpacing: 0.0,
+                          ),
                     ),
                   ),
                   actions: const [],
@@ -152,7 +155,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                             if (selectedMedia != null &&
                                 selectedMedia.every((m) => validateFileFormat(
                                     m.storagePath, context))) {
-                              setState(() => _model.isDataUploading = true);
+                              safeSetState(() => _model.isDataUploading = true);
                               var selectedUploadedFiles = <FFUploadedFile>[];
 
                               var downloadUrls = <String>[];
@@ -184,14 +187,14 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               if (selectedUploadedFiles.length ==
                                       selectedMedia.length &&
                                   downloadUrls.length == selectedMedia.length) {
-                                setState(() {
+                                safeSetState(() {
                                   _model.uploadedLocalFile =
                                       selectedUploadedFiles.first;
                                   _model.uploadedFileUrl = downloadUrls.first;
                                 });
                                 showUploadMessage(context, 'Success!');
                               } else {
-                                setState(() {});
+                                safeSetState(() {});
                                 showUploadMessage(
                                     context, 'Failed to upload data');
                                 return;
@@ -221,13 +224,23 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                             text: editAccountUsersRow?.fullName,
                           ),
                           focusNode: _model.textFieldFocusNode1,
+                          autofocus: false,
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
                             labelText: 'User name',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color:
@@ -258,7 +271,11 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           validator: _model.textController1Validator
                               .asValidator(context),
                         ),
@@ -268,14 +285,24 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                             text: editAccountUsersRow?.userReferral,
                           ),
                           focusNode: _model.textFieldFocusNode2,
+                          autofocus: false,
                           readOnly: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
                             labelText: 'Referral',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color:
@@ -306,7 +333,11 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           validator: _model.textController2Validator
                               .asValidator(context),
                         ),
@@ -316,14 +347,24 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                             text: editAccountUsersRow?.invite,
                           ),
                           focusNode: _model.textFieldFocusNode3,
+                          autofocus: false,
                           readOnly: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             isDense: true,
                             labelText: 'Invite ID',
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            labelStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                            hintStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color:
@@ -354,7 +395,11 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               borderRadius: BorderRadius.circular(20.0),
                             ),
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           validator: _model.textController3Validator
                               .asValidator(context),
                         ),
@@ -380,6 +425,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                               }
                               List<SectorsRow> dropDownSectorsRowList =
                                   snapshot.data!;
+
                               return FlutterFlowDropDown<String>(
                                 controller: _model.dropDownValueController ??=
                                     FormFieldController<String>(
@@ -401,13 +447,13 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                         ))
                                     .toList(),
                                 onChanged: (val) async {
-                                  setState(() => _model.dropDownValue = val);
-                                  setState(() {
-                                    _model.sectorID = valueOrDefault<int>(
-                                      editAccountUsersRow?.sectorID,
-                                      1,
-                                    );
-                                  });
+                                  safeSetState(
+                                      () => _model.dropDownValue = val);
+                                  _model.sectorID = valueOrDefault<int>(
+                                    editAccountUsersRow?.sectorID,
+                                    1,
+                                  );
+                                  safeSetState(() {});
                                 },
                                 width: double.infinity,
                                 height: 40.0,
@@ -416,6 +462,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       fontSize: 14.0,
+                                      letterSpacing: 0.0,
                                     ),
                                 hintText: 'Please select sector',
                                 icon: Icon(
@@ -510,14 +557,13 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                       context.safePop();
                                       return;
                                     } else {
-                                      FFAppState().update(() {
-                                        FFAppState().deleteUserInfo();
-                                        FFAppState().UserInfo = UserInfoStruct
-                                            .fromSerializableMap(jsonDecode(
-                                                '{"IsTestAccount":"false"}'));
+                                      FFAppState().deleteUserInfo();
+                                      FFAppState().UserInfo = UserInfoStruct
+                                          .fromSerializableMap(jsonDecode(
+                                              '{\"IsTestAccount\":\"false\"}'));
 
-                                        FFAppState().IsLogged = false;
-                                      });
+                                      FFAppState().IsLogged = false;
+                                      FFAppState().update(() {});
                                       GoRouter.of(context).prepareAuthEvent();
                                       await authManager.signOut();
                                       GoRouter.of(context)
@@ -600,6 +646,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       color: Colors.white,
+                                      letterSpacing: 0.0,
                                     ),
                                 elevation: 3.0,
                                 borderSide: const BorderSide(
@@ -626,21 +673,20 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                   returnRows: true,
                                 );
                                 if (!FFAppState().UserInfo.isAdmin) {
-                                  FFAppState().update(() {
-                                    FFAppState().updateUserInfoStruct(
-                                      (e) => e
-                                        ..fullName = _model.textController1.text
-                                        ..sectorID = _model.sectorID
-                                        ..profile =
-                                            _model.uploadedFileUrl == ''
-                                                ? editAccountUsersRow.profile
-                                                : _model.uploadedFileUrl,
-                                    );
-                                  });
+                                  FFAppState().updateUserInfoStruct(
+                                    (e) => e
+                                      ..fullName = _model.textController1.text
+                                      ..sectorID = _model.sectorID
+                                      ..profile =
+                                          _model.uploadedFileUrl == ''
+                                              ? editAccountUsersRow.profile
+                                              : _model.uploadedFileUrl,
+                                  );
+                                  FFAppState().update(() {});
                                 }
                                 context.safePop();
 
-                                setState(() {});
+                                safeSetState(() {});
                               },
                               text: 'Update',
                               options: FFButtonOptions(
@@ -656,6 +702,7 @@ class _EditAccountWidgetState extends State<EditAccountWidget> {
                                     .override(
                                       fontFamily: 'Readex Pro',
                                       color: Colors.white,
+                                      letterSpacing: 0.0,
                                     ),
                                 elevation: 3.0,
                                 borderSide: const BorderSide(

@@ -9,22 +9,19 @@ class ChangePasswordModel extends FlutterFlowModel<ChangePasswordWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for OldPassword widget.
   FocusNode? oldPasswordFocusNode;
-  TextEditingController? oldPasswordController;
-  String? Function(BuildContext, String?)? oldPasswordControllerValidator;
+  TextEditingController? oldPasswordTextController;
+  String? Function(BuildContext, String?)? oldPasswordTextControllerValidator;
   // Stores action output result for [Custom Action - passwordHash] action in OldPassword widget.
   String? hashedPassword;
   // State field(s) for NewPassword widget.
   FocusNode? newPasswordFocusNode;
-  TextEditingController? newPasswordController;
+  TextEditingController? newPasswordTextController;
   late bool newPasswordVisibility;
-  String? Function(BuildContext, String?)? newPasswordControllerValidator;
+  String? Function(BuildContext, String?)? newPasswordTextControllerValidator;
   // Stores action output result for [Custom Action - passwordHash] action in Button widget.
   String? hashed;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -33,15 +30,10 @@ class ChangePasswordModel extends FlutterFlowModel<ChangePasswordWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     oldPasswordFocusNode?.dispose();
-    oldPasswordController?.dispose();
+    oldPasswordTextController?.dispose();
 
     newPasswordFocusNode?.dispose();
-    newPasswordController?.dispose();
+    newPasswordTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

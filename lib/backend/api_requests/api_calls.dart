@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
@@ -10,7 +12,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 /// Start Users Group Code
 
 class UsersGroup {
-  static String baseUrl =
+  static String getBaseUrl() =>
       'https://kwlydfajqnlgqirgtgze.supabase.co/rest/v1/rpc';
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
@@ -24,6 +26,8 @@ class UsersGroup {
   static CheckPhoneNumberCall checkPhoneNumberCall = CheckPhoneNumberCall();
   static SectorPhoneNumberCall sectorPhoneNumberCall = SectorPhoneNumberCall();
   static OneUserNameCall oneUserNameCall = OneUserNameCall();
+  static GetNearestDistrictCall getNearestDistrictCall =
+      GetNearestDistrictCall();
   static CheckPasswordChangeCall checkPasswordChangeCall =
       CheckPasswordChangeCall();
   static UserAndCompanyCall userAndCompanyCall = UserAndCompanyCall();
@@ -36,9 +40,11 @@ class LoginCall {
     String? phoneNumber = '',
     String? password = '',
   }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'Login',
-      apiUrl: '${UsersGroup.baseUrl}/user_login_auth',
+      apiUrl: '$baseUrl/user_login_auth',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -55,6 +61,7 @@ class LoginCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -125,9 +132,11 @@ class CheckReferralCall {
   Future<ApiCallResponse> call({
     String? phoneNumber = '',
   }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'Check referral',
-      apiUrl: '${UsersGroup.baseUrl}/check_referral',
+      apiUrl: '$baseUrl/check_referral',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -143,6 +152,7 @@ class CheckReferralCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -152,9 +162,11 @@ class CheckPhoneNumberCall {
   Future<ApiCallResponse> call({
     String? phoneNumber = '',
   }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'Check phone number',
-      apiUrl: '${UsersGroup.baseUrl}/check_phone_number',
+      apiUrl: '$baseUrl/check_phone_number',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -170,6 +182,7 @@ class CheckPhoneNumberCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -184,9 +197,11 @@ class SectorPhoneNumberCall {
   Future<ApiCallResponse> call({
     int? sectorId,
   }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'sector phone number',
-      apiUrl: '${UsersGroup.baseUrl}/sector_phone_number',
+      apiUrl: '$baseUrl/sector_phone_number',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -202,6 +217,7 @@ class SectorPhoneNumberCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -216,9 +232,11 @@ class OneUserNameCall {
   Future<ApiCallResponse> call({
     String? phoneNumber = '',
   }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'one user name',
-      apiUrl: '${UsersGroup.baseUrl}/one_user_name',
+      apiUrl: '$baseUrl/one_user_name',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -234,6 +252,7 @@ class OneUserNameCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -244,14 +263,61 @@ class OneUserNameCall {
       ));
 }
 
+class GetNearestDistrictCall {
+  Future<ApiCallResponse> call({
+    double? lat,
+    double? lon,
+  }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'get nearest district',
+      apiUrl: '$baseUrl/get_nearest_district',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt3bHlkZmFqcW5sZ3Fpcmd0Z3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDAyMDI0NDksImV4cCI6MjAxNTc3ODQ0OX0.E3j5ZwZhfsVfxDrUklsacFuiqXhFfIq7F_5CVaxMXBw',
+      },
+      params: {
+        'lat': lat,
+        'lon': lon,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? districtID(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].DistrictID''',
+      ));
+  int? provinceID(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$[:].ProvinceID''',
+      ));
+  double? distance(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$[:].distance''',
+      ));
+}
+
 class CheckPasswordChangeCall {
   Future<ApiCallResponse> call({
     int? userId,
     String? password = '',
   }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'check password change',
-      apiUrl: '${UsersGroup.baseUrl}/check_password_change',
+      apiUrl: '$baseUrl/check_password_change',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -268,6 +334,7 @@ class CheckPasswordChangeCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -275,9 +342,11 @@ class CheckPasswordChangeCall {
 
 class UserAndCompanyCall {
   Future<ApiCallResponse> call() async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'user and company',
-      apiUrl: '${UsersGroup.baseUrl}/user_and_company',
+      apiUrl: '$baseUrl/user_and_company',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -291,6 +360,7 @@ class UserAndCompanyCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -355,9 +425,11 @@ class SearchUserAndCompanyCall {
   Future<ApiCallResponse> call({
     String? pFullname = '',
   }) async {
+    final baseUrl = UsersGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'search user and company',
-      apiUrl: '${UsersGroup.baseUrl}/search_user_and_company',
+      apiUrl: '$baseUrl/search_user_and_company',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -373,6 +445,7 @@ class SearchUserAndCompanyCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -438,7 +511,7 @@ class SearchUserAndCompanyCall {
 /// Start Company Group Code
 
 class CompanyGroup {
-  static String baseUrl =
+  static String getBaseUrl() =>
       'https://kwlydfajqnlgqirgtgze.supabase.co/rest/v1/rpc';
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
@@ -459,9 +532,11 @@ class CompanyGroup {
 
 class CompanyLocationCall {
   Future<ApiCallResponse> call() async {
+    final baseUrl = CompanyGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'Company Location',
-      apiUrl: '${CompanyGroup.baseUrl}/company_location',
+      apiUrl: '$baseUrl/company_location',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -475,6 +550,7 @@ class CompanyLocationCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -500,9 +576,11 @@ class SearchCompanyCall {
   Future<ApiCallResponse> call({
     String? companyName = '',
   }) async {
+    final baseUrl = CompanyGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'Search company',
-      apiUrl: '${CompanyGroup.baseUrl}/search_company',
+      apiUrl: '$baseUrl/search_company',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -518,6 +596,7 @@ class SearchCompanyCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -669,9 +748,11 @@ class CheckRatingCall {
     int? userId,
     int? companyId,
   }) async {
+    final baseUrl = CompanyGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'check rating',
-      apiUrl: '${CompanyGroup.baseUrl}/check_rating',
+      apiUrl: '$baseUrl/check_rating',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -688,6 +769,7 @@ class CheckRatingCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -702,9 +784,11 @@ class CompanyRatingCall {
   Future<ApiCallResponse> call({
     int? id,
   }) async {
+    final baseUrl = CompanyGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'company rating',
-      apiUrl: '${CompanyGroup.baseUrl}/company_rating',
+      apiUrl: '$baseUrl/company_rating',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -720,6 +804,7 @@ class CompanyRatingCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -742,9 +827,11 @@ class CompayRatingByUserCall {
   Future<ApiCallResponse> call({
     int? id,
   }) async {
+    final baseUrl = CompanyGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'compay rating by user',
-      apiUrl: '${CompanyGroup.baseUrl}/compay_rating_by_user',
+      apiUrl: '$baseUrl/compay_rating_by_user',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -760,6 +847,7 @@ class CompayRatingByUserCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -806,9 +894,11 @@ class CompayRatingByCompanyCall {
   Future<ApiCallResponse> call({
     int? id,
   }) async {
+    final baseUrl = CompanyGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'compay rating by company',
-      apiUrl: '${CompanyGroup.baseUrl}/compay_rating_by_company',
+      apiUrl: '$baseUrl/compay_rating_by_company',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -824,6 +914,7 @@ class CompayRatingByCompanyCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -871,7 +962,7 @@ class CompayRatingByCompanyCall {
 /// Start Transactions Group Code
 
 class TransactionsGroup {
-  static String baseUrl =
+  static String getBaseUrl() =>
       'https://kwlydfajqnlgqirgtgze.supabase.co/rest/v1/rpc';
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
@@ -891,9 +982,11 @@ class TransactionsGroup {
 
 class ListTransactionsCall {
   Future<ApiCallResponse> call() async {
+    final baseUrl = TransactionsGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'List transactions',
-      apiUrl: '${TransactionsGroup.baseUrl}/list_transactions',
+      apiUrl: '$baseUrl/list_transactions',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -907,6 +1000,7 @@ class ListTransactionsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -981,9 +1075,11 @@ class ListHistoryTransactionsCall {
     String? fromDate = '',
     String? toDate = '',
   }) async {
+    final baseUrl = TransactionsGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'List history transactions',
-      apiUrl: '${TransactionsGroup.baseUrl}/list_history_transactions',
+      apiUrl: '$baseUrl/list_history_transactions',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -1000,6 +1096,7 @@ class ListHistoryTransactionsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1085,9 +1182,11 @@ class UserListTransactionsCall {
     String? toDate = '',
     String? userPhoneNumber = '',
   }) async {
+    final baseUrl = TransactionsGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'User list transactions',
-      apiUrl: '${TransactionsGroup.baseUrl}/user_list_transactions',
+      apiUrl: '$baseUrl/user_list_transactions',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -1105,6 +1204,7 @@ class UserListTransactionsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1161,9 +1261,11 @@ class UserListTransactionsNoDateCall {
   Future<ApiCallResponse> call({
     String? userPhoneNumber = '',
   }) async {
+    final baseUrl = TransactionsGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'User list transactions no date',
-      apiUrl: '${TransactionsGroup.baseUrl}/user_list_transactions_v2',
+      apiUrl: '$baseUrl/user_list_transactions_v2',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -1179,6 +1281,7 @@ class UserListTransactionsNoDateCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1240,7 +1343,7 @@ class UserListTransactionsNoDateCall {
 /// Start Edge Function Group Code
 
 class EdgeFunctionGroup {
-  static String baseUrl =
+  static String getBaseUrl() =>
       'https://kwlydfajqnlgqirgtgze.supabase.co/functions/v1';
   static Map<String, String> headers = {
     'Authorization':
@@ -1267,6 +1370,8 @@ class UpdateBalanceCall {
     double? money,
     String? action = 'plus',
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "phone_number": "$phoneNumber",
@@ -1275,7 +1380,7 @@ class UpdateBalanceCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Update Balance',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/UpdateBalance',
+      apiUrl: '$baseUrl/UpdateBalance',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1289,6 +1394,7 @@ class UpdateBalanceCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1300,6 +1406,8 @@ class ReferralCall {
     double? money,
     String? invitePhoneNumber = '',
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "phone_number": "$phoneNumber",
@@ -1309,7 +1417,7 @@ class ReferralCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Referral',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/Referral',
+      apiUrl: '$baseUrl/Referral',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1323,6 +1431,7 @@ class ReferralCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1335,6 +1444,8 @@ class ReferralSecondCall {
     String? invitePhoneNumber = '',
     String? sector = '',
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "phone_number": "$phoneNumber",
@@ -1346,7 +1457,7 @@ class ReferralSecondCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Referral second',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/ReferralV2',
+      apiUrl: '$baseUrl/ReferralV2',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1360,6 +1471,7 @@ class ReferralSecondCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1369,13 +1481,15 @@ class GetUserReferralCall {
   Future<ApiCallResponse> call({
     String? phoneNumber = '',
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "phone_number": "$phoneNumber"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Get User Referral',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/GetUserReferral',
+      apiUrl: '$baseUrl/GetUserReferral',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1389,6 +1503,7 @@ class GetUserReferralCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1481,6 +1596,8 @@ class PushNotifcationSingleUserCall {
     String? title = '',
     String? contents = '',
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "token": "$token",
@@ -1489,7 +1606,7 @@ class PushNotifcationSingleUserCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Push Notifcation Single User',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/PushNotifcation',
+      apiUrl: '$baseUrl/PushNotifcation',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1503,6 +1620,7 @@ class PushNotifcationSingleUserCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1514,6 +1632,7 @@ class PushNotifcationMultipleUserCall {
     String? title = '',
     String? contents = '',
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
     final token = _serializeList(tokenList);
 
     final ffApiRequestBody = '''
@@ -1524,7 +1643,7 @@ class PushNotifcationMultipleUserCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Push Notifcation Multiple User',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/PushNotifcation',
+      apiUrl: '$baseUrl/PushNotifcation',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1538,6 +1657,7 @@ class PushNotifcationMultipleUserCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1548,6 +1668,8 @@ class BroadcastPushNotifcationCall {
     String? title = '',
     String? contents = '',
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "title": "$title",
@@ -1555,7 +1677,7 @@ class BroadcastPushNotifcationCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Broadcast Push Notifcation',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/BroadcastPushNotifcation',
+      apiUrl: '$baseUrl/BroadcastPushNotifcation',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1569,6 +1691,7 @@ class BroadcastPushNotifcationCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1578,13 +1701,15 @@ class IncreaseCompanyViewCountCall {
   Future<ApiCallResponse> call({
     int? companyId,
   }) async {
+    final baseUrl = EdgeFunctionGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
   "company_id": $companyId
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Increase Company ViewCount',
-      apiUrl: '${EdgeFunctionGroup.baseUrl}/IncreaseCompanyViewCount',
+      apiUrl: '$baseUrl/IncreaseCompanyViewCount',
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
@@ -1598,6 +1723,7 @@ class IncreaseCompanyViewCountCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1608,7 +1734,7 @@ class IncreaseCompanyViewCountCall {
 /// Start Check Group Code
 
 class CheckGroup {
-  static String baseUrl =
+  static String getBaseUrl() =>
       'https://kwlydfajqnlgqirgtgze.supabase.co/rest/v1/rpc';
   static Map<String, String> headers = {
     'Authorization':
@@ -1626,9 +1752,11 @@ class CheckGroup {
 
 class CheckMaintenanceModeCall {
   Future<ApiCallResponse> call() async {
+    final baseUrl = CheckGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'Check Maintenance mode',
-      apiUrl: '${CheckGroup.baseUrl}/under_maintenance',
+      apiUrl: '$baseUrl/under_maintenance',
       callType: ApiCallType.GET,
       headers: {
         'Authorization':
@@ -1642,6 +1770,7 @@ class CheckMaintenanceModeCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1654,9 +1783,11 @@ class CheckMaintenanceModeCall {
 
 class AppVersionCall {
   Future<ApiCallResponse> call() async {
+    final baseUrl = CheckGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'AppVersion',
-      apiUrl: '${CheckGroup.baseUrl}/app_version',
+      apiUrl: '$baseUrl/app_version',
       callType: ApiCallType.GET,
       headers: {
         'Authorization':
@@ -1670,6 +1801,7 @@ class AppVersionCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1684,9 +1816,11 @@ class CheckUsablePhoneNumberCall {
   Future<ApiCallResponse> call({
     String? phoneNumber = '',
   }) async {
+    final baseUrl = CheckGroup.getBaseUrl();
+
     return ApiManager.instance.makeApiCall(
       callName: 'check usable phone number',
-      apiUrl: '${CheckGroup.baseUrl}/check_phone_number',
+      apiUrl: '$baseUrl/check_phone_number',
       callType: ApiCallType.GET,
       headers: {
         'Authorization':
@@ -1702,6 +1836,7 @@ class CheckUsablePhoneNumberCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1733,6 +1868,7 @@ class GetMaxPhoneNumberCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1759,11 +1895,18 @@ class ApiPagingParams {
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }
 
+String _toEncodable(dynamic item) {
+  return item;
+}
+
 String _serializeList(List? list) {
   list ??= <String>[];
   try {
-    return json.encode(list);
+    return json.encode(list, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("List serialization failed. Returning empty list.");
+    }
     return '[]';
   }
 }
@@ -1771,8 +1914,11 @@ String _serializeList(List? list) {
 String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   jsonVar ??= (isList ? [] : {});
   try {
-    return json.encode(jsonVar);
+    return json.encode(jsonVar, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("Json serialization failed. Returning empty json.");
+    }
     return isList ? '[]' : '{}';
   }
 }

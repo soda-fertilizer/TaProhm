@@ -43,10 +43,10 @@ class _DepositWidgetState extends State<DepositWidget> {
       return;
     });
 
-    _model.amountController ??= TextEditingController();
+    _model.amountTextController ??= TextEditingController();
     _model.amountFocusNode ??= FocusNode();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -122,7 +122,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: TextFormField(
-                    controller: _model.amountController,
+                    controller: _model.amountTextController,
                     focusNode: _model.amountFocusNode,
                     autofocus: true,
                     obscureText: false,
@@ -157,12 +157,15 @@ class _DepositWidgetState extends State<DepositWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
-                    style: FlutterFlowTheme.of(context).displayMedium,
+                    style: FlutterFlowTheme.of(context).displayMedium.override(
+                          fontFamily: 'Outfit',
+                          letterSpacing: 0.0,
+                        ),
                     textAlign: TextAlign.center,
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
-                    validator:
-                        _model.amountControllerValidator.asValidator(context),
+                    validator: _model.amountTextControllerValidator
+                        .asValidator(context),
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp('[0-9]'))
                     ],
@@ -230,13 +233,23 @@ class _DepositWidgetState extends State<DepositWidget> {
                                               'ABA Pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                             Text(
                                               'Click to pay',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelSmall,
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ],
                                         ),
@@ -310,13 +323,23 @@ class _DepositWidgetState extends State<DepositWidget> {
                                                 'Acleda Pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Text(
                                                 'Click to pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -390,13 +413,23 @@ class _DepositWidgetState extends State<DepositWidget> {
                                                 'Wing Pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                               Text(
                                                 'Click to pay',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall,
+                                                        .labelSmall
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -433,7 +466,11 @@ class _DepositWidgetState extends State<DepositWidget> {
                             const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'Add image',
-                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                         ),
                       ),
                       Padding(
@@ -448,9 +485,8 @@ class _DepositWidgetState extends State<DepositWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                setState(() {
-                                  _model.uploadedImage = null;
-                                });
+                                _model.uploadedImage = null;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -480,7 +516,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading1 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -517,7 +553,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile1 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl1 =
@@ -525,17 +561,15 @@ class _DepositWidgetState extends State<DepositWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl1;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl1;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -563,7 +597,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                                     selectedMedia.every((m) =>
                                         validateFileFormat(
                                             m.storagePath, context))) {
-                                  setState(
+                                  safeSetState(
                                       () => _model.isDataUploading2 = true);
                                   var selectedUploadedFiles =
                                       <FFUploadedFile>[];
@@ -600,7 +634,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                                           selectedMedia.length &&
                                       downloadUrls.length ==
                                           selectedMedia.length) {
-                                    setState(() {
+                                    safeSetState(() {
                                       _model.uploadedLocalFile2 =
                                           selectedUploadedFiles.first;
                                       _model.uploadedFileUrl2 =
@@ -608,17 +642,15 @@ class _DepositWidgetState extends State<DepositWidget> {
                                     });
                                     showUploadMessage(context, 'Success!');
                                   } else {
-                                    setState(() {});
+                                    safeSetState(() {});
                                     showUploadMessage(
                                         context, 'Failed to upload data');
                                     return;
                                   }
                                 }
 
-                                setState(() {
-                                  _model.uploadedImage =
-                                      _model.uploadedFileUrl2;
-                                });
+                                _model.uploadedImage = _model.uploadedFileUrl2;
+                                safeSetState(() {});
                               },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
@@ -659,7 +691,8 @@ class _DepositWidgetState extends State<DepositWidget> {
                     onPressed: () async {
                       _model.requestWithdrawal =
                           await TransactionsTable().insert({
-                        'Amount': double.tryParse(_model.amountController.text),
+                        'Amount':
+                            double.tryParse(_model.amountTextController.text),
                         'IsApprove': false,
                         'UserPhoneNumber': FFAppState().UserInfo.phoneNumber,
                         'Image': _model.uploadedImage,
@@ -674,7 +707,7 @@ class _DepositWidgetState extends State<DepositWidget> {
                       });
                       context.safePop();
 
-                      setState(() {});
+                      safeSetState(() {});
                     },
                     text: 'Confirm',
                     options: FFButtonOptions(
@@ -685,7 +718,11 @@ class _DepositWidgetState extends State<DepositWidget> {
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).secondary,
-                      textStyle: FlutterFlowTheme.of(context).bodyLarge,
+                      textStyle:
+                          FlutterFlowTheme.of(context).bodyLarge.override(
+                                fontFamily: 'Readex Pro',
+                                letterSpacing: 0.0,
+                              ),
                       elevation: 0.0,
                       borderSide: const BorderSide(
                         color: Colors.transparent,

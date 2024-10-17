@@ -7,7 +7,6 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'member_model.dart';
 export 'member_model.dart';
 
@@ -28,7 +27,7 @@ class _MemberWidgetState extends State<MemberWidget> {
     super.initState();
     _model = createModel(context, () => MemberModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -40,8 +39,6 @@ class _MemberWidgetState extends State<MemberWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<ApiCallResponse>(
       future: UsersGroup.userAndCompanyCall.call(),
       builder: (context, snapshot) {
@@ -63,13 +60,12 @@ class _MemberWidgetState extends State<MemberWidget> {
           );
         }
         final memberUserAndCompanyResponse = snapshot.data!;
+
         return Title(
             title: 'Member',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).alternate,
@@ -82,6 +78,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 20.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -125,7 +122,11 @@ class _MemberWidgetState extends State<MemberWidget> {
                                           formatType: FormatType.compact,
                                         )}',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
                                     ),
                                     Padding(
@@ -175,6 +176,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                                     final datas = memberUserAndCompanyResponse
                                         .jsonBody
                                         .toList();
+
                                     return ListView.separated(
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
@@ -233,7 +235,10 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .alternate,
-                                                      offset: const Offset(0.0, 1.0),
+                                                      offset: const Offset(
+                                                        0.0,
+                                                        1.0,
+                                                      ),
                                                     )
                                                   ],
                                                 ),
@@ -319,10 +324,12 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                                 'Readex Pro',
                                                                             fontSize:
                                                                                 10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
                                                                           ),
                                                                     ),
                                                                     Text(
-                                                                      'Join: ${dateTimeFormat('d/M/y h:mm a', functions.dataTimeConverter(getJsonField(
+                                                                      'Join: ${dateTimeFormat("d/M/y h:mm a", functions.dataTimeConverter(getJsonField(
                                                                             datasItem,
                                                                             r'''$.joindate''',
                                                                           ).toString()))}',
@@ -334,6 +341,8 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                                 'Readex Pro',
                                                                             fontSize:
                                                                                 10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
                                                                           ),
                                                                     ),
                                                                   ],
@@ -353,6 +362,8 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                                 'Readex Pro',
                                                                             fontSize:
                                                                                 10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
                                                                           ),
                                                                     ),
                                                                     InkWell(
@@ -390,6 +401,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                               fontFamily: 'Readex Pro',
                                                                               color: const Color(0xFF1900FF),
                                                                               fontSize: 10.0,
+                                                                              letterSpacing: 0.0,
                                                                             ),
                                                                       ),
                                                                     ),
@@ -413,6 +425,8 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                                 'Readex Pro',
                                                                             fontSize:
                                                                                 10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
                                                                           ),
                                                                     ),
                                                                     Text(
@@ -430,6 +444,8 @@ class _MemberWidgetState extends State<MemberWidget> {
                                                                                 FlutterFlowTheme.of(context).error,
                                                                             fontSize:
                                                                                 10.0,
+                                                                            letterSpacing:
+                                                                                0.0,
                                                                           ),
                                                                     ),
                                                                   ],
@@ -455,7 +471,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                             ),
                           wrapWithModel(
                             model: _model.navPaddingModel,
-                            updateCallback: () => setState(() {}),
+                            updateCallback: () => safeSetState(() {}),
                             child: const NavPaddingWidget(),
                           ),
                         ],
@@ -464,7 +480,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                         alignment: const AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
                           model: _model.navBarModel,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: const NavBarWidget(
                             selectPageIndex: 4,
                           ),

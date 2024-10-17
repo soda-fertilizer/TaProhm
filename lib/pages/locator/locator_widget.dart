@@ -55,9 +55,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
             context: context,
             builder: (context) {
               return GestureDetector(
-                onTap: () => _model.unfocusNode.canRequestFocus
-                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                    : FocusScope.of(context).unfocus(),
+                onTap: () => FocusScope.of(context).unfocus(),
                 child: Padding(
                   padding: MediaQuery.viewInsetsOf(context),
                   child: SizedBox(
@@ -92,8 +90,8 @@ class _LocatorWidgetState extends State<LocatorWidget> {
     });
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -157,13 +155,12 @@ class _LocatorWidgetState extends State<LocatorWidget> {
           );
         }
         List<CompaniesRow> locatorCompaniesRowList = snapshot.data!;
+
         return Title(
             title: 'Locator',
             color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
             child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
+              onTap: () => FocusScope.of(context).unfocus(),
               child: Scaffold(
                 key: scaffoldKey,
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -176,6 +173,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                           fontFamily: 'Outfit',
                           color: Colors.white,
                           fontSize: 20.0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                   actions: const [],
@@ -211,13 +209,8 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                                         context: context,
                                         builder: (context) {
                                           return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
+                                            onTap: () => FocusScope.of(context)
+                                                .unfocus(),
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
@@ -242,13 +235,8 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                                         context: context,
                                         builder: (context) {
                                           return GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
+                                            onTap: () => FocusScope.of(context)
+                                                .unfocus(),
                                             child: Padding(
                                               padding: MediaQuery.viewInsetsOf(
                                                   context),
@@ -275,7 +263,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                             alignment: const AlignmentDirectional(0.0, 1.0),
                             child: wrapWithModel(
                               model: _model.navPaddingModel,
-                              updateCallback: () => setState(() {}),
+                              updateCallback: () => safeSetState(() {}),
                               child: const NavPaddingWidget(),
                             ),
                           ),
@@ -285,7 +273,7 @@ class _LocatorWidgetState extends State<LocatorWidget> {
                         alignment: const AlignmentDirectional(0.0, 1.0),
                         child: wrapWithModel(
                           model: _model.navBarModel,
-                          updateCallback: () => setState(() {}),
+                          updateCallback: () => safeSetState(() {}),
                           child: const NavBarWidget(
                             selectPageIndex: 2,
                           ),

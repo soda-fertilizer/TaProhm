@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
 import 'admin_sub_account_model.dart';
 export 'admin_sub_account_model.dart';
 
@@ -40,7 +39,7 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
         'Users',
         () async {
           FFAppState().clearAdminRequestAccountCache();
-          setState(() {
+          safeSetState(() {
             FFAppState()
                 .clearAdminRequestAccountCacheKey(_model.requestLastUniqueKey);
             _model.requestCompleted = false;
@@ -59,8 +58,8 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
             0,
           ),
           1),
-    )..addListener(() => setState(() {}));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -72,15 +71,11 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'AdminSubAccount',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -105,7 +100,10 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                 alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Text(
                   'Account',
-                  style: FlutterFlowTheme.of(context).titleMedium,
+                  style: FlutterFlowTheme.of(context).titleMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
               actions: const [],
@@ -168,6 +166,7 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                     );
                   }
                   List<UsersRow> tabBarUsersRowList = snapshot.data!;
+
                   return Column(
                     children: [
                       Align(
@@ -176,7 +175,11 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                           labelColor: FlutterFlowTheme.of(context).primaryText,
                           unselectedLabelColor:
                               FlutterFlowTheme.of(context).secondaryText,
-                          labelStyle: FlutterFlowTheme.of(context).titleMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                           unselectedLabelStyle: const TextStyle(),
                           indicatorColor: FlutterFlowTheme.of(context).primary,
                           padding: const EdgeInsets.all(4.0),
@@ -206,6 +209,7 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                   final normal = tabBarUsersRowList
                                       .where((e) => e.isMember == false)
                                       .toList();
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
@@ -244,7 +248,10 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
-                                                  offset: const Offset(0.0, 1.0),
+                                                  offset: const Offset(
+                                                    0.0,
+                                                    1.0,
+                                                  ),
                                                 )
                                               ],
                                             ),
@@ -313,6 +320,8 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                                                             .primaryText
                                                                         : FlutterFlowTheme.of(context)
                                                                             .error,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ),
@@ -320,7 +329,13 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                                             'ID: ${normalItem.phoneNumber}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .labelMedium,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                           ),
                                                         ],
                                                       ),
@@ -352,6 +367,7 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                   final tabBarVar = tabBarUsersRowList
                                       .where((e) => e.isMember == true)
                                       .toList();
+
                                   return ListView.builder(
                                     padding: EdgeInsets.zero,
                                     scrollDirection: Axis.vertical,
@@ -374,7 +390,10 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .alternate,
-                                                offset: const Offset(0.0, 1.0),
+                                                offset: const Offset(
+                                                  0.0,
+                                                  1.0,
+                                                ),
                                               )
                                             ],
                                           ),
@@ -467,6 +486,8 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                                                             .primaryText
                                                                         : FlutterFlowTheme.of(context)
                                                                             .error,
+                                                                    letterSpacing:
+                                                                        0.0,
                                                                   ),
                                                             ),
                                                           ),
@@ -474,7 +495,13 @@ class _AdminSubAccountWidgetState extends State<AdminSubAccountWidget>
                                                             'ID: ${tabBarVarItem.phoneNumber}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .labelMedium,
+                                                                .labelMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
                                                           ),
                                                         ],
                                                       ),

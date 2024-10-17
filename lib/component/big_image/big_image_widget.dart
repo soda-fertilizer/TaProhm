@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'big_image_model.dart';
 export 'big_image_model.dart';
 
@@ -32,7 +31,7 @@ class _BigImageWidgetState extends State<BigImageWidget> {
     super.initState();
     _model = createModel(context, () => BigImageModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -44,8 +43,6 @@ class _BigImageWidgetState extends State<BigImageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return BackdropFilter(
       filter: ImageFilter.blur(
         sigmaX: 2.0,

@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:provider/provider.dart';
 import 'select_location_model.dart';
 export 'select_location_model.dart';
 
@@ -33,8 +32,8 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
     _model = createModel(context, () => SelectLocationModel());
 
     getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0), cached: true)
-        .then((loc) => setState(() => currentUserLocationValue = loc));
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+        .then((loc) => safeSetState(() => currentUserLocationValue = loc));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -46,7 +45,6 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
     if (currentUserLocationValue == null) {
       return Container(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -122,6 +120,7 @@ class _SelectLocationWidgetState extends State<SelectLocationWidget> {
                 textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                       fontFamily: 'Readex Pro',
                       color: Colors.white,
+                      letterSpacing: 0.0,
                     ),
                 elevation: 3.0,
                 borderSide: const BorderSide(

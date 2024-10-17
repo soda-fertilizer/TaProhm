@@ -24,7 +24,6 @@ class CreateUserForOfficerModel
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (Get max phone number)] action in CreateUserForOfficer widget.
   ApiCallResponse? maxPhoneNumber;
   bool isDataUploading = false;
@@ -34,25 +33,29 @@ class CreateUserForOfficerModel
 
   // State field(s) for NormalFullName widget.
   FocusNode? normalFullNameFocusNode;
-  TextEditingController? normalFullNameController;
-  String? Function(BuildContext, String?)? normalFullNameControllerValidator;
+  TextEditingController? normalFullNameTextController;
+  String? Function(BuildContext, String?)?
+      normalFullNameTextControllerValidator;
   // State field(s) for NormalPassword widget.
   FocusNode? normalPasswordFocusNode;
-  TextEditingController? normalPasswordController;
+  TextEditingController? normalPasswordTextController;
   late bool normalPasswordVisibility;
-  String? Function(BuildContext, String?)? normalPasswordControllerValidator;
+  String? Function(BuildContext, String?)?
+      normalPasswordTextControllerValidator;
   // State field(s) for NormalPhoneNumber widget.
   FocusNode? normalPhoneNumberFocusNode;
-  TextEditingController? normalPhoneNumberController;
-  String? Function(BuildContext, String?)? normalPhoneNumberControllerValidator;
+  TextEditingController? normalPhoneNumberTextController;
+  String? Function(BuildContext, String?)?
+      normalPhoneNumberTextControllerValidator;
   // State field(s) for NormalReferral widget.
   FocusNode? normalReferralFocusNode;
-  TextEditingController? normalReferralController;
-  String? Function(BuildContext, String?)? normalReferralControllerValidator;
+  TextEditingController? normalReferralTextController;
+  String? Function(BuildContext, String?)?
+      normalReferralTextControllerValidator;
   // State field(s) for NormalInvite widget.
   FocusNode? normalInviteFocusNode;
-  TextEditingController? normalInviteController;
-  String? Function(BuildContext, String?)? normalInviteControllerValidator;
+  TextEditingController? normalInviteTextController;
+  String? Function(BuildContext, String?)? normalInviteTextControllerValidator;
   // State field(s) for NormalSector widget.
   String? normalSectorValue;
   FormFieldController<String>? normalSectorValueController;
@@ -69,8 +72,6 @@ class CreateUserForOfficerModel
   // Stores action output result for [Backend Call - API (Check referral)] action in Button widget.
   ApiCallResponse? checkinvideNew;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     normalPasswordVisibility = false;
@@ -78,24 +79,19 @@ class CreateUserForOfficerModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     normalFullNameFocusNode?.dispose();
-    normalFullNameController?.dispose();
+    normalFullNameTextController?.dispose();
 
     normalPasswordFocusNode?.dispose();
-    normalPasswordController?.dispose();
+    normalPasswordTextController?.dispose();
 
     normalPhoneNumberFocusNode?.dispose();
-    normalPhoneNumberController?.dispose();
+    normalPhoneNumberTextController?.dispose();
 
     normalReferralFocusNode?.dispose();
-    normalReferralController?.dispose();
+    normalReferralTextController?.dispose();
 
     normalInviteFocusNode?.dispose();
-    normalInviteController?.dispose();
+    normalInviteTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -7,23 +7,15 @@ import 'package:flutter/material.dart';
 class AdminBusinessesModel extends FlutterFlowModel<AdminBusinessesWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   Completer<List<CompaniesRow>>? requestCompleter;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
-
+  /// Additional helper methods.
   Future waitForRequestCompleted({
     double minWait = 0,
     double maxWait = double.infinity,
