@@ -122,7 +122,9 @@ class _SinupAlertWidgetState extends State<SinupAlertWidget> {
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () async {},
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
                     child: Text(
                       'Ok',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(

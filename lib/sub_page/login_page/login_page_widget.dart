@@ -26,7 +26,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await requestPermission(notificationsPermission);
+      if (!(await getPermissionStatus(locationPermission))) {
+        await requestPermission(locationPermission);
+      }
+      if (!(await getPermissionStatus(notificationsPermission))) {
+        await requestPermission(notificationsPermission);
+      }
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

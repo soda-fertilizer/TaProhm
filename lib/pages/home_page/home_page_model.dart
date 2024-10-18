@@ -34,12 +34,12 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   ///  State fields for stateful widgets in this page.
 
+  // Stores action output result for [Backend Call - API (check password change)] action in HomePage widget.
+  ApiCallResponse? passwordChange;
   // Stores action output result for [Backend Call - API (get nearest district)] action in HomePage widget.
   ApiCallResponse? locationID;
   // Stores action output result for [Backend Call - API (AppVersion)] action in HomePage widget.
   ApiCallResponse? appVersion;
-  // Stores action output result for [Backend Call - API (check password change)] action in HomePage widget.
-  ApiCallResponse? passwordChange;
   // Model for NavPadding component.
   late NavPaddingModel navPaddingModel;
   // Model for NavBar component.

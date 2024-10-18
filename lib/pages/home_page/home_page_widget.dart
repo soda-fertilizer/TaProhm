@@ -12,6 +12,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/permissions_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -46,84 +47,79 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       currentUserLocationValue =
           await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
       Function() navigate = () {};
+      if (!(await getPermissionStatus(locationPermission))) {
+        await requestPermission(locationPermission);
+      }
+      _model.passwordChange = await UsersGroup.checkPasswordChangeCall.call(
+        userId: FFAppState().UserInfo.userID,
+        password: FFAppState().UserInfo.hashedPassword,
+      );
+
+      if ((_model.passwordChange?.succeeded ?? true)) {
+        GoRouter.of(context).prepareAuthEvent();
+        await authManager.signOut();
+        GoRouter.of(context).clearRedirectLocation();
+
+        navigate = () => context.goNamedAuth('LoginPage', context.mounted);
+        FFAppState().deleteUserInfo();
+        FFAppState().UserInfo = UserInfoStruct.fromSerializableMap(
+            jsonDecode('{\"IsTestAccount\":\"false\"}'));
+
+        FFAppState().IsLogged = false;
+        safeSetState(() {});
+      }
       await Future.wait([
         Future(() async {
+          unawaited(
+            () async {}(),
+          );
           _model.locationID = await UsersGroup.getNearestDistrictCall.call(
             lat: functions.splitLatLng(currentUserLocationValue)?.first,
             lon: functions.splitLatLng(currentUserLocationValue)?.last,
           );
 
-          if ((_model.locationID?.succeeded ?? true)) {
-            _model.selectLocation = currentUserLocationValue;
-            _model.selectProvinceID = valueOrDefault<int>(
+          _model.selectLocation = currentUserLocationValue;
+          _model.selectProvinceID =
               UsersGroup.getNearestDistrictCall.provinceID(
+            (_model.locationID?.jsonBody ?? ''),
+          );
+          _model.selectDistrictID = UsersGroup.getNearestDistrictCall
+              .districtID(
                 (_model.locationID?.jsonBody ?? ''),
-              ),
-              1,
-            );
-            _model.selectDistrictID = valueOrDefault<double>(
-              UsersGroup.getNearestDistrictCall
-                  .districtID(
-                    (_model.locationID?.jsonBody ?? ''),
-                  )
-                  ?.toDouble(),
-              1.0,
-            );
-            safeSetState(() {});
-          }
+              )
+              ?.toDouble();
+          safeSetState(() {});
         }),
         Future(() async {
           _model.appVersion = await CheckGroup.appVersionCall.call();
 
-          if ((_model.appVersion?.succeeded ?? true)) {
-            await actions.inAppUpdate(
-              CheckGroup.appVersionCall.value(
-                (_model.appVersion?.jsonBody ?? ''),
-              ),
-              () async {
-                await showDialog(
-                  context: context,
-                  builder: (dialogContext) {
-                    return Dialog(
-                      elevation: 0,
-                      insetPadding: EdgeInsets.zero,
-                      backgroundColor: Colors.transparent,
-                      alignment: const AlignmentDirectional(0.0, 0.0)
-                          .resolve(Directionality.of(context)),
-                      child: GestureDetector(
-                        onTap: () => FocusScope.of(dialogContext).unfocus(),
-                        child: const SizedBox(
-                          height: 300.0,
-                          width: 300.0,
-                          child: UpdateAlertWidget(),
-                        ),
+          await actions.inAppUpdate(
+            CheckGroup.appVersionCall.value(
+              (_model.appVersion?.jsonBody ?? ''),
+            ),
+            () async {
+              await showDialog(
+                context: context,
+                builder: (dialogContext) {
+                  return Dialog(
+                    elevation: 0,
+                    insetPadding: EdgeInsets.zero,
+                    backgroundColor: Colors.transparent,
+                    alignment: const AlignmentDirectional(0.0, 0.0)
+                        .resolve(Directionality.of(context)),
+                    child: GestureDetector(
+                      onTap: () => FocusScope.of(dialogContext).unfocus(),
+                      child: const SizedBox(
+                        height: 300.0,
+                        width: 300.0,
+                        child: UpdateAlertWidget(),
                       ),
-                    );
-                  },
-                );
-              },
-            );
-          }
-        }),
-        Future(() async {
-          _model.passwordChange = await UsersGroup.checkPasswordChangeCall.call(
-            userId: FFAppState().UserInfo.userID,
-            password: FFAppState().UserInfo.hashedPassword,
+                    ),
+                  );
+                },
+              );
+            },
           );
-
-          if ((_model.passwordChange?.succeeded ?? true)) {
-            GoRouter.of(context).prepareAuthEvent();
-            await authManager.signOut();
-            GoRouter.of(context).clearRedirectLocation();
-
-            navigate = () => context.goNamedAuth('LoginPage', context.mounted);
-            FFAppState().deleteUserInfo();
-            FFAppState().UserInfo = UserInfoStruct.fromSerializableMap(
-                jsonDecode('{\"IsTestAccount\":\"false\"}'));
-
-            FFAppState().IsLogged = false;
-            safeSetState(() {});
-          }
         }),
       ]);
 
@@ -1339,18 +1335,34 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           size: 24.0,
                                         ),
                                       ),
-                                      Text(
-                                        'Ta Prohm',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              fontSize: 20.0,
-                                              letterSpacing: 0.0,
-                                            ),
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          currentUserLocationValue =
+                                              await getCurrentUserLocation(
+                                                  defaultLocation:
+                                                      const LatLng(0.0, 0.0));
+                                          await actions.printAction(
+                                            currentUserLocationValue
+                                                ?.toString(),
+                                          );
+                                        },
+                                        child: Text(
+                                          'Ta Prohm',
+                                          style: FlutterFlowTheme.of(context)
+                                              .headlineMedium
+                                              .override(
+                                                fontFamily: 'Outfit',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                fontSize: 20.0,
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
                                       ),
                                     ].divide(const SizedBox(width: 5.0)),
                                   ),
@@ -1426,8 +1438,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                           ),
                         ),
-                        if (_model.selectProvinceID != null)
-                          FutureBuilder<List<ProvincesRow>>(
+                        Container(
+                          width: double.infinity,
+                          height: 40.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primary,
+                          ),
+                          child: FutureBuilder<List<ProvincesRow>>(
                             future: ProvincesTable().queryRows(
                               queryFn: (q) => q,
                             ),
@@ -1446,67 +1463,60 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   ),
                                 );
                               }
-                              List<ProvincesRow> containerProvincesRowList =
+                              List<ProvincesRow> rowProvincesRowList =
                                   snapshot.data!;
 
-                              return Container(
-                                width: double.infinity,
-                                height: 40.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                ),
-                                child: Builder(
-                                  builder: (context) {
-                                    final containerVar =
-                                        containerProvincesRowList
-                                            .sortedList(
-                                                keyOf: (e) => functions
-                                                    .returnBiggerIfTarget(
-                                                        e.provinceID,
-                                                        e.provinceID,
-                                                        UsersGroup
-                                                            .getNearestDistrictCall
-                                                            .provinceID(
-                                                          (_model.locationID
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        )!)
-                                                    .toString(),
-                                                desc: true)
-                                            .toList();
-
-                                    return SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children:
-                                            List.generate(containerVar.length,
-                                                (containerVarIndex) {
-                                          final containerVarItem =
-                                              containerVar[containerVarIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              _model.buttonClickindex =
-                                                  containerVarIndex;
-                                              _model.selectLocation =
-                                                  functions.returnLatLng(
-                                                      containerVarItem.latitude,
-                                                      containerVarItem
-                                                          .longitude);
-                                              _model.selectProvinceID =
-                                                  containerVarItem.provinceID;
-                                              safeSetState(() {});
-                                            },
-                                            child: Container(
-                                              height: 55.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    _model.selectProvinceID ==
-                                                            containerVarItem
+                              return SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: List.generate(
+                                      rowProvincesRowList.length, (rowIndex) {
+                                    final rowProvincesRow =
+                                        rowProvincesRowList[rowIndex];
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.buttonClickindex = rowIndex;
+                                        _model.selectLocation =
+                                            functions.returnLatLng(
+                                                rowProvincesRow.latitude,
+                                                rowProvincesRow.longitude);
+                                        _model.selectProvinceID =
+                                            rowProvincesRow.provinceID;
+                                        safeSetState(() {});
+                                      },
+                                      child: Container(
+                                        height: 55.0,
+                                        decoration: BoxDecoration(
+                                          color: _model.selectProvinceID ==
+                                                  rowProvincesRow.provinceID
+                                              ? FlutterFlowTheme.of(context)
+                                                  .primaryBackground
+                                              : FlutterFlowTheme.of(context)
+                                                  .primary,
+                                        ),
+                                        child: Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 0.0, 10.0, 0.0),
+                                            child: Text(
+                                              rowProvincesRow.provinceName,
+                                              textAlign: TextAlign.center,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: _model
+                                                                .selectProvinceID !=
+                                                            rowProvincesRow
                                                                 .provinceID
                                                         ? FlutterFlowTheme.of(
                                                                 context)
@@ -1514,173 +1524,117 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                         : FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
-                                              ),
-                                              child: Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          10.0, 0.0, 10.0, 0.0),
-                                                  child: Text(
-                                                    containerVarItem
-                                                        .provinceName,
-                                                    textAlign: TextAlign.center,
-                                                    style:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Readex Pro',
-                                                              color: _model
-                                                                          .selectProvinceID !=
-                                                                      containerVarItem
-                                                                          .provinceID
-                                                                  ? FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground
-                                                                  : FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
+                                                    letterSpacing: 0.0,
                                                   ),
-                                                ),
-                                              ),
                                             ),
-                                          );
-                                        }).divide(const SizedBox(width: 10.0)),
+                                          ),
+                                        ),
                                       ),
                                     );
-                                  },
+                                  }).divide(const SizedBox(width: 10.0)),
                                 ),
                               );
                             },
                           ),
+                        ),
                         if (_model.selectProvinceID != null)
-                          FutureBuilder<List<DistrictsRow>>(
-                            future: DistrictsTable().queryRows(
-                              queryFn: (q) => q.eq(
-                                'ProvinceID',
-                                _model.selectProvinceID,
+                          Container(
+                            width: double.infinity,
+                            height: 55.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  5.0, 0.0, 5.0, 0.0),
+                              child: FutureBuilder<List<DistrictsRow>>(
+                                future: DistrictsTable().queryRows(
+                                  queryFn: (q) => q.eq(
+                                    'ProvinceID',
+                                    _model.selectProvinceID,
+                                  ),
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<DistrictsRow> rowDistrictsRowList =
+                                      snapshot.data!;
+
+                                  return SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: List.generate(
+                                          rowDistrictsRowList.length,
+                                          (rowIndex) {
+                                        final rowDistrictsRow =
+                                            rowDistrictsRowList[rowIndex];
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.fromSTEB(
+                                                  1.0, 0.0, 0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              _model.selectLocation =
+                                                  functions.returnLatLng(
+                                                      rowDistrictsRow.latitude,
+                                                      rowDistrictsRow
+                                                          .longitude);
+                                              _model.buttonClickindex2 =
+                                                  rowIndex;
+                                              _model.selectDistrictID =
+                                                  rowDistrictsRow.districtID
+                                                      .toDouble();
+                                              safeSetState(() {});
+                                            },
+                                            child: Text(
+                                              rowDistrictsRow.districtName,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: _model
+                                                                .selectDistrictID ==
+                                                            rowDistrictsRow
+                                                                .districtID
+                                                                .toDouble()
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                            ),
+                                          ),
+                                        );
+                                      }).divide(const SizedBox(width: 15.0)),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<DistrictsRow> containerDistrictsRowList =
-                                  snapshot.data!;
-
-                              return Container(
-                                width: double.infinity,
-                                height: 55.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 0.0, 5.0, 0.0),
-                                  child: Builder(
-                                    builder: (context) {
-                                      final containerVar =
-                                          containerDistrictsRowList
-                                              .sortedList(
-                                                  keyOf: (e) => functions
-                                                      .returnBiggerIfTarget(
-                                                          e.districtID,
-                                                          e.districtID,
-                                                          UsersGroup
-                                                              .getNearestDistrictCall
-                                                              .districtID(
-                                                            (_model.locationID
-                                                                    ?.jsonBody ??
-                                                                ''),
-                                                          )!)
-                                                      .toString(),
-                                                  desc: true)
-                                              .toList();
-
-                                      return SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children:
-                                              List.generate(containerVar.length,
-                                                  (containerVarIndex) {
-                                            final containerVarItem =
-                                                containerVar[containerVarIndex];
-                                            return Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(1.0, 0.0, 0.0, 0.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  _model.selectLocation =
-                                                      functions.returnLatLng(
-                                                          containerVarItem
-                                                              .latitude,
-                                                          containerVarItem
-                                                              .longitude);
-                                                  _model.buttonClickindex2 =
-                                                      containerVarIndex;
-                                                  _model.selectDistrictID =
-                                                      containerVarItem
-                                                          .districtID
-                                                          .toDouble();
-                                                  safeSetState(() {});
-                                                },
-                                                child: Text(
-                                                  containerVarItem.districtName,
-                                                  style:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Readex Pro',
-                                                            color: _model
-                                                                        .selectDistrictID ==
-                                                                    containerVarItem
-                                                                        .districtID
-                                                                        .toDouble()
-                                                                ? FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary
-                                                                : FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryText,
-                                                            letterSpacing: 0.0,
-                                                          ),
-                                                ),
-                                              ),
-                                            );
-                                          }).divide(const SizedBox(width: 15.0)),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              );
-                            },
                           ),
                         Expanded(
                           child: FutureBuilder<List<CompaniesRow>>(
