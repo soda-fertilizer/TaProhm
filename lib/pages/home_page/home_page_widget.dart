@@ -53,53 +53,57 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             lon: functions.splitLatLng(currentUserLocationValue)?.last,
           );
 
-          _model.selectLocation = currentUserLocationValue;
-          _model.selectProvinceID = valueOrDefault<int>(
-            UsersGroup.getNearestDistrictCall.provinceID(
-              (_model.locationID?.jsonBody ?? ''),
-            ),
-            1,
-          );
-          _model.selectDistrictID = valueOrDefault<double>(
-            UsersGroup.getNearestDistrictCall
-                .districtID(
-                  (_model.locationID?.jsonBody ?? ''),
-                )
-                ?.toDouble(),
-            1.0,
-          );
-          safeSetState(() {});
+          if ((_model.locationID?.succeeded ?? true)) {
+            _model.selectLocation = currentUserLocationValue;
+            _model.selectProvinceID = valueOrDefault<int>(
+              UsersGroup.getNearestDistrictCall.provinceID(
+                (_model.locationID?.jsonBody ?? ''),
+              ),
+              1,
+            );
+            _model.selectDistrictID = valueOrDefault<double>(
+              UsersGroup.getNearestDistrictCall
+                  .districtID(
+                    (_model.locationID?.jsonBody ?? ''),
+                  )
+                  ?.toDouble(),
+              1.0,
+            );
+            safeSetState(() {});
+          }
         }),
         Future(() async {
           _model.appVersion = await CheckGroup.appVersionCall.call();
 
-          await actions.inAppUpdate(
-            CheckGroup.appVersionCall.value(
-              (_model.appVersion?.jsonBody ?? ''),
-            ),
-            () async {
-              await showDialog(
-                context: context,
-                builder: (dialogContext) {
-                  return Dialog(
-                    elevation: 0,
-                    insetPadding: EdgeInsets.zero,
-                    backgroundColor: Colors.transparent,
-                    alignment: const AlignmentDirectional(0.0, 0.0)
-                        .resolve(Directionality.of(context)),
-                    child: GestureDetector(
-                      onTap: () => FocusScope.of(dialogContext).unfocus(),
-                      child: const SizedBox(
-                        height: 300.0,
-                        width: 300.0,
-                        child: UpdateAlertWidget(),
+          if ((_model.appVersion?.succeeded ?? true)) {
+            await actions.inAppUpdate(
+              CheckGroup.appVersionCall.value(
+                (_model.appVersion?.jsonBody ?? ''),
+              ),
+              () async {
+                await showDialog(
+                  context: context,
+                  builder: (dialogContext) {
+                    return Dialog(
+                      elevation: 0,
+                      insetPadding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
+                      alignment: const AlignmentDirectional(0.0, 0.0)
+                          .resolve(Directionality.of(context)),
+                      child: GestureDetector(
+                        onTap: () => FocusScope.of(dialogContext).unfocus(),
+                        child: const SizedBox(
+                          height: 300.0,
+                          width: 300.0,
+                          child: UpdateAlertWidget(),
+                        ),
                       ),
-                    ),
-                  );
-                },
-              );
-            },
-          );
+                    );
+                  },
+                );
+              },
+            );
+          }
         }),
         Future(() async {
           _model.passwordChange = await UsersGroup.checkPasswordChangeCall.call(
