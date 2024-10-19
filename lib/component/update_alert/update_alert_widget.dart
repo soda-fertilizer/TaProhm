@@ -84,9 +84,7 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
+                    onTap: () async {},
                     child: Text(
                       'LATER',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -109,8 +107,6 @@ class _UpdateAlertWidgetState extends State<UpdateAlertWidget> {
                         await launchURL(
                             'https://play.google.com/store/apps/details?id=com.soda.taprohm');
                       }
-
-                      Navigator.pop(context);
                     },
                     child: Text(
                       'UPDATE NOW',

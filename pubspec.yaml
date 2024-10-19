@@ -44,6 +44,7 @@ dependencies:
   flutter_barcode_scanner: 
     git:
       url: https://github.com/FlutterFlow/flutter_barcode_scanner
+      ref: v2.0.0
   flutter_blurhash: 0.8.2
   flutter_cache_manager: 3.3.1
   flutter_native_splash: 2.3.1

@@ -28,4 +28,7 @@ class DistrictsRow extends SupabaseDataRow {
 
   double? get longitude => getField<double>('Longitude');
   set longitude(double? value) => setField<double>('Longitude', value);
+
+  int? get order => getField<int>('Order');
+  set order(int? value) => setField<int>('Order', value);
 }

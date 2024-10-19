@@ -111,3 +111,14 @@ int returnLength(String? value) {
     return value.length;
   }
 }
+
+double returnBiggerIfTarget(
+  int inputValue,
+  int inputID,
+  int targetID,
+) {
+  if (inputID == targetID) {
+    return inputValue * 100;
+  }
+  return inputValue / 100;
+}
